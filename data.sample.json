@@ -75,6 +75,14 @@
       "userId": 1,
       "date": "2025-06-27",
       "status": "booked"
+    },
+    {
+      "id": 203,
+      "designerId": 2,
+      "serviceId": 1,
+      "userId": 1,
+      "date": "2025-06-26",
+      "status": "booked"
     }
   ],
   "users": [
