@@ -1,0 +1,22 @@
+{
+  "designers": [
+    { "id": 1, "name": "小美" },
+    { "id": 2, "name": "阿強" },
+    { "id": 3, "name": "小華" }
+  ],
+  "services": [
+    { "id": 1, "name": "洗剪吹" },
+    { "id": 2, "name": "染髮" },
+    { "id": 3, "name": "燙髮" }
+  ],
+  "queue": [
+    { "id": 101, "designerId": 1, "serviceId": 1, "type": "onsite", "status": "waiting", "number": 128, "createdAt": "2024-06-26T02:30:00Z", "userId": null },
+    { "id": 102, "designerId": 2, "serviceId": 2, "type": "online", "status": "waiting", "number": 129, "createdAt": "2024-06-26T02:32:00Z", "userId": 1 }
+  ],
+  "reservations": [
+    { "id": 201, "designerId": 1, "serviceId": 1, "userId": 1, "date": "2024-06-27", "status": "booked" }
+  ],
+  "users": [
+    { "id": 1, "email": "test@example.com", "password": "hashedpassword", "name": "王小明" }
+  ]
+} 
