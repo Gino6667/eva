@@ -63,7 +63,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "online",
-      "status": "called",
+      "status": "done",
       "number": 131,
       "createdAt": "2025-06-25T19:58:06.917Z",
       "userId": 1
