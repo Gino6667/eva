@@ -99,6 +99,12 @@
       "email": "test@example.com",
       "password": "hashedpassword",
       "name": "王小明"
+    },
+    {
+      "id": 2,
+      "email": "akapb8641@gmail.com",
+      "password": "123456",
+      "name": "賴"
     }
   ]
 }
