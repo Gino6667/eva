@@ -43,7 +43,7 @@
       "designerId": 2,
       "serviceId": 2,
       "type": "online",
-      "status": "waiting",
+      "status": "called",
       "number": 129,
       "createdAt": "2024-06-26T02:32:00Z",
       "userId": 1
