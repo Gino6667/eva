@@ -16,15 +16,18 @@
   "services": [
     {
       "id": 1,
-      "name": "洗剪吹"
+      "name": "洗剪吹",
+      "price": 200
     },
     {
       "id": 2,
-      "name": "染髮"
+      "name": "染髮",
+      "price": 0
     },
     {
       "id": 3,
-      "name": "燙髮"
+      "name": "燙髮",
+      "price": 0
     }
   ],
   "queue": [
@@ -286,6 +289,16 @@
       "status": "waiting",
       "number": 153,
       "createdAt": "2025-06-25T20:53:55.781Z",
+      "userId": null
+    },
+    {
+      "id": 127,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 154,
+      "createdAt": "2025-06-26T05:59:22.363Z",
       "userId": null
     }
   ],
