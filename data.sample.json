@@ -176,7 +176,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "called",
       "number": 142,
       "createdAt": "2025-06-25T20:14:57.749Z",
       "userId": null
