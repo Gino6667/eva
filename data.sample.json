@@ -2,15 +2,18 @@
   "designers": [
     {
       "id": 1,
-      "name": "小美"
+      "name": "小美",
+      "isResting": false
     },
     {
       "id": 2,
-      "name": "阿強"
+      "name": "阿強",
+      "isResting": true
     },
     {
       "id": 3,
-      "name": "小華"
+      "name": "小華",
+      "isResting": false
     }
   ],
   "services": [
