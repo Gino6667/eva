@@ -648,6 +648,16 @@
       "number": 202,
       "createdAt": "2025-06-26T18:07:55.278Z",
       "userId": null
+    },
+    {
+      "id": 203,
+      "designerId": 4,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 203,
+      "createdAt": "2025-06-26T18:07:56.827Z",
+      "userId": null
     }
   ],
   "reservations": [
