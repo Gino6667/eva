@@ -420,6 +420,16 @@
       "number": 166,
       "createdAt": "2025-06-26T12:30:09.579Z",
       "userId": null
+    },
+    {
+      "id": 140,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 167,
+      "createdAt": "2025-06-26T12:50:18.369Z",
+      "userId": null
     }
   ],
   "reservations": [
