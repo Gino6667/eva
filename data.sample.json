@@ -3,17 +3,19 @@
     {
       "id": 1,
       "name": "小美",
-      "isResting": false
+      "isPaused": true
     },
     {
       "id": 2,
-      "name": "阿強",
-      "isResting": false
+      "name": "阿強"
     },
     {
       "id": 3,
-      "name": "小華",
-      "isResting": false
+      "name": "小華"
+    },
+    {
+      "id": 4,
+      "name": "不指定"
     }
   ],
   "services": [
@@ -23,601 +25,576 @@
       "price": 200
     },
     {
-      "id": 4,
+      "id": 2,
       "name": "染髮",
-      "price": 300
+      "price": 0
+    },
+    {
+      "id": 3,
+      "name": "燙髮",
+      "price": 0
     }
   ],
   "queue": [
     {
-      "id": 1,
+      "id": 101,
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 1,
-      "createdAt": "2025-06-26T15:00:00.000Z",
+      "number": 128,
+      "createdAt": "2024-06-26T02:30:00Z",
       "userId": null
     },
     {
-      "id": 2,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 2,
-      "createdAt": "2025-06-26T14:40:08.363Z",
-      "userId": null
-    },
-    {
-      "id": 3,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 3,
-      "createdAt": "2025-06-26T14:42:56.146Z",
-      "userId": null
-    },
-    {
-      "id": 4,
+      "id": 102,
       "designerId": 2,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 4,
-      "createdAt": "2025-06-26T14:42:58.812Z",
-      "userId": null
-    },
-    {
-      "id": 5,
-      "designerId": 3,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 5,
-      "createdAt": "2025-06-26T14:43:05.589Z",
-      "userId": null
-    },
-    {
-      "id": 6,
-      "designerId": 2,
-      "serviceId": 1,
-      "type": "onsite",
+      "serviceId": 2,
+      "type": "online",
       "status": "done",
-      "number": 6,
-      "createdAt": "2025-06-26T14:43:07.129Z",
-      "userId": null
+      "number": 129,
+      "createdAt": "2024-06-26T02:32:00Z",
+      "userId": 1
     },
     {
-      "id": 7,
-      "designerId": 2,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 7,
-      "createdAt": "2025-06-26T14:43:09.163Z",
-      "userId": null
-    },
-    {
-      "id": 8,
+      "id": 103,
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 8,
-      "createdAt": "2025-06-26T14:43:10.725Z",
+      "number": 130,
+      "createdAt": "2025-06-25T19:51:13.310Z",
       "userId": null
     },
     {
-      "id": 9,
-      "designerId": 3,
+      "id": 104,
+      "designerId": 1,
       "serviceId": 1,
-      "type": "onsite",
+      "type": "online",
       "status": "done",
-      "number": 9,
-      "createdAt": "2025-06-26T14:43:17.955Z",
-      "userId": null
+      "number": 131,
+      "createdAt": "2025-06-25T19:58:06.917Z",
+      "userId": 1
     },
     {
-      "id": 10,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 10,
-      "createdAt": "2025-06-26T14:45:13.683Z",
-      "userId": null
-    },
-    {
-      "id": 11,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 11,
-      "createdAt": "2025-06-26T14:45:15.859Z",
-      "userId": null
-    },
-    {
-      "id": 12,
-      "designerId": 2,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 12,
-      "createdAt": "2025-06-26T14:45:17.670Z",
-      "userId": null
-    },
-    {
-      "id": 13,
-      "designerId": 2,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 13,
-      "createdAt": "2025-06-26T14:48:19.390Z",
-      "userId": null
-    },
-    {
-      "id": 14,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 14,
-      "createdAt": "2025-06-26T14:48:34.458Z",
-      "userId": null
-    },
-    {
-      "id": 15,
-      "designerId": 3,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 15,
-      "createdAt": "2025-06-26T14:48:36.264Z",
-      "userId": null
-    },
-    {
-      "id": 16,
-      "designerId": 3,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "done",
-      "number": 16,
-      "createdAt": "2025-06-26T14:48:37.957Z",
-      "userId": null
-    },
-    {
-      "id": 17,
-      "designerId": 3,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 17,
-      "createdAt": "2025-06-26T14:48:39.417Z",
-      "userId": null
-    },
-    {
-      "id": 18,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 18,
-      "createdAt": "2025-06-26T14:48:57.584Z",
-      "userId": null
-    },
-    {
-      "id": 19,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 19,
-      "createdAt": "2025-06-26T14:49:22.913Z",
-      "userId": null
-    },
-    {
-      "id": 20,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 20,
-      "createdAt": "2025-06-26T14:49:24.834Z",
-      "userId": null
-    },
-    {
-      "id": 21,
-      "designerId": 2,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "done",
-      "number": 21,
-      "createdAt": "2025-06-26T14:49:26.159Z",
-      "userId": null
-    },
-    {
-      "id": 22,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 22,
-      "createdAt": "2025-06-26T14:49:27.350Z",
-      "userId": null
-    },
-    {
-      "id": 23,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "absent",
-      "number": 23,
-      "createdAt": "2025-06-26T15:03:20.080Z",
-      "userId": null
-    },
-    {
-      "id": 24,
+      "id": 105,
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 24,
-      "createdAt": "2025-06-26T15:03:27.300Z",
+      "number": 132,
+      "createdAt": "2025-06-25T19:59:07.598Z",
       "userId": null
     },
     {
-      "id": 25,
+      "id": 106,
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 25,
-      "createdAt": "2025-06-26T15:03:30.138Z",
+      "number": 133,
+      "createdAt": "2025-06-25T20:00:45.954Z",
       "userId": null
     },
     {
-      "id": 26,
-      "designerId": 3,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "done",
-      "number": 26,
-      "createdAt": "2025-06-26T15:04:25.772Z",
-      "userId": null
-    },
-    {
-      "id": 27,
-      "designerId": 2,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "absent",
-      "number": 27,
-      "createdAt": "2025-06-26T15:04:28.039Z",
-      "userId": null
-    },
-    {
-      "id": 28,
+      "id": 107,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
-      "status": "absent",
-      "number": 28,
-      "createdAt": "2025-06-26T15:04:49.459Z",
+      "status": "done",
+      "number": 134,
+      "createdAt": "2025-06-25T20:01:52.150Z",
       "userId": null
     },
     {
-      "id": 29,
+      "id": 108,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 29,
-      "createdAt": "2025-06-26T15:04:51.447Z",
+      "number": 135,
+      "createdAt": "2025-06-25T20:02:00.533Z",
       "userId": null
     },
     {
-      "id": 30,
+      "id": 109,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 30,
-      "createdAt": "2025-06-26T15:04:52.986Z",
+      "number": 136,
+      "createdAt": "2025-06-25T20:02:06.724Z",
       "userId": null
     },
     {
-      "id": 31,
+      "id": 110,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 31,
-      "createdAt": "2025-06-26T15:04:54.697Z",
+      "number": 137,
+      "createdAt": "2025-06-25T20:02:07.622Z",
       "userId": null
     },
     {
-      "id": 32,
-      "designerId": 2,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "absent",
-      "number": 32,
-      "createdAt": "2025-06-26T15:05:08.261Z",
-      "userId": null
-    },
-    {
-      "id": 33,
+      "id": 111,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 33,
-      "createdAt": "2025-06-26T15:05:09.974Z",
+      "number": 138,
+      "createdAt": "2025-06-25T20:02:08.092Z",
       "userId": null
     },
     {
-      "id": 34,
+      "id": 112,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 34,
-      "createdAt": "2025-06-26T15:05:11.840Z",
+      "number": 139,
+      "createdAt": "2025-06-25T20:02:15.394Z",
       "userId": null
     },
     {
-      "id": 35,
-      "designerId": 2,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "done",
-      "number": 35,
-      "createdAt": "2025-06-26T15:05:13.402Z",
-      "userId": null
-    },
-    {
-      "id": 36,
+      "id": 113,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 36,
-      "createdAt": "2025-06-26T15:05:14.706Z",
+      "number": 140,
+      "createdAt": "2025-06-25T20:11:45.722Z",
       "userId": null
     },
     {
-      "id": 37,
-      "designerId": 3,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "absent",
-      "number": 37,
-      "createdAt": "2025-06-26T15:05:29.855Z",
-      "userId": null
-    },
-    {
-      "id": 38,
+      "id": 114,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 38,
-      "createdAt": "2025-06-26T15:05:31.701Z",
+      "number": 141,
+      "createdAt": "2025-06-25T20:12:53.188Z",
       "userId": null
     },
     {
-      "id": 39,
+      "id": 115,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 39,
-      "createdAt": "2025-06-26T15:05:33.032Z",
+      "number": 142,
+      "createdAt": "2025-06-25T20:14:57.749Z",
       "userId": null
     },
     {
-      "id": 40,
-      "designerId": 3,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "absent",
-      "number": 40,
-      "createdAt": "2025-06-26T15:05:42.606Z",
-      "userId": null
-    },
-    {
-      "id": 41,
-      "designerId": 2,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "absent",
-      "number": 41,
-      "createdAt": "2025-06-26T15:05:47.246Z",
-      "userId": null
-    },
-    {
-      "id": 42,
-      "designerId": 3,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "done",
-      "number": 42,
-      "createdAt": "2025-06-26T15:05:49.252Z",
-      "userId": null
-    },
-    {
-      "id": 43,
-      "designerId": 2,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "done",
-      "number": 43,
-      "createdAt": "2025-06-26T15:05:58.074Z",
-      "userId": null
-    },
-    {
-      "id": 44,
+      "id": 116,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "done",
-      "number": 44,
-      "createdAt": "2025-06-26T15:06:00.168Z",
+      "number": 143,
+      "createdAt": "2025-06-25T20:16:14.667Z",
       "userId": null
     },
     {
-      "id": 45,
+      "id": 117,
       "designerId": 1,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "done",
-      "number": 45,
-      "createdAt": "2025-06-26T15:06:02.048Z",
-      "userId": null
-    },
-    {
-      "id": 46,
-      "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "called",
-      "number": 46,
-      "createdAt": "2025-06-26T15:06:03.504Z",
+      "number": 144,
+      "createdAt": "2025-06-25T20:17:55.093Z",
       "userId": null
     },
     {
-      "id": 47,
-      "designerId": 2,
-      "serviceId": 4,
+      "id": 118,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "called",
+      "number": 145,
+      "createdAt": "2025-06-25T20:18:54.593Z",
+      "userId": null
+    },
+    {
+      "id": 119,
+      "designerId": 1,
+      "serviceId": 1,
       "type": "onsite",
       "status": "absent",
-      "number": 47,
-      "createdAt": "2025-06-26T15:06:26.643Z",
+      "number": 146,
+      "createdAt": "2025-06-25T20:19:15.066Z",
       "userId": null
     },
     {
-      "id": 48,
-      "designerId": 3,
-      "serviceId": 4,
+      "id": 120,
+      "designerId": 1,
+      "serviceId": 1,
       "type": "onsite",
+      "status": "called",
+      "number": 147,
+      "createdAt": "2025-06-25T20:21:16.162Z",
+      "userId": null
+    },
+    {
+      "id": 121,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "online",
       "status": "absent",
-      "number": 48,
-      "createdAt": "2025-06-26T15:10:16.873Z",
-      "userId": null
+      "number": 148,
+      "createdAt": "2025-06-25T20:36:06.743Z",
+      "userId": 1
     },
     {
-      "id": 49,
+      "id": 122,
       "designerId": 1,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 49,
-      "createdAt": "2025-06-26T15:10:23.185Z",
-      "userId": null
+      "serviceId": 1,
+      "type": "online",
+      "status": "absent",
+      "number": 149,
+      "createdAt": "2025-06-25T20:38:18.102Z",
+      "userId": 1
     },
     {
-      "id": 50,
+      "id": 123,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "online",
+      "status": "waiting",
+      "number": 150,
+      "createdAt": "2025-06-25T20:39:45.660Z",
+      "userId": 1
+    },
+    {
+      "id": 124,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "online",
+      "status": "waiting",
+      "number": 151,
+      "createdAt": "2025-06-25T20:39:56.858Z",
+      "userId": 1
+    },
+    {
+      "id": 125,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "online",
+      "status": "waiting",
+      "number": 152,
+      "createdAt": "2025-06-25T20:41:21.872Z",
+      "userId": 1
+    },
+    {
+      "id": 126,
       "designerId": 2,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
-      "number": 50,
-      "createdAt": "2025-06-26T15:10:37.188Z",
+      "status": "done",
+      "number": 153,
+      "createdAt": "2025-06-25T20:53:55.781Z",
       "userId": null
     },
     {
-      "id": 51,
-      "designerId": 3,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 51,
-      "createdAt": "2025-06-26T15:13:13.385Z",
-      "userId": null
-    },
-    {
-      "id": 52,
+      "id": 127,
       "designerId": 1,
-      "serviceId": 4,
+      "serviceId": 1,
       "type": "onsite",
       "status": "waiting",
-      "number": 52,
-      "createdAt": "2025-06-26T15:13:15.675Z",
+      "number": 154,
+      "createdAt": "2025-06-26T05:59:22.363Z",
       "userId": null
     },
     {
-      "id": 53,
-      "designerId": 1,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 53,
-      "createdAt": "2025-06-26T15:13:20.972Z",
-      "userId": null
-    },
-    {
-      "id": 54,
-      "designerId": 1,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 54,
-      "createdAt": "2025-06-26T15:14:01.688Z",
-      "userId": null
-    },
-    {
-      "id": 55,
-      "designerId": 1,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 55,
-      "createdAt": "2025-06-26T15:14:40.932Z",
-      "userId": null
-    },
-    {
-      "id": 56,
-      "designerId": 1,
-      "serviceId": 4,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 56,
-      "createdAt": "2025-06-26T15:14:56.683Z",
-      "userId": null
-    },
-    {
-      "id": 57,
-      "designerId": 1,
-      "serviceId": 4,
+      "id": 128,
+      "designerId": 2,
+      "serviceId": 1,
       "type": "online",
-      "status": "waiting",
-      "number": 57,
-      "createdAt": "2025-06-26T15:17:06.592Z",
+      "status": "absent",
+      "number": 155,
+      "createdAt": "2025-06-26T05:59:37.790Z",
       "userId": 1
     },
     {
-      "id": 58,
+      "id": 129,
       "designerId": 1,
-      "serviceId": 4,
-      "type": "online",
+      "serviceId": 2,
+      "type": "onsite",
       "status": "waiting",
-      "number": 58,
-      "createdAt": "2025-06-26T15:21:20.431Z",
-      "userId": 1
+      "number": 156,
+      "createdAt": "2025-06-26T10:38:45.426Z",
+      "userId": null
     },
     {
-      "id": 59,
-      "designerId": 1,
-      "serviceId": 4,
-      "type": "online",
+      "id": 130,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
       "status": "waiting",
-      "number": 59,
-      "createdAt": "2025-06-26T15:21:21.855Z",
-      "userId": 1
+      "number": 157,
+      "createdAt": "2025-06-26T10:39:03.166Z",
+      "userId": null
+    },
+    {
+      "id": 131,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 158,
+      "createdAt": "2025-06-26T10:39:26.997Z",
+      "userId": null
+    },
+    {
+      "id": 132,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 159,
+      "createdAt": "2025-06-26T10:41:59.173Z",
+      "userId": null
+    },
+    {
+      "id": 133,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 160,
+      "createdAt": "2025-06-26T10:43:26.138Z",
+      "userId": null
+    },
+    {
+      "id": 134,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 161,
+      "createdAt": "2025-06-26T10:44:53.267Z",
+      "userId": null
+    },
+    {
+      "id": 135,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 162,
+      "createdAt": "2025-06-26T10:45:43.715Z",
+      "userId": null
+    },
+    {
+      "id": 136,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 163,
+      "createdAt": "2025-06-26T12:20:56.829Z",
+      "userId": null
+    },
+    {
+      "id": 137,
+      "designerId": 2,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 164,
+      "createdAt": "2025-06-26T12:21:06.374Z",
+      "userId": null
+    },
+    {
+      "id": 138,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 165,
+      "createdAt": "2025-06-26T12:21:33.675Z",
+      "userId": null
+    },
+    {
+      "id": 139,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 166,
+      "createdAt": "2025-06-26T12:30:09.579Z",
+      "userId": null
+    },
+    {
+      "id": 140,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 167,
+      "createdAt": "2025-06-26T12:50:18.369Z",
+      "userId": null
+    },
+    {
+      "id": 141,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 168,
+      "createdAt": "2025-06-26T12:50:34.490Z",
+      "userId": null
+    },
+    {
+      "id": 142,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 169,
+      "createdAt": "2025-06-26T12:52:22.531Z",
+      "userId": null
+    },
+    {
+      "id": 143,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 170,
+      "createdAt": "2025-06-26T12:52:41.451Z",
+      "userId": null
+    },
+    {
+      "id": 144,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 171,
+      "createdAt": "2025-06-26T12:53:08.522Z",
+      "userId": null
+    },
+    {
+      "id": 145,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 172,
+      "createdAt": "2025-06-26T12:53:29.405Z",
+      "userId": null
+    },
+    {
+      "id": 146,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 173,
+      "createdAt": "2025-06-26T12:54:05.598Z",
+      "userId": null
+    },
+    {
+      "id": 147,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 174,
+      "createdAt": "2025-06-26T12:54:20.726Z",
+      "userId": null
+    },
+    {
+      "id": 148,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 175,
+      "createdAt": "2025-06-26T12:54:36.645Z",
+      "userId": null
+    },
+    {
+      "id": 149,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 176,
+      "createdAt": "2025-06-26T12:54:48.984Z",
+      "userId": null
+    },
+    {
+      "id": 150,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 177,
+      "createdAt": "2025-06-26T12:56:14.261Z",
+      "userId": null
+    },
+    {
+      "id": 151,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 178,
+      "createdAt": "2025-06-26T12:56:28.692Z",
+      "userId": null
+    },
+    {
+      "id": 152,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 179,
+      "createdAt": "2025-06-26T12:57:45.197Z",
+      "userId": null
+    },
+    {
+      "id": 153,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 180,
+      "createdAt": "2025-06-26T12:57:58.014Z",
+      "userId": null
+    },
+    {
+      "id": 154,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 181,
+      "createdAt": "2025-06-26T12:58:13.873Z",
+      "userId": null
+    },
+    {
+      "id": 155,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 182,
+      "createdAt": "2025-06-26T12:58:28.191Z",
+      "userId": null
+    },
+    {
+      "id": 156,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 183,
+      "createdAt": "2025-06-26T12:59:13.362Z",
+      "userId": null
     }
   ],
   "reservations": [
@@ -715,27 +692,6 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
-    },
-    {
-      "id": 213,
-      "designerId": 1,
-      "serviceId": 4,
-      "userId": 1,
-      "status": "booked"
-    },
-    {
-      "id": 214,
-      "designerId": 1,
-      "serviceId": 4,
-      "userId": 1,
-      "status": "booked"
-    },
-    {
-      "id": 215,
-      "designerId": 1,
-      "serviceId": 4,
-      "userId": 1,
       "status": "booked"
     }
   ],
