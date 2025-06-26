@@ -271,7 +271,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 152,
       "createdAt": "2025-06-25T20:41:21.872Z",
       "userId": 1
