@@ -13,7 +13,8 @@
     {
       "id": 3,
       "name": "小華",
-      "isPaused": true
+      "isPaused": true,
+      "isResting": true
     },
     {
       "id": 4,
