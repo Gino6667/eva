@@ -394,7 +394,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "called",
+      "status": "done",
       "number": 163,
       "createdAt": "2025-06-26T12:20:56.829Z",
       "userId": null
@@ -424,7 +424,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "called",
       "number": 166,
       "createdAt": "2025-06-26T12:30:09.579Z",
       "userId": null
