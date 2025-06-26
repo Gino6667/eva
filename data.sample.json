@@ -106,7 +106,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "called",
+      "status": "done",
       "number": 135,
       "createdAt": "2025-06-25T20:02:00.533Z",
       "userId": null
