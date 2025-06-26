@@ -31,139 +31,19 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "absent",
+      "status": "done",
       "number": 1,
-      "createdAt": "2025-06-26T15:00:00.000Z",
+      "createdAt": "2025-06-26T14:40:08.321Z",
       "userId": null
     },
     {
       "id": 2,
-      "designerId": 2,
+      "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 2,
-      "createdAt": "2025-06-26T15:01:00.000Z",
-      "userId": null
-    },
-    {
-      "id": 3,
-      "designerId": 3,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "called",
-      "number": 3,
-      "createdAt": "2025-06-26T15:02:00.000Z",
-      "userId": null
-    },
-    {
-      "id": 4,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 4,
-      "createdAt": "2025-06-26T14:20:37.551Z",
-      "userId": null
-    },
-    {
-      "id": 5,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 5,
-      "createdAt": "2025-06-26T14:20:39.238Z",
-      "userId": null
-    },
-    {
-      "id": 6,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 6,
-      "createdAt": "2025-06-26T14:20:40.483Z",
-      "userId": null
-    },
-    {
-      "id": 7,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 7,
-      "createdAt": "2025-06-26T14:20:41.637Z",
-      "userId": null
-    },
-    {
-      "id": 8,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 8,
-      "createdAt": "2025-06-26T14:20:42.772Z",
-      "userId": null
-    },
-    {
-      "id": 9,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 9,
-      "createdAt": "2025-06-26T14:20:44.000Z",
-      "userId": null
-    },
-    {
-      "id": 10,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 10,
-      "createdAt": "2025-06-26T14:20:45.188Z",
-      "userId": null
-    },
-    {
-      "id": 11,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 11,
-      "createdAt": "2025-06-26T14:20:46.817Z",
-      "userId": null
-    },
-    {
-      "id": 12,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 12,
-      "createdAt": "2025-06-26T14:20:48.688Z",
-      "userId": null
-    },
-    {
-      "id": 13,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 13,
-      "createdAt": "2025-06-26T14:28:44.002Z",
-      "userId": null
-    },
-    {
-      "id": 14,
-      "designerId": 0,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 14,
-      "createdAt": "2025-06-26T14:31:22.051Z",
+      "createdAt": "2025-06-26T14:40:08.363Z",
       "userId": null
     }
   ],
