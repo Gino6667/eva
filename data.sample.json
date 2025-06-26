@@ -27,6 +27,66 @@
   ],
   "queue": [
     {
+      "id": 201,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "called",
+      "number": 200,
+      "createdAt": "2025-06-26T15:00:00.000Z",
+      "userId": null
+    },
+    {
+      "id": 202,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 201,
+      "createdAt": "2025-06-26T15:01:00.000Z",
+      "userId": null
+    },
+    {
+      "id": 203,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "absent",
+      "number": 202,
+      "createdAt": "2025-06-26T15:02:00.000Z",
+      "userId": null
+    },
+    {
+      "id": 204,
+      "designerId": 2,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 203,
+      "createdAt": "2025-06-26T15:03:00.000Z",
+      "userId": null
+    },
+    {
+      "id": 205,
+      "designerId": 3,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "called",
+      "number": 204,
+      "createdAt": "2025-06-26T15:04:00.000Z",
+      "userId": null
+    },
+    {
+      "id": 206,
+      "designerId": 3,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 205,
+      "createdAt": "2025-06-26T15:05:00.000Z",
+      "userId": null
+    },
+    {
       "id": 101,
       "designerId": 1,
       "serviceId": 1,
