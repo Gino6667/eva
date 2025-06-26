@@ -460,6 +460,16 @@
       "number": 170,
       "createdAt": "2025-06-26T12:52:41.451Z",
       "userId": null
+    },
+    {
+      "id": 144,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 171,
+      "createdAt": "2025-06-26T12:53:08.522Z",
+      "userId": null
     }
   ],
   "reservations": [
