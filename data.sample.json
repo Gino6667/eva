@@ -678,6 +678,16 @@
       "number": 205,
       "createdAt": "2025-06-26T18:08:11.932Z",
       "userId": null
+    },
+    {
+      "id": 206,
+      "designerId": 3,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 206,
+      "createdAt": "2025-06-26T18:08:13.724Z",
+      "userId": null
     }
   ],
   "reservations": [
