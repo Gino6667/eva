@@ -585,6 +585,16 @@
       "number": 56,
       "createdAt": "2025-06-26T15:14:56.683Z",
       "userId": null
+    },
+    {
+      "id": 57,
+      "designerId": 1,
+      "serviceId": 4,
+      "type": "online",
+      "status": "waiting",
+      "number": 57,
+      "createdAt": "2025-06-26T15:17:06.592Z",
+      "userId": 1
     }
   ],
   "reservations": [
@@ -682,6 +692,13 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
+      "status": "booked"
+    },
+    {
+      "id": 213,
+      "designerId": 1,
+      "serviceId": 4,
+      "userId": 1,
       "status": "booked"
     }
   ],
