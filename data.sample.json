@@ -13,7 +13,7 @@
     {
       "id": 3,
       "name": "小華",
-      "isResting": false
+      "isResting": true
     }
   ],
   "services": [
