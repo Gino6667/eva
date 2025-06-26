@@ -291,7 +291,7 @@
       "designerId": 2,
       "serviceId": 4,
       "type": "onsite",
-      "status": "called",
+      "status": "absent",
       "number": 27,
       "createdAt": "2025-06-26T15:04:28.039Z",
       "userId": null
