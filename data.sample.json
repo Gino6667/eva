@@ -251,7 +251,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "online",
-      "status": "waiting",
+      "status": "called",
       "number": 150,
       "createdAt": "2025-06-25T20:39:45.660Z",
       "userId": 1
