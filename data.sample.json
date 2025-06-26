@@ -141,7 +141,7 @@
       "designerId": 2,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 12,
       "createdAt": "2025-06-26T14:45:17.670Z",
       "userId": null
