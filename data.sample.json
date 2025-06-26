@@ -491,7 +491,7 @@
       "designerId": 2,
       "serviceId": 4,
       "type": "onsite",
-      "status": "called",
+      "status": "absent",
       "number": 47,
       "createdAt": "2025-06-26T15:06:26.643Z",
       "userId": null
