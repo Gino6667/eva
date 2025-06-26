@@ -283,7 +283,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "online",
-      "status": "called",
+      "status": "done",
       "number": 152,
       "createdAt": "2025-06-25T20:41:21.872Z",
       "userId": 1
@@ -303,7 +303,7 @@
       "designerId": 1,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "called",
       "number": 154,
       "createdAt": "2025-06-26T05:59:22.363Z",
       "userId": null
