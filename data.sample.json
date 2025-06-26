@@ -365,6 +365,16 @@
       "number": 34,
       "createdAt": "2025-06-26T15:05:11.840Z",
       "userId": null
+    },
+    {
+      "id": 35,
+      "designerId": 2,
+      "serviceId": 4,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 35,
+      "createdAt": "2025-06-26T15:05:13.402Z",
+      "userId": null
     }
   ],
   "reservations": [
