@@ -12,7 +12,8 @@
     },
     {
       "id": 3,
-      "name": "小華"
+      "name": "小華",
+      "isPaused": true
     },
     {
       "id": 4,
