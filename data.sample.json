@@ -618,6 +618,16 @@
       "number": 185,
       "createdAt": "2025-06-26T17:08:26.505Z",
       "userId": null
+    },
+    {
+      "id": 200,
+      "designerId": 3,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "absent",
+      "number": 200,
+      "createdAt": "2025-06-26T18:30:00Z",
+      "userId": null
     }
   ],
   "reservations": [
