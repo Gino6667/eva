@@ -2238,7 +2238,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2249,7 +2249,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2260,7 +2260,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2271,7 +2271,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2282,7 +2282,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2293,7 +2293,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2304,7 +2304,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2315,7 +2315,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2326,7 +2326,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2337,7 +2337,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2348,7 +2348,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2359,7 +2359,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2370,7 +2370,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2381,7 +2381,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2392,7 +2392,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2403,7 +2403,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2414,7 +2414,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2425,7 +2425,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -2436,7 +2436,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
