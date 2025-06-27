@@ -865,7 +865,18 @@
     "slotConfig": [
       [
         {
-          "enabled": false,
+          "enabled": true,
+          "seats": 5,
+          "services": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1019,7 +1030,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1030,7 +1041,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1041,7 +1052,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1052,7 +1063,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1063,7 +1074,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1074,7 +1085,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1085,7 +1096,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1096,7 +1107,7 @@
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
@@ -1107,18 +1118,7 @@
           ]
         },
         {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
             true,
