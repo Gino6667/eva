@@ -694,7 +694,7 @@
       "designerId": 3,
       "serviceId": 1,
       "type": "onsite",
-      "status": "called",
+      "status": "done",
       "number": 66,
       "createdAt": "2025-06-27T12:32:42.860Z",
       "userId": null
