@@ -36,6 +36,11 @@
       "id": 3,
       "name": "燙髮",
       "price": 0
+    },
+    {
+      "id": 4,
+      "name": "55",
+      "price": 6
     }
   ],
   "queue": [
@@ -738,6 +743,16 @@
       "number": 70,
       "createdAt": "2025-06-27T12:58:01.917Z",
       "userId": null
+    },
+    {
+      "id": 2761,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "createdAt": "2025-06-27T12:58:01.917Z",
+      "userId": null,
+      "number": 1001
     }
   ],
   "reservations": [
@@ -900,6 +915,13 @@
           "services": [
             true,
             true,
+            true
+          ]
+        },
+        {
+          "enabled": true,
+          "seats": 5,
+          "services": [
             true,
             true,
             true
@@ -911,151 +933,6 @@
           "services": [
             true,
             true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
             true
           ]
         },
@@ -1065,8 +942,6 @@
           "services": [
             true,
             true,
-            true,
-            true,
             true
           ]
         },
@@ -1074,85 +949,6 @@
           "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": true,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
@@ -1161,264 +957,45 @@
       ],
       [
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
@@ -1427,264 +1004,45 @@
       ],
       [
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
@@ -1693,264 +1051,45 @@
       ],
       [
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
@@ -1959,264 +1098,45 @@
       ],
       [
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
@@ -2225,264 +1145,45 @@
       ],
       [
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
@@ -2491,264 +1192,45 @@
       ],
       [
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
             true,
             true,
             true
           ]
         },
         {
-          "enabled": false,
+          "enabled": true,
           "seats": 5,
           "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
-            true,
-            true,
-            true
-          ]
-        },
-        {
-          "enabled": false,
-          "seats": 5,
-          "services": [
-            true,
-            true,
             true,
             true,
             true
