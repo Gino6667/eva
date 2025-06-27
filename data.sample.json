@@ -774,7 +774,7 @@
       "designerId": 3,
       "serviceId": 1,
       "type": "online",
-      "status": "called",
+      "status": "done",
       "number": 1004,
       "createdAt": "2025-06-27T14:45:50.165Z",
       "userId": 1
@@ -784,7 +784,7 @@
       "designerId": 3,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "called",
       "number": 1005,
       "createdAt": "2025-06-27T14:45:58.713Z",
       "userId": null
