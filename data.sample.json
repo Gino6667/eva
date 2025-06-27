@@ -728,6 +728,16 @@
       "number": 69,
       "createdAt": "2025-06-27T12:57:54.905Z",
       "userId": null
+    },
+    {
+      "id": 213,
+      "designerId": 1,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 70,
+      "createdAt": "2025-06-27T12:58:01.917Z",
+      "userId": null
     }
   ],
   "reservations": [
