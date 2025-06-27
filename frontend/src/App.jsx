@@ -7,32 +7,8 @@ import './App.css';
 axios.defaults.baseURL = 'https://eva-36bg.onrender.com';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // 測試後端連線
-    axios.get('/api/health')
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log('後端連線測試:', err.message);
-        setIsLoading(false);
-      });
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="loading">
-        <h2>美髮沙龍管理系統</h2>
-        <p>正在載入中...</p>
-      </div>
-    );
-  }
-
   return (
-    <Router>
+    <Router basename="/eva">
       <div className="App">
         <header className="header">
           <h1>美髮沙龍管理系統</h1>
