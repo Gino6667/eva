@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors({
-  origin: ['https://Gino6667.github.io', 'https://Gino6667.github.io/eva'],
+  origin: ['https://gino6667.github.io', 'https://gino6667.github.io/eva'],
   credentials: true
 }));
 app.use(express.json());
