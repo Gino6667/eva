@@ -804,7 +804,7 @@
       "designerId": 2,
       "serviceId": 1,
       "type": "onsite",
-      "status": "called",
+      "status": "done",
       "number": 9002,
       "createdAt": "2025-06-27T15:00:00.000Z",
       "userId": null
