@@ -51,6 +51,13 @@ function Home() {
           <h3>排隊查詢</h3>
           <p>查詢您的排隊進度，掌握等待時間</p>
         </Link>
+        {user && user.role !== 'admin' && (
+          <Link to="/profile" className="feature-card primary feature-link">
+            <div className="feature-icon">🏷️</div>
+            <h3>會員中心</h3>
+            <p>管理個人資料、預約與排隊紀錄</p>
+          </Link>
+        )}
       </div>
 
       {/* 管理員入口按鈕（縮小版） */}
@@ -64,7 +71,7 @@ function Home() {
       <div className="home-action-bar">
         {user && user.role !== 'admin' && (
           <Link to="/profile" className="home-action-btn">
-            <span role="img" aria-label="會員">👤</span> 會員中心
+            會員中心
           </Link>
         )}
       </div>
