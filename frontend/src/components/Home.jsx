@@ -33,8 +33,19 @@ function Home() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
+
   return (
     <div className="home">
+      {/* 右上角登出按鈕 */}
+      {user && (
+        <button className="btn btn-logout" style={{position: 'absolute', top: 24, right: 32, zIndex: 10}} onClick={handleLogout}>
+          登出
+        </button>
+      )}
       <div className="features">
         <Link to="/queue" className="feature-card primary feature-link">
           <div className="feature-icon">🎯</div>
