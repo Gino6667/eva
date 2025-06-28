@@ -50,13 +50,14 @@ jobs:
 
       - name: Sync backend data
         run: |
-          # 複製 data.sample.json 到 data.json
-          cp backend/data.sample.json backend/data.json
-          
-          # 提交並推送更新
-          git add backend/data.json
-          git commit -m "Sync backend data from sample" || echo "No changes to commit"
-          git push origin main
+          if [ -f backend/data.sample.json ]; then
+            cp backend/data.sample.json backend/data.json
+            git add backend/data.json
+            git commit -m "Sync backend data from sample" || echo "No changes to commit"
+            git push origin main
+          else
+            echo "backend/data.sample.json 不存在，跳過同步"
+          fi
 
       - name: Trigger Render deployment
         run: |
