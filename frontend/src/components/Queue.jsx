@@ -10,8 +10,6 @@ function Queue() {
     const token = localStorage.getItem('token');
     return token ? JSON.parse(atob(token.split('.')[1])) : null;
   });
-  const [guestName, setGuestName] = useState('');
-  const [guestPhone, setGuestPhone] = useState('');
   const [designers, setDesigners] = useState([]);
   const [services, setServices] = useState([]);
   const [selectedDesigner, setSelectedDesigner] = useState('');
@@ -84,9 +82,7 @@ function Queue() {
         designerId: selectedDesigner,
         serviceId: selectedService,
         type: 'onsite',
-        userId,
-        guestName: !isMember && guestName ? guestName : undefined,
-        guestPhone: !isMember && guestPhone ? guestPhone : undefined
+        userId
       });
       setQueueResult(res.data);
       setStep(3);
@@ -118,21 +114,8 @@ function Queue() {
           {isMember === false && (
             <div style={{marginBottom: '1em'}}>
               <p style={{color: '#666', fontSize: '0.9em', marginBottom: '0.5em'}}>
-                可選擇性輸入個人資料（非必填）
+                訪客排隊無需輸入個人資料
               </p>
-              <input 
-                type="text" 
-                placeholder="姓名（選填）" 
-                value={guestName} 
-                onChange={e => setGuestName(e.target.value)} 
-                style={{marginRight: '1em'}} 
-              />
-              <input 
-                type="text" 
-                placeholder="電話（選填）" 
-                value={guestPhone} 
-                onChange={e => setGuestPhone(e.target.value)} 
-              />
             </div>
           )}
           {isMember === true && !user && (
