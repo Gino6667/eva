@@ -66,14 +66,8 @@ function App() {
             <nav className="nav-menu">
               <Link to="/" className="nav-link">首頁</Link>
               <Link to="/queue" className="nav-link">現場排隊</Link>
-              <Link to="/queue-progress" className="nav-link">排隊進度</Link>
+              <Link to="/queue-progress" className="nav-link">排隊查詢</Link>
               <Link to="/reservation" className="nav-link">線上預約</Link>
-              <Link to="/worktime" className="nav-link">工作時間設定</Link>
-              <Link to="/reports" className="nav-link">報表統計</Link>
-              <Link to="/customers" className="nav-link">客戶管理</Link>
-              <Link to="/finance" className="nav-link">財務管理</Link>
-              <Link to="/designers" className="nav-link">設計師管理</Link>
-              <Link to="/admin" className="nav-link">管理員</Link>
               {user ? (
                 <>
                   <Link to="/profile" className="nav-link">會員中心</Link>

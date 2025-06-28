@@ -116,10 +116,20 @@
   animation: fadeInUp 0.8s ease-out;
 }
 
+.feature-card.primary {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
 .feature-card:hover {
   transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card.primary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .feature-icon {
@@ -156,6 +166,67 @@
   transform: translateY(-2px);
 }
 
+/* 管理員入口 */
+.admin-section {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-card {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 400px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.admin-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  opacity: 0.8;
+}
+
+.admin-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #ffe082;
+}
+
+.admin-card p {
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.btn-admin {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-admin:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -190,6 +261,14 @@
   .feature-card {
     padding: 1.5rem;
   }
+  
+  .admin-section {
+    padding: 20px;
+  }
+  
+  .admin-card {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -201,11 +280,23 @@
     font-size: 1.8rem;
   }
   
+  .hero-subtitle.highlight {
+    font-size: 1.2rem;
+  }
+  
+  .features {
+    padding: 30px 15px;
+  }
+  
   .feature-card {
-    padding: 1rem;
+    padding: 1.2rem;
   }
   
   .feature-icon {
     font-size: 2.5rem;
+  }
+  
+  .admin-card {
+    padding: 1.2rem;
   }
 } 

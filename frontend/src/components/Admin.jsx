@@ -137,6 +137,48 @@ function Admin() {
         </div>
       </div>
 
+      {/* 管理功能快速入口 */}
+      <div className="admin-section">
+        <h3>管理功能</h3>
+        <div className="admin-grid">
+          <div className="admin-card" onClick={() => handleNavigation('/worktime')}>
+            <div className="admin-card-icon">⏰</div>
+            <h4>工作時間設定</h4>
+            <p>設定營業時間與服務時段</p>
+          </div>
+          
+          <div className="admin-card" onClick={() => handleNavigation('/reports')}>
+            <div className="admin-card-icon">📊</div>
+            <h4>報表統計</h4>
+            <p>查看詳細的營業數據分析</p>
+          </div>
+          
+          <div className="admin-card" onClick={() => handleNavigation('/customers')}>
+            <div className="admin-card-icon">👥</div>
+            <h4>客戶管理</h4>
+            <p>管理客戶資料與消費紀錄</p>
+          </div>
+          
+          <div className="admin-card" onClick={() => handleNavigation('/finance')}>
+            <div className="admin-card-icon">💰</div>
+            <h4>財務管理</h4>
+            <p>收入支出記錄與財務分析</p>
+          </div>
+          
+          <div className="admin-card" onClick={() => handleNavigation('/designers')}>
+            <div className="admin-card-icon">✂️</div>
+            <h4>設計師管理</h4>
+            <p>設計師檔案、排班與績效管理</p>
+          </div>
+          
+          <div className="admin-card" onClick={() => handleNavigation('/queue')}>
+            <div className="admin-card-icon">🎯</div>
+            <h4>排隊管理</h4>
+            <p>現場排隊叫號與進度管理</p>
+          </div>
+        </div>
+      </div>
+
       {/* 設計師權限管理 */}
       <div className="admin-section">
         <div className="section-header">

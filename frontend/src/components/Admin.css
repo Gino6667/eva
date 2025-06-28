@@ -39,6 +39,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid transparent;
+  text-align: center;
 }
 
 .admin-card:hover {
@@ -47,22 +48,24 @@
   border-color: #667eea;
 }
 
-.admin-card h3 {
-  margin: 0 0 1rem 0;
+.admin-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.admin-card h4 {
+  margin: 0 0 0.5rem 0;
   color: #333;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .admin-card p {
   margin: 0;
   color: #666;
   font-size: 0.9rem;
-}
-
-.admin-card .icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #667eea;
+  line-height: 1.4;
 }
 
 /* 表格樣式 */
@@ -446,4 +449,29 @@
   .admin-table table {
     min-width: 400px;
   }
+}
+
+/* 管理功能網格 */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 原有的 admin-card 樣式保留給其他用途 */
+.admin-nav .admin-card {
+  text-align: left;
+}
+
+.admin-nav .admin-card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+.admin-nav .admin-card h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.3rem;
 } 
