@@ -62,17 +62,6 @@ function Register({ setUser }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        {redirect && (
-          <div style={{marginBottom: '1em', textAlign: 'center'}}>
-            <button 
-              onClick={handleGoBack}
-              className="btn btn-secondary"
-              style={{marginBottom: '1em'}}
-            >
-              ← 返回{redirectText}頁面
-            </button>
-          </div>
-        )}
         <h2>會員註冊</h2>
         <form onSubmit={handleRegister}>
           <div className="form-group">
@@ -115,6 +104,15 @@ function Register({ setUser }) {
           >
             {loading ? '註冊中...' : '註冊'}
           </button>
+          {redirect && (
+            <button 
+              onClick={handleGoBack}
+              className="btn btn-secondary"
+              style={{marginLeft: '1em'}}
+            >
+              ← 返回{redirectText}頁面
+            </button>
+          )}
           {msg && (
             <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
               {msg}

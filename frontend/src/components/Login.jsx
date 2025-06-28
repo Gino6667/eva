@@ -86,17 +86,6 @@ function Login({ setUser }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        {redirect && (
-          <div style={{marginBottom: '1em', textAlign: 'center'}}>
-            <button 
-              onClick={handleGoBack}
-              className="btn btn-secondary"
-              style={{marginBottom: '1em'}}
-            >
-              ← 返回{redirectText}頁面
-            </button>
-          </div>
-        )}
         <h2>會員登入</h2>
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -128,6 +117,15 @@ function Login({ setUser }) {
           >
             {loading ? '登入中...' : '登入'}
           </button>
+          {redirect && (
+            <button 
+              onClick={handleGoBack}
+              className="btn btn-secondary"
+              style={{marginLeft: '1em'}}
+            >
+              ← 返回{redirectText}頁面
+            </button>
+          )}
           {msg && (
             <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
               {msg}
