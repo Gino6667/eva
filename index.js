@@ -1773,10 +1773,27 @@ function getFavoriteDesigners(reservations, designers) {
 app.get('/api/line/callback', async (req, res) => {
   console.log('LINE callback 收到請求:', req.query);
   
-  const { code, state } = req.query;
-  const client_id = '2007657170';
-  const client_secret = '59ce418bc196c809a6f0064ebc895062';
-  const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
+ const axios = require('axios');
+
+const { code } = req.query;
+const client_id = '2007657170';
+const client_secret = '59ce418bc196c809a6f0064ebc895062';
+const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
+
+const tokenUrl = 'https://api.line.me/oauth2/v2.1/token';
+
+const params = new URLSearchParams();
+params.append('grant_type', 'authorization_code');
+params.append('code', code);
+params.append('redirect_uri', redirect_uri);
+params.append('client_id', client_id);
+params.append('client_secret', client_secret);
+
+const tokenRes = await axios.post(tokenUrl, params.toString(), {
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+});
+
+console.log(tokenRes.data);
 
   if (!code) {
     console.error('缺少授權碼');
