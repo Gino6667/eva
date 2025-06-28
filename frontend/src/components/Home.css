@@ -8,6 +8,11 @@
   text-align: center;
   padding: 80px 20px;
   background: rgba(0, 0, 0, 0.1);
+  color: white;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: none;
+  margin: 0;
   backdrop-filter: blur(10px);
 }
 
@@ -15,6 +20,7 @@
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: #fff;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -22,7 +28,19 @@
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
+  color: #fff;
+  font-weight: 500;
   animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-subtitle.highlight {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ffe082;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  letter-spacing: 1px;
+  margin-bottom: 2.2rem;
+  display: block;
 }
 
 .highlight {
