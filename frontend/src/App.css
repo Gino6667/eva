@@ -36,18 +36,20 @@ body, html {
 }
 .header nav a, .header nav button.btn {
   color: #f7ab5e;
-  background: #007bff;
-  border: none;
-  border-radius: 4px;
+  background: transparent;
+  border: 2px solid #f7ab5e;
+  border-radius: 12px;
   padding: 8px 16px;
   text-decoration: none;
   font-size: 1rem;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
   cursor: pointer;
+  box-shadow: none;
 }
 .header nav a:hover, .header nav button.btn:hover {
-  background: #0056b3;
+  background: #fff;
   color: #f7ab5e;
+  border-color: #f7ab5e;
 }
 
 .main {
