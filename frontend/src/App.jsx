@@ -12,7 +12,6 @@ const Queue = lazy(() => import('./components/Queue'));
 const Reservation = lazy(() => import('./components/Reservation'));
 const Worktime = lazy(() => import('./components/Worktime'));
 const Reports = lazy(() => import('./components/Reports'));
-const Notifications = lazy(() => import('./components/Notifications'));
 const Customers = lazy(() => import('./components/Customers'));
 const Finance = lazy(() => import('./components/Finance'));
 const Designers = lazy(() => import('./components/Designers'));
@@ -92,7 +91,6 @@ function App() {
               <Link to="/reservation" className="nav-link">線上預約</Link>
               <Link to="/worktime" className="nav-link">工作時間設定</Link>
               <Link to="/reports" className="nav-link">報表統計</Link>
-              <Link to="/notifications" className="nav-link">通知系統</Link>
               <Link to="/customers" className="nav-link">客戶管理</Link>
               <Link to="/finance" className="nav-link">財務管理</Link>
               <Link to="/designers" className="nav-link">設計師管理</Link>
@@ -121,7 +119,6 @@ function App() {
                 <Route path="/reservation" element={<Reservation />} />
                 <Route path="/worktime" element={<Worktime />} />
                 <Route path="/reports" element={<Reports />} />
-                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/finance" element={<Finance />} />
                 <Route path="/designers" element={<Designers />} />
