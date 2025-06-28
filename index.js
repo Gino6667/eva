@@ -545,11 +545,35 @@ app.post('/api/register', (req, res) => {
 // 登入
 app.post('/api/login', (req, res) => {
   const data = getData();
-  const { email, password } = req.body;
-  const user = data.users.find(u => u.email === email && u.password === password);
+  const { email, phone, password } = req.body;
+  
+  // 支援使用 email 或 phone 登入
+  let user;
+  if (phone) {
+    user = data.users.find(u => u.phone === phone && u.password === password);
+  } else if (email) {
+    user = data.users.find(u => u.email === email && u.password === password);
+  }
+  
   if (!user) return res.status(401).json({ error: '帳號或密碼錯誤' });
-  const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
-  res.json({ token, user: { id: user.id, email: user.email, name: user.name } });
+  
+  const token = jwt.sign({ 
+    id: user.id, 
+    email: user.email, 
+    phone: user.phone,
+    role: user.role 
+  }, JWT_SECRET, { expiresIn: '7d' });
+  
+  res.json({ 
+    token, 
+    user: { 
+      id: user.id, 
+      email: user.email, 
+      phone: user.phone,
+      name: user.name,
+      role: user.role 
+    } 
+  });
 });
 
 // JWT 驗證中介層
