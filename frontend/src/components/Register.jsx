@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import './Auth.css';
 
@@ -10,6 +10,7 @@ function Register({ setUser }) {
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -24,7 +25,18 @@ function Register({ setUser }) {
       });
       setUser(profile.data);
       setMsg('註冊成功！');
-      setTimeout(() => navigate('/profile'), 800);
+      
+      // 檢查是否有重定向參數
+      const redirect = searchParams.get('redirect');
+      setTimeout(() => {
+        if (redirect === 'queue') {
+          navigate('/queue');
+        } else if (redirect === 'reservation') {
+          navigate('/reservation');
+        } else {
+          navigate('/profile');
+        }
+      }, 800);
     } catch (err) {
       setMsg('註冊失敗，Email 可能已被註冊');
     } finally {
@@ -32,9 +44,41 @@ function Register({ setUser }) {
     }
   };
 
+  const handleGoBack = () => {
+    const redirect = searchParams.get('redirect');
+    if (redirect === 'queue') {
+      navigate('/queue');
+    } else if (redirect === 'reservation') {
+      navigate('/reservation');
+    } else {
+      navigate('/');
+    }
+  };
+
+  const redirect = searchParams.get('redirect');
+  const redirectText = redirect === 'queue' ? '現場排隊' : 
+                      redirect === 'reservation' ? '線上預約' : '';
+
   return (
     <div className="auth-container">
       <div className="auth-card">
+        {redirect && (
+          <div style={{marginBottom: '1em', textAlign: 'center'}}>
+            <button 
+              onClick={handleGoBack}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                cursor: 'pointer',
+                fontSize: '0.9em',
+                textDecoration: 'underline'
+              }}
+            >
+              ← 返回{redirectText}頁面
+            </button>
+          </div>
+        )}
         <h2>會員註冊</h2>
         <form onSubmit={handleRegister}>
           <div className="form-group">
