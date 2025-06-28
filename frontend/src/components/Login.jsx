@@ -90,14 +90,8 @@ function Login({ setUser }) {
           <div style={{marginBottom: '1em', textAlign: 'center'}}>
             <button 
               onClick={handleGoBack}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#666',
-                cursor: 'pointer',
-                fontSize: '0.9em',
-                textDecoration: 'underline'
-              }}
+              className="btn btn-secondary"
+              style={{marginBottom: '1em'}}
             >
               ← 返回{redirectText}頁面
             </button>
