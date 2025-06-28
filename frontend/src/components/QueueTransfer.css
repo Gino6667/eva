@@ -7,7 +7,7 @@
 
 .transfer-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: #f7ab5e;
   padding: 2rem;
   border-radius: 12px;
   margin-bottom: 2rem;
@@ -19,12 +19,14 @@
   margin: 0 0 0.5rem 0;
   font-size: 2rem;
   font-weight: 600;
+  color: #f7ab5e;
 }
 
 .transfer-header p {
   margin: 0;
   opacity: 0.9;
   font-size: 1.1rem;
+  color: #f7ab5e;
 }
 
 .message {
@@ -35,15 +37,15 @@
 }
 
 .message.success {
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  background: #4a5a4f;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 .message.error {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background: #4a5a4f;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 .transfer-content {
@@ -54,10 +56,11 @@
 
 /* 排隊列表區域 */
 .queue-section {
-  background: white;
+  background: #333d38;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid #f7ab5e;
 }
 
 .section-header {
@@ -66,12 +69,12 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #f8f9fa;
+  border-bottom: 2px solid #f7ab5e;
 }
 
 .section-header h3 {
   margin: 0;
-  color: #333;
+  color: #f7ab5e;
   font-size: 1.3rem;
   font-weight: 600;
 }
@@ -88,38 +91,41 @@
 
 .btn-primary {
   background: #007bff;
-  color: white;
+  color: #f7ab5e;
 }
 
 .btn-primary:hover:not(:disabled) {
   background: #0056b3;
+  color: #f7ab5e;
 }
 
 .btn-primary:disabled {
   background: #6c757d;
   cursor: not-allowed;
+  color: #f7ab5e;
 }
 
 .btn-secondary {
   background: #6c757d;
-  color: white;
+  color: #f7ab5e;
 }
 
 .btn-secondary:hover {
   background: #545b62;
+  color: #f7ab5e;
 }
 
 .loading {
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: #f7ab5e;
   font-size: 1.1rem;
 }
 
 .no-data {
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: #f7ab5e;
   font-style: italic;
 }
 
@@ -137,25 +143,25 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #f8f9fa;
+  background: #4a5a4f;
 }
 
 .queue-item:hover {
   border-color: #007bff;
-  background: #f0f8ff;
+  background: #333d38;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
 }
 
 .queue-item.selected {
   border-color: #28a745;
-  background: #f0fff4;
+  background: #333d38;
   box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
 }
 
 .queue-number {
   background: #007bff;
-  color: white;
+  color: #f7ab5e;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-weight: 600;
@@ -181,7 +187,7 @@
 .designer-name,
 .service-name,
 .queue-time {
-  color: #333;
+  color: #f7ab5e;
   font-size: 0.9rem;
 }
 
@@ -197,177 +203,185 @@
 }
 
 .status-waiting {
-  background: #fff3cd;
-  color: #856404;
+  background: #4a5a4f;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 .status-called {
-  background: #d1ecf1;
-  color: #0c5460;
+  background: #4a5a4f;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 .status-done {
-  background: #d4edda;
-  color: #155724;
+  background: #4a5a4f;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 .status-absent {
-  background: #f8d7da;
-  color: #721c24;
+  background: #4a5a4f;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 /* 調整表單 */
 .transfer-form {
-  background: white;
+  background: #333d38;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 2px solid #e9ecef;
+  border: 2px solid #f7ab5e;
 }
 
 .transfer-form h3 {
   margin: 0 0 1rem 0;
-  color: #333;
+  color: #f7ab5e;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .selected-queue-info {
-  background: #f8f9fa;
+  background: #4a5a4f;
   padding: 1rem;
   border-radius: 8px;
-  margin-bottom: 1.5rem;
-  border-left: 4px solid #007bff;
+  margin-bottom: 1rem;
+  border: 1px solid #f7ab5e;
 }
 
 .selected-queue-info p {
-  margin: 0.5rem 0;
-  color: #333;
+  margin: 0;
+  color: #f7ab5e;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #333;
+  color: #f7ab5e;
+  font-weight: 500;
 }
 
 .form-control {
   width: 100%;
   padding: 0.75rem;
   border: 2px solid #e9ecef;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  background: #4a5a4f;
+  color: #f7ab5e;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  border-color: #f7ab5e;
+  box-shadow: 0 0 0 2px rgba(247, 171, 94, 0.1);
 }
 
 textarea.form-control {
   resize: vertical;
-  min-height: 80px;
+  min-height: 100px;
 }
 
 .form-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 /* 調整歷史 */
 .transfer-history {
-  background: white;
+  background: #333d38;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-top: 2rem;
+  border: 2px solid #f7ab5e;
 }
 
 .transfer-history h3 {
   margin: 0 0 1rem 0;
-  color: #333;
+  color: #f7ab5e;
   font-size: 1.2rem;
   font-weight: 600;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #f8f9fa;
 }
 
 .history-list {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .history-item {
-  padding: 1rem;
-  border: 1px solid #e9ecef;
+  background: #4a5a4f;
   border-radius: 8px;
-  background: #f8f9fa;
+  padding: 1rem;
+  border: 1px solid #f7ab5e;
 }
 
 .history-info {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
-  flex-wrap: wrap;
+  color: #f7ab5e;
 }
 
 .history-queue {
-  background: #007bff;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  color: #f7ab5e;
 }
 
 .history-arrow {
-  color: #666;
-  font-weight: bold;
+  color: #f7ab5e;
+  font-size: 1.2rem;
 }
 
 .history-from,
 .history-to {
-  font-weight: 600;
-  color: #333;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #f7ab5e;
 }
 
 .history-from {
-  color: #dc3545;
+  background: #333d38;
+  border: 1px solid #f7ab5e;
 }
 
 .history-to {
-  color: #28a745;
+  background: #333d38;
+  border: 1px solid #f7ab5e;
 }
 
 .history-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.9rem;
+  color: #f7ab5e;
 }
 
 .history-reason {
+  color: #f7ab5e;
   font-style: italic;
 }
 
 .history-time {
-  color: #999;
+  color: #f7ab5e;
+  font-size: 0.8rem;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
   .queue-transfer-container {
-    padding: 15px;
+    padding: 10px;
   }
   
   .transfer-header {
@@ -386,12 +400,12 @@ textarea.form-control {
   
   .queue-info {
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.5rem;
+    align-items: flex-start;
   }
   
   .queue-details {
-    flex-direction: column;
+    width: 100%;
   }
   
   .form-actions {
@@ -400,27 +414,27 @@ textarea.form-control {
   
   .history-info {
     flex-direction: column;
+    gap: 0.5rem;
     align-items: flex-start;
-    gap: 0.25rem;
   }
   
   .history-details {
     flex-direction: column;
+    gap: 0.5rem;
     align-items: flex-start;
-    gap: 0.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .queue-item {
     flex-direction: column;
-    align-items: flex-start;
     gap: 1rem;
+    align-items: flex-start;
   }
   
   .queue-number {
     margin-right: 0;
-    align-self: flex-start;
+    margin-bottom: 0.5rem;
   }
   
   .queue-info {

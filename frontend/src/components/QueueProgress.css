@@ -8,7 +8,7 @@
 }
 
 .queue-progress-card {
-  background: #fff;
+  background: #333d38;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15), 0 1.5px 8px rgba(0,0,0,0.04);
   padding: 36px 32px 32px 32px;
@@ -17,11 +17,12 @@
   margin-top: 0;
   margin-bottom: 32px;
   animation: fadeInUp 0.8s;
+  border: 2px solid #f7ab5e;
 }
 
 .queue-progress-card h2 {
   text-align: center;
-  color: #4a4a4a;
+  color: #f7ab5e;
   margin-bottom: 32px;
   font-size: 2rem;
   font-weight: 700;
@@ -30,15 +31,16 @@
 
 /* 今日統計 */
 .today-stats {
-  background: #f6f8fc;
+  background: #4a5a4f;
   border-radius: 16px;
   padding: 20px 18px 16px 18px;
   margin-bottom: 32px;
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.07);
+  border: 1px solid #f7ab5e;
 }
 
 .today-stats h3 {
-  color: #333;
+  color: #f7ab5e;
   margin-bottom: 18px;
   font-size: 1.15rem;
   font-weight: 600;
@@ -55,35 +57,36 @@
 .stat-item {
   text-align: center;
   padding: 10px 18px;
-  background: #fff;
+  background: #333d38;
   border-radius: 10px;
   box-shadow: 0 1px 4px rgba(102, 126, 234, 0.07);
   min-width: 70px;
+  border: 1px solid #f7ab5e;
 }
 
 .stat-number {
   display: block;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #f7ab5e;
   margin-bottom: 2px;
 }
 
 .stat-number.waiting {
-  color: #ff9800;
+  color: #f7ab5e;
 }
 
 .stat-number.called {
-  color: #2196f3;
+  color: #f7ab5e;
 }
 
 .stat-number.done {
-  color: #4caf50;
+  color: #f7ab5e;
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: #888;
+  color: #f7ab5e;
 }
 
 /* 當前正在服務 */
@@ -92,7 +95,7 @@
 }
 
 .current-serving h4 {
-  color: #333;
+  color: #f7ab5e;
   margin-bottom: 8px;
   font-size: 1rem;
   font-weight: 600;
@@ -105,8 +108,8 @@
 }
 
 .serving-item {
-  background: #e3f2fd;
-  border: 1px solid #2196f3;
+  background: #4a5a4f;
+  border: 1px solid #f7ab5e;
   border-radius: 8px;
   padding: 6px 12px;
   display: flex;
@@ -117,25 +120,26 @@
 
 .serving-item .number {
   font-weight: bold;
-  color: #2196f3;
+  color: #f7ab5e;
 }
 
 .serving-item .designer {
-  color: #333;
+  color: #f7ab5e;
 }
 
 .serving-item .service {
-  color: #666;
+  color: #f7ab5e;
   font-size: 0.85rem;
 }
 
 /* 查詢表單 */
 .search-form {
-  background: #f6f8fc;
+  background: #4a5a4f;
   border-radius: 16px;
   padding: 24px 18px 18px 18px;
   margin-bottom: 28px;
   box-shadow: 0 1px 6px rgba(102, 126, 234, 0.07);
+  border: 1px solid #f7ab5e;
 }
 
 .form-group {
@@ -145,7 +149,7 @@
 .form-group label {
   display: block;
   margin-bottom: 7px;
-  color: #333;
+  color: #f7ab5e;
   font-weight: 500;
 }
 
@@ -156,20 +160,21 @@
   border-radius: 10px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
-  background: #fff;
+  background: #333d38;
+  color: #f7ab5e;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.08);
+  border-color: #f7ab5e;
+  box-shadow: 0 0 0 2px rgba(247, 171, 94, 0.08);
 }
 
 .search-btn {
   width: 100%;
   padding: 15px;
   background: linear-gradient(135deg, #667eea 0%, #ff6b6b 100%);
-  color: white;
+  color: #f7ab5e;
   border: none;
   border-radius: 10px;
   font-size: 1.1rem;
@@ -183,125 +188,126 @@
 .search-btn:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 6px 18px rgba(255, 107, 107, 0.18);
+  color: #f7ab5e;
 }
 
 .search-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  color: #f7ab5e;
 }
 
 /* 錯誤訊息 */
 .error-message {
-  background: #ffebee;
-  color: #c62828;
+  background: #4a5a4f;
+  color: #f7ab5e;
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
-  border-left: 4px solid #f44336;
-  font-weight: 500;
-  box-shadow: 0 1px 4px rgba(255, 107, 107, 0.08);
+  border-left: 4px solid #f7ab5e;
 }
 
 /* 查詢結果 */
 .progress-result {
-  background: #f6f8fc;
+  background: #4a5a4f;
   border-radius: 16px;
   padding: 24px 18px 18px 18px;
-  margin-top: 18px;
+  margin-bottom: 20px;
   box-shadow: 0 1px 6px rgba(102, 126, 234, 0.07);
+  border: 1px solid #f7ab5e;
 }
 
 .progress-result h3 {
-  color: #333;
-  margin-bottom: 18px;
-  font-size: 1.15rem;
+  color: #f7ab5e;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .queue-info {
-  background: #fff;
+  background: #333d38;
   border-radius: 12px;
-  padding: 18px 14px;
-  margin-bottom: 18px;
-  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.07);
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #f7ab5e;
 }
 
 .info-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e1e5e9;
+  margin-bottom: 15px;
+  color: #f7ab5e;
 }
 
 .queue-number {
-  font-size: 2.1rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #667eea;
+  color: #f7ab5e;
 }
 
 .status-badge {
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 20px;
-  color: white;
+  font-size: 0.9rem;
   font-weight: 600;
-  font-size: 1rem;
-  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.10);
-  letter-spacing: 1px;
+  color: #f7ab5e;
+  background: #4a5a4f;
+  border: 1px solid #f7ab5e;
 }
 
 .info-details {
   display: grid;
-  gap: 10px;
+  gap: 12px;
+  color: #f7ab5e;
 }
 
 .detail-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  color: #f7ab5e;
 }
 
 .detail-item .label {
-  font-weight: 600;
-  color: #333;
-  min-width: 90px;
+  font-weight: 500;
+  color: #f7ab5e;
 }
 
 .detail-item .value {
-  color: #666;
-  flex: 1;
+  font-weight: 600;
+  color: #f7ab5e;
 }
 
 .paused-badge {
   background: #ff9800;
-  color: white;
+  color: #f7ab5e;
   padding: 4px 8px;
   border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-left: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 8px;
 }
 
-/* 進度資訊 */
 .progress-info {
-  background: #fff;
+  background: #333d38;
   border-radius: 12px;
-  padding: 16px 12px;
-  margin-bottom: 18px;
-  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.07);
+  padding: 20px;
+  border: 1px solid #f7ab5e;
 }
 
 .progress-info h4 {
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 1rem;
+  color: #f7ab5e;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
 .progress-details {
   display: grid;
-  gap: 10px;
+  gap: 12px;
+  color: #f7ab5e;
 }
 
 .progress-item {
@@ -309,61 +315,68 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f7ab5e;
+  color: #f7ab5e;
 }
 
 .progress-item:last-child {
   border-bottom: none;
+  color: #f7ab5e;
 }
 
 .progress-item .label {
   font-weight: 500;
-  color: #333;
+  color: #f7ab5e;
 }
 
 .progress-item .value {
   font-weight: 600;
-  color: #667eea;
-  font-size: 1.05rem;
+  color: #f7ab5e;
 }
 
-/* 當前正在服務結果 */
 .current-serving-result {
-  background: #fff;
+  background: #333d38;
   border-radius: 12px;
-  padding: 16px 12px;
-  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.07);
+  padding: 20px;
+  border: 1px solid #f7ab5e;
 }
 
 .current-serving-result h4 {
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 1rem;
+  color: #f7ab5e;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
-/* 響應式設計 */
 @media (max-width: 600px) {
   .queue-progress-card {
-    padding: 16px 4px 18px 4px;
-    max-width: 98vw;
+    padding: 24px 16px 20px 16px;
   }
+  
   .today-stats, .search-form, .progress-result {
-    padding: 12px 4px 10px 4px;
+    padding: 16px 12px 12px 12px;
   }
+  
   .queue-info, .progress-info, .current-serving-result {
-    padding: 10px 4px;
+    padding: 16px;
   }
+  
   .queue-number {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
+  
   .status-badge {
-    font-size: 0.9rem;
-    padding: 6px 10px;
+    font-size: 0.8rem;
   }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 } 

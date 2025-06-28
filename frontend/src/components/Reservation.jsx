@@ -168,7 +168,7 @@ function Reservation() {
               width: '100%', 
               padding: '12px', 
               textAlign: 'left',
-              background: selectedDesigner ? '#f8f9fa' : '#fff',
+              background: selectedDesigner ? '#4a5a4f' : '#333d38',
               border: '1px solid #ddd',
               borderRadius: '4px'
             }}
@@ -186,7 +186,7 @@ function Reservation() {
               width: '100%', 
               padding: '12px', 
               textAlign: 'left',
-              background: selectedService ? '#f8f9fa' : '#fff',
+              background: selectedService ? '#4a5a4f' : '#333d38',
               border: '1px solid #ddd',
               borderRadius: '4px'
             }}
@@ -239,8 +239,8 @@ function Reservation() {
         <div className="modal-overlay">
           <div className="modal-content service-modal">
             <div className="modal-header service-header">
-              <span style={{fontSize: '2rem', marginRight: '0.5em', color: '#fff'}}>💇‍♂️</span>
-              <h3 style={{color: '#fff', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟3：選擇服務項目</h3>
+              <span style={{fontSize: '2rem', marginRight: '0.5em', color: '#f7ab5e'}}>💇‍♂️</span>
+              <h3 style={{color: '#f7ab5e', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟3：選擇服務項目</h3>
               <button className="modal-close" onClick={() => setShowServiceModal(false)}>&times;</button>
             </div>
             <div className="modal-body">

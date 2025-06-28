@@ -116,24 +116,24 @@
 }
 
 .admin-container {
-  min-height: 100vh;
-  background: #333d38;
-  color: #f7ab5e;
   padding: 20px;
+  background: #333d38;
+  min-height: 100vh;
 }
 
 .admin-header {
-  text-align: center;
-  margin-bottom: 2rem;
   background: #333d38;
-  color: #f7ab5e;
-  padding: 1rem;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #f7ab5e;
 }
 
 .admin-header h1 {
-  margin: 0 0 0.5rem 0;
+  color: #f7ab5e;
+  margin: 0;
   font-size: 2rem;
+  font-weight: bold;
 }
 
 .admin-header p {
@@ -212,35 +212,27 @@
 
 /* 表格樣式 */
 .admin-table {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
-}
-
-.admin-table table {
   width: 100%;
   border-collapse: collapse;
+  background: #333d38;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #f7ab5e;
+  color: #f7ab5e;
 }
 
 .admin-table th {
-  background: #f8f9fa;
-  padding: 1rem;
-  text-align: left;
-  font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #e9ecef;
-}
-
-.admin-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
-  color: #666;
+  background: #4a5a4f;
+  font-weight: bold;
+  color: #f7ab5e;
 }
 
 .admin-table tr:hover {
-  background: #f8f9fa;
+  background: #4a5a4f;
 }
 
 .admin-table tr:last-child td {
@@ -249,110 +241,76 @@
 
 /* 按鈕樣式 */
 .admin-btn {
-  padding: 8px 16px;
+  background: #f7ab5e;
+  color: #333d38;
   border: none;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-weight: bold;
   transition: all 0.3s ease;
-  margin-right: 0.5rem;
 }
 
-.admin-btn-primary {
-  background: #007bff;
-  color: white;
+.admin-btn:hover {
+  background: #e89b4e;
+  transform: translateY(-1px);
 }
 
-.admin-btn-primary:hover {
-  background: #0056b3;
-}
-
-.admin-btn-success {
-  background: #28a745;
-  color: white;
-}
-
-.admin-btn-success:hover {
-  background: #1e7e34;
-}
-
-.admin-btn-warning {
-  background: #ffc107;
-  color: #212529;
-}
-
-.admin-btn-warning:hover {
-  background: #e0a800;
-}
-
-.admin-btn-danger {
+.admin-btn.danger {
   background: #dc3545;
-  color: white;
+  color: #f7ab5e;
 }
 
-.admin-btn-danger:hover {
+.admin-btn.danger:hover {
   background: #c82333;
-}
-
-.admin-btn-secondary {
-  background: #6c757d;
-  color: white;
-}
-
-.admin-btn-secondary:hover {
-  background: #545b62;
 }
 
 /* 表單樣式 */
 .admin-form {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
-}
-
-.admin-form h3 {
-  margin: 0 0 1.5rem 0;
-  color: #333;
+  display: grid;
+  gap: 15px;
+  max-width: 500px;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #333;
+  color: #f7ab5e;
+  margin-bottom: 5px;
+  font-weight: 500;
 }
 
 .form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
+.form-group select {
+  padding: 10px;
   border: 2px solid #e9ecef;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+  border-radius: 5px;
+  background: #4a5a4f;
+  color: #f7ab5e;
 }
 
 .form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-group select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #f7ab5e;
 }
 
 /* 設計師權限管理樣式 */
 .admin-section {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
+  background: #333d38;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #f7ab5e;
+}
+
+.admin-section h2 {
+  color: #f7ab5e;
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
 }
 
 .section-header {
@@ -452,31 +410,31 @@
 }
 
 /* 統計卡片 */
-.stats-grid {
+.admin-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
 }
 
 .stat-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: #333d38;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #f7ab5e;
   text-align: center;
 }
 
-.stat-card .number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #667eea;
-  margin-bottom: 0.5rem;
+.stat-card h3 {
+  color: #f7ab5e;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
 }
 
-.stat-card .label {
-  color: #666;
-  font-size: 0.9rem;
+.stat-card .number {
+  color: #f7ab5e;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 /* 搜尋和篩選 */
@@ -578,9 +536,17 @@
     min-width: 600px;
   }
   
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .admin-table {
+    font-size: 14px;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
   }
   
   .admin-filters {
@@ -611,7 +577,7 @@
 }
 
 @media (max-width: 480px) {
-  .stats-grid {
+  .admin-stats {
     grid-template-columns: 1fr;
   }
   

@@ -215,11 +215,10 @@ function Queue() {
         </div>
 
         <div className="queue-step">
-          <h3 style={{fontSize: '2.2rem', color: '#ff9800', fontWeight: 'bold', marginBottom: '1.2rem', letterSpacing: '2px', textShadow: '0 2px 12px #fff3cd, 0 1px 0 #fff'}}>排隊成功！</h3>
-          <div style={{margin: '1.5em 0'}}>
-            <div style={{fontSize: '3.2rem', fontWeight: '900', color: '#d84315', letterSpacing: '4px', textShadow: '0 4px 24px #ffcc80, 0 1px 0 #fff', animation: 'popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55)'}}>您的號碼牌</div>
-            <div style={{fontSize: '5rem', fontWeight: '900', color: '#ff9800', letterSpacing: '6px', textShadow: '0 6px 32px #fffbe6, 0 2px 0 #fff', margin: '0.2em 0', animation: 'popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55)'}}>{queueResult.number}</div>
-          </div>
+          <h3 style={{fontSize: '2.2rem', color: '#f7ab5e', fontWeight: 'bold', marginBottom: '1.2rem', letterSpacing: '2px', textShadow: '0 2px 12px #fff3cd, 0 1px 0 #f7ab5e'}}>排隊成功！</h3>
+          <div style={{fontSize: '1.2rem', color: '#f7ab5e', marginBottom: '1rem'}}>請記住您的號碼牌</div>
+          <div style={{fontSize: '3.2rem', fontWeight: '900', color: '#f7ab5e', letterSpacing: '4px', textShadow: '0 4px 24px #ffcc80, 0 1px 0 #f7ab5e', animation: 'popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55)'}}>您的號碼牌</div>
+          <div style={{fontSize: '5rem', fontWeight: '900', color: '#f7ab5e', letterSpacing: '6px', textShadow: '0 6px 32px #fffbe6, 0 2px 0 #f7ab5e', margin: '0.2em 0', animation: 'popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55)'}}>{queueResult.number}</div>
           <p style={{fontSize: '1.3em', color: '#333', fontWeight: 'bold', marginBottom: '0.5em'}}>請留意現場叫號或手機通知！</p>
           <p style={{color: '#666', fontSize: '0.9em', marginTop: '1em'}}>
             {countdown} 秒後自動返回現場排隊頁面
@@ -261,7 +260,7 @@ function Queue() {
           </div>
         )}
 
-        <h3 style={{marginTop: '2em', color: '#ff9800'}}>步驟2：選擇設計師</h3>
+        <h3 style={{marginTop: '2em', color: '#f7ab5e'}}>步驟2：選擇設計師</h3>
         <div style={{marginBottom: '1em'}}>
           <button 
             className="btn btn-outline" 
@@ -270,7 +269,7 @@ function Queue() {
               width: '100%', 
               padding: '12px', 
               textAlign: 'left',
-              background: selectedDesigner ? '#f8f9fa' : '#fff',
+              background: selectedDesigner ? '#4a5a4f' : '#333d38',
               border: '1px solid #ddd',
               borderRadius: '4px'
             }}
@@ -288,7 +287,7 @@ function Queue() {
               width: '100%', 
               padding: '12px', 
               textAlign: 'left',
-              background: selectedService ? '#f8f9fa' : '#fff',
+              background: selectedService ? '#4a5a4f' : '#333d38',
               border: '1px solid #ddd',
               borderRadius: '4px'
             }}
@@ -316,7 +315,7 @@ function Queue() {
         <div className="modal-overlay">
           <div className="modal-content">
             <div className="modal-header">
-              <h3 style={{color: '#ff9800', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟2：選擇設計師</h3>
+              <h3 style={{color: '#f7ab5e', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟2：選擇設計師</h3>
               <button className="modal-close" onClick={() => setShowDesignerModal(false)}>&times;</button>
             </div>
             <div className="modal-body">
@@ -340,7 +339,7 @@ function Queue() {
         <div className="modal-overlay">
           <div className="modal-content service-modal">
             <div className="modal-header service-header">
-              <h3 style={{color: '#fff', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟3：選擇服務項目</h3>
+              <h3 style={{color: '#f7ab5e', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟3：選擇服務項目</h3>
               <button className="modal-close" onClick={() => setShowServiceModal(false)}>&times;</button>
             </div>
             <div className="modal-body">

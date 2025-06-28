@@ -262,7 +262,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: #333d38;
   border-radius: 20px;
   max-width: 600px;
   width: 100%;
@@ -312,12 +312,12 @@
   padding: 2rem;
   border-bottom: 2px solid #e9ecef;
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: white;
+  color: #f7ab5e;
 }
 
 .modal-header h3 {
   margin: 0;
-  color: white;
+  color: #f7ab5e;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -327,7 +327,7 @@
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: white;
+  color: #f7ab5e;
   padding: 0;
   width: 40px;
   height: 40px;
@@ -359,7 +359,7 @@
   display: block;
   width: 100%;
   padding: 16px 20px;
-  background: #f8f9fa;
+  background: #333d38;
   border: 2px solid #e9ecef;
   border-radius: 999px !important;
   text-align: center;
@@ -370,6 +370,7 @@
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
+  color: #f7ab5e;
 }
 
 .modal-option::before {
@@ -388,15 +389,16 @@
 }
 
 .modal-option:hover {
-  background: #e9ecef;
+  background: #4a5a4f;
   border-color: #007bff;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+  color: #f7ab5e;
 }
 
 .modal-option.selected {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: white;
+  color: #f7ab5e;
   border-color: #007bff;
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
   transform: translateY(-2px);
@@ -406,6 +408,7 @@
   background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(0, 123, 255, 0.4);
+  color: #f7ab5e;
 }
 
 /* 響應式設計 - 彈窗 */
@@ -458,7 +461,7 @@
 }
 
 .queue-step {
-  background: #fffbe6;
+  background: #333d38;
   border: 3px solid #ff9800;
   border-radius: 18px;
   box-shadow: 0 8px 32px rgba(255,152,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
@@ -470,20 +473,20 @@
 }
 
 .queue-step h3 {
-  color: #ff9800;
+  color: #f7ab5e;
   font-size: 2.1rem;
   font-weight: bold;
   margin-bottom: 1.2rem;
   letter-spacing: 1px;
-  text-shadow: 0 2px 12px #fff3cd, 0 1px 0 #fff;
+  text-shadow: 0 2px 12px #fff3cd, 0 1px 0 #f7ab5e;
 }
 
 .queue-step span[style*='fontWeight: bold'] {
-  color: #d84315;
+  color: #f7ab5e;
   font-size: 2.8rem !important;
   font-weight: 900 !important;
   letter-spacing: 2px;
-  text-shadow: 0 4px 24px #ffcc80, 0 1px 0 #fff;
+  text-shadow: 0 4px 24px #ffcc80, 0 1px 0 #f7ab5e;
   animation: popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
@@ -495,12 +498,12 @@
 
 @keyframes popNumber {
   0% { transform: scale(0.7); opacity: 0; }
-  80% { transform: scale(1.15); opacity: 1; }
+  80% { transform: scale(1.08); opacity: 1; }
   100% { transform: scale(1); }
 }
 
 .modal-header h3 {
-  color: #ff9800 !important;
+  color: #f7ab5e !important;
 }
 
 /* 實時服務狀態顯示樣式 */

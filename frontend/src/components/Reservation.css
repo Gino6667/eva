@@ -11,25 +11,26 @@
 }
 
 .reservation-header h2 {
-  color: #333;
+  color: #f7ab5e;
   margin-bottom: 0.5rem;
 }
 
 .reservation-header p {
-  color: #666;
+  color: #f7ab5e;
   font-size: 1.1rem;
 }
 
 .reservation-step {
-  background: white;
+  background: #333d38;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+  border: 2px solid #f7ab5e;
 }
 
 .reservation-step h3 {
-  color: #333;
+  color: #f7ab5e;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -46,46 +47,50 @@
 
 .btn-primary {
   background: #007bff;
-  color: white;
+  color: #f7ab5e;
 }
 
 .btn-primary:hover:not(:disabled) {
   background: #0056b3;
   transform: translateY(-1px);
+  color: #f7ab5e;
 }
 
 .btn-primary:disabled {
   background: #ccc;
   cursor: not-allowed;
+  color: #f7ab5e;
 }
 
 .btn-secondary {
   background: #6c757d;
-  color: white;
+  color: #f7ab5e;
 }
 
 .btn-secondary:hover {
   background: #545b62;
   transform: translateY(-1px);
+  color: #f7ab5e;
 }
 
 .btn-outline {
   background: transparent;
-  color: #333;
-  border: 1px solid #ddd;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
 }
 
 .btn-outline:hover {
-  background: #f8f9fa;
+  background: #4a5a4f;
+  color: #f7ab5e;
 }
 
 .error-message {
-  background: #f8d7da;
-  color: #721c24;
+  background: #4a5a4f;
+  color: #f7ab5e;
   padding: 1rem;
   border-radius: 8px;
   margin-top: 1rem;
-  border: 1px solid #f5c6cb;
+  border: 1px solid #f7ab5e;
 }
 
 /* 彈窗樣式 */
@@ -105,7 +110,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: #333d38;
   border-radius: 20px;
   max-width: 600px;
   width: 100%;
@@ -155,12 +160,12 @@
   padding: 2rem;
   border-bottom: 2px solid #e9ecef;
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: white;
+  color: #f7ab5e;
 }
 
 .modal-header h3 {
   margin: 0;
-  color: white;
+  color: #f7ab5e;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -170,7 +175,7 @@
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: white;
+  color: #f7ab5e;
   padding: 0;
   width: 40px;
   height: 40px;
@@ -202,7 +207,7 @@
   display: block;
   width: 100%;
   padding: 16px 20px;
-  background: #f8f9fa;
+  background: #333d38;
   border: 2px solid #e9ecef;
   border-radius: 999px !important;
   text-align: center;
@@ -213,6 +218,7 @@
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
+  color: #f7ab5e;
 }
 
 .modal-option::before {
@@ -231,15 +237,16 @@
 }
 
 .modal-option:hover {
-  background: #e9ecef;
+  background: #4a5a4f;
   border-color: #007bff;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+  color: #f7ab5e;
 }
 
 .modal-option.selected {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: white;
+  color: #f7ab5e;
   border-color: #007bff;
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
   transform: translateY(-2px);
@@ -249,9 +256,10 @@
   background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(0, 123, 255, 0.4);
+  color: #f7ab5e;
 }
 
-/* 響應式設計 */
+/* 響應式設計 - 彈窗 */
 @media (max-width: 1200px) {
   .modal-body {
     grid-template-columns: repeat(4, 1fr);
@@ -268,7 +276,7 @@
 
 @media (max-width: 768px) {
   .reservation-container {
-    padding: 15px;
+    padding: 10px;
   }
   
   .reservation-step {

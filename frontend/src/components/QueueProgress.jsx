@@ -115,7 +115,7 @@ function QueueProgress() {
                   className="user-queue-btn"
                   onClick={() => { setNumber(q.number); setDate(q.createdAt.slice(0,10)); setProgress(null); setError(''); }}
                   style={{
-                    background: '#fff',
+                    background: '#333d38',
                     border: '2px solid #2196f3',
                     borderRadius: '8px',
                     padding: '0.5em 1em',

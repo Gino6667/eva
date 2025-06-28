@@ -237,7 +237,7 @@ function Login({ setUser }) {
         </form>
         
         {!isAdminLogin && (
-          <a href={`https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=${redirect === 'queue' ? 'eva_login_queue' : redirect === 'reservation' ? 'eva_login_reservation' : redirect === 'admin' ? 'eva_login_admin' : 'eva_login'}&scope=profile%20openid%20email`} className="btn btn-line" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#fff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
+          <a href="https://line.me/R/ti/p/@2007657170" target="_blank" rel="noopener noreferrer" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#f7ab5e', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
             使用 LINE 登入
           </a>
         )}
