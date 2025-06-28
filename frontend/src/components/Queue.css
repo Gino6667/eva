@@ -494,7 +494,11 @@
 }
 
 @keyframes popNumber {
-  0% { transform: scale(0.5); opacity: 0; }
-  80% { transform: scale(1.2); opacity: 1; }
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.15); opacity: 1; }
   100% { transform: scale(1); }
+}
+
+.modal-header h3 {
+  color: #ff9800 !important;
 } 
