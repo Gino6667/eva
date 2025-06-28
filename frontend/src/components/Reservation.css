@@ -116,6 +116,32 @@
   border: 2px solid #007bff;
 }
 
+/* 步驟3服務項目彈窗特殊樣式 */
+.modal-content.service-modal {
+  border: 2px solid #28a745;
+  box-shadow: 0 20px 60px rgba(40, 167, 69, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.modal-header.service-header {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+}
+
+.modal-option.service-option:hover {
+  border-color: #28a745;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+}
+
+.modal-option.service-option.selected {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  border-color: #28a745;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.modal-option.service-option.selected:hover {
+  background: linear-gradient(135deg, #1e7e34 0%, #155724 100%);
+  box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
+}
+
 @keyframes modalSlideIn {
   from {
     opacity: 0;

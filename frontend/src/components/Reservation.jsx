@@ -235,8 +235,8 @@ function Reservation() {
       {/* 服務項目選擇彈窗 */}
       {showServiceModal && (
         <div className="modal-overlay" onClick={() => setShowServiceModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <div className="modal-header">
+          <div className="modal-content service-modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header service-header">
               <h3>選擇服務項目</h3>
               <button className="modal-close" onClick={() => setShowServiceModal(false)}>×</button>
             </div>
@@ -244,7 +244,7 @@ function Reservation() {
               {services.map(service => (
                 <button
                   key={service.id}
-                  className={`modal-option ${selectedService === service.id ? 'selected' : ''}`}
+                  className={`modal-option service-option ${selectedService === service.id ? 'selected' : ''}`}
                   onClick={() => handleServiceSelect(service.id)}
                 >
                   {service.name} - ${service.price}
