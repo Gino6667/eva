@@ -6,9 +6,9 @@ function Home() {
     <div className="home">
       <div className="hero">
         <h1 className="hero-title">歡迎來到美髮沙龍</h1>
-        <p className="hero-subtitle">專業的髮型設計，讓您展現最美的一面</p>
+        <p className="hero-subtitle highlight">專業的髮型設計，讓您展現最美的一面</p>
         <div className="hero-buttons">
-          <Link to="/queue" className="btn btn-primary">立即排隊</Link>
+          <Link to="/queue" className="btn btn-primary">現場排隊</Link>
           <Link to="/reservation" className="btn btn-secondary">線上預約</Link>
         </div>
       </div>

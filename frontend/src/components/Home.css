@@ -25,6 +25,16 @@
   animation: fadeInUp 1s ease-out 0.2s both;
 }
 
+.highlight {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ffe082;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  letter-spacing: 1px;
+  margin-bottom: 2.2rem;
+  display: block;
+}
+
 .hero-buttons {
   display: flex;
   gap: 1rem;
