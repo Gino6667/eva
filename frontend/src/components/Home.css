@@ -95,13 +95,12 @@
 
 .features {
   padding: 60px 20px 0 20px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
-  justify-content: center;
-  align-items: center;
 }
 
 .feature-card {
