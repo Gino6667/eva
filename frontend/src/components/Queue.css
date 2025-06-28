@@ -784,4 +784,37 @@ body, .queue-container, .queue-step, .modal-header, .modal-header h3, .modal-opt
   border: 2px solid #f7ab5e !important;
   border-radius: 12px !important;
   box-shadow: none !important;
+}
+
+.queue-flex-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 32px;
+}
+.queue-sidebar {
+  flex: 0 0 340px;
+  min-width: 260px;
+  max-width: 380px;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  padding: 0;
+}
+.queue-main {
+  flex: 1 1 480px;
+  min-width: 320px;
+  max-width: 600px;
+}
+@media (max-width: 900px) {
+  .queue-flex-layout {
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .queue-sidebar, .queue-main {
+    max-width: 100%;
+    min-width: 0;
+  }
 } 

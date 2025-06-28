@@ -63,30 +63,30 @@ function App() {
       <div className="App">
         {/* 只有不是 admin 頁面時才顯示 header */}
         {window.location.pathname !== '/eva/admin' && (
-          <header className="header">
-            <div className="header-content">
-              <h1>美髮沙龍管理系統</h1>
-              <nav className="nav-menu">
-                <Link to="/" className="nav-link">首頁</Link>
-                <Link to="/queue" className="nav-link">現場排隊</Link>
+        <header className="header">
+          <div className="header-content">
+            <h1>美髮沙龍管理系統</h1>
+            <nav className="nav-menu">
+              <Link to="/" className="nav-link">首頁</Link>
+              <Link to="/queue" className="nav-link">現場排隊</Link>
                 <Link to="/queue-progress" className="nav-link">排隊進度查詢</Link>
                 {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
-                <Link to="/reservation" className="nav-link">線上預約</Link>
-                {user ? (
-                  <>
+              <Link to="/reservation" className="nav-link">線上預約</Link>
+              {user ? (
+                <>
                     {user.role !== 'admin' && (
-                      <Link to="/profile" className="nav-link">會員中心</Link>
+                  <Link to="/profile" className="nav-link">會員中心</Link>
                     )}
-                    <button className="btn btn-logout" onClick={handleLogout}>登出</button>
-                  </>
-                ) : (
-                  <>
+                  <button className="btn btn-logout" onClick={handleLogout}>登出</button>
+                </>
+              ) : (
+                <>
                     <Link to="/login" className="nav-link">會員登入/註冊</Link>
-                  </>
-                )}
-              </nav>
-            </div>
-          </header>
+                </>
+              )}
+            </nav>
+          </div>
+        </header>
         )}
         
         <main className="main">

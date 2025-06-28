@@ -158,7 +158,7 @@ function Queue() {
 
   // 實時服務狀態顯示組件
   const CurrentServingDisplay = () => (
-    <div className="current-serving-display">
+    <>
       <div className="serving-header">
         <h3>🔄 即時服務狀態</h3>
         <div className="update-info">
@@ -172,7 +172,6 @@ function Queue() {
           </button>
         </div>
       </div>
-      
       <div className="serving-grid">
         {designers.filter(designer => designer.name !== '不指定').map(designer => {
           const serving = currentServing.find(s => s.designerId === designer.id);
@@ -197,13 +196,12 @@ function Queue() {
           );
         })}
       </div>
-      
       {currentServing.length === 0 && (
         <div className="no-serving">
           <p>目前沒有設計師在服務中</p>
         </div>
       )}
-    </div>
+    </>
   );
 
   if (queueResult) {
@@ -230,84 +228,87 @@ function Queue() {
   }
 
   return (
-    <div className="queue-container">
-      <div className="queue-header">
-        <h2>現場排隊</h2>
-        <p>完成以下步驟即可現場排隊</p>
+    <div className="queue-container queue-flex-layout">
+      {/* 左側 Sidebar：即時服務狀態 */}
+      <div className="queue-sidebar">
+        <CurrentServingDisplay />
       </div>
-
-      {/* 實時服務狀態顯示 */}
-      <CurrentServingDisplay />
-
-      <div className="queue-step">
-        <h3>步驟1：選擇訪客或會員</h3>
-        <div style={{marginBottom: '1em'}}>
-          <button className={`btn ${isMember === false ? 'btn-primary' : ''}`} onClick={() => setIsMember(false)}>訪客</button>
-          <button className={`btn ${isMember === true ? 'btn-primary' : ''}`} onClick={handleMemberSelect} style={{marginLeft: '1em'}}>會員</button>
+      {/* 右側 Content：排隊步驟 */}
+      <div className="queue-main">
+        <div className="queue-header">
+          <h2>現場排隊</h2>
+          <p>完成以下步驟即可現場排隊</p>
         </div>
-        {isMember === false && (
+        <div className="queue-step">
+          <h3>步驟1：選擇訪客或會員</h3>
           <div style={{marginBottom: '1em'}}>
-            <p style={{color: '#666', fontSize: '0.9em', marginBottom: '0.5em'}}>
-              訪客排隊無需輸入個人資料
-            </p>
+            <button className={`btn ${isMember === false ? 'btn-primary' : ''}`} onClick={() => setIsMember(false)}>訪客</button>
+            <button className={`btn ${isMember === true ? 'btn-primary' : ''}`} onClick={handleMemberSelect} style={{marginLeft: '1em'}}>會員</button>
           </div>
-        )}
-        {isMember === true && user && (
-          <div style={{marginBottom: '1em', padding: '1em', background: '#e8f5e8', borderRadius: '4px'}}>
-            <p style={{margin: '0', color: '#2d5a2d'}}>
-              ✓ 已登入會員：{user.name}
-            </p>
+          {isMember === false && (
+            <div style={{marginBottom: '1em'}}>
+              <p style={{color: '#666', fontSize: '0.9em', marginBottom: '0.5em'}}>
+                訪客排隊無需輸入個人資料
+              </p>
+            </div>
+          )}
+          {isMember === true && user && (
+            <div style={{marginBottom: '1em', padding: '1em', background: '#4a5a4f', borderRadius: '4px'}}>
+              <p style={{margin: '0', color: '#f7ab5e'}}>
+                ✓ 已登入會員：{user.name}
+              </p>
+            </div>
+          )}
+
+          <h3 style={{marginTop: '2em', color: '#f7ab5e'}}>步驟2：選擇設計師</h3>
+          <div style={{marginBottom: '1em'}}>
+            <button 
+              className="btn btn-outline" 
+              onClick={() => setShowDesignerModal(true)}
+              style={{
+                width: '100%', 
+                padding: '12px', 
+                textAlign: 'left',
+                background: selectedDesigner ? '#4a5a4f' : '#333d38',
+                border: '1px solid #ddd',
+                borderRadius: '4px'
+              }}
+            >
+              {selectedDesigner ? getSelectedDesignerName() : '請選擇設計師'}
+            </button>
           </div>
-        )}
 
-        <h3 style={{marginTop: '2em', color: '#f7ab5e'}}>步驟2：選擇設計師</h3>
-        <div style={{marginBottom: '1em'}}>
-          <button 
-            className="btn btn-outline" 
-            onClick={() => setShowDesignerModal(true)}
-            style={{
-              width: '100%', 
-              padding: '12px', 
-              textAlign: 'left',
-              background: selectedDesigner ? '#4a5a4f' : '#333d38',
-              border: '1px solid #ddd',
-              borderRadius: '4px'
-            }}
-          >
-            {selectedDesigner ? getSelectedDesignerName() : '請選擇設計師'}
-          </button>
+          <h3 style={{marginTop: '2em'}}>步驟3：選擇服務項目</h3>
+          <div style={{marginBottom: '1em'}}>
+            <button 
+              className="btn btn-outline" 
+              onClick={() => setShowServiceModal(true)}
+              style={{
+                width: '100%', 
+                padding: '12px', 
+                textAlign: 'left',
+                background: selectedService ? '#4a5a4f' : '#333d38',
+                border: '1px solid #ddd',
+                borderRadius: '4px'
+              }}
+            >
+              {selectedService ? getSelectedServiceName() : '請選擇服務項目'}
+            </button>
+          </div>
+
+          <div style={{marginTop: '2em', textAlign: 'center'}}>
+            <button 
+              className="btn btn-primary" 
+              onClick={handleQueue} 
+              disabled={loading}
+              style={{fontSize: '1.1em', padding: '12px 24px'}}
+            >
+              {loading ? '送出中...' : '送出排隊'}
+            </button>
+          </div>
+
+          {msg && <div className="error-message" style={{marginTop: '1em', textAlign: 'center'}}>{msg}</div>}
         </div>
-
-        <h3 style={{marginTop: '2em'}}>步驟3：選擇服務項目</h3>
-        <div style={{marginBottom: '1em'}}>
-          <button 
-            className="btn btn-outline" 
-            onClick={() => setShowServiceModal(true)}
-            style={{
-              width: '100%', 
-              padding: '12px', 
-              textAlign: 'left',
-              background: selectedService ? '#4a5a4f' : '#333d38',
-              border: '1px solid #ddd',
-              borderRadius: '4px'
-            }}
-          >
-            {selectedService ? getSelectedServiceName() : '請選擇服務項目'}
-          </button>
-        </div>
-
-        <div style={{marginTop: '2em', textAlign: 'center'}}>
-          <button 
-            className="btn btn-primary" 
-            onClick={handleQueue} 
-            disabled={loading}
-            style={{fontSize: '1.1em', padding: '12px 24px'}}
-          >
-            {loading ? '送出中...' : '送出排隊'}
-          </button>
-        </div>
-
-        {msg && <div className="error-message" style={{marginTop: '1em', textAlign: 'center'}}>{msg}</div>}
       </div>
 
       {/* 選擇設計師彈窗 */}
