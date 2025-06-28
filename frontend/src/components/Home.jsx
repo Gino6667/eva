@@ -53,16 +53,11 @@ function Home() {
         </Link>
       </div>
 
-      {/* 管理員入口 */}
-      <div className="admin-section">
-        <div className="admin-card">
-          <div className="admin-icon">⚙️</div>
-          <h3>管理員功能</h3>
-          <p>系統管理、報表統計、客戶管理等後台功能</p>
-          <button onClick={handleAdminClick} className="btn btn-admin">
-            {user?.role === 'admin' ? '進入管理系統' : '管理員登入'}
-          </button>
-        </div>
+      {/* 管理員入口按鈕（縮小版） */}
+      <div className="admin-btn-bar">
+        <button onClick={handleAdminClick} className="btn btn-admin-mini">
+          <span role="img" aria-label="管理員">⚙️</span> {user?.role === 'admin' ? '管理員後台' : '管理員登入'}
+        </button>
       </div>
     </div>
   );
