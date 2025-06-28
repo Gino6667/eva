@@ -25,6 +25,7 @@ axios.defaults.baseURL = 'https://eva-36bg.onrender.com';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     // 嘗試自動登入
@@ -66,22 +67,25 @@ function App() {
         <header className="header">
           <div className="header-content">
             <h1>美髮沙龍管理系統</h1>
-            <nav className="nav-menu">
-              <Link to="/" className="nav-link">首頁</Link>
-              <Link to="/queue" className="nav-link">現場排隊</Link>
-                <Link to="/queue-progress" className="nav-link">排隊進度查詢</Link>
-                {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
-              <Link to="/reservation" className="nav-link">線上預約</Link>
+            <button className="nav-toggle" onClick={() => setNavOpen(v => !v)} aria-label="展開選單">☰</button>
+            <nav className={`nav-menu${navOpen ? ' open' : ''}`}
+              onMouseLeave={() => setNavOpen(false)}
+            >
+              <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
+              <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
+              <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
+              {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
+              <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上預約</Link>
               {user ? (
                 <>
-                    {user.role !== 'admin' && (
-                  <Link to="/profile" className="nav-link">會員中心</Link>
-                    )}
-                  <button className="btn btn-logout" onClick={handleLogout}>登出</button>
+                  {user.role !== 'admin' && (
+                    <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
+                  )}
+                  <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
                 </>
               ) : (
                 <>
-                    <Link to="/login" className="nav-link">會員登入/註冊</Link>
+                  <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>會員登入/註冊</Link>
                 </>
               )}
             </nav>

@@ -270,17 +270,54 @@ button, .btn, .btn-primary, .btn-secondary, input, select, textarea, .card, .mod
   box-shadow: none !important;
 }
 
+.nav-toggle {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: #f7ab5e;
+  font-size: 2rem;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: color 0.2s;
+  vertical-align: middle;
+}
+.nav-toggle:focus {
+  outline: 2px solid #f7ab5e;
+}
+
 .nav-menu {
-  position: relative;
-}
-.nav-menu .nav-link {
+  display: none;
+  flex-direction: row;
+  gap: 8px;
+  margin: 12px 0 0 0;
+  transition: max-height 0.3s, opacity 0.3s;
   opacity: 0;
-  pointer-events: none;
-  transform: translateY(-10px);
-  transition: opacity 0.3s, transform 0.3s;
+  max-height: 0;
+  overflow: hidden;
 }
-.nav-menu:hover .nav-link {
+.nav-menu.open {
+  display: flex;
   opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  max-height: 300px;
+  background: #333d38;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 8px 0;
+  z-index: 10;
+}
+
+@media (max-width: 900px) {
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 8px 0 0 0;
+  }
+  .nav-menu.open {
+    width: 100%;
+  }
+  .nav-toggle {
+    font-size: 2.2rem;
+    margin-left: 0;
+  }
 }
