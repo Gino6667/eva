@@ -17,6 +17,9 @@ const DATA_PATH = path.join(__dirname, 'data.json');
 const git = simpleGit();
 const JWT_SECRET = 'your_jwt_secret_key'; // 請改成安全的 key
 
+git.addConfig('user.name', 'render-bot');
+git.addConfig('user.email', 'render-bot@render.com');
+
 function getData() {
   return JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
 }
