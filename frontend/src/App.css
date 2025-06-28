@@ -259,3 +259,9 @@ tr:last-child td {
 #root, h1, h2, h3, h4, h5, h6, p, a, span, label, input, button {
   color: #fff !important;
 }
+
+button, .btn, .btn-primary, .btn-secondary, input, select, textarea, .card, .modal-content, .tab, .badge, .content-card, .queue-step, .queue-form, .queue-list, .queue-item, .admin-section, .stat-card, .reservation-step, .feature-card, .auth-card, .progress-result, .current-serving-result, .transfer-form, .transfer-history, .selected-queue-info {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}

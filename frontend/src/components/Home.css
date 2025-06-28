@@ -295,4 +295,10 @@
 
 .home-container, .home, .hero-title, .hero-subtitle, .highlight, .feature-card, .feature-link, .feature-icon, .btn-primary, .btn-secondary, h3, p, label, span {
   color: #fff !important;
+}
+
+.feature-card, .btn, input, select, textarea {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
 } 

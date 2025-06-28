@@ -444,4 +444,10 @@ textarea.form-control {
 
 .queue-transfer-container, .transfer-header, .transfer-header h1, .transfer-header p, .message, .queue-section, .section-header, .section-header h3, .btn, .btn-primary, .btn-secondary, .queue-item, .queue-number, .queue-details, .designer-name, .service-name, .queue-time, .queue-status, .status-waiting, .status-called, .status-done, .status-absent, .transfer-form, .transfer-form h3, .selected-queue-info, .selected-queue-info p, .form-group label, .form-control, .form-control::placeholder, .form-actions, .transfer-history, .transfer-history h3, .history-list, .history-item, .history-info, .history-queue, .history-arrow, .history-from, .history-to, .history-details, .history-reason, .history-time {
   color: #fff !important;
+}
+
+.transfer-form, .transfer-history, .selected-queue-info, .btn, input, select, textarea {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
 } 

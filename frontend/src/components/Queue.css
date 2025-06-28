@@ -778,4 +778,10 @@ body, .queue-container, .queue-step, .modal-header, .modal-header h3, .modal-opt
   background: #f7ab5e !important;
   color: #333d38 !important;
   border: 2px solid #f7ab5e !important;
+}
+
+.queue-step, .queue-form, .queue-list, .queue-item, .modal-content, .btn, input, select, textarea {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
 } 

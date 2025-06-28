@@ -27,9 +27,9 @@
   background: #333d38;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   margin-bottom: 2rem;
-  border: 2px solid #f7ab5e;
+  border: 2px solid #f7ab5e !important;
 }
 
 .reservation-step h3 {
@@ -119,7 +119,7 @@
   width: 100%;
   max-height: 80vh;
   overflow: hidden;
-  box-shadow: 0 24px 80px 0 rgba(0,0,0,0.35), 0 0 0 4px #007bff44;
+  box-shadow: none;
   animation: modalPop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
   border: 4px solid #007bff;
 }
@@ -127,7 +127,7 @@
 /* 步驟3服務項目彈窗特殊樣式 */
 .modal-content.service-modal {
   border: 4px solid #28a745;
-  box-shadow: 0 24px 80px 0 rgba(40,167,69,0.25), 0 0 0 4px #28a74544;
+  box-shadow: none;
 }
 
 .modal-header.service-header {
@@ -136,18 +136,18 @@
 
 .modal-option.service-option:hover {
   border-color: #28a745;
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+  box-shadow: none;
 }
 
 .modal-option.service-option.selected {
   background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
   border-color: #28a745;
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+  box-shadow: none;
 }
 
 .modal-option.service-option.selected:hover {
   background: linear-gradient(135deg, #1e7e34 0%, #155724 100%);
-  box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
+  box-shadow: none;
 }
 
 @keyframes modalPop {
@@ -321,4 +321,10 @@
 
 .reservation-container, .reservation-header h2, .reservation-header p, .reservation-step, .reservation-step h3, .btn, .btn-primary, .btn-secondary, .btn-outline, .modal-header, .modal-header h3, .modal-option, .modal-option.selected, .modal-body, .modal-close, .modal-option.selected:hover, .modal-option:hover, .error-message, .form-group label, .form-group input, .form-group input::placeholder {
   color: #fff !important;
+}
+
+.reservation-step, .btn, input, select, textarea, .modal-content {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
 } 

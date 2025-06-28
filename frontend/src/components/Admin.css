@@ -307,6 +307,12 @@
 }
 
 /* 設計師權限管理樣式 */
+.admin-section, .stat-card, .btn, input, select, textarea {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
 .admin-section {
   background: #333d38;
   padding: 20px;

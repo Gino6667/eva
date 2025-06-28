@@ -174,7 +174,7 @@ function Queue() {
       </div>
       
       <div className="serving-grid">
-        {designers.map(designer => {
+        {designers.filter(designer => designer.name !== '不指定').map(designer => {
           const serving = currentServing.find(s => s.designerId === designer.id);
           return (
             <div key={designer.id} className={`serving-card ${serving ? 'serving' : 'idle'}`}>

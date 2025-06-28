@@ -383,4 +383,10 @@
 
 .queue-progress-container, .queue-progress-card, .today-stats, .stat-number, .stat-label, .current-serving, .current-serving h4, .serving-item, .serving-item .number, .serving-item .designer, .serving-item .service, .search-form, .form-group label, .form-group input, .search-btn, .progress-result, .queue-info, .info-header, .queue-number, .status-badge, .info-details, .detail-item, .detail-item .label, .detail-item .value, .paused-badge, .progress-info, .progress-info h4, .progress-details, .progress-item, .progress-item .label, .progress-item .value, .current-serving-result, .current-serving-result h4 {
   color: #fff !important;
+}
+
+.progress-result, .current-serving-result, .btn, input, select, textarea {
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
 } 
