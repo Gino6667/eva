@@ -94,6 +94,33 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+// 檢查 data.json 檔案狀態
+app.get('/api/check-data', (req, res) => {
+  try {
+    const data = getData();
+    const adminExists = data.users.find(u => u.phone === 'rowyha' && u.role === 'admin');
+    
+    res.json({
+      status: 'ok',
+      dataFileExists: true,
+      adminAccountExists: !!adminExists,
+      totalUsers: data.users.length,
+      adminUser: adminExists ? {
+        id: adminExists.id,
+        phone: adminExists.phone,
+        name: adminExists.name,
+        role: adminExists.role
+      } : null
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: err.message,
+      dataFileExists: false
+    });
+  }
+});
+
 app.get('/api/designers', (req, res) => {
   const data = getData();
   res.json(data.designers);
