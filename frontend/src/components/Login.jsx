@@ -60,10 +60,9 @@ function Login({ setUser }) {
 
       const res = await axios.post('/api/login', loginData);
       localStorage.setItem('token', res.data.token);
-      const profile = await axios.get('/api/profile', { 
-        headers: { Authorization: `Bearer ${res.data.token}` } 
-      });
-      setUser(profile.data);
+      
+      // 直接使用登入回應中的用戶資料，不需要額外的profile API調用
+      setUser(res.data.user);
       setMsg('登入成功！');
       
       // 檢查是否有重定向參數
@@ -73,6 +72,8 @@ function Login({ setUser }) {
           navigate('/queue');
         } else if (redirect === 'reservation') {
           navigate('/reservation');
+        } else if (res.data.user.role === 'admin') {
+          navigate('/admin');
         } else {
           navigate('/profile');
         }

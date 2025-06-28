@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Admin.css';
 
 function Admin() {
@@ -10,6 +11,17 @@ function Admin() {
     totalReservations: 0,
     totalRevenue: 0
   });
+  
+  // 設計師權限管理狀態
+  const [designerAccounts, setDesignerAccounts] = useState([]);
+  const [showDesignerForm, setShowDesignerForm] = useState(false);
+  const [newDesigner, setNewDesigner] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    password: ''
+  });
+  const [message, setMessage] = useState('');
   
   const token = localStorage.getItem('token');
   let user = null;
@@ -33,7 +45,66 @@ function Admin() {
       totalReservations: 89,
       totalRevenue: 125000
     });
+    
+    // 載入設計師帳號列表
+    loadDesignerAccounts();
   }, [navigate, user]);
+
+  const loadDesignerAccounts = async () => {
+    try {
+      const response = await axios.get('/api/designer-accounts', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setDesignerAccounts(response.data);
+    } catch (error) {
+      console.error('載入設計師帳號失敗:', error);
+    }
+  };
+
+  const handleAddDesigner = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    
+    if (!newDesigner.name || !newDesigner.password) {
+      setMessage('請填寫姓名和密碼');
+      return;
+    }
+    
+    if (!newDesigner.email && !newDesigner.phone) {
+      setMessage('請填寫信箱或手機號碼至少一項');
+      return;
+    }
+    
+    try {
+      await axios.post('/api/designer-accounts', newDesigner, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      setMessage('新增設計師帳號成功！');
+      setNewDesigner({ name: '', email: '', phone: '', password: '' });
+      setShowDesignerForm(false);
+      loadDesignerAccounts();
+    } catch (error) {
+      setMessage(error.response?.data?.error || '新增失敗');
+    }
+  };
+
+  const handleDeleteDesigner = async (id) => {
+    if (!window.confirm('確定要刪除此設計師帳號嗎？')) {
+      return;
+    }
+    
+    try {
+      await axios.delete(`/api/designer-accounts/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      setMessage('刪除設計師帳號成功！');
+      loadDesignerAccounts();
+    } catch (error) {
+      setMessage(error.response?.data?.error || '刪除失敗');
+    }
+  };
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -63,6 +134,125 @@ function Admin() {
         <div className="stat-card">
           <div className="number">${stats.totalRevenue.toLocaleString()}</div>
           <div className="label">本月營收</div>
+        </div>
+      </div>
+
+      {/* 設計師權限管理 */}
+      <div className="admin-section">
+        <div className="section-header">
+          <h3>設計師權限管理</h3>
+          <button 
+            className="admin-btn admin-btn-primary"
+            onClick={() => setShowDesignerForm(!showDesignerForm)}
+          >
+            {showDesignerForm ? '取消' : '新增設計師帳號'}
+          </button>
+        </div>
+        
+        {message && (
+          <div className={`message ${message.includes('成功') ? 'success' : 'error'}`}>
+            {message}
+          </div>
+        )}
+        
+        {showDesignerForm && (
+          <div className="admin-form">
+            <form onSubmit={handleAddDesigner}>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>姓名 *</label>
+                  <input
+                    type="text"
+                    value={newDesigner.name}
+                    onChange={e => setNewDesigner({...newDesigner, name: e.target.value})}
+                    required
+                    placeholder="請輸入姓名"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>密碼 *</label>
+                  <input
+                    type="password"
+                    value={newDesigner.password}
+                    onChange={e => setNewDesigner({...newDesigner, password: e.target.value})}
+                    required
+                    placeholder="請輸入密碼"
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>信箱</label>
+                  <input
+                    type="email"
+                    value={newDesigner.email}
+                    onChange={e => setNewDesigner({...newDesigner, email: e.target.value})}
+                    placeholder="請輸入信箱"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>手機號碼</label>
+                  <input
+                    type="tel"
+                    value={newDesigner.phone}
+                    onChange={e => setNewDesigner({...newDesigner, phone: e.target.value})}
+                    placeholder="請輸入手機號碼"
+                  />
+                </div>
+              </div>
+              <div className="form-actions">
+                <button type="submit" className="admin-btn admin-btn-success">
+                  新增帳號
+                </button>
+                <button 
+                  type="button" 
+                  className="admin-btn admin-btn-secondary"
+                  onClick={() => setShowDesignerForm(false)}
+                >
+                  取消
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+        
+        <div className="designer-accounts-list">
+          <h4>現有設計師帳號</h4>
+          {designerAccounts.length === 0 ? (
+            <p className="no-data">目前沒有設計師帳號</p>
+          ) : (
+            <div className="accounts-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>信箱</th>
+                    <th>手機號碼</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {designerAccounts.map(account => (
+                    <tr key={account.id}>
+                      <td>{account.id}</td>
+                      <td>{account.name}</td>
+                      <td>{account.email || '-'}</td>
+                      <td>{account.phone || '-'}</td>
+                      <td>
+                        <button 
+                          className="admin-btn admin-btn-danger"
+                          onClick={() => handleDeleteDesigner(account.id)}
+                        >
+                          刪除
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
 
