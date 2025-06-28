@@ -1995,4 +1995,114 @@ app.get('/api/queue/today-stats', (req, res) => {
     console.error('查詢今日統計時發生錯誤:', err);
     res.status(500).json({ error: '查詢失敗，請稍後再試' });
   }
-}); 
+});
+
+// 設計師調整客人 API
+app.post('/api/queue/transfer', (req, res) => {
+  const data = getData();
+  const { queueId, fromDesignerId, toDesignerId, reason } = req.body;
+  
+  // 驗證參數
+  if (!queueId || !fromDesignerId || !toDesignerId) {
+    return res.status(400).json({ error: '缺少必要參數' });
+  }
+  
+  if (fromDesignerId === toDesignerId) {
+    return res.status(400).json({ error: '無法調整給同一位設計師' });
+  }
+  
+  // 查找排隊項目
+  const queueItem = data.queue.find(q => q.id === Number(queueId));
+  if (!queueItem) {
+    return res.status(404).json({ error: '找不到該排隊項目' });
+  }
+  
+  // 驗證設計師是否存在
+  const fromDesigner = data.designers.find(d => d.id === Number(fromDesignerId));
+  const toDesigner = data.designers.find(d => d.id === Number(toDesignerId));
+  
+  if (!fromDesigner || !toDesigner) {
+    return res.status(404).json({ error: '找不到指定的設計師' });
+  }
+  
+  // 檢查目標設計師是否暫停接客
+  if (toDesigner.isPaused) {
+    return res.status(400).json({ error: '目標設計師目前暫停接客' });
+  }
+  
+  // 記錄調整歷史
+  if (!data.queueTransfers) {
+    data.queueTransfers = [];
+  }
+  
+  const transferRecord = {
+    id: data.queueTransfers.length + 1,
+    queueId: Number(queueId),
+    fromDesignerId: Number(fromDesignerId),
+    toDesignerId: Number(toDesignerId),
+    reason: reason || '設計師調整',
+    transferredAt: new Date().toISOString(),
+    status: 'transferred'
+  };
+  
+  data.queueTransfers.push(transferRecord);
+  
+  // 更新排隊項目
+  queueItem.designerId = Number(toDesignerId);
+  queueItem.transferredAt = new Date().toISOString();
+  queueItem.transferReason = reason || '設計師調整';
+  
+  saveData(data);
+  
+  res.json({
+    success: true,
+    message: '客人調整成功',
+    queueItem,
+    transferRecord
+  });
+});
+
+// 獲取調整歷史
+app.get('/api/queue/transfers', (req, res) => {
+  const data = getData();
+  const transfers = data.queueTransfers || [];
+  
+  // 如果有日期篩選
+  if (req.query.date) {
+    const [y, m, d] = req.query.date.split('-').map(Number);
+    const filteredTransfers = transfers.filter(t => {
+      const transferDate = new Date(t.transferredAt);
+      return transferDate.getFullYear() === y && 
+             transferDate.getMonth() + 1 === m && 
+             transferDate.getDate() === d;
+    });
+    return res.json(filteredTransfers);
+  }
+  
+  res.json(transfers);
+});
+
+// 獲取設計師的排隊狀況
+app.get('/api/queue/designer/:designerId', (req, res) => {
+  const data = getData();
+  const designerId = Number(req.params.designerId);
+  
+  // 獲取今日該設計師的排隊項目
+  const todayQueue = data.queue.filter(q => 
+    q.designerId === designerId && 
+    isToday(q.createdAt) &&
+    (q.status === 'waiting' || q.status === 'called')
+  );
+  
+  // 按狀態分組
+  const waiting = todayQueue.filter(q => q.status === 'waiting');
+  const called = todayQueue.filter(q => q.status === 'called');
+  
+  res.json({
+    designerId,
+    waiting: waiting.length,
+    called: called.length,
+    total: todayQueue.length,
+    queueItems: todayQueue
+  });
+});

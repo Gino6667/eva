@@ -125,6 +125,7 @@ function Admin() {
     { path: '/finance', icon: '💰', label: '財務管理', active: location.pathname === '/finance' },
     { path: '/designers', icon: '✂️', label: '設計師管理', active: location.pathname === '/designers' },
     { path: '/queue', icon: '🎯', label: '排隊管理', active: location.pathname === '/queue' },
+    { path: '/queue-transfer', icon: '🔄', label: '客人調整', active: location.pathname === '/queue-transfer' },
     { path: '/reservation', icon: '📅', label: '預約管理', active: location.pathname === '/reservation' },
     { path: '/queue-progress', icon: '📋', label: '排隊查詢', active: location.pathname === '/queue-progress' },
     { path: '/profile', icon: '⚙️', label: '系統設定', active: location.pathname === '/profile' }
