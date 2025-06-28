@@ -1,33 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Reservation.css';
 
 function Reservation() {
-  const [user] = useState(() => {
+  const [step, setStep] = useState(1);
+  const [user, setUser] = useState(() => {
     const token = localStorage.getItem('token');
     return token ? JSON.parse(atob(token.split('.')[1])) : null;
   });
   const [designers, setDesigners] = useState([]);
   const [services, setServices] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('');
   const [selectedDesigner, setSelectedDesigner] = useState('');
   const [selectedService, setSelectedService] = useState('');
-  const [availableSlots, setAvailableSlots] = useState([]);
-  const [selectedSlot, setSelectedSlot] = useState('');
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [reservationResult, setReservationResult] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDesigners();
     loadServices();
   }, []);
-
-  useEffect(() => {
-    if (selectedDate) {
-      loadAvailableSlots();
-    }
-  }, [selectedDate, selectedDesigner]);
 
   const loadDesigners = async () => {
     try {
@@ -47,48 +41,42 @@ function Reservation() {
     }
   };
 
-  const loadAvailableSlots = async () => {
-    if (!selectedDate) return;
-    setLoading(true);
-    try {
-      const params = { date: selectedDate };
-      if (selectedDesigner) params.designerId = selectedDesigner;
-      const res = await axios.get('/api/available-slots', { params });
-      setAvailableSlots(res.data);
-    } catch (err) {
-      console.error('載入可預約時段失敗:', err);
-    } finally {
-      setLoading(false);
+  const handleNext = () => {
+    if (step === 1) {
+      if (!user) {
+        setMsg('請先登入會員');
+        return;
+      }
     }
+    if (step === 2 && !selectedDesigner) {
+      setMsg('請選擇設計師');
+      return;
+    }
+    if (step === 3 && !selectedService) {
+      setMsg('請選擇服務項目');
+      return;
+    }
+    setMsg('');
+    setStep(step + 1);
   };
 
-  const handleReservation = async (e) => {
-    e.preventDefault();
-    if (!user) {
-      setMsg('請先登入');
-      return;
-    }
-    if (!selectedDate || !selectedSlot || !selectedService) {
-      setMsg('請填寫完整資料');
-      return;
-    }
+  const handlePrev = () => {
+    setStep(step - 1);
+  };
 
+  const handleReservation = async () => {
     setLoading(true);
     setMsg('');
     try {
-      await axios.post('/api/reservations', {
-        designerId: selectedDesigner || 0,
+      const res = await axios.post('/api/reservations', {
+        designerId: selectedDesigner,
         serviceId: selectedService,
         userId: user.id,
-        date: selectedDate,
-        time: selectedSlot
+        date: new Date().toISOString().split('T')[0], // 今天
+        time: '09:00' // 預設時間
       });
-      setMsg('預約成功！');
-      setSelectedDate('');
-      setSelectedDesigner('');
-      setSelectedService('');
-      setSelectedSlot('');
-      setAvailableSlots([]);
+      setReservationResult(res.data);
+      setStep(4);
     } catch (err) {
       setMsg(err.response?.data?.error || '預約失敗');
     } finally {
@@ -96,133 +84,116 @@ function Reservation() {
     }
   };
 
-  const getDateOptions = () => {
-    const options = [];
-    const today = new Date();
-    for (let i = 0; i < 30; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-      const dateStr = date.toISOString().split('T')[0];
-      const dayNames = ['日', '一', '二', '三', '四', '五', '六'];
-      const dayName = dayNames[date.getDay()];
-      options.push({
-        value: dateStr,
-        label: `${dateStr} (週${dayName})`
-      });
-    }
-    return options;
+  const handleLogin = () => {
+    navigate('/login?redirect=reservation');
   };
 
-  if (!user) {
-    const LINE_LOGIN_URL = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=l2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=eva_login&scope=profile%20openid%20email`;
-    return (
-      <div className="reservation-container">
-        <div className="auth-card">
-          <h2>線上預約</h2>
-          <p>請先登入才能使用預約功能</p>
-          <Link to="/login" className="btn btn-primary">前往登入</Link>
-          <a href={LINE_LOGIN_URL} className="btn btn-line" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#fff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
-            使用 LINE 登入
-          </a>
-        </div>
-      </div>
-    );
-  }
+  const handleRegister = () => {
+    navigate('/register?redirect=reservation');
+  };
 
   return (
     <div className="reservation-container">
       <div className="reservation-header">
         <h2>線上預約</h2>
-        <p>選擇您喜歡的設計師與服務時段</p>
+        <p>依步驟完成線上預約</p>
       </div>
 
-      <form onSubmit={handleReservation} className="reservation-form">
-        <div className="form-group">
-          <label>預約日期</label>
-          <select 
-            value={selectedDate} 
-            onChange={e => setSelectedDate(e.target.value)}
-            required
-          >
-            <option value="">請選擇日期</option>
-            {getDateOptions().map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>設計師（可選）</label>
-          <select 
-            value={selectedDesigner} 
-            onChange={e => setSelectedDesigner(e.target.value)}
-          >
-            <option value="">不指定設計師</option>
-            {designers.map(designer => (
-              <option key={designer.id} value={designer.id}>
-                {designer.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>服務項目</label>
-          <select 
-            value={selectedService} 
-            onChange={e => setSelectedService(e.target.value)}
-            required
-          >
-            <option value="">請選擇服務</option>
-            {services.map(service => (
-              <option key={service.id} value={service.id}>
-                {service.name} - ${service.price}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {selectedDate && (
-          <div className="form-group">
-            <label>可預約時段</label>
-            {loading ? (
-              <div className="loading">載入中...</div>
-            ) : availableSlots.length === 0 ? (
-              <div className="no-slots">該日期無可預約時段</div>
-            ) : (
-              <div className="time-slots">
-                {availableSlots.map(slot => (
-                  <button
-                    key={slot.time}
-                    type="button"
-                    onClick={() => setSelectedSlot(slot.time)}
-                    className={`time-slot ${selectedSlot === slot.time ? 'selected' : ''}`}
-                  >
-                    {slot.time}<br/>
-                    <small>剩餘 {slot.availableSeats} 位</small>
-                  </button>
-                ))}
+      {step === 1 && (
+        <div className="reservation-step">
+          <h3>步驟1：會員登入</h3>
+          {user ? (
+            <div style={{marginBottom: '1em', padding: '1em', background: '#e8f5e8', borderRadius: '4px'}}>
+              <p style={{margin: '0', color: '#2d5a2d'}}>
+                ✓ 已登入會員：{user.name}
+              </p>
+            </div>
+          ) : (
+            <div style={{marginBottom: '1em'}}>
+              <p>請先登入會員才能使用預約功能</p>
+              <div style={{marginBottom: '1em'}}>
+                <button className="btn btn-primary" onClick={handleLogin} style={{marginRight: '1em'}}>
+                  登入會員
+                </button>
+                <button className="btn btn-secondary" onClick={handleRegister}>
+                  註冊會員
+                </button>
               </div>
-            )}
-          </div>
-        )}
+              <div style={{marginTop: '1em', padding: '1em', background: '#f5f5f5', borderRadius: '4px'}}>
+                <h4 style={{margin: '0 0 0.5em 0', color: '#333'}}>會員權益：</h4>
+                <ul style={{margin: '0', paddingLeft: '1.5em', color: '#666'}}>
+                  <li>線上預約服務</li>
+                  <li>預約記錄查詢</li>
+                  <li>會員專屬優惠</li>
+                  <li>個人資料管理</li>
+                </ul>
+              </div>
+            </div>
+          )}
+          <button className="btn btn-primary" onClick={handleNext}>下一步</button>
+          {msg && <div className="error-message">{msg}</div>}
+        </div>
+      )}
 
-        <button 
-          type="submit" 
-          className="btn btn-primary"
-          disabled={loading || !selectedDate || !selectedSlot || !selectedService}
-        >
-          {loading ? '預約中...' : '確認預約'}
-        </button>
-
-        {msg && (
-          <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
-            {msg}
+      {step === 2 && (
+        <div className="reservation-step">
+          <h3>步驟2：選擇設計師</h3>
+          <div style={{marginBottom: '1em'}}>
+            <label style={{display: 'block', marginBottom: '0.5em', fontWeight: 'bold'}}>設計師：</label>
+            <select 
+              value={selectedDesigner} 
+              onChange={e => setSelectedDesigner(e.target.value)}
+              style={{width: '100%', padding: '8px'}}
+            >
+              <option value="">請選擇設計師</option>
+              {designers.map(d => (
+                <option key={d.id} value={d.id}>{d.name}</option>
+              ))}
+            </select>
           </div>
-        )}
-      </form>
+          <div style={{marginTop: '1em'}}>
+            <button className="btn btn-secondary" onClick={handlePrev}>上一步</button>
+            <button className="btn btn-primary" onClick={handleNext} style={{marginLeft: '1em'}}>下一步</button>
+          </div>
+          {msg && <div className="error-message">{msg}</div>}
+        </div>
+      )}
+
+      {step === 3 && (
+        <div className="reservation-step">
+          <h3>步驟3：選擇服務項目</h3>
+          <div style={{marginBottom: '1em'}}>
+            <label style={{display: 'block', marginBottom: '0.5em', fontWeight: 'bold'}}>服務項目：</label>
+            <select 
+              value={selectedService} 
+              onChange={e => setSelectedService(e.target.value)}
+              style={{width: '100%', padding: '8px'}}
+            >
+              <option value="">請選擇服務項目</option>
+              {services.map(s => (
+                <option key={s.id} value={s.id}>{s.name} - ${s.price}</option>
+              ))}
+            </select>
+          </div>
+          <div style={{marginTop: '1em'}}>
+            <button className="btn btn-secondary" onClick={handlePrev}>上一步</button>
+            <button className="btn btn-primary" onClick={handleReservation} style={{marginLeft: '1em'}} disabled={loading}>
+              {loading ? '送出中...' : '送出預約'}
+            </button>
+          </div>
+          {msg && <div className="error-message">{msg}</div>}
+        </div>
+      )}
+
+      {step === 4 && reservationResult && (
+        <div className="reservation-step">
+          <h3>預約成功！</h3>
+          <p>您的預約已成功建立</p>
+          <p>預約編號：<span style={{fontWeight: 'bold', fontSize: '1.2em'}}>{reservationResult.id}</span></p>
+          <p>請留意手機簡訊或 Email 通知。</p>
+          <Link to="/" className="btn btn-primary">回首頁</Link>
+        </div>
+      )}
     </div>
   );
 }

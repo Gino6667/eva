@@ -1774,6 +1774,8 @@ app.get('/api/line/callback', async (req, res) => {
     let redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true`;
     if (state === 'eva_login_queue') {
       redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true&redirect=queue`;
+    } else if (state === 'eva_login_reservation') {
+      redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true&redirect=reservation`;
     }
 
     // 重導向到前端並帶上 token

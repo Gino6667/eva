@@ -26,6 +26,8 @@ function Login({ setUser }) {
       setTimeout(() => {
         if (redirect === 'queue') {
           navigate('/queue');
+        } else if (redirect === 'reservation') {
+          navigate('/reservation');
         } else {
           navigate('/profile');
         }
@@ -53,6 +55,8 @@ function Login({ setUser }) {
       setTimeout(() => {
         if (redirect === 'queue') {
           navigate('/queue');
+        } else if (redirect === 'reservation') {
+          navigate('/reservation');
         } else {
           navigate('/profile');
         }
