@@ -1711,7 +1711,7 @@ function getFavoriteDesigners(reservations, designers) {
 
 // === LINE 登入 callback API ===
 app.get('/api/line/callback', async (req, res) => {
-  const { code } = req.query;
+  const { code, state } = req.query;
   const client_id = 'l2007657170';
   const client_secret = '59ce418bc196c809a6f0064ebc895062';
   const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
@@ -1770,8 +1770,14 @@ app.get('/api/line/callback', async (req, res) => {
       { expiresIn: '7d' }
     );
 
+    // 檢查 state 參數，判斷是否需要重定向到 queue
+    let redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true`;
+    if (state === 'eva_login_queue') {
+      redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true&redirect=queue`;
+    }
+
     // 重導向到前端並帶上 token
-    res.redirect(`https://gino6667.github.io/eva/login?token=${token}&success=true`);
+    res.redirect(redirectUrl);
   } catch (err) {
     console.error('LINE 登入錯誤:', err);
     res.redirect(`https://gino6667.github.io/eva/login?error=line_login_failed`);

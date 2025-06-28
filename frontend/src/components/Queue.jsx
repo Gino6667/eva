@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Queue.css';
 
 function Queue() {
@@ -19,6 +19,7 @@ function Queue() {
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [queueResult, setQueueResult] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDesigners();
@@ -40,6 +41,13 @@ function Queue() {
       setServices(res.data);
     } catch (err) {
       console.error('載入服務失敗:', err);
+    }
+  };
+
+  const handleMemberSelect = () => {
+    setIsMember(true);
+    if (!user) {
+      navigate('/login?redirect=queue');
     }
   };
 
@@ -93,6 +101,11 @@ function Queue() {
     }
   };
 
+  const handleLineLogin = () => {
+    const lineLoginUrl = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=l2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=eva_login_queue&scope=profile%20openid%20email`;
+    window.location.href = lineLoginUrl;
+  };
+
   return (
     <div className="queue-container">
       <div className="queue-header">
@@ -104,7 +117,7 @@ function Queue() {
           <h3>步驟1：選擇訪客或會員</h3>
           <div style={{marginBottom: '1em'}}>
             <button className={`btn ${isMember === false ? 'btn-primary' : ''}`} onClick={() => setIsMember(false)}>訪客</button>
-            <button className={`btn ${isMember === true ? 'btn-primary' : ''}`} onClick={() => setIsMember(true)} style={{marginLeft: '1em'}}>會員</button>
+            <button className={`btn ${isMember === true ? 'btn-primary' : ''}`} onClick={handleMemberSelect} style={{marginLeft: '1em'}}>會員</button>
           </div>
           {isMember === false && (
             <div style={{marginBottom: '1em'}}>
@@ -128,8 +141,41 @@ function Queue() {
           )}
           {isMember === true && !user && (
             <div style={{marginBottom: '1em'}}>
-              <p>請先登入會員</p>
-              <Link to="/login" className="btn btn-secondary">前往登入</Link>
+              <p>請選擇登入方式：</p>
+              <div style={{marginBottom: '1em'}}>
+                <button 
+                  className="btn btn-line" 
+                  onClick={handleLineLogin}
+                  style={{
+                    background: '#06C755', 
+                    color: '#fff', 
+                    padding: '10px 20px', 
+                    borderRadius: '4px', 
+                    border: 'none',
+                    fontWeight: 'bold',
+                    marginRight: '1em'
+                  }}
+                >
+                  LINE 登入
+                </button>
+                <Link to="/login" className="btn btn-secondary">一般登入</Link>
+              </div>
+              <div style={{marginTop: '1em', padding: '1em', background: '#f5f5f5', borderRadius: '4px'}}>
+                <h4 style={{margin: '0 0 0.5em 0', color: '#333'}}>LINE 登入說明：</h4>
+                <ol style={{margin: '0', paddingLeft: '1.5em', color: '#666'}}>
+                  <li>點擊「LINE 登入」按鈕</li>
+                  <li>使用 LINE App 掃描 QR Code</li>
+                  <li>授權登入後自動返回</li>
+                  <li>完成會員身份驗證</li>
+                </ol>
+              </div>
+            </div>
+          )}
+          {isMember === true && user && (
+            <div style={{marginBottom: '1em', padding: '1em', background: '#e8f5e8', borderRadius: '4px'}}>
+              <p style={{margin: '0', color: '#2d5a2d'}}>
+                ✓ 已登入會員：{user.name}
+              </p>
             </div>
           )}
           <button className="btn btn-primary" onClick={handleNext}>下一步</button>

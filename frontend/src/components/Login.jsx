@@ -16,13 +16,20 @@ function Login({ setUser }) {
     const token = searchParams.get('token');
     const error = searchParams.get('error');
     const success = searchParams.get('success');
+    const redirect = searchParams.get('redirect');
 
     if (token && success === 'true') {
       // LINE 登入成功
       localStorage.setItem('token', token);
       setUser({ token }); // 暫時設定，稍後會從 profile API 取得完整資料
       setMsg('LINE 登入成功！');
-      setTimeout(() => navigate('/profile'), 800);
+      setTimeout(() => {
+        if (redirect === 'queue') {
+          navigate('/queue');
+        } else {
+          navigate('/profile');
+        }
+      }, 800);
     } else if (error === 'line_login_failed') {
       setMsg('LINE 登入失敗，請稍後再試');
     }
@@ -40,7 +47,16 @@ function Login({ setUser }) {
       });
       setUser(profile.data);
       setMsg('登入成功！');
-      setTimeout(() => navigate('/profile'), 800);
+      
+      // 檢查是否有重定向參數
+      const redirect = searchParams.get('redirect');
+      setTimeout(() => {
+        if (redirect === 'queue') {
+          navigate('/queue');
+        } else {
+          navigate('/profile');
+        }
+      }, 800);
     } catch (err) {
       setMsg('登入失敗，請檢查帳號密碼');
     } finally {
