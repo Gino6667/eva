@@ -27,7 +27,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background-color: #242424;
   color: #fff;
 }
 
