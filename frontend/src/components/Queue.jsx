@@ -223,46 +223,49 @@ function Queue() {
         {msg && <div className="error-message" style={{marginTop: '1em', textAlign: 'center'}}>{msg}</div>}
       </div>
 
-      {/* 設計師選擇彈窗 */}
+      {/* 選擇設計師彈窗 */}
       {showDesignerModal && (
-        <div className="modal-overlay" onClick={() => setShowDesignerModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="modal-overlay">
+          <div className="modal-content">
             <div className="modal-header">
-              <h3>選擇設計師</h3>
-              <button className="modal-close" onClick={() => setShowDesignerModal(false)}>×</button>
+              <span style={{fontSize: '2rem', marginRight: '0.5em', color: '#007bff'}}>👤</span>
+              <h3 style={{color: '#007bff', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟2：選擇設計師</h3>
+              <button className="modal-close" onClick={() => setShowDesignerModal(false)}>&times;</button>
             </div>
             <div className="modal-body">
-              {designers.map(designer => (
-                <button
-                  key={designer.id}
-                  className={`modal-option ${selectedDesigner === designer.id ? 'selected' : ''}`}
-                  onClick={() => handleDesignerSelect(designer.id)}
+              {designers.map(d => (
+                <div
+                  key={d.id}
+                  className={`modal-option${selectedDesigner === d.id ? ' selected' : ''}`}
+                  onClick={() => handleDesignerSelect(d.id)}
                 >
-                  {designer.name}
-                </button>
+                  {d.name}
+                  {d.isPaused && <span style={{color: '#f44336', marginLeft: 8}}>(暫停接客)</span>}
+                </div>
               ))}
             </div>
           </div>
         </div>
       )}
 
-      {/* 服務項目選擇彈窗 */}
+      {/* 選擇服務項目彈窗 */}
       {showServiceModal && (
-        <div className="modal-overlay" onClick={() => setShowServiceModal(false)}>
-          <div className="modal-content service-modal" onClick={e => e.stopPropagation()}>
+        <div className="modal-overlay">
+          <div className="modal-content service-modal">
             <div className="modal-header service-header">
-              <h3>選擇服務項目</h3>
-              <button className="modal-close" onClick={() => setShowServiceModal(false)}>×</button>
+              <span style={{fontSize: '2rem', marginRight: '0.5em', color: '#fff'}}>💇‍♂️</span>
+              <h3 style={{color: '#fff', fontWeight: 'bold', fontSize: '1.5rem', margin: 0}}>步驟3：選擇服務項目</h3>
+              <button className="modal-close" onClick={() => setShowServiceModal(false)}>&times;</button>
             </div>
             <div className="modal-body">
-              {services.map(service => (
-                <button
-                  key={service.id}
-                  className={`modal-option service-option ${selectedService === service.id ? 'selected' : ''}`}
-                  onClick={() => handleServiceSelect(service.id)}
+              {services.map(s => (
+                <div
+                  key={s.id}
+                  className={`modal-option service-option${selectedService === s.id ? ' selected' : ''}`}
+                  onClick={() => handleServiceSelect(s.id)}
                 >
-                  {service.name} - ${service.price}
-                </button>
+                  {s.name} <span style={{color: '#888', fontSize: '0.95em'}}> ${s.price}</span>
+                </div>
               ))}
             </div>
           </div>
