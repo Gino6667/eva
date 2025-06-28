@@ -14,14 +14,22 @@ function QueueProgress() {
     const token = localStorage.getItem('token');
     return token ? JSON.parse(atob(token.split('.')[1])) : null;
   });
+  const [designers, setDesigners] = useState([]);
+  const [currentServing, setCurrentServing] = useState([]);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
 
-  // 載入今日統計
   useEffect(() => {
     loadTodayStats();
-    // 會員自動查詢今日抽號
+    loadDesigners();
+    loadCurrentServing();
     if (user) {
       loadUserQueue();
     }
+    // 每分鐘自動更新服務狀態
+    const interval = setInterval(() => {
+      loadCurrentServing();
+    }, 60000);
+    return () => clearInterval(interval);
   }, [user, date]);
 
   const loadTodayStats = async () => {
@@ -30,6 +38,25 @@ function QueueProgress() {
       setTodayStats(response.data);
     } catch (err) {
       console.error('載入今日統計失敗:', err);
+    }
+  };
+
+  const loadDesigners = async () => {
+    try {
+      const res = await axios.get('/api/designers');
+      setDesigners(res.data);
+    } catch (err) {
+      console.error('載入設計師失敗:', err);
+    }
+  };
+
+  const loadCurrentServing = async () => {
+    try {
+      const res = await axios.get('/api/queue/today-stats');
+      setCurrentServing(res.data.currentServing || []);
+      setLastUpdate(new Date());
+    } catch (err) {
+      console.error('載入當前服務狀態失敗:', err);
     }
   };
 
@@ -131,48 +158,42 @@ function QueueProgress() {
             </div>
           </div>
         )}
-        
-        {/* 今日統計 */}
-        {todayStats && (
-          <div className="today-stats">
-            <h3>今日統計</h3>
-            <div className="stats-grid">
-              <div className="stat-item">
-                <span className="stat-number">{todayStats.stats.total}</span>
-                <span className="stat-label">總號碼</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number waiting">{todayStats.stats.waiting}</span>
-                <span className="stat-label">等待中</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number called">{todayStats.stats.called}</span>
-                <span className="stat-label">已叫號</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number done">{todayStats.stats.done}</span>
-                <span className="stat-label">已完成</span>
-              </div>
-            </div>
-            
-            {/* 當前正在服務 */}
-            {todayStats.currentServing.length > 0 && (
-              <div className="current-serving">
-                <h4>當前正在服務</h4>
-                <div className="serving-list">
-                  {todayStats.currentServing.map((item, index) => (
-                    <div key={index} className="serving-item">
-                      <span className="number">#{item.number}</span>
-                      <span className="designer">{item.designerName}</span>
-                      <span className="service">{item.serviceName}</span>
-                    </div>
-                  ))}
+        {/* 即時服務狀態卡片區塊 */}
+        <div className="serving-header">
+          <h3>即時服務狀態</h3>
+          <div className="update-info">
+            <span>最後更新: {lastUpdate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
+          </div>
+        </div>
+        <div className="serving-grid">
+          {designers.filter(designer => designer.name !== '不指定').map(designer => {
+            const serving = currentServing.find(s => s.designerId === designer.id);
+            return (
+              <div key={designer.id} className={`serving-card ${serving ? 'serving' : 'idle'}`}>
+                <div className="designer-name">{designer.name}</div>
+                <div className="serving-status">
+                  {serving ? (
+                    <>
+                      <div className="status-badge serving">服務中</div>
+                      <div className="current-number">#{serving.number}</div>
+                      <div className="service-name">{serving.serviceName}</div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="status-badge idle">待機中</div>
+                      <div className="idle-text">等待下一位客人</div>
+                    </>
+                  )}
                 </div>
               </div>
-            )}
+            );
+          })}
+        </div>
+        {currentServing.length === 0 && (
+          <div className="no-serving">
+            <p>目前沒有設計師在服務中</p>
           </div>
         )}
-
         {/* 查詢表單 */}
         {/*
         <form onSubmit={handleSearch} className="search-form">
