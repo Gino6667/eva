@@ -249,6 +249,11 @@ function Login({ setUser }) {
             使用 LINE 登入
           </a>
         )}
+        <div className="login-extra-bar">
+          <button className="login-reserve-btn" onClick={() => navigate('/reservation')}>
+            還不是會員？立即註冊享受線上預約
+          </button>
+        </div>
       </div>
     </div>
   );
