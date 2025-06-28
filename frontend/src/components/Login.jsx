@@ -6,6 +6,7 @@ import './Auth.css';
 function Login({ setUser }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,45 @@ function Login({ setUser }) {
     setLoading(true);
     setMsg('');
 
-    // 驗證手機號碼或信箱至少填寫一個
+    const redirect = searchParams.get('redirect');
+    
+    // 管理員登入使用帳號密碼
+    if (redirect === 'admin') {
+      if (!account || !password) {
+        setMsg('請填寫帳號和密碼');
+        setLoading(false);
+        return;
+      }
+      
+      try {
+        const loginData = { 
+          phone: account, // 管理員帳號使用phone欄位
+          password 
+        };
+
+        const res = await axios.post('/api/login', loginData);
+        localStorage.setItem('token', res.data.token);
+        
+        setUser(res.data.user);
+        setMsg('登入成功！');
+        
+        setTimeout(() => {
+          if (res.data.user.role === 'admin') {
+            navigate('/admin');
+          } else {
+            alert('只有管理員可以進入管理系統');
+            navigate('/profile');
+          }
+        }, 800);
+      } catch (err) {
+        setMsg('登入失敗，請檢查帳號密碼');
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    // 一般會員登入
     if (!email && !phone) {
       setMsg('請填寫手機號碼或信箱至少一項');
       setLoading(false);
@@ -64,24 +103,14 @@ function Login({ setUser }) {
       const res = await axios.post('/api/login', loginData);
       localStorage.setItem('token', res.data.token);
       
-      // 直接使用登入回應中的用戶資料，不需要額外的profile API調用
       setUser(res.data.user);
       setMsg('登入成功！');
       
-      // 檢查是否有重定向參數
-      const redirect = searchParams.get('redirect');
       setTimeout(() => {
         if (redirect === 'queue') {
           navigate('/queue');
         } else if (redirect === 'reservation') {
           navigate('/reservation');
-        } else if (redirect === 'admin') {
-          if (res.data.user.role === 'admin') {
-            navigate('/admin');
-          } else {
-            alert('只有管理員可以進入管理系統');
-            navigate('/profile');
-          }
         } else if (res.data.user.role === 'admin') {
           navigate('/admin');
         } else {
@@ -109,53 +138,86 @@ function Login({ setUser }) {
   };
 
   const redirect = searchParams.get('redirect');
+  const isAdminLogin = redirect === 'admin';
 
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>會員登入</h2>
+        <h2>{isAdminLogin ? '管理員登入' : '會員登入'}</h2>
         <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <label htmlFor="email">信箱 (選填)</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="請輸入信箱"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="phone">手機號碼 (選填)</label>
-            <input
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-              placeholder="請輸入手機號碼"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">密碼</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-              placeholder="請輸入密碼"
-            />
-          </div>
-          <div style={{ 
-            background: '#f8f9fa', 
-            padding: '0.75rem', 
-            borderRadius: '8px', 
-            marginBottom: '1rem',
-            fontSize: '0.9rem',
-            color: '#666'
-          }}>
-            <strong>注意：</strong>信箱和手機號碼至少需要填寫一項
-          </div>
+          {isAdminLogin ? (
+            // 管理員登入表單
+            <>
+              <div className="form-group">
+                <label htmlFor="account">帳號</label>
+                <input
+                  type="text"
+                  id="account"
+                  value={account}
+                  onChange={e => setAccount(e.target.value)}
+                  placeholder="請輸入管理員帳號"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">密碼</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  placeholder="請輸入密碼"
+                />
+              </div>
+            </>
+          ) : (
+            // 一般會員登入表單
+            <>
+              <div className="form-group">
+                <label htmlFor="email">信箱 (選填)</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="請輸入信箱"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">手機號碼 (選填)</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  placeholder="請輸入手機號碼"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">密碼</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  placeholder="請輸入密碼"
+                />
+              </div>
+              <div style={{ 
+                background: '#f8f9fa', 
+                padding: '0.75rem', 
+                borderRadius: '8px', 
+                marginBottom: '1rem',
+                fontSize: '0.9rem',
+                color: '#666'
+              }}>
+                <strong>注意：</strong>信箱和手機號碼至少需要填寫一項
+              </div>
+            </>
+          )}
+          
           <div className="button-group">
             {redirect && (
               <button 
@@ -181,9 +243,12 @@ function Login({ setUser }) {
             </div>
           )}
         </form>
-        <a href={`https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=l2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=${redirect === 'queue' ? 'eva_login_queue' : redirect === 'reservation' ? 'eva_login_reservation' : redirect === 'admin' ? 'eva_login_admin' : 'eva_login'}&scope=profile%20openid%20email`} className="btn btn-line" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#fff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
-          使用 LINE 登入
-        </a>
+        
+        {!isAdminLogin && (
+          <a href={`https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=l2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=${redirect === 'queue' ? 'eva_login_queue' : redirect === 'reservation' ? 'eva_login_reservation' : redirect === 'admin' ? 'eva_login_admin' : 'eva_login'}&scope=profile%20openid%20email`} className="btn btn-line" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#fff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
+            使用 LINE 登入
+          </a>
+        )}
       </div>
     </div>
   );
