@@ -19,11 +19,21 @@ function Queue() {
   const [showDesignerModal, setShowDesignerModal] = useState(false);
   const [showServiceModal, setShowServiceModal] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [currentServing, setCurrentServing] = useState([]);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
   const navigate = useNavigate();
 
   useEffect(() => {
     loadDesigners();
     loadServices();
+    loadCurrentServing();
+    
+    // 每30秒自動更新服務狀態
+    const interval = setInterval(() => {
+      loadCurrentServing();
+    }, 30000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const loadDesigners = async () => {
@@ -41,6 +51,16 @@ function Queue() {
       setServices(res.data);
     } catch (err) {
       console.error('載入服務失敗:', err);
+    }
+  };
+
+  const loadCurrentServing = async () => {
+    try {
+      const res = await axios.get('/api/queue/today-stats');
+      setCurrentServing(res.data.currentServing || []);
+      setLastUpdate(new Date());
+    } catch (err) {
+      console.error('載入當前服務狀態失敗:', err);
     }
   };
 
@@ -81,6 +101,9 @@ function Queue() {
         userId
       });
       setQueueResult(res.data);
+      
+      // 立即更新服務狀態
+      loadCurrentServing();
       
       // 10秒後自動返回現場排隊頁面
       setCountdown(10);
@@ -125,6 +148,64 @@ function Queue() {
     return service ? `${service.name} - $${service.price}` : '';
   };
 
+  const formatTime = (date) => {
+    return new Date(date).toLocaleTimeString('zh-TW', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  };
+
+  // 實時服務狀態顯示組件
+  const CurrentServingDisplay = () => (
+    <div className="current-serving-display">
+      <div className="serving-header">
+        <h3>🔄 即時服務狀態</h3>
+        <div className="update-info">
+          <span>最後更新: {formatTime(lastUpdate)}</span>
+          <button 
+            onClick={loadCurrentServing}
+            className="refresh-btn"
+            title="手動更新"
+          >
+            🔄
+          </button>
+        </div>
+      </div>
+      
+      <div className="serving-grid">
+        {designers.map(designer => {
+          const serving = currentServing.find(s => s.designerId === designer.id);
+          return (
+            <div key={designer.id} className={`serving-card ${serving ? 'serving' : 'idle'}`}>
+              <div className="designer-name">{designer.name}</div>
+              <div className="serving-status">
+                {serving ? (
+                  <>
+                    <div className="status-badge serving">服務中</div>
+                    <div className="current-number">#{serving.number}</div>
+                    <div className="service-name">{serving.serviceName}</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="status-badge idle">待機中</div>
+                    <div className="idle-text">等待下一位客人</div>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {currentServing.length === 0 && (
+        <div className="no-serving">
+          <p>目前沒有設計師在服務中</p>
+        </div>
+      )}
+    </div>
+  );
+
   if (queueResult) {
     return (
       <div className="queue-container">
@@ -155,6 +236,9 @@ function Queue() {
         <h2>現場排隊</h2>
         <p>完成以下步驟即可現場排隊</p>
       </div>
+
+      {/* 實時服務狀態顯示 */}
+      <CurrentServingDisplay />
 
       <div className="queue-step">
         <h3>步驟1：選擇訪客或會員</h3>

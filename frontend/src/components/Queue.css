@@ -501,4 +501,239 @@
 
 .modal-header h3 {
   color: #ff9800 !important;
+}
+
+/* 實時服務狀態顯示樣式 */
+.current-serving-display {
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  animation: slideInDown 0.5s ease-out;
+}
+
+.serving-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.serving-header h3 {
+  color: #333;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.update-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.refresh-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.refresh-btn:hover {
+  background: #f0f0f0;
+  transform: rotate(180deg);
+}
+
+.serving-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.serving-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.serving-card.serving {
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  border-color: #2196f3;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.15);
+}
+
+.serving-card.idle {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  border-color: #9e9e9e;
+}
+
+.serving-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.designer-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.serving-status {
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.serving {
+  background: #2196f3;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.status-badge.idle {
+  background: #9e9e9e;
+  color: white;
+}
+
+.current-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ff9800;
+  margin: 0.5rem 0;
+  text-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+  animation: bounce 1s ease-in-out;
+}
+
+.service-name {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.idle-text {
+  font-size: 1rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.no-serving {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.no-serving p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* 動畫效果 */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .serving-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .serving-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .serving-card {
+    padding: 1rem;
+  }
+  
+  .current-number {
+    font-size: 2rem;
+  }
+  
+  .designer-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .current-serving-display {
+    padding: 1rem;
+  }
+  
+  .serving-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .update-info {
+    font-size: 0.8rem;
+  }
+  
+  .current-number {
+    font-size: 1.8rem;
+  }
 } 
