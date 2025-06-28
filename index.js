@@ -1770,58 +1770,53 @@ function getFavoriteDesigners(reservations, designers) {
 }
 
 // === LINE 登入 callback API ===
+const axios = require('axios');
+
 app.get('/api/line/callback', async (req, res) => {
-  console.log('LINE callback 收到請求:', req.query);
-  
+  const { code } = req.query;
   const client_id = '2007657170';
   const client_secret = '59ce418bc196c809a6f0064ebc895062';
   const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
 
-  const tokenUrl = 'https://api.line.me/oauth2/v2.1/token';
-
-  const params = new URLSearchParams();
-  params.append('grant_type', 'authorization_code');
-  params.append('code', req.query.code);
-  params.append('redirect_uri', redirect_uri);
-  params.append('client_id', client_id);
-  params.append('client_secret', client_secret);
-
-  const tokenRes = await axios.post(tokenUrl, params.toString(), {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  });
-
-  console.log(tokenRes.data);
-
-  if (!req.query.code) {
-    console.error('缺少授權碼');
+  if (!code) {
+    console.error('❌ 缺少授權碼');
     return res.status(400).json({ error: '缺少授權碼' });
   }
 
   try {
-    console.log('開始與 LINE 交換 access token');
-    
-    // 跟 LINE 交換 access token
-    const tokenRes = await axios.post('https://api.line.me/oauth2/v2.1/token', null, {
-      params: {
-        grant_type: 'authorization_code',
-        code: req.query.code,
-        redirect_uri,
-        client_id,
-        client_secret
-      },
+    console.log('✅ 開始與 LINE 交換 access token');
+
+    const params = new URLSearchParams();
+    params.append('grant_type', 'authorization_code');
+    params.append('code', code);
+    params.append('redirect_uri', redirect_uri);
+    params.append('client_id', client_id);
+    params.append('client_secret', client_secret);
+
+    const tokenRes = await axios.post('https://api.line.me/oauth2/v2.1/token', params.toString(), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
 
     const access_token = tokenRes.data.access_token;
-    console.log('成功取得 access token');
+    console.log('✅ 成功取得 access token');
 
     // 取得用戶資料
     const profileRes = await axios.get('https://api.line.me/v2/profile', {
       headers: { Authorization: `Bearer ${access_token}` }
     });
 
-    const lineProfile = profileRes.data;
-    console.log('成功取得用戶資料:', lineProfile.userId);
+    const userProfile = profileRes.data;
+    console.log('✅ 使用者資料：', userProfile);
+
+    // 可導向到前端或顯示歡迎畫面
+    return res.send(`<h2>歡迎回來，${userProfile.displayName}</h2>`);
+
+  } catch (err) {
+    console.error('❌ 處理錯誤：', err.response?.data || err.message);
+    return res.status(500).send('LINE 登入流程失敗');
+  }
+});
+
     
     // 檢查用戶是否已存在
     const data = getData();
