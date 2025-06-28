@@ -59,6 +59,18 @@ function Home() {
           <span role="img" aria-label="管理員">⚙️</span> {user?.role === 'admin' ? '管理員後台' : '管理員登入'}
         </button>
       </div>
+
+      {/* 新增首頁下方大按鈕區塊 */}
+      <div className="home-action-bar">
+        <Link to="/queue-progress" className="home-action-btn">
+          <span role="img" aria-label="查詢">🔍</span> 排隊查詢
+        </Link>
+        {user && user.role !== 'admin' && (
+          <Link to="/profile" className="home-action-btn">
+            <span role="img" aria-label="會員">👤</span> 會員中心
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
