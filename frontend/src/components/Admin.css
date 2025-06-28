@@ -1,4 +1,120 @@
 /* 管理系統樣式 */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 黑色 YouTube 風格側邊欄 */
+.admin-sidebar {
+  width: 280px;
+  background: #0f0f0f;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-header {
+  padding: 2rem 1.5rem 1.5rem;
+  border-bottom: 1px solid #272727;
+}
+
+.sidebar-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.sidebar-header p {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-item:hover {
+  background: #272727;
+  border-left-color: #ff0000;
+}
+
+.sidebar-item.active {
+  background: #272727;
+  border-left-color: #ff0000;
+}
+
+.sidebar-item.active .sidebar-label {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.sidebar-icon {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  width: 24px;
+  text-align: center;
+}
+
+.sidebar-label {
+  font-size: 0.95rem;
+  color: #cccccc;
+  transition: color 0.2s ease;
+}
+
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #272727;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 0;
+  background: none;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.logout-btn:hover {
+  background: #272727;
+  color: #ff0000;
+}
+
+.logout-btn .sidebar-icon {
+  margin-right: 1rem;
+}
+
+/* 主要內容區域 */
+.admin-main {
+  flex: 1;
+  margin-left: 280px;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
 .admin-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -402,6 +518,16 @@
 
 /* 響應式設計 */
 @media (max-width: 768px) {
+  .admin-sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+  
+  .admin-main {
+    margin-left: 0;
+  }
+  
   .admin-container {
     padding: 15px;
   }
@@ -428,6 +554,7 @@
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
   
   .admin-filters {
@@ -439,6 +566,22 @@
   .admin-filters select {
     min-width: auto;
   }
+  
+  .quick-actions {
+    flex-direction: column;
+  }
+  
+  .quick-actions .admin-btn {
+    width: 100%;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-row .form-group {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -448,6 +591,22 @@
   
   .admin-table table {
     min-width: 400px;
+  }
+  
+  .admin-sidebar {
+    width: 100%;
+  }
+  
+  .sidebar-item {
+    padding: 1rem 1.5rem;
+  }
+  
+  .sidebar-icon {
+    font-size: 1.4rem;
+  }
+  
+  .sidebar-label {
+    font-size: 1rem;
   }
 }
 
@@ -474,4 +633,18 @@
   margin: 0 0 1rem 0;
   color: #333;
   font-size: 1.3rem;
+}
+
+/* 快速操作按鈕 */
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.quick-actions .admin-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
 } 

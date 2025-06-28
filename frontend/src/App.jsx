@@ -60,30 +60,33 @@ function App() {
   return (
     <Router basename="/eva">
       <div className="App">
-        <header className="header">
-          <div className="header-content">
-            <h1>美髮沙龍管理系統</h1>
-            <nav className="nav-menu">
-              <Link to="/" className="nav-link">首頁</Link>
-              <Link to="/queue" className="nav-link">現場排隊</Link>
-              <Link to="/queue-progress" className="nav-link">排隊查詢</Link>
-              <Link to="/reservation" className="nav-link">線上預約</Link>
-              {user ? (
-                <>
-                  {user.role !== 'admin' && (
-                    <Link to="/profile" className="nav-link">會員中心</Link>
-                  )}
-                  <button className="btn btn-logout" onClick={handleLogout}>登出</button>
-                </>
-              ) : (
-                <>
-                  <Link to="/login" className="nav-link">登入</Link>
-                  <Link to="/register" className="nav-link">註冊</Link>
-                </>
-              )}
-            </nav>
-          </div>
-        </header>
+        {/* 只有不是 admin 頁面時才顯示 header */}
+        {window.location.pathname !== '/eva/admin' && (
+          <header className="header">
+            <div className="header-content">
+              <h1>美髮沙龍管理系統</h1>
+              <nav className="nav-menu">
+                <Link to="/" className="nav-link">首頁</Link>
+                <Link to="/queue" className="nav-link">現場排隊</Link>
+                <Link to="/queue-progress" className="nav-link">排隊查詢</Link>
+                <Link to="/reservation" className="nav-link">線上預約</Link>
+                {user ? (
+                  <>
+                    {user.role !== 'admin' && (
+                      <Link to="/profile" className="nav-link">會員中心</Link>
+                    )}
+                    <button className="btn btn-logout" onClick={handleLogout}>登出</button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="nav-link">登入</Link>
+                    <Link to="/register" className="nav-link">註冊</Link>
+                  </>
+                )}
+              </nav>
+            </div>
+          </header>
+        )}
         
         <main className="main">
           <Routes>
