@@ -6,6 +6,7 @@ import './Auth.css';
 function Register({ setUser }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,9 +17,30 @@ function Register({ setUser }) {
     e.preventDefault();
     setLoading(true);
     setMsg('');
+
+    // 驗證手機號碼或信箱至少填寫一個
+    if (!email && !phone) {
+      setMsg('請填寫手機號碼或信箱至少一項');
+      setLoading(false);
+      return;
+    }
+
     try {
-      await axios.post('/api/register', { name, email, password });
-      const res = await axios.post('/api/login', { email, password });
+      const registerData = { name, password };
+      if (email) registerData.email = email;
+      if (phone) registerData.phone = phone;
+
+      await axios.post('/api/register', registerData);
+      
+      // 登入時使用email或phone
+      const loginData = { password };
+      if (email) {
+        loginData.email = email;
+      } else {
+        loginData.phone = phone;
+      }
+      
+      const res = await axios.post('/api/login', loginData);
       localStorage.setItem('token', res.data.token);
       const profile = await axios.get('/api/profile', { 
         headers: { Authorization: `Bearer ${res.data.token}` } 
@@ -38,7 +60,7 @@ function Register({ setUser }) {
         }
       }, 800);
     } catch (err) {
-      setMsg('註冊失敗，Email 可能已被註冊');
+      setMsg('註冊失敗，帳號可能已被註冊');
     } finally {
       setLoading(false);
     }
@@ -74,14 +96,23 @@ function Register({ setUser }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">信箱 (選填)</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
-              placeholder="請輸入Email"
+              placeholder="請輸入信箱"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">手機號碼 (選填)</label>
+            <input
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
+              placeholder="請輸入手機號碼"
             />
           </div>
           <div className="form-group">
@@ -94,6 +125,16 @@ function Register({ setUser }) {
               required
               placeholder="請輸入密碼"
             />
+          </div>
+          <div style={{ 
+            background: '#f8f9fa', 
+            padding: '0.75rem', 
+            borderRadius: '8px', 
+            marginBottom: '1rem',
+            fontSize: '0.9rem',
+            color: '#666'
+          }}>
+            <strong>注意：</strong>信箱和手機號碼至少需要填寫一項
           </div>
           <div className="button-group">
             {redirect && (

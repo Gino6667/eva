@@ -5,6 +5,7 @@ import './Auth.css';
 
 function Login({ setUser }) {
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
@@ -41,8 +42,23 @@ function Login({ setUser }) {
     e.preventDefault();
     setLoading(true);
     setMsg('');
+
+    // 驗證手機號碼或信箱至少填寫一個
+    if (!email && !phone) {
+      setMsg('請填寫手機號碼或信箱至少一項');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const res = await axios.post('/api/login', { email, password });
+      const loginData = { password };
+      if (email) {
+        loginData.email = email;
+      } else {
+        loginData.phone = phone;
+      }
+
+      const res = await axios.post('/api/login', loginData);
       localStorage.setItem('token', res.data.token);
       const profile = await axios.get('/api/profile', { 
         headers: { Authorization: `Bearer ${res.data.token}` } 
@@ -87,14 +103,23 @@ function Login({ setUser }) {
         <h2>會員登入</h2>
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">信箱 (選填)</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
-              placeholder="請輸入Email"
+              placeholder="請輸入信箱"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">手機號碼 (選填)</label>
+            <input
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
+              placeholder="請輸入手機號碼"
             />
           </div>
           <div className="form-group">
@@ -107,6 +132,16 @@ function Login({ setUser }) {
               required
               placeholder="請輸入密碼"
             />
+          </div>
+          <div style={{ 
+            background: '#f8f9fa', 
+            padding: '0.75rem', 
+            borderRadius: '8px', 
+            marginBottom: '1rem',
+            fontSize: '0.9rem',
+            color: '#666'
+          }}>
+            <strong>注意：</strong>信箱和手機號碼至少需要填寫一項
           </div>
           <div className="button-group">
             {redirect && (
