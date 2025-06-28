@@ -49,8 +49,8 @@ function Queue() {
         setMsg('請選擇訪客或會員');
         return;
       }
-      if (!isMember && (!guestName || !guestPhone)) {
-        setMsg('請輸入姓名與電話');
+      if (isMember && !user) {
+        setMsg('請先登入會員');
         return;
       }
     }
@@ -81,8 +81,8 @@ function Queue() {
         serviceId: selectedService,
         type: 'onsite',
         userId,
-        guestName: !isMember ? guestName : undefined,
-        guestPhone: !isMember ? guestPhone : undefined
+        guestName: !isMember && guestName ? guestName : undefined,
+        guestPhone: !isMember && guestPhone ? guestPhone : undefined
       });
       setQueueResult(res.data);
       setStep(4);
@@ -108,8 +108,22 @@ function Queue() {
           </div>
           {isMember === false && (
             <div style={{marginBottom: '1em'}}>
-              <input type="text" placeholder="姓名" value={guestName} onChange={e => setGuestName(e.target.value)} style={{marginRight: '1em'}} />
-              <input type="text" placeholder="電話" value={guestPhone} onChange={e => setGuestPhone(e.target.value)} />
+              <p style={{color: '#666', fontSize: '0.9em', marginBottom: '0.5em'}}>
+                可選擇性輸入個人資料（非必填）
+              </p>
+              <input 
+                type="text" 
+                placeholder="姓名（選填）" 
+                value={guestName} 
+                onChange={e => setGuestName(e.target.value)} 
+                style={{marginRight: '1em'}} 
+              />
+              <input 
+                type="text" 
+                placeholder="電話（選填）" 
+                value={guestPhone} 
+                onChange={e => setGuestPhone(e.target.value)} 
+              />
             </div>
           )}
           {isMember === true && !user && (
