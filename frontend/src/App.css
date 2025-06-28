@@ -267,3 +267,18 @@ button, .btn, .btn-primary, .btn-secondary, input, select, textarea, .card, .mod
   border-radius: 12px !important;
   box-shadow: none !important;
 }
+
+.nav-menu {
+  position: relative;
+}
+.nav-menu .nav-link {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.nav-menu:hover .nav-link {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
