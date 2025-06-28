@@ -9,11 +9,20 @@ function QueueProgress() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [todayStats, setTodayStats] = useState(null);
+  const [userQueue, setUserQueue] = useState([]);
+  const [user, setUser] = useState(() => {
+    const token = localStorage.getItem('token');
+    return token ? JSON.parse(atob(token.split('.')[1])) : null;
+  });
 
   // 載入今日統計
   useEffect(() => {
     loadTodayStats();
-  }, []);
+    // 會員自動查詢今日抽號
+    if (user) {
+      loadUserQueue();
+    }
+  }, [user, date]);
 
   const loadTodayStats = async () => {
     try {
@@ -24,8 +33,19 @@ function QueueProgress() {
     }
   };
 
+  const loadUserQueue = async () => {
+    try {
+      const res = await axios.get(`/api/queue/user/${user.id}`);
+      // 只顯示今日的號碼
+      const today = date;
+      setUserQueue(res.data.filter(q => q.createdAt.slice(0,10) === today));
+    } catch (err) {
+      setUserQueue([]);
+    }
+  };
+
   const handleSearch = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!number.trim()) {
       setError('請輸入號碼');
       return;
@@ -84,6 +104,33 @@ function QueueProgress() {
     <div className="queue-progress-container">
       <div className="queue-progress-card">
         <h2>排隊進度查詢</h2>
+        {/* 會員今日抽號自動顯示 */}
+        {user && userQueue.length > 0 && (
+          <div className="user-queue-list">
+            <div style={{marginBottom: '0.5em', fontWeight: 500}}>您今日抽到的號碼：</div>
+            <div style={{display: 'flex', gap: '0.5em', flexWrap: 'wrap'}}>
+              {userQueue.map(q => (
+                <button
+                  key={q.id}
+                  className="user-queue-btn"
+                  onClick={() => { setNumber(q.number); setDate(q.createdAt.slice(0,10)); setProgress(null); setError(''); }}
+                  style={{
+                    background: '#fff',
+                    border: '2px solid #2196f3',
+                    borderRadius: '8px',
+                    padding: '0.5em 1em',
+                    fontWeight: 600,
+                    color: '#2196f3',
+                    cursor: 'pointer',
+                    fontSize: '1.1em',
+                  }}
+                >
+                  #{q.number}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         
         {/* 今日統計 */}
         {todayStats && (

@@ -8,6 +8,7 @@ function Profile({ user, setUser }) {
   const [msg, setMsg] = useState('');
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (user) setName(user.name);
@@ -90,16 +91,21 @@ function Profile({ user, setUser }) {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password">新密碼（可不填）</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="留空表示不修改密碼"
-              />
-            </div>
+            {showPassword ? (
+              <div className="form-group">
+                <label htmlFor="password">新密碼</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="請輸入新密碼"
+                />
+                <button type="button" className="btn btn-secondary" style={{marginTop: '0.5em'}} onClick={() => { setShowPassword(false); setPassword(''); }}>取消</button>
+              </div>
+            ) : (
+              <button type="button" className="btn btn-secondary" style={{marginBottom: '1em'}} onClick={() => setShowPassword(true)}>修改密碼</button>
+            )}
             <button 
               type="submit" 
               className="btn btn-primary"

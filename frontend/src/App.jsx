@@ -70,7 +70,7 @@ function App() {
                 <Link to="/" className="nav-link">首頁</Link>
                 <Link to="/queue" className="nav-link">現場排隊</Link>
                 <Link to="/queue-progress" className="nav-link">排隊查詢</Link>
-                <Link to="/queue-transfer" className="nav-link">轉移排隊</Link>
+                {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
                 <Link to="/reservation" className="nav-link">線上預約</Link>
                 {user ? (
                   <>

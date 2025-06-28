@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './QueueTransfer.css';
 
 function QueueTransfer() {
@@ -12,6 +13,20 @@ function QueueTransfer() {
   const [message, setMessage] = useState('');
   const [transferHistory, setTransferHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    let user = null;
+    if (token) {
+      try {
+        user = JSON.parse(atob(token.split('.')[1]));
+      } catch {}
+    }
+    if (!user || user.role !== 'admin') {
+      navigate('/');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     loadData();

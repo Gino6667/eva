@@ -12,6 +12,7 @@ function Login({ setUser }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [accountInput, setAccountInput] = useState('');
 
   // 處理 LINE 登入回調
   useEffect(() => {
@@ -86,18 +87,18 @@ function Login({ setUser }) {
     }
 
     // 一般會員登入
-    if (!email && !phone) {
-      setMsg('請填寫手機號碼或信箱至少一項');
+    if (!accountInput) {
+      setMsg('請填寫信箱或手機號碼');
       setLoading(false);
       return;
     }
 
     try {
       const loginData = { password };
-      if (email) {
-        loginData.email = email;
+      if (accountInput.includes('@')) {
+        loginData.email = accountInput;
       } else {
-        loginData.phone = phone;
+        loginData.phone = accountInput;
       }
 
       const res = await axios.post('/api/login', loginData);
@@ -175,23 +176,14 @@ function Login({ setUser }) {
             // 一般會員登入表單
             <>
               <div className="form-group">
-                <label htmlFor="email">信箱 (選填)</label>
+                <label htmlFor="accountInput">信箱 (e-mail或手機，擇一填寫)</label>
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="請輸入信箱"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="phone">手機號碼 (選填)</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)}
-                  placeholder="請輸入手機號碼"
+                  type="text"
+                  id="accountInput"
+                  value={accountInput}
+                  onChange={e => setAccountInput(e.target.value)}
+                  placeholder="請輸入信箱或手機號碼"
+                  autoComplete="username"
                 />
               </div>
               <div className="form-group">
