@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import './Auth.css';
 
@@ -9,6 +9,24 @@ function Login({ setUser }) {
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // 處理 LINE 登入回調
+  useEffect(() => {
+    const token = searchParams.get('token');
+    const error = searchParams.get('error');
+    const success = searchParams.get('success');
+
+    if (token && success === 'true') {
+      // LINE 登入成功
+      localStorage.setItem('token', token);
+      setUser({ token }); // 暫時設定，稍後會從 profile API 取得完整資料
+      setMsg('LINE 登入成功！');
+      setTimeout(() => navigate('/profile'), 800);
+    } else if (error === 'line_login_failed') {
+      setMsg('LINE 登入失敗，請稍後再試');
+    }
+  }, [searchParams, setUser, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

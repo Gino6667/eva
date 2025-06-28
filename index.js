@@ -1710,11 +1710,15 @@ function getFavoriteDesigners(reservations, designers) {
 }
 
 // === LINE 登入 callback API ===
-app.post('/api/line/callback', async (req, res) => {
-  const { code } = req.body;
+app.get('/api/line/callback', async (req, res) => {
+  const { code } = req.query;
   const client_id = 'l2007657170';
   const client_secret = '59ce418bc196c809a6f0064ebc895062';
   const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
+
+  if (!code) {
+    return res.status(400).json({ error: '缺少授權碼' });
+  }
 
   try {
     // 跟 LINE 交換 access token
@@ -1736,10 +1740,41 @@ app.post('/api/line/callback', async (req, res) => {
       headers: { Authorization: `Bearer ${access_token}` }
     });
 
-    // 這裡可以根據 profileRes.data 做登入/註冊邏輯
-    res.json({ profile: profileRes.data });
+    const lineProfile = profileRes.data;
+    
+    // 檢查用戶是否已存在
+    const data = getData();
+    let user = data.users.find(u => u.lineId === lineProfile.userId);
+    
+    if (!user) {
+      // 建立新用戶
+      const newUserId = data.users.length ? Math.max(...data.users.map(u => u.id)) + 1 : 1;
+      user = {
+        id: newUserId,
+        name: lineProfile.displayName,
+        email: lineProfile.email || '',
+        phone: '',
+        lineId: lineProfile.userId,
+        linePicture: lineProfile.pictureUrl,
+        createdAt: new Date().toISOString(),
+        role: 'customer'
+      };
+      data.users.push(user);
+      saveData(data);
+    }
+
+    // 生成 JWT token
+    const token = jwt.sign(
+      { id: user.id, name: user.name, role: user.role },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    // 重導向到前端並帶上 token
+    res.redirect(`https://gino6667.github.io/eva/login?token=${token}&success=true`);
   } catch (err) {
-    res.status(400).json({ error: 'LINE 登入失敗', detail: err.message });
+    console.error('LINE 登入錯誤:', err);
+    res.redirect(`https://gino6667.github.io/eva/login?error=line_login_failed`);
   }
 });
 
