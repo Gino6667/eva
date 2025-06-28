@@ -50,11 +50,20 @@ jobs:
 
       - name: Sync backend data
         run: |
+          echo "檢查 backend/data.sample.json 是否存在..."
+          ls -la backend/
+          
           if [ -f backend/data.sample.json ]; then
+            echo "複製 data.sample.json 到 data.json..."
             cp backend/data.sample.json backend/data.json
+            echo "檢查 data.json 內容..."
+            grep -A 5 -B 5 "rowyha" backend/data.json || echo "找不到 rowyha 帳號"
+            
+            echo "提交 data.json 到 git..."
             git add backend/data.json
             git commit -m "Sync backend data from sample" || echo "No changes to commit"
             git push origin main
+            echo "資料同步完成"
           else
             echo "backend/data.sample.json 不存在，跳過同步"
           fi
