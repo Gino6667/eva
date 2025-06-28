@@ -159,17 +159,14 @@ app.post('/api/queue', (req, res) => {
       const busyDesignerIds = data.queue.filter(q => q.status === 'waiting' || q.status === 'called').map(q => q.designerId);
       const freeDesigners = designers.filter(d => !busyDesignerIds.includes(d.id));
       let assignList = freeDesigners;
+      
       if (assignList.length === 0) {
-        // 輪流分配：找 queue 數量最少的設計師
-        const queueCount = {};
-        designers.forEach(d => { queueCount[d.id] = 0; });
-        data.queue.forEach(q => { if (queueCount[q.designerId] !== undefined) queueCount[q.designerId]++; });
-        const minCount = Math.min(...Object.values(queueCount));
-        assignList = designers.filter(d => queueCount[d.id] === minCount);
+        // 如果沒有空閒設計師，則按順序分配（照設計師 ID 順序）
+        assignList = designers.sort((a, b) => a.id - b.id);
       }
-      // 多人同分時隨機選一位
-      const randomIndex = Math.floor(Math.random() * assignList.length);
-      designerId = assignList[randomIndex].id;
+      
+      // 選擇第一位設計師（優先順序：空閒 > 順序）
+      designerId = assignList[0].id;
     }
   } else {
     // 指定設計師時，若該設計師 isPaused，則回傳錯誤
