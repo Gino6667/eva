@@ -1,9 +1,4 @@
 .queue-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -526,7 +521,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1cm;
+  margin-bottom: 1rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid #f0f0f0;
 }
@@ -547,6 +542,7 @@
   gap: 0.75rem;
   font-size: 0.8rem;
   color: #f7ab5e;
+  margin-bottom: 1cm;
 }
 
 .refresh-btn {
@@ -571,14 +567,13 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 0.75rem;
   margin-bottom: 0.75rem;
-  margin-top: 2cm;
 }
 
 .serving-card {
   background: #333d38;
   border-radius: 8px;
   padding: 1rem;
-  border: 0.67px solid #e9ecef;
+  border: 1px solid #e9ecef;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -759,63 +754,4 @@
   .status-badge {
     font-size: 0.7rem;
     padding: 0.25rem 0.6rem;
-  }
-}
-
-body, .queue-container, .queue-step, .modal-header, .modal-header h3, .modal-option, .modal-option.selected, .queue-step h3, .queue-step span, .queue-step span[style*='fontWeight: bold'], .queue-status, .queue-info, .queue-number, .status-badge, .info-details, .detail-item, .detail-item .label, .detail-item .value {
-  color: #fff !important;
-}
-
-.queue-step .btn {
-  background: transparent !important;
-  color: #f7ab5e !important;
-  border: 2px solid #f7ab5e !important;
-  border-radius: 12px !important;
-  font-weight: bold;
-  box-shadow: none !important;
-  transition: all 0.2s;
-}
-.queue-step .btn:hover, .queue-step .btn:focus {
-  background: #f7ab5e !important;
-  color: #333d38 !important;
-  border: 2px solid #f7ab5e !important;
-}
-
-.queue-step, .queue-form, .queue-list, .queue-item, .modal-content, .btn, input, select, textarea {
-  border: 2px solid #f7ab5e !important;
-  border-radius: 12px !important;
-  box-shadow: none !important;
-}
-
-.queue-flex-layout {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 32px;
-}
-.queue-sidebar {
-  flex: 0 0 340px;
-  min-width: 260px;
-  max-width: 380px;
-  border: none !important;
-  box-shadow: none !important;
-  background: none !important;
-  padding: 0;
-}
-.queue-main {
-  flex: 1 1 480px;
-  min-width: 320px;
-  max-width: 600px;
-}
-@media (max-width: 900px) {
-  .queue-flex-layout {
-    flex-direction: column;
-    gap: 24px;
-    align-items: stretch;
-  }
-  .queue-sidebar, .queue-main {
-    max-width: 100%;
-    min-width: 0;
-  }
-} 
+  }} 

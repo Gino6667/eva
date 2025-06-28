@@ -176,7 +176,7 @@ function Login({ setUser }) {
             // 一般會員登入表單
             <>
               <div className="form-group">
-                <label htmlFor="accountInput">信箱 (e-mail或手機，擇一填寫)</label>
+                <label htmlFor="accountInput">信箱</label>
                 <input
                   type="text"
                   id="accountInput"
@@ -216,8 +216,7 @@ function Login({ setUser }) {
                 type="button"
                 onClick={handleGoBack}
                 className="btn btn-secondary"
-                style={{marginRight: '1em'}}
-              >
+                style={{marginRight: '1em'}}>
                 返回
               </button>
             )}
@@ -225,8 +224,12 @@ function Login({ setUser }) {
               type="submit" 
               className="btn btn-primary"
               disabled={loading}
+              style={{marginRight: '1em'}}
             >
               {loading ? '登入中...' : '登入'}
+            </button>
+            <button className="btn btn-secondary" onClick={() => navigate('/register')}>
+              註冊會員
             </button>
           </div>
           {msg && (
@@ -241,16 +244,8 @@ function Login({ setUser }) {
             使用 LINE 登入
           </a>
         )}
-        {!isAdminLogin && (
-          <div className="login-extra-bar" style={{marginTop: '1.5em', textAlign: 'center'}}>
-            <button className="btn btn-secondary" onClick={() => navigate('/register')}>
-              註冊會員
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
 }
-
 export default Login;

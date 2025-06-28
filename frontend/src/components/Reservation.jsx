@@ -146,12 +146,12 @@ function Reservation() {
                 註冊會員
               </button>
             </div>
-            <a href={`https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=eva_login_reservation&scope=profile%20openid%20email`} className="btn btn-line" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#fff', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
+            <a href={`https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=eva_login_reservation&scope=profile%20openid%20email`} className="btn btn-line" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#fff', padding: '12px 24px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold', fontSize: '1.1em', width: '100%', boxSizing: 'border-box'}}>
               使用 LINE 登入
             </a>
             <div style={{marginTop: '1em', padding: '1em', background: '#f5f5f5', borderRadius: '4px'}}>
-              <h4 style={{margin: '0 0 0.5em 0', color: '#333'}}>會員權益：</h4>
-              <ul style={{margin: '0', paddingLeft: '1.5em', color: '#666'}}>
+              <h4 style={{margin: '0 0 0.5em 0', color: '#fff'}}>會員權益：</h4>
+              <ul style={{margin: '0', paddingLeft: '1.5em', color: '#fff'}}>
                 <li>線上預約服務</li>
                 <li>預約記錄查詢</li>
               </ul>

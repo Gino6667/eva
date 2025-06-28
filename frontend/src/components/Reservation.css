@@ -317,14 +317,3 @@
     grid-template-columns: 1fr;
     gap: 0.4cm;
   }
-}
-
-.reservation-container, .reservation-header h2, .reservation-header p, .reservation-step, .reservation-step h3, .btn, .btn-primary, .btn-secondary, .btn-outline, .modal-header, .modal-header h3, .modal-option, .modal-option.selected, .modal-body, .modal-close, .modal-option.selected:hover, .modal-option:hover, .error-message, .form-group label, .form-group input, .form-group input::placeholder {
-  color: #fff !important;
-}
-
-.reservation-step, .btn, input, select, textarea, .modal-content {
-  border: 2px solid #f7ab5e !important;
-  border-radius: 12px !important;
-  box-shadow: none !important;
-} 

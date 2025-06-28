@@ -353,5 +353,3 @@ function QueueProgress() {
     </div>
   );
 }
-
-export default QueueProgress; 

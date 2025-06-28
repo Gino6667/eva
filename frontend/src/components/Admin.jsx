@@ -130,7 +130,7 @@ function Admin() {
       { path: '/queue-transfer', icon: '🔄', label: '客人調整', active: location.pathname === '/queue-transfer' }
     ] : []),
     { path: '/reservation', icon: '📅', label: '預約管理', active: location.pathname === '/reservation' },
-    { path: '/queue-progress', icon: '📋', label: '排隊進度查詢', active: location.pathname === '/queue-progress' },
+    { path: '/queue-progress', icon: '📋', label: '即時看板', active: location.pathname === '/queue-progress' },
     { path: '/profile', icon: '⚙️', label: '系統設定', active: location.pathname === '/profile' }
   ];
 
@@ -166,50 +166,50 @@ function Admin() {
 
       {/* 主要內容區域 */}
       <main className="admin-main">
-        <div className="admin-container">
-          <div className="admin-header">
+    <div className="admin-container">
+      <div className="admin-header">
             <h1>管理員儀表板</h1>
-            <p>歡迎回來，{user?.name || '管理員'}！這裡是您的管理控制台</p>
-          </div>
+        <p>歡迎回來，{user?.name || '管理員'}！這裡是您的管理控制台</p>
+      </div>
 
-          {/* 統計卡片 */}
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="number">{stats.totalCustomers}</div>
-              <div className="label">總客戶數</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">{stats.totalDesigners}</div>
-              <div className="label">設計師數量</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">{stats.totalReservations}</div>
-              <div className="label">本月預約</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">${stats.totalRevenue.toLocaleString()}</div>
-              <div className="label">本月營收</div>
-            </div>
-          </div>
+      {/* 統計卡片 */}
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="number">{stats.totalCustomers}</div>
+          <div className="label">總客戶數</div>
+        </div>
+        <div className="stat-card">
+          <div className="number">{stats.totalDesigners}</div>
+          <div className="label">設計師數量</div>
+        </div>
+        <div className="stat-card">
+          <div className="number">{stats.totalReservations}</div>
+          <div className="label">本月預約</div>
+        </div>
+        <div className="stat-card">
+          <div className="number">${stats.totalRevenue.toLocaleString()}</div>
+          <div className="label">本月營收</div>
+        </div>
+      </div>
 
-          {/* 快速操作 */}
+      {/* 快速操作 */}
           <div className="admin-section">
-            <h3>快速操作</h3>
+        <h3>快速操作</h3>
             <div className="quick-actions">
-              <button className="admin-btn admin-btn-primary" onClick={() => handleNavigation('/customers')}>
-                新增客戶
-              </button>
-              <button className="admin-btn admin-btn-success" onClick={() => handleNavigation('/designers')}>
-                新增設計師
-              </button>
-              <button className="admin-btn admin-btn-warning" onClick={() => handleNavigation('/reservation')}>
-                查看今日預約
-              </button>
-              <button className="admin-btn admin-btn-secondary" onClick={() => handleNavigation('/reports')}>
-                生成報表
-              </button>
-            </div>
-          </div>
+          <button className="admin-btn admin-btn-primary" onClick={() => handleNavigation('/customers')}>
+            新增客戶
+          </button>
+          <button className="admin-btn admin-btn-success" onClick={() => handleNavigation('/designers')}>
+            新增設計師
+          </button>
+          <button className="admin-btn admin-btn-warning" onClick={() => handleNavigation('/reservation')}>
+            查看今日預約
+          </button>
+          <button className="admin-btn admin-btn-secondary" onClick={() => handleNavigation('/reports')}>
+            生成報表
+          </button>
+        </div>
+      </div>
 
           {/* 設計師權限管理 */}
           <div className="admin-section">

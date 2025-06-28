@@ -46,7 +46,7 @@ function Home() {
         </Link>
         <Link to="/queue-progress" className="feature-card primary feature-link">
           <div className="feature-icon">🔍</div>
-          <h3>排隊進度查詢</h3>
+          <h3>即時看板</h3>
           <p>查詢您的排隊進度，掌握等待時間</p>
         </Link>
         {user && user.role !== 'admin' && (
@@ -58,13 +58,9 @@ function Home() {
         )}
       </div>
       {/* 新增首頁下方大按鈕區塊 */}
-      {/* <div className="home-action-bar">
-        {user && user.role !== 'admin' && (
-          <Link to="/profile" className="home-action-btn">
-            會員中心
-          </Link>
-        )}
-      </div> */}
+      <div className="home-action-bar">
+        <Link to="/eva/admin" className="home-action-btn">管理員登入</Link>
+      </div>
     </div>
   );
 }
