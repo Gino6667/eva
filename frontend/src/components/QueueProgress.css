@@ -9,15 +9,13 @@
 
 .queue-progress-card {
   background: #333d38;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15), 0 1.5px 8px rgba(0,0,0,0.04);
-  padding: 36px 32px 32px 32px;
-  width: 100%;
-  max-width: 520px;
-  margin-top: 0;
-  margin-bottom: 32px;
+  border-radius: 18px;
+  border: none;
+  box-shadow: none;
+  padding: 32px 0 32px 0;
+  margin: 0 auto 32px auto;
+  max-width: 480px;
   animation: fadeInUp 0.8s;
-  border: 2px solid #f7ab5e;
 }
 
 .queue-progress-card h2 {
@@ -348,6 +346,16 @@
   font-weight: 600;
 }
 
+.serving-card {
+  background: #333d38;
+  border-radius: 8px;
+  padding: 4rem;
+  border: 0.67px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
 @media (max-width: 600px) {
   .queue-progress-card {
     padding: 24px 16px 20px 16px;
@@ -380,64 +388,3 @@
     transform: translateY(0);
   }
 }
-
-.queue-progress-container, .queue-progress-card, .today-stats, .stat-number, .stat-label, .current-serving, .current-serving h4, .serving-item, .serving-item .number, .serving-item .designer, .serving-item .service, .search-form, .form-group label, .form-group input, .search-btn, .progress-result, .queue-info, .info-header, .queue-number, .status-badge, .info-details, .detail-item, .detail-item .label, .detail-item .value, .paused-badge, .progress-info, .progress-info h4, .progress-details, .progress-item, .progress-item .label, .progress-item .value, .current-serving-result, .current-serving-result h4 {
-  color: #fff !important;
-}
-
-.progress-result, .current-serving-result, .btn, input, select, textarea {
-  border: 2px solid #f7ab5e !important;
-  border-radius: 12px !important;
-  box-shadow: none !important;
-}
-
-.serving-card {
-  background: #333d38;
-  border-radius: 8px;
-  padding: 2rem;
-  border: 0.67px solid #e9ecef;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.current-customer, .next-customer {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-  border-left: 3px solid #f7ab5e;
-}
-
-.customer-label {
-  font-size: 0.85rem;
-  color: #f7ab5e;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.current-number, .next-number {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 0.25rem;
-}
-
-.service-name {
-  font-size: 0.9rem;
-  color: #ccc;
-  margin-top: 0.25rem;
-}
-
-.next-customer {
-  margin-top: 0.75rem;
-  border-left-color: #2196f3;
-}
-
-.next-customer .customer-label {
-  color: #2196f3;
-}
-
-.next-customer .next-number {
-  color: #2196f3;
-} 
