@@ -29,7 +29,10 @@ function getData() {
 function saveData(data) {
   try {
     fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
-    pushToGitHub();
+    // 僅在本地開發時才 push
+    if (process.env.NODE_ENV !== 'production') {
+      pushToGitHub();
+    }
     return true;
   } catch (err) {
     console.error('寫入 data.json 失敗:', err);
