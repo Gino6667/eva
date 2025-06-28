@@ -62,9 +62,6 @@ function Home() {
 
       {/* 新增首頁下方大按鈕區塊 */}
       <div className="home-action-bar">
-        <Link to="/queue-progress" className="home-action-btn">
-          <span role="img" aria-label="查詢">🔍</span> 排隊查詢
-        </Link>
         {user && user.role !== 'admin' && (
           <Link to="/profile" className="home-action-btn">
             <span role="img" aria-label="會員">👤</span> 會員中心
