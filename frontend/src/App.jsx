@@ -82,6 +82,7 @@ function App() {
   return (
     <Router basename="/eva">
       <div className="App">
+        <h1 style={{textAlign: 'center', color: 'green'}}>部署測試 - 2024-06-28</h1>
         <header className="header">
           <div className="header-content">
             <h1>美髮沙龍管理系統</h1>
