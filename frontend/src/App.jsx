@@ -70,7 +70,9 @@ function App() {
               <Link to="/reservation" className="nav-link">線上預約</Link>
               {user ? (
                 <>
-                  <Link to="/profile" className="nav-link">會員中心</Link>
+                  {user.role !== 'admin' && (
+                    <Link to="/profile" className="nav-link">會員中心</Link>
+                  )}
                   <button className="btn btn-logout" onClick={handleLogout}>登出</button>
                 </>
               ) : (
