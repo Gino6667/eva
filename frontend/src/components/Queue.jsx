@@ -160,16 +160,9 @@ function Queue() {
   const CurrentServingDisplay = () => (
     <>
       <div className="serving-header">
-        <h3>🔄 即時服務狀態</h3>
+        <h3>即時服務狀態</h3>
         <div className="update-info">
           <span>最後更新: {formatTime(lastUpdate)}</span>
-          <button 
-            onClick={loadCurrentServing}
-            className="refresh-btn"
-            title="手動更新"
-          >
-            🔄
-          </button>
         </div>
       </div>
       <div className="serving-grid">
