@@ -1773,29 +1773,26 @@ function getFavoriteDesigners(reservations, designers) {
 app.get('/api/line/callback', async (req, res) => {
   console.log('LINE callback 收到請求:', req.query);
   
- const axios = require('axios');
+  const client_id = '2007657170';
+  const client_secret = '59ce418bc196c809a6f0064ebc895062';
+  const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
 
-const { code } = req.query;
-const client_id = '2007657170';
-const client_secret = '59ce418bc196c809a6f0064ebc895062';
-const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
+  const tokenUrl = 'https://api.line.me/oauth2/v2.1/token';
 
-const tokenUrl = 'https://api.line.me/oauth2/v2.1/token';
+  const params = new URLSearchParams();
+  params.append('grant_type', 'authorization_code');
+  params.append('code', req.query.code);
+  params.append('redirect_uri', redirect_uri);
+  params.append('client_id', client_id);
+  params.append('client_secret', client_secret);
 
-const params = new URLSearchParams();
-params.append('grant_type', 'authorization_code');
-params.append('code', code);
-params.append('redirect_uri', redirect_uri);
-params.append('client_id', client_id);
-params.append('client_secret', client_secret);
+  const tokenRes = await axios.post(tokenUrl, params.toString(), {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  });
 
-const tokenRes = await axios.post(tokenUrl, params.toString(), {
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-});
+  console.log(tokenRes.data);
 
-console.log(tokenRes.data);
-
-  if (!code) {
+  if (!req.query.code) {
     console.error('缺少授權碼');
     return res.status(400).json({ error: '缺少授權碼' });
   }
@@ -1807,7 +1804,7 @@ console.log(tokenRes.data);
     const tokenRes = await axios.post('https://api.line.me/oauth2/v2.1/token', null, {
       params: {
         grant_type: 'authorization_code',
-        code,
+        code: req.query.code,
         redirect_uri,
         client_id,
         client_secret
@@ -1859,9 +1856,9 @@ console.log(tokenRes.data);
 
     // 檢查 state 參數，判斷是否需要重定向到 queue
     let redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true`;
-    if (state === 'eva_login_queue') {
+    if (req.query.state === 'eva_login_queue') {
       redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true&redirect=queue`;
-    } else if (state === 'eva_login_reservation') {
+    } else if (req.query.state === 'eva_login_reservation') {
       redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true&redirect=reservation`;
     }
 
