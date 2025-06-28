@@ -113,7 +113,7 @@ function Login({ setUser }) {
               <button 
                 type="button"
                 onClick={handleGoBack}
-                className="btn btn-primary"
+                className="btn btn-secondary"
                 style={{marginRight: '1em'}}
               >
                 返回
