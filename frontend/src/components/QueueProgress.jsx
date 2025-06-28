@@ -174,6 +174,7 @@ function QueueProgress() {
         )}
 
         {/* 查詢表單 */}
+        {/*
         <form onSubmit={handleSearch} className="search-form">
           <div className="form-group">
             <label htmlFor="number">號碼</label>
@@ -186,7 +187,6 @@ function QueueProgress() {
               required
             />
           </div>
-          
           <div className="form-group">
             <label htmlFor="date">日期</label>
             <input
@@ -197,11 +197,11 @@ function QueueProgress() {
               max={new Date().toISOString().split('T')[0]}
             />
           </div>
-          
           <button type="submit" disabled={loading} className="search-btn">
             {loading ? '查詢中...' : '查詢進度'}
           </button>
         </form>
+        */}
 
         {/* 錯誤訊息 */}
         {error && (
