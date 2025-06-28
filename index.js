@@ -1774,7 +1774,7 @@ app.get('/api/line/callback', async (req, res) => {
   console.log('LINE callback 收到請求:', req.query);
   
   const { code, state } = req.query;
-  const client_id = 'l2007657170';
+  const client_id = '2007657170';
   const client_secret = '59ce418bc196c809a6f0064ebc895062';
   const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
 
