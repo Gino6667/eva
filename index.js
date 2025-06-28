@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const simpleGit = require('simple-git');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 const app = express();
 app.use(cors({
@@ -164,30 +165,297 @@ app.post('/api/queue', (req, res) => {
 app.post('/api/reservations', (req, res) => {
   const data = getData();
   const { designerId, serviceId, userId, date, time } = req.body;
+  
+  // 驗證必填欄位
+  if (!designerId || !serviceId || !userId || !date || !time) {
+    return res.status(400).json({ error: '缺少必要欄位' });
+  }
+  
   // worktime 驗證
   const worktime = data.worktime || {};
-  const dt = date ? new Date(date) : new Date();
+  const dt = new Date(date);
   const week = dt.getDay();
   if (!worktime.openDays?.[week]) return res.status(400).json({ error: '非營業日不可預約' });
+  
   const slotIdx = worktime.slotConfig?.[week]?.findIndex(slot => slot.enabled && slot.time === time);
   if (slotIdx === -1) return res.status(400).json({ error: '非開放時段不可預約' });
   if (!worktime.slotConfig[week][slotIdx].services[serviceId-1]) return res.status(400).json({ error: '該服務未開放' });
+  
+  // 檢查設計師是否可用
+  const designer = data.designers.find(d => d.id === Number(designerId));
+  if (!designer) return res.status(400).json({ error: '找不到設計師' });
+  if (designer.isPaused) return res.status(400).json({ error: '該設計師暫停接客' });
+  
+  // 檢查是否已有預約（同一客戶同一時段）
+  const existingReservation = data.reservations.find(r => 
+    r.userId === Number(userId) && r.date === date && r.time === time && r.status !== 'cancelled'
+  );
+  if (existingReservation) return res.status(400).json({ error: '您已在此時段有預約' });
+  
+  // 檢查設計師是否已被預約（同一設計師同一時段）
+  const designerBooked = data.reservations.find(r => 
+    r.designerId === Number(designerId) && r.date === date && r.time === time && r.status !== 'cancelled'
+  );
+  if (designerBooked) return res.status(400).json({ error: '該設計師此時段已被預約' });
+  
   // 椅子數量限制
-  const reservedCount = data.reservations.filter(r => r.date === date && r.time === time).length;
+  const reservedCount = data.reservations.filter(r => r.date === date && r.time === time && r.status !== 'cancelled').length;
   if (reservedCount >= worktime.slotConfig[week][slotIdx].seats) return res.status(400).json({ error: '該時段椅子已滿' });
+  
   const newId = data.reservations.length ? Math.max(...data.reservations.map(r => r.id)) + 1 : 1;
   const newReservation = {
     id: newId,
-    designerId,
-    serviceId,
-    userId,
+    designerId: Number(designerId),
+    serviceId: Number(serviceId),
+    userId: Number(userId),
     date,
     time,
-    status: 'booked'
+    status: 'booked',
+    createdAt: new Date().toISOString()
   };
   data.reservations.push(newReservation);
   saveData(data);
   res.json(newReservation);
+});
+
+// 查詢預約（支援多種篩選）
+app.get('/api/reservations', (req, res) => {
+  const data = getData();
+  let result = data.reservations;
+  
+  // 按日期篩選
+  if (req.query.date) {
+    result = result.filter(r => r.date === req.query.date);
+  }
+  
+  // 按設計師篩選
+  if (req.query.designerId) {
+    result = result.filter(r => r.designerId === Number(req.query.designerId));
+  }
+  
+  // 按狀態篩選
+  if (req.query.status) {
+    result = result.filter(r => r.status === req.query.status);
+  }
+  
+  // 按用戶篩選
+  if (req.query.userId) {
+    result = result.filter(r => r.userId === Number(req.query.userId));
+  }
+  
+  // 按時間範圍篩選
+  if (req.query.startDate && req.query.endDate) {
+    result = result.filter(r => r.date >= req.query.startDate && r.date <= req.query.endDate);
+  }
+  
+  // 排序（預設按日期時間排序）
+  result.sort((a, b) => {
+    if (a.date !== b.date) return a.date.localeCompare(b.date);
+    return a.time.localeCompare(b.time);
+  });
+  
+  res.json(result);
+});
+
+// 查詢我的預約（需要登入）
+app.get('/api/my-reservations', auth, (req, res) => {
+  const data = getData();
+  const userId = req.user.id;
+  const result = data.reservations
+    .filter(r => r.userId === userId)
+    .map(r => {
+      const designer = data.designers.find(d => d.id === r.designerId);
+      const service = data.services.find(s => s.id === r.serviceId);
+      return {
+        ...r,
+        designerName: designer?.name || '未知設計師',
+        serviceName: service?.name || '未知服務',
+        servicePrice: service?.price || 0
+      };
+    })
+    .sort((a, b) => {
+      if (a.date !== b.date) return a.date.localeCompare(b.date);
+      return a.time.localeCompare(b.time);
+    });
+  res.json(result);
+});
+
+// 修改預約
+app.patch('/api/reservations/:id', auth, (req, res) => {
+  const data = getData();
+  const reservationId = Number(req.params.id);
+  const reservation = data.reservations.find(r => r.id === reservationId);
+  
+  if (!reservation) return res.status(404).json({ error: '找不到預約' });
+  
+  // 檢查權限（只能修改自己的預約）
+  if (reservation.userId !== req.user.id) {
+    return res.status(403).json({ error: '無權限修改此預約' });
+  }
+  
+  // 只能修改未完成的預約
+  if (reservation.status === 'completed' || reservation.status === 'cancelled') {
+    return res.status(400).json({ error: '無法修改已完成的預約' });
+  }
+  
+  const { designerId, serviceId, date, time } = req.body;
+  
+  // 如果要修改日期或時間，需要檢查衝突
+  if ((date && date !== reservation.date) || (time && time !== reservation.time)) {
+    const newDate = date || reservation.date;
+    const newTime = time || reservation.time;
+    
+    // 檢查是否已有預約（同一客戶同一時段）
+    const existingReservation = data.reservations.find(r => 
+      r.id !== reservationId && r.userId === reservation.userId && 
+      r.date === newDate && r.time === newTime && r.status !== 'cancelled'
+    );
+    if (existingReservation) return res.status(400).json({ error: '您已在此時段有預約' });
+    
+    // 檢查設計師是否已被預約（同一設計師同一時段）
+    const newDesignerId = designerId || reservation.designerId;
+    const designerBooked = data.reservations.find(r => 
+      r.id !== reservationId && r.designerId === Number(newDesignerId) && 
+      r.date === newDate && r.time === newTime && r.status !== 'cancelled'
+    );
+    if (designerBooked) return res.status(400).json({ error: '該設計師此時段已被預約' });
+  }
+  
+  // 更新預約資料
+  if (designerId !== undefined) reservation.designerId = Number(designerId);
+  if (serviceId !== undefined) reservation.serviceId = Number(serviceId);
+  if (date !== undefined) reservation.date = date;
+  if (time !== undefined) reservation.time = time;
+  
+  reservation.updatedAt = new Date().toISOString();
+  
+  saveData(data);
+  res.json(reservation);
+});
+
+// 取消預約
+app.patch('/api/reservations/:id/cancel', auth, (req, res) => {
+  const data = getData();
+  const reservationId = Number(req.params.id);
+  const reservation = data.reservations.find(r => r.id === reservationId);
+  
+  if (!reservation) return res.status(404).json({ error: '找不到預約' });
+  
+  // 檢查權限（只能取消自己的預約）
+  if (reservation.userId !== req.user.id) {
+    return res.status(403).json({ error: '無權限取消此預約' });
+  }
+  
+  // 只能取消未完成的預約
+  if (reservation.status === 'completed') {
+    return res.status(400).json({ error: '無法取消已完成的預約' });
+  }
+  
+  reservation.status = 'cancelled';
+  reservation.cancelledAt = new Date().toISOString();
+  
+  saveData(data);
+  res.json(reservation);
+});
+
+// 完成預約（管理員功能）
+app.patch('/api/reservations/:id/complete', (req, res) => {
+  const data = getData();
+  const reservationId = Number(req.params.id);
+  const reservation = data.reservations.find(r => r.id === reservationId);
+  
+  if (!reservation) return res.status(404).json({ error: '找不到預約' });
+  
+  if (reservation.status === 'cancelled') {
+    return res.status(400).json({ error: '無法完成已取消的預約' });
+  }
+  
+  reservation.status = 'completed';
+  reservation.completedAt = new Date().toISOString();
+  
+  saveData(data);
+  res.json(reservation);
+});
+
+// 查詢可預約時段
+app.get('/api/available-slots', (req, res) => {
+  const data = getData();
+  const { date, designerId } = req.query;
+  
+  if (!date) return res.status(400).json({ error: '請指定日期' });
+  
+  const worktime = data.worktime || {};
+  const dt = new Date(date);
+  const week = dt.getDay();
+  
+  if (!worktime.openDays?.[week]) {
+    return res.json([]); // 非營業日
+  }
+  
+  const slots = worktime.slotConfig?.[week] || [];
+  const availableSlots = [];
+  
+  slots.forEach(slot => {
+    if (!slot.enabled) return;
+    
+    // 檢查該時段是否還有空位
+    const reservedCount = data.reservations.filter(r => 
+      r.date === date && r.time === slot.time && r.status !== 'cancelled'
+    ).length;
+    
+    if (reservedCount < slot.seats) {
+      const slotInfo = {
+        time: slot.time,
+        availableSeats: slot.seats - reservedCount,
+        totalSeats: slot.seats,
+        services: slot.services.map((enabled, index) => ({
+          id: index + 1,
+          name: data.services[index]?.name || `服務${index + 1}`,
+          enabled: enabled
+        })).filter(service => service.enabled)
+      };
+      
+      // 如果指定設計師，檢查該設計師是否可用
+      if (designerId) {
+        const designer = data.designers.find(d => d.id === Number(designerId));
+        if (designer && !designer.isPaused) {
+          const designerBooked = data.reservations.find(r => 
+            r.designerId === Number(designerId) && r.date === date && 
+            r.time === slot.time && r.status !== 'cancelled'
+          );
+          if (!designerBooked) {
+            availableSlots.push(slotInfo);
+          }
+        }
+      } else {
+        availableSlots.push(slotInfo);
+      }
+    }
+  });
+  
+  res.json(availableSlots);
+});
+
+// 查詢會員資料
+app.get('/api/profile', auth, (req, res) => {
+  const data = getData();
+  const user = data.users.find(u => u.id === req.user.id);
+  if (!user) return res.status(404).json({ error: '找不到會員' });
+  res.json({ id: user.id, email: user.email, name: user.name });
+});
+
+// 修改會員資料
+app.post('/api/profile', auth, (req, res) => {
+  const data = getData();
+  const user = data.users.find(u => u.id === req.user.id);
+  if (!user) return res.status(404).json({ error: '找不到會員' });
+  
+  const { name, password } = req.body;
+  if (name) user.name = name;
+  if (password) user.password = password;
+  
+  saveData(data);
+  res.json({ id: user.id, email: user.email, name: user.name });
 });
 
 // 新增會員註冊
@@ -398,6 +666,1081 @@ app.post('/api/worktime', (req, res) => {
   data.worktime = req.body;
   saveData(data);
   res.json({ success: true });
+});
+
+// 營業額統計
+app.get('/api/reports/revenue', (req, res) => {
+  const data = getData();
+  const { startDate, endDate, groupBy = 'day' } = req.query;
+  
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: '請指定日期範圍' });
+  }
+  
+  // 篩選時間範圍內的預約
+  const reservations = data.reservations.filter(r => 
+    r.date >= startDate && r.date <= endDate && r.status === 'completed'
+  );
+  
+  const revenueData = {};
+  
+  reservations.forEach(reservation => {
+    const service = data.services.find(s => s.id === reservation.serviceId);
+    const amount = service?.price || 0;
+    
+    let key;
+    switch (groupBy) {
+      case 'day':
+        key = reservation.date;
+        break;
+      case 'week':
+        const date = new Date(reservation.date);
+        const weekStart = new Date(date);
+        weekStart.setDate(date.getDate() - date.getDay());
+        key = weekStart.toISOString().split('T')[0];
+        break;
+      case 'month':
+        key = reservation.date.substring(0, 7); // YYYY-MM
+        break;
+      default:
+        key = reservation.date;
+    }
+    
+    if (!revenueData[key]) {
+      revenueData[key] = {
+        date: key,
+        revenue: 0,
+        count: 0,
+        services: {}
+      };
+    }
+    
+    revenueData[key].revenue += amount;
+    revenueData[key].count += 1;
+    
+    const serviceName = service?.name || '未知服務';
+    if (!revenueData[key].services[serviceName]) {
+      revenueData[key].services[serviceName] = { count: 0, revenue: 0 };
+    }
+    revenueData[key].services[serviceName].count += 1;
+    revenueData[key].services[serviceName].revenue += amount;
+  });
+  
+  const result = Object.values(revenueData).sort((a, b) => a.date.localeCompare(b.date));
+  
+  res.json({
+    summary: {
+      totalRevenue: result.reduce((sum, item) => sum + item.revenue, 0),
+      totalCount: result.reduce((sum, item) => sum + item.count, 0),
+      averageRevenue: result.length > 0 ? result.reduce((sum, item) => sum + item.revenue, 0) / result.length : 0
+    },
+    data: result
+  });
+});
+
+// 客戶流量分析
+app.get('/api/reports/traffic', (req, res) => {
+  const data = getData();
+  const { startDate, endDate, groupBy = 'day' } = req.query;
+  
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: '請指定日期範圍' });
+  }
+  
+  // 篩選時間範圍內的預約和排隊
+  const reservations = data.reservations.filter(r => 
+    r.date >= startDate && r.date <= endDate
+  );
+  
+  const queueData = data.queue.filter(q => {
+    const queueDate = q.createdAt.split('T')[0];
+    return queueDate >= startDate && queueDate <= endDate;
+  });
+  
+  const trafficData = {};
+  
+  // 處理預約數據
+  reservations.forEach(reservation => {
+    let key;
+    switch (groupBy) {
+      case 'day':
+        key = reservation.date;
+        break;
+      case 'week':
+        const date = new Date(reservation.date);
+        const weekStart = new Date(date);
+        weekStart.setDate(date.getDate() - date.getDay());
+        key = weekStart.toISOString().split('T')[0];
+        break;
+      case 'month':
+        key = reservation.date.substring(0, 7);
+        break;
+      default:
+        key = reservation.date;
+    }
+    
+    if (!trafficData[key]) {
+      trafficData[key] = {
+        date: key,
+        reservations: { total: 0, completed: 0, cancelled: 0 },
+        queue: { total: 0, completed: 0, absent: 0 },
+        uniqueCustomers: new Set()
+      };
+    }
+    
+    trafficData[key].reservations.total += 1;
+    if (reservation.status === 'completed') {
+      trafficData[key].reservations.completed += 1;
+    } else if (reservation.status === 'cancelled') {
+      trafficData[key].reservations.cancelled += 1;
+    }
+    
+    trafficData[key].uniqueCustomers.add(reservation.userId);
+  });
+  
+  // 處理排隊數據
+  queueData.forEach(queue => {
+    const queueDate = queue.createdAt.split('T')[0];
+    let key;
+    switch (groupBy) {
+      case 'day':
+        key = queueDate;
+        break;
+      case 'week':
+        const date = new Date(queueDate);
+        const weekStart = new Date(date);
+        weekStart.setDate(date.getDate() - date.getDay());
+        key = weekStart.toISOString().split('T')[0];
+        break;
+      case 'month':
+        key = queueDate.substring(0, 7);
+        break;
+      default:
+        key = queueDate;
+    }
+    
+    if (!trafficData[key]) {
+      trafficData[key] = {
+        date: key,
+        reservations: { total: 0, completed: 0, cancelled: 0 },
+        queue: { total: 0, completed: 0, absent: 0 },
+        uniqueCustomers: new Set()
+      };
+    }
+    
+    trafficData[key].queue.total += 1;
+    if (queue.status === 'done') {
+      trafficData[key].queue.completed += 1;
+    } else if (queue.status === 'absent') {
+      trafficData[key].queue.absent += 1;
+    }
+    
+    if (queue.userId) {
+      trafficData[key].uniqueCustomers.add(queue.userId);
+    }
+  });
+  
+  // 轉換 Set 為數量
+  const result = Object.values(trafficData).map(item => ({
+    ...item,
+    uniqueCustomers: item.uniqueCustomers.size
+  })).sort((a, b) => a.date.localeCompare(b.date));
+  
+  res.json({
+    summary: {
+      totalReservations: result.reduce((sum, item) => sum + item.reservations.total, 0),
+      totalQueue: result.reduce((sum, item) => sum + item.queue.total, 0),
+      totalCustomers: result.reduce((sum, item) => sum + item.uniqueCustomers, 0),
+      avgReservationsPerDay: result.length > 0 ? result.reduce((sum, item) => sum + item.reservations.total, 0) / result.length : 0,
+      avgQueuePerDay: result.length > 0 ? result.reduce((sum, item) => sum + item.queue.total, 0) / result.length : 0
+    },
+    data: result
+  });
+});
+
+// 設計師績效報表
+app.get('/api/reports/designer-performance', (req, res) => {
+  const data = getData();
+  const { startDate, endDate, designerId } = req.query;
+  
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: '請指定日期範圍' });
+  }
+  
+  // 篩選時間範圍內的預約
+  const reservations = data.reservations.filter(r => 
+    r.date >= startDate && r.date <= endDate
+  );
+  
+  // 篩選時間範圍內的排隊
+  const queueData = data.queue.filter(q => {
+    const queueDate = q.createdAt.split('T')[0];
+    return queueDate >= startDate && queueDate <= endDate;
+  });
+  
+  const designerStats = {};
+  
+  // 初始化所有設計師的統計資料
+  data.designers.forEach(designer => {
+    if (designerId && designer.id !== Number(designerId)) return;
+    
+    designerStats[designer.id] = {
+      designerId: designer.id,
+      designerName: designer.name,
+      reservations: {
+        total: 0,
+        completed: 0,
+        cancelled: 0,
+        revenue: 0
+      },
+      queue: {
+        total: 0,
+        completed: 0,
+        absent: 0
+      },
+      services: {},
+      dailyStats: {}
+    };
+  });
+  
+  // 統計預約數據
+  reservations.forEach(reservation => {
+    if (designerId && reservation.designerId !== Number(designerId)) return;
+    
+    const stats = designerStats[reservation.designerId];
+    if (!stats) return;
+    
+    const service = data.services.find(s => s.id === reservation.serviceId);
+    const amount = service?.price || 0;
+    
+    stats.reservations.total += 1;
+    if (reservation.status === 'completed') {
+      stats.reservations.completed += 1;
+      stats.reservations.revenue += amount;
+    } else if (reservation.status === 'cancelled') {
+      stats.reservations.cancelled += 1;
+    }
+    
+    // 服務統計
+    const serviceName = service?.name || '未知服務';
+    if (!stats.services[serviceName]) {
+      stats.services[serviceName] = { count: 0, revenue: 0 };
+    }
+    if (reservation.status === 'completed') {
+      stats.services[serviceName].count += 1;
+      stats.services[serviceName].revenue += amount;
+    }
+    
+    // 每日統計
+    if (!stats.dailyStats[reservation.date]) {
+      stats.dailyStats[reservation.date] = { reservations: 0, revenue: 0 };
+    }
+    stats.dailyStats[reservation.date].reservations += 1;
+    if (reservation.status === 'completed') {
+      stats.dailyStats[reservation.date].revenue += amount;
+    }
+  });
+  
+  // 統計排隊數據
+  queueData.forEach(queue => {
+    if (designerId && queue.designerId !== Number(designerId)) return;
+    
+    const stats = designerStats[queue.designerId];
+    if (!stats) return;
+    
+    stats.queue.total += 1;
+    if (queue.status === 'done') {
+      stats.queue.completed += 1;
+    } else if (queue.status === 'absent') {
+      stats.queue.absent += 1;
+    }
+  });
+  
+  // 轉換為陣列並計算績效指標
+  const result = Object.values(designerStats).map(stats => {
+    const completionRate = stats.reservations.total > 0 ? 
+      (stats.reservations.completed / stats.reservations.total * 100).toFixed(1) : 0;
+    
+    const avgRevenue = stats.reservations.completed > 0 ? 
+      (stats.reservations.revenue / stats.reservations.completed).toFixed(0) : 0;
+    
+    const queueCompletionRate = stats.queue.total > 0 ? 
+      (stats.queue.completed / stats.queue.total * 100).toFixed(1) : 0;
+    
+    return {
+      ...stats,
+      performance: {
+        completionRate: parseFloat(completionRate),
+        avgRevenue: parseFloat(avgRevenue),
+        queueCompletionRate: parseFloat(queueCompletionRate),
+        totalWorkload: stats.reservations.total + stats.queue.total
+      }
+    };
+  });
+  
+  res.json({
+    summary: {
+      totalDesigners: result.length,
+      totalRevenue: result.reduce((sum, item) => sum + item.reservations.revenue, 0),
+      totalReservations: result.reduce((sum, item) => sum + item.reservations.total, 0),
+      avgCompletionRate: result.length > 0 ? 
+        result.reduce((sum, item) => sum + item.performance.completionRate, 0) / result.length : 0
+    },
+    data: result
+  });
+});
+
+// 熱門時段分析
+app.get('/api/reports/popular-times', (req, res) => {
+  const data = getData();
+  const { startDate, endDate } = req.query;
+  
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: '請指定日期範圍' });
+  }
+  
+  // 篩選時間範圍內的預約
+  const reservations = data.reservations.filter(r => 
+    r.date >= startDate && r.date <= endDate && r.status === 'completed'
+  );
+  
+  const timeStats = {};
+  
+  reservations.forEach(reservation => {
+    if (!timeStats[reservation.time]) {
+      timeStats[reservation.time] = {
+        time: reservation.time,
+        count: 0,
+        revenue: 0,
+        services: {}
+      };
+    }
+    
+    const service = data.services.find(s => s.id === reservation.serviceId);
+    const amount = service?.price || 0;
+    
+    timeStats[reservation.time].count += 1;
+    timeStats[reservation.time].revenue += amount;
+    
+    const serviceName = service?.name || '未知服務';
+    if (!timeStats[reservation.time].services[serviceName]) {
+      timeStats[reservation.time].services[serviceName] = { count: 0, revenue: 0 };
+    }
+    timeStats[reservation.time].services[serviceName].count += 1;
+    timeStats[reservation.time].services[serviceName].revenue += amount;
+  });
+  
+  const result = Object.values(timeStats)
+    .sort((a, b) => a.time.localeCompare(b.time))
+    .map(item => ({
+      ...item,
+      avgRevenue: item.count > 0 ? (item.revenue / item.count).toFixed(0) : 0
+    }));
+  
+  res.json({
+    summary: {
+      totalBookings: result.reduce((sum, item) => sum + item.count, 0),
+      totalRevenue: result.reduce((sum, item) => sum + item.revenue, 0),
+      mostPopularTime: result.length > 0 ? 
+        result.reduce((max, item) => item.count > max.count ? item : max) : null
+    },
+    data: result
+  });
+});
+
+// 熱門服務分析
+app.get('/api/reports/popular-services', (req, res) => {
+  const data = getData();
+  const { startDate, endDate } = req.query;
+  
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: '請指定日期範圍' });
+  }
+  
+  // 篩選時間範圍內的預約
+  const reservations = data.reservations.filter(r => 
+    r.date >= startDate && r.date <= endDate && r.status === 'completed'
+  );
+  
+  const serviceStats = {};
+  
+  reservations.forEach(reservation => {
+    const service = data.services.find(s => s.id === reservation.serviceId);
+    if (!service) return;
+    
+    if (!serviceStats[service.id]) {
+      serviceStats[service.id] = {
+        serviceId: service.id,
+        serviceName: service.name,
+        price: service.price,
+        count: 0,
+        revenue: 0,
+        designers: {}
+      };
+    }
+    
+    serviceStats[service.id].count += 1;
+    serviceStats[service.id].revenue += service.price;
+    
+    const designer = data.designers.find(d => d.id === reservation.designerId);
+    const designerName = designer?.name || '未知設計師';
+    if (!serviceStats[service.id].designers[designerName]) {
+      serviceStats[service.id].designers[designerName] = 0;
+    }
+    serviceStats[service.id].designers[designerName] += 1;
+  });
+  
+  const result = Object.values(serviceStats)
+    .sort((a, b) => b.count - a.count)
+    .map(item => ({
+      ...item,
+      avgRevenue: item.count > 0 ? (item.revenue / item.count).toFixed(0) : 0
+    }));
+  
+  res.json({
+    summary: {
+      totalServices: result.length,
+      totalBookings: result.reduce((sum, item) => sum + item.count, 0),
+      totalRevenue: result.reduce((sum, item) => sum + item.revenue, 0),
+      mostPopularService: result.length > 0 ? result[0] : null
+    },
+    data: result
+  });
+});
+
+// ==================== 通知系統 ====================
+
+// 發送通知
+app.post('/api/notifications/send', (req, res) => {
+  const data = getData();
+  const { type, title, message, targetUsers, targetDesigners } = req.body;
+  
+  if (!type || !title || !message) {
+    return res.status(400).json({ error: '缺少必要欄位' });
+  }
+  
+  const newId = data.notifications ? Math.max(...data.notifications.map(n => n.id)) + 1 : 1;
+  const notification = {
+    id: newId,
+    type, // 'system', 'reservation', 'queue', 'reminder'
+    title,
+    message,
+    targetUsers: targetUsers || [],
+    targetDesigners: targetDesigners || [],
+    createdAt: new Date().toISOString(),
+    status: 'sent'
+  };
+  
+  if (!data.notifications) data.notifications = [];
+  data.notifications.push(notification);
+  saveData(data);
+  
+  res.json(notification);
+});
+
+// 查詢通知
+app.get('/api/notifications', (req, res) => {
+  const data = getData();
+  const { userId, designerId, type, status } = req.query;
+  
+  let notifications = data.notifications || [];
+  
+  if (userId) {
+    notifications = notifications.filter(n => 
+      n.targetUsers.includes(Number(userId)) || n.targetUsers.length === 0
+    );
+  }
+  
+  if (designerId) {
+    notifications = notifications.filter(n => 
+      n.targetDesigners.includes(Number(designerId)) || n.targetDesigners.length === 0
+    );
+  }
+  
+  if (type) {
+    notifications = notifications.filter(n => n.type === type);
+  }
+  
+  if (status) {
+    notifications = notifications.filter(n => n.status === status);
+  }
+  
+  notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+  res.json(notifications);
+});
+
+// 標記通知為已讀
+app.patch('/api/notifications/:id/read', auth, (req, res) => {
+  const data = getData();
+  const notificationId = Number(req.params.id);
+  const notification = data.notifications?.find(n => n.id === notificationId);
+  
+  if (!notification) {
+    return res.status(404).json({ error: '找不到通知' });
+  }
+  
+  notification.readBy = notification.readBy || [];
+  if (!notification.readBy.includes(req.user.id)) {
+    notification.readBy.push(req.user.id);
+  }
+  
+  saveData(data);
+  res.json(notification);
+});
+
+// 預約提醒（自動觸發）
+app.post('/api/notifications/reservation-reminder', (req, res) => {
+  const data = getData();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split('T')[0];
+  
+  const tomorrowReservations = data.reservations.filter(r => 
+    r.date === tomorrowStr && r.status === 'booked'
+  );
+  
+  const notifications = [];
+  
+  tomorrowReservations.forEach(reservation => {
+    const user = data.users.find(u => u.id === reservation.userId);
+    const designer = data.designers.find(d => d.id === reservation.designerId);
+    const service = data.services.find(s => s.id === reservation.serviceId);
+    
+    if (user) {
+      const notification = {
+        id: Date.now() + Math.random(),
+        type: 'reminder',
+        title: '預約提醒',
+        message: `您明天 ${reservation.time} 有預約 ${service?.name || '服務'}，設計師：${designer?.name || '未指定'}`,
+        targetUsers: [reservation.userId],
+        targetDesigners: [reservation.designerId],
+        createdAt: new Date().toISOString(),
+        status: 'sent'
+      };
+      
+      if (!data.notifications) data.notifications = [];
+      data.notifications.push(notification);
+      notifications.push(notification);
+    }
+  });
+  
+  saveData(data);
+  res.json({ sent: notifications.length });
+});
+
+// ==================== 客戶管理系統 ====================
+
+// 客戶資料查詢
+app.get('/api/customers', (req, res) => {
+  const data = getData();
+  const { search, level, startDate, endDate } = req.query;
+  
+  let customers = data.users.map(user => {
+    // 計算客戶統計資料
+    const reservations = data.reservations.filter(r => r.userId === user.id);
+    const completedReservations = reservations.filter(r => r.status === 'completed');
+    const totalSpent = completedReservations.reduce((sum, r) => {
+      const service = data.services.find(s => s.id === r.serviceId);
+      return sum + (service?.price || 0);
+    }, 0);
+    
+    // 計算客戶等級
+    let level = '一般客戶';
+    if (totalSpent >= 10000) level = 'VIP客戶';
+    else if (totalSpent >= 5000) level = '黃金客戶';
+    else if (totalSpent >= 2000) level = '白銀客戶';
+    
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      level,
+      totalReservations: reservations.length,
+      completedReservations: completedReservations.length,
+      totalSpent,
+      lastVisit: completedReservations.length > 0 ? 
+        completedReservations[completedReservations.length - 1].date : null,
+      createdAt: user.createdAt || new Date().toISOString()
+    };
+  });
+  
+  // 篩選
+  if (search) {
+    customers = customers.filter(c => 
+      c.name.includes(search) || c.email.includes(search)
+    );
+  }
+  
+  if (level) {
+    customers = customers.filter(c => c.level === level);
+  }
+  
+  if (startDate && endDate) {
+    customers = customers.filter(c => 
+      c.lastVisit && c.lastVisit >= startDate && c.lastVisit <= endDate
+    );
+  }
+  
+  customers.sort((a, b) => b.totalSpent - a.totalSpent);
+  
+  res.json(customers);
+});
+
+// 客戶詳細資料
+app.get('/api/customers/:id', (req, res) => {
+  const data = getData();
+  const customerId = Number(req.params.id);
+  const user = data.users.find(u => u.id === customerId);
+  
+  if (!user) {
+    return res.status(404).json({ error: '找不到客戶' });
+  }
+  
+  const reservations = data.reservations.filter(r => r.userId === customerId);
+  const completedReservations = reservations.filter(r => r.status === 'completed');
+  const cancelledReservations = reservations.filter(r => r.status === 'cancelled');
+  
+  const customerData = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    phone: user.phone || '',
+    address: user.address || '',
+    birthday: user.birthday || '',
+    preferences: user.preferences || {},
+    totalReservations: reservations.length,
+    completedReservations: completedReservations.length,
+    cancelledReservations: cancelledReservations.length,
+    totalSpent: completedReservations.reduce((sum, r) => {
+      const service = data.services.find(s => s.id === r.serviceId);
+      return sum + (service?.price || 0);
+    }, 0),
+    favoriteServices: getFavoriteServices(completedReservations, data.services),
+    favoriteDesigners: getFavoriteDesigners(completedReservations, data.designers),
+    reservationHistory: reservations.map(r => ({
+      ...r,
+      serviceName: data.services.find(s => s.id === r.serviceId)?.name,
+      designerName: data.designers.find(d => d.id === r.designerId)?.name
+    })).sort((a, b) => b.date.localeCompare(a.date))
+  };
+  
+  res.json(customerData);
+});
+
+// 更新客戶資料
+app.patch('/api/customers/:id', auth, (req, res) => {
+  const data = getData();
+  const customerId = Number(req.params.id);
+  const user = data.users.find(u => u.id === customerId);
+  
+  if (!user) {
+    return res.status(404).json({ error: '找不到客戶' });
+  }
+  
+  const { name, phone, address, birthday, preferences } = req.body;
+  
+  if (name) user.name = name;
+  if (phone) user.phone = phone;
+  if (address) user.address = address;
+  if (birthday) user.birthday = birthday;
+  if (preferences) user.preferences = { ...user.preferences, ...preferences };
+  
+  saveData(data);
+  res.json(user);
+});
+
+// 客戶生日提醒
+app.get('/api/customers/birthday-reminders', (req, res) => {
+  const data = getData();
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  
+  const birthdayCustomers = data.users.filter(user => {
+    if (!user.birthday) return false;
+    const [birthMonth, birthDay] = user.birthday.split('-').map(Number);
+    return birthMonth === month && birthDay === day;
+  });
+  
+  res.json(birthdayCustomers);
+});
+
+// ==================== 財務管理系統 ====================
+
+// 收入記錄
+app.post('/api/finance/income', (req, res) => {
+  const data = getData();
+  const { amount, type, description, reservationId, designerId } = req.body;
+  
+  if (!amount || !type) {
+    return res.status(400).json({ error: '缺少必要欄位' });
+  }
+  
+  const newId = data.finance?.income ? Math.max(...data.finance.income.map(i => i.id)) + 1 : 1;
+  const income = {
+    id: newId,
+    amount: Number(amount),
+    type, // 'reservation', 'service', 'other'
+    description: description || '',
+    reservationId: reservationId ? Number(reservationId) : null,
+    designerId: designerId ? Number(designerId) : null,
+    date: new Date().toISOString(),
+    createdAt: new Date().toISOString()
+  };
+  
+  if (!data.finance) data.finance = {};
+  if (!data.finance.income) data.finance.income = [];
+  data.finance.income.push(income);
+  
+  saveData(data);
+  res.json(income);
+});
+
+// 支出記錄
+app.post('/api/finance/expense', (req, res) => {
+  const data = getData();
+  const { amount, category, description, supplier } = req.body;
+  
+  if (!amount || !category) {
+    return res.status(400).json({ error: '缺少必要欄位' });
+  }
+  
+  const newId = data.finance?.expense ? Math.max(...data.finance.expense.map(e => e.id)) + 1 : 1;
+  const expense = {
+    id: newId,
+    amount: Number(amount),
+    category, // 'supplies', 'rent', 'utilities', 'salary', 'other'
+    description: description || '',
+    supplier: supplier || '',
+    date: new Date().toISOString(),
+    createdAt: new Date().toISOString()
+  };
+  
+  if (!data.finance) data.finance = {};
+  if (!data.finance.expense) data.finance.expense = [];
+  data.finance.expense.push(expense);
+  
+  saveData(data);
+  res.json(expense);
+});
+
+// 財務報表
+app.get('/api/finance/report', (req, res) => {
+  const data = getData();
+  const { startDate, endDate } = req.query;
+  
+  const income = data.finance?.income || [];
+  const expense = data.finance?.expense || [];
+  
+  let filteredIncome = income;
+  let filteredExpense = expense;
+  
+  if (startDate && endDate) {
+    filteredIncome = income.filter(i => i.date >= startDate && i.date <= endDate);
+    filteredExpense = expense.filter(e => e.date >= startDate && e.date <= endDate);
+  }
+  
+  const totalIncome = filteredIncome.reduce((sum, i) => sum + i.amount, 0);
+  const totalExpense = filteredExpense.reduce((sum, e) => sum + e.amount, 0);
+  const netProfit = totalIncome - totalExpense;
+  
+  // 按類別統計
+  const incomeByType = {};
+  const expenseByCategory = {};
+  
+  filteredIncome.forEach(i => {
+    incomeByType[i.type] = (incomeByType[i.type] || 0) + i.amount;
+  });
+  
+  filteredExpense.forEach(e => {
+    expenseByCategory[e.category] = (expenseByCategory[e.category] || 0) + e.amount;
+  });
+  
+  res.json({
+    summary: {
+      totalIncome,
+      totalExpense,
+      netProfit,
+      profitMargin: totalIncome > 0 ? (netProfit / totalIncome * 100).toFixed(2) : 0
+    },
+    incomeByType,
+    expenseByCategory,
+    income: filteredIncome,
+    expense: filteredExpense
+  });
+});
+
+// 設計師抽成計算
+app.get('/api/finance/designer-commission', (req, res) => {
+  const data = getData();
+  const { startDate, endDate, designerId } = req.query;
+  
+  let reservations = data.reservations.filter(r => 
+    r.status === 'completed' && r.date >= startDate && r.date <= endDate
+  );
+  
+  if (designerId) {
+    reservations = reservations.filter(r => r.designerId === Number(designerId));
+  }
+  
+  const commissionData = {};
+  
+  reservations.forEach(reservation => {
+    const service = data.services.find(s => s.id === reservation.serviceId);
+    const designer = data.designers.find(d => d.id === reservation.designerId);
+    
+    if (!service || !designer) return;
+    
+    const commissionRate = designer.commissionRate || 0.3; // 預設30%
+    const commission = service.price * commissionRate;
+    
+    if (!commissionData[designer.id]) {
+      commissionData[designer.id] = {
+        designerId: designer.id,
+        designerName: designer.name,
+        totalRevenue: 0,
+        totalCommission: 0,
+        reservationCount: 0
+      };
+    }
+    
+    commissionData[designer.id].totalRevenue += service.price;
+    commissionData[designer.id].totalCommission += commission;
+    commissionData[designer.id].reservationCount += 1;
+  });
+  
+  const result = Object.values(commissionData);
+  
+  res.json({
+    summary: {
+      totalRevenue: result.reduce((sum, d) => sum + d.totalRevenue, 0),
+      totalCommission: result.reduce((sum, d) => sum + d.totalCommission, 0),
+      totalReservations: result.reduce((sum, d) => sum + d.reservationCount, 0)
+    },
+    data: result
+  });
+});
+
+// ==================== 設計師管理系統 ====================
+
+// 設計師詳細資料
+app.get('/api/designers/:id/profile', (req, res) => {
+  const data = getData();
+  const designerId = Number(req.params.id);
+  const designer = data.designers.find(d => d.id === designerId);
+  
+  if (!designer) {
+    return res.status(404).json({ error: '找不到設計師' });
+  }
+  
+  // 計算設計師統計資料
+  const reservations = data.reservations.filter(r => r.designerId === designerId);
+  const completedReservations = reservations.filter(r => r.status === 'completed');
+  const queueData = data.queue.filter(q => q.designerId === designerId);
+  
+  const designerProfile = {
+    ...designer,
+    totalReservations: reservations.length,
+    completedReservations: completedReservations.length,
+    totalRevenue: completedReservations.reduce((sum, r) => {
+      const service = data.services.find(s => s.id === r.serviceId);
+      return sum + (service?.price || 0);
+    }, 0),
+    averageRating: designer.ratings ? 
+      (designer.ratings.reduce((sum, r) => sum + r.rating, 0) / designer.ratings.length).toFixed(1) : 0,
+    totalRatings: designer.ratings ? designer.ratings.length : 0,
+    currentQueue: queueData.filter(q => q.status === 'waiting' || q.status === 'called').length,
+    schedule: designer.schedule || {},
+    skills: designer.skills || [],
+    experience: designer.experience || '',
+    education: designer.education || '',
+    certifications: designer.certifications || []
+  };
+  
+  res.json(designerProfile);
+});
+
+// 更新設計師資料
+app.patch('/api/designers/:id/profile', (req, res) => {
+  const data = getData();
+  const designerId = Number(req.params.id);
+  const designer = data.designers.find(d => d.id === designerId);
+  
+  if (!designer) {
+    return res.status(404).json({ error: '找不到設計師' });
+  }
+  
+  const { 
+    name, phone, email, experience, education, skills, 
+    certifications, schedule, commissionRate, bio 
+  } = req.body;
+  
+  if (name) designer.name = name;
+  if (phone) designer.phone = phone;
+  if (email) designer.email = email;
+  if (experience) designer.experience = experience;
+  if (education) designer.education = education;
+  if (skills) designer.skills = skills;
+  if (certifications) designer.certifications = certifications;
+  if (schedule) designer.schedule = schedule;
+  if (commissionRate !== undefined) designer.commissionRate = Number(commissionRate);
+  if (bio) designer.bio = bio;
+  
+  saveData(data);
+  res.json(designer);
+});
+
+// 設計師排班管理
+app.post('/api/designers/:id/schedule', (req, res) => {
+  const data = getData();
+  const designerId = Number(req.params.id);
+  const designer = data.designers.find(d => d.id === designerId);
+  
+  if (!designer) {
+    return res.status(404).json({ error: '找不到設計師' });
+  }
+  
+  const { date, startTime, endTime, status } = req.body;
+  
+  if (!date || !startTime || !endTime || !status) {
+    return res.status(400).json({ error: '缺少必要欄位' });
+  }
+  
+  if (!designer.schedule) designer.schedule = {};
+  if (!designer.schedule[date]) designer.schedule[date] = [];
+  
+  const scheduleEntry = {
+    id: Date.now(),
+    startTime,
+    endTime,
+    status, // 'working', 'break', 'off'
+    createdAt: new Date().toISOString()
+  };
+  
+  designer.schedule[date].push(scheduleEntry);
+  
+  saveData(data);
+  res.json(scheduleEntry);
+});
+
+// 設計師評價
+app.post('/api/designers/:id/rating', auth, (req, res) => {
+  const data = getData();
+  const designerId = Number(req.params.id);
+  const designer = data.designers.find(d => d.id === designerId);
+  
+  if (!designer) {
+    return res.status(404).json({ error: '找不到設計師' });
+  }
+  
+  const { rating, comment, reservationId } = req.body;
+  
+  if (!rating || rating < 1 || rating > 5) {
+    return res.status(400).json({ error: '評分必須在1-5之間' });
+  }
+  
+  if (!designer.ratings) designer.ratings = [];
+  
+  const newRating = {
+    id: Date.now(),
+    userId: req.user.id,
+    rating: Number(rating),
+    comment: comment || '',
+    reservationId: reservationId ? Number(reservationId) : null,
+    createdAt: new Date().toISOString()
+  };
+  
+  designer.ratings.push(newRating);
+  
+  saveData(data);
+  res.json(newRating);
+});
+
+// 設計師評價查詢
+app.get('/api/designers/:id/ratings', (req, res) => {
+  const data = getData();
+  const designerId = Number(req.params.id);
+  const designer = data.designers.find(d => d.id === designerId);
+  
+  if (!designer) {
+    return res.status(404).json({ error: '找不到設計師' });
+  }
+  
+  const ratings = (designer.ratings || []).map(rating => {
+    const user = data.users.find(u => u.id === rating.userId);
+    return {
+      ...rating,
+      userName: user?.name || '匿名用戶'
+    };
+  }).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+  res.json(ratings);
+});
+
+// 輔助函數
+function getFavoriteServices(reservations, services) {
+  const serviceCount = {};
+  reservations.forEach(r => {
+    const service = services.find(s => s.id === r.serviceId);
+    if (service) {
+      serviceCount[service.name] = (serviceCount[service.name] || 0) + 1;
+    }
+  });
+  
+  return Object.entries(serviceCount)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 3)
+    .map(([name, count]) => ({ name, count }));
+}
+
+function getFavoriteDesigners(reservations, designers) {
+  const designerCount = {};
+  reservations.forEach(r => {
+    const designer = designers.find(d => d.id === r.designerId);
+    if (designer) {
+      designerCount[designer.name] = (designerCount[designer.name] || 0) + 1;
+    }
+  });
+  
+  return Object.entries(designerCount)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 3)
+    .map(([name, count]) => ({ name, count }));
+}
+
+// === LINE 登入 callback API ===
+app.post('/api/line/callback', async (req, res) => {
+  const { code } = req.body;
+  const client_id = 'l2007657170';
+  const client_secret = '59ce418bc196c809a6f0064ebc895062';
+  const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
+
+  try {
+    // 跟 LINE 交換 access token
+    const tokenRes = await axios.post('https://api.line.me/oauth2/v2.1/token', null, {
+      params: {
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri,
+        client_id,
+        client_secret
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+
+    const access_token = tokenRes.data.access_token;
+
+    // 取得用戶資料
+    const profileRes = await axios.get('https://api.line.me/v2/profile', {
+      headers: { Authorization: `Bearer ${access_token}` }
+    });
+
+    // 這裡可以根據 profileRes.data 做登入/註冊邏輯
+    res.json({ profile: profileRes.data });
+  } catch (err) {
+    res.status(400).json({ error: 'LINE 登入失敗', detail: err.message });
+  }
 });
 
 const PORT = process.env.PORT || 3001;
