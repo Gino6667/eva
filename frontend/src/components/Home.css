@@ -277,4 +277,8 @@
   .admin-card {
     padding: 1.2rem;
   }
+}
+
+.feature-card.primary h3 {
+  color: #fff !important;
 } 
