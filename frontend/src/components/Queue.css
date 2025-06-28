@@ -20,10 +20,11 @@
 }
 
 .queue-form {
-  background: white;
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
@@ -90,10 +91,11 @@
 }
 
 .queue-list {
-  background: white;
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .queue-list h3 {
@@ -120,17 +122,21 @@
 }
 
 .queue-item {
+  background: #fff;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1rem;
   display: flex;
   align-items: center;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #007bff;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
+  margin-bottom: 0.5rem;
 }
 
 .queue-item:hover {
-  background: #e9ecef;
+  background: #f8f9fa;
+  border-color: #007bff;
+  box-shadow: 0 4px 16px rgba(0,123,255,0.10);
   transform: translateX(5px);
 }
 

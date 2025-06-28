@@ -119,6 +119,10 @@
   box-sizing: border-box;
   text-decoration: none;
   color: inherit;
+  transform: scale(0.67);
+  width: 66% !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .feature-card.primary {
@@ -140,18 +144,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 220px;
+  min-height: 146px;
 }
 
 .feature-icon {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.47rem;
+  margin-bottom: 0.67rem;
   display: block;
 }
 
 .feature-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.7rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.47rem;
   font-weight: bold;
   color: #2196f3;
 }
@@ -160,7 +164,7 @@
   margin-bottom: 0;
   opacity: 0.9;
   line-height: 1.5;
-  font-size: 0.95rem;
+  font-size: 0.63rem;
 }
 
 /* 移除卡片內按鈕樣式 */
@@ -236,8 +240,13 @@
     padding: 30px 10px 0 10px;
   }
   
+  .feature-card {
+    width: 95% !important;
+    transform: scale(0.85);
+  }
+  
   .feature-link {
-    min-height: 160px;
+    min-height: 100px;
   }
   
   .admin-section {
