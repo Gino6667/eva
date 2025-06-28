@@ -79,13 +79,13 @@ function Home() {
       </div>
 
       {/* 新增首頁下方大按鈕區塊 */}
-      <div className="home-action-bar">
+      {/* <div className="home-action-bar">
         {user && user.role !== 'admin' && (
           <Link to="/profile" className="home-action-btn">
             會員中心
           </Link>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
