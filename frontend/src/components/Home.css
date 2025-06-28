@@ -1,6 +1,13 @@
+.home-container {
+  background: #333d38;
+  min-height: 100vh;
+  padding: 20px;
+  color: #fff;
+}
+
 .home {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #333d38;
   color: white;
 }
 

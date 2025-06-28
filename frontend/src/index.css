@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #333d38;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,7 +27,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: #333d38 !important;
   color: #fff;
 }
 
@@ -44,7 +44,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #333d38;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -59,20 +59,20 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #333d38;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #333d38;
   }
 }
 
 /* 統一卡片樣式 */
 .card, .auth-card, .admin-container, .feature-card, .modal-content, .admin-form, .admin-table, .stats-grid, .stat-card {
-  background: #fff;
-  color: #222;
+  background: #333d38;
+  color: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 2rem;
@@ -100,13 +100,13 @@ button:focus-visible {
   background: #ff5252;
 }
 .btn-secondary, .admin-btn-secondary {
-  background: #fff;
-  color: #764ba2;
+  background: #333d38;
+  color: #fff;
   border: 2px solid #fff;
 }
 .btn-secondary:hover, .admin-btn-secondary:hover {
   background: #ffe082;
-  color: #764ba2;
+  color: #333d38;
 }
 
 /* 統一表單樣式 */
@@ -118,8 +118,8 @@ input, select, textarea {
   margin-bottom: 1rem;
   width: 100%;
   box-sizing: border-box;
-  background: #f8f9fa;
-  color: #222;
+  background: #333d38;
+  color: #fff;
 }
 input:focus, select:focus, textarea:focus {
   outline: 2px solid #667eea;
@@ -130,7 +130,7 @@ input:focus, select:focus, textarea:focus {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
+  background: #333d38;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
@@ -138,11 +138,11 @@ table {
 th, td {
   padding: 1rem;
   border-bottom: 1px solid #e9ecef;
-  color: #222;
+  color: #fff;
 }
 th {
-  background: #f8f9fa;
-  color: #764ba2;
+  background: #333d38;
+  color: #fff;
   font-weight: 600;
 }
 tr:last-child td {

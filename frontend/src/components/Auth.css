@@ -49,4 +49,31 @@
   transform: translateY(-2px) scale(1.04);
   box-shadow: 0 8px 24px rgba(108, 117, 125, 0.18);
   color: #fff;
+}
+
+.auth-container {
+  min-height: 100vh;
+  background: #333d38;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #333d38;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  color: #fff;
+}
+
+.auth-card.login {
+  background: #333d38;
+}
+
+.auth-card.register {
+  background: #333d38;
 } 

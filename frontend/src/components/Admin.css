@@ -116,18 +116,19 @@
 }
 
 .admin-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: 100vh;
+  background: #333d38;
+  color: #fff;
   padding: 20px;
 }
 
 .admin-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 2rem;
-  border-radius: 12px;
+  text-align: center;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #333d38;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
 }
 
 .admin-header h1 {
@@ -141,10 +142,35 @@
 }
 
 .admin-nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.admin-nav button {
+  background: #333d38;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-nav button.active {
+  background: #333d38;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.admin-content {
+  background: #333d38;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  color: #fff;
 }
 
 .admin-card {
