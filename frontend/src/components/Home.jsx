@@ -1,7 +1,38 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import './Home.css';
 
 function Home() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 檢查用戶登入狀態
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const userData = JSON.parse(atob(token.split('.')[1]));
+        setUser(userData);
+      } catch (error) {
+        console.error('Token解析失敗:', error);
+        localStorage.removeItem('token');
+      }
+    }
+  }, []);
+
+  const handleAdminClick = () => {
+    if (!user) {
+      // 未登入，導向登入頁面
+      navigate('/login?redirect=admin');
+    } else if (user.role === 'admin') {
+      // 已登入且為管理員，導向管理員頁面
+      navigate('/admin');
+    } else {
+      // 已登入但不是管理員
+      alert('只有管理員可以進入管理系統');
+    }
+  };
+
   return (
     <div className="home">
       <div className="hero">
@@ -74,7 +105,7 @@ function Home() {
           <div className="feature-icon">⚙️</div>
           <h3>管理功能</h3>
           <p>管理員專用功能，系統管理與監控</p>
-          <Link to="/admin" className="btn">管理系統</Link>
+          <button onClick={handleAdminClick} className="btn">管理系統</button>
         </div>
       </div>
     </div>
