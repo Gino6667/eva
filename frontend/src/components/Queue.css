@@ -763,4 +763,19 @@
 
 body, .queue-container, .queue-step, .modal-header, .modal-header h3, .modal-option, .modal-option.selected, .queue-step h3, .queue-step span, .queue-step span[style*='fontWeight: bold'], .queue-status, .queue-info, .queue-number, .status-badge, .info-details, .detail-item, .detail-item .label, .detail-item .value {
   color: #fff !important;
+}
+
+.queue-step .btn {
+  background: transparent !important;
+  color: #f7ab5e !important;
+  border: 2px solid #f7ab5e !important;
+  border-radius: 12px !important;
+  font-weight: bold;
+  box-shadow: none !important;
+  transition: all 0.2s;
+}
+.queue-step .btn:hover, .queue-step .btn:focus {
+  background: #f7ab5e !important;
+  color: #333d38 !important;
+  border: 2px solid #f7ab5e !important;
 } 
