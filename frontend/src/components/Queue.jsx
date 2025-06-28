@@ -28,10 +28,10 @@ function Queue() {
     loadServices();
     loadCurrentServing();
     
-    // 每30秒自動更新服務狀態
+    // 每分鐘自動更新服務狀態
     const interval = setInterval(() => {
       loadCurrentServing();
-    }, 30000);
+    }, 60000);
     
     return () => clearInterval(interval);
   }, []);
