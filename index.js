@@ -1860,4 +1860,139 @@ app.get('/api/line/callback', async (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+// 排隊進度查詢 API
+app.get('/api/queue/progress', (req, res) => {
+  try {
+    const data = getData();
+    const { number, date } = req.query;
+    
+    if (!number) {
+      return res.status(400).json({ error: '請提供號碼' });
+    }
+    
+    // 如果沒有指定日期，使用今天
+    const queryDate = date || new Date().toISOString().split('T')[0];
+    const [year, month, day] = queryDate.split('-').map(Number);
+    
+    // 篩選指定日期的排隊資料
+    const dayQueue = data.queue.filter(q => isSameDay(q.createdAt, year, month, day));
+    
+    // 找到指定號碼的排隊記錄
+    const targetQueue = dayQueue.find(q => q.number === Number(number));
+    
+    if (!targetQueue) {
+      return res.status(404).json({ 
+        error: '找不到該號碼的排隊記錄',
+        message: '請確認號碼是否正確，或該號碼可能已完成服務'
+      });
+    }
+    
+    // 計算該號碼在當天所有 waiting 狀態中的位置
+    const waitingQueue = dayQueue.filter(q => q.status === 'waiting');
+    const position = waitingQueue.findIndex(q => q.number === Number(number)) + 1;
+    
+    // 獲取相關資訊
+    const designer = data.designers.find(d => d.id === targetQueue.designerId);
+    const service = data.services.find(s => s.id === targetQueue.serviceId);
+    
+    // 計算預估等待時間（假設每個服務平均 30 分鐘）
+    const estimatedWaitTime = position * 30; // 分鐘
+    
+    // 獲取當前正在服務的號碼
+    const currentServing = dayQueue.filter(q => q.status === 'called');
+    
+    const result = {
+      queueInfo: {
+        id: targetQueue.id,
+        number: targetQueue.number,
+        status: targetQueue.status,
+        type: targetQueue.type,
+        createdAt: targetQueue.createdAt
+      },
+      designer: designer ? {
+        id: designer.id,
+        name: designer.name,
+        isPaused: designer.isPaused || false
+      } : null,
+      service: service ? {
+        id: service.id,
+        name: service.name,
+        price: service.price
+      } : null,
+      progress: {
+        position: position,
+        totalWaiting: waitingQueue.length,
+        estimatedWaitMinutes: estimatedWaitTime,
+        status: targetQueue.status
+      },
+      currentServing: currentServing.map(q => ({
+        number: q.number,
+        designerId: q.designerId,
+        designerName: data.designers.find(d => d.id === q.designerId)?.name || '未知設計師'
+      })),
+      date: queryDate
+    };
+    
+    res.json(result);
+  } catch (err) {
+    console.error('查詢排隊進度時發生錯誤:', err);
+    res.status(500).json({ error: '查詢失敗，請稍後再試' });
+  }
+});
+
+// 查詢今日排隊統計
+app.get('/api/queue/today-stats', (req, res) => {
+  try {
+    const data = getData();
+    const today = new Date();
+    const [year, month, day] = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
+    
+    // 篩選今日的排隊資料
+    const todayQueue = data.queue.filter(q => isSameDay(q.createdAt, year, month, day));
+    
+    // 按狀態統計
+    const stats = {
+      total: todayQueue.length,
+      waiting: todayQueue.filter(q => q.status === 'waiting').length,
+      called: todayQueue.filter(q => q.status === 'called').length,
+      done: todayQueue.filter(q => q.status === 'done').length,
+      absent: todayQueue.filter(q => q.status === 'absent').length
+    };
+    
+    // 按設計師統計
+    const designerStats = {};
+    data.designers.forEach(designer => {
+      const designerQueue = todayQueue.filter(q => q.designerId === designer.id);
+      designerStats[designer.id] = {
+        name: designer.name,
+        total: designerQueue.length,
+        waiting: designerQueue.filter(q => q.status === 'waiting').length,
+        called: designerQueue.filter(q => q.status === 'called').length,
+        done: designerQueue.filter(q => q.status === 'done').length,
+        isPaused: designer.isPaused || false
+      };
+    });
+    
+    // 當前正在服務的號碼
+    const currentServing = todayQueue
+      .filter(q => q.status === 'called')
+      .map(q => ({
+        number: q.number,
+        designerId: q.designerId,
+        designerName: data.designers.find(d => d.id === q.designerId)?.name || '未知設計師',
+        serviceName: data.services.find(s => s.id === q.serviceId)?.name || '未知服務'
+      }));
+    
+    res.json({
+      date: today.toISOString().split('T')[0],
+      stats,
+      designerStats,
+      currentServing
+    });
+  } catch (err) {
+    console.error('查詢今日統計時發生錯誤:', err);
+    res.status(500).json({ error: '查詢失敗，請稍後再試' });
+  }
 }); 

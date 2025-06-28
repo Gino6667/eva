@@ -6,6 +6,7 @@ import './App.css';
 // 直接引入所有組件
 import Home from './components/Home';
 import Queue from './components/Queue';
+import QueueProgress from './components/QueueProgress';
 import Reservation from './components/Reservation';
 import Worktime from './components/Worktime';
 import Reports from './components/Reports';
@@ -65,6 +66,7 @@ function App() {
             <nav className="nav-menu">
               <Link to="/" className="nav-link">首頁</Link>
               <Link to="/queue" className="nav-link">現場排隊</Link>
+              <Link to="/queue-progress" className="nav-link">排隊進度</Link>
               <Link to="/reservation" className="nav-link">線上預約</Link>
               <Link to="/worktime" className="nav-link">工作時間設定</Link>
               <Link to="/reports" className="nav-link">報表統計</Link>
@@ -91,6 +93,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/queue" element={<Queue />} />
+            <Route path="/queue-progress" element={<QueueProgress />} />
             <Route path="/reservation" element={<Reservation />} />
             <Route path="/worktime" element={<Worktime />} />
             <Route path="/reports" element={<Reports />} />
