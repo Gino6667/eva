@@ -62,12 +62,8 @@ function Queue() {
         return;
       }
     }
-    if (step === 2 && !selectedDesigner) {
-      setMsg('請選擇設計師');
-      return;
-    }
-    if (step === 3 && !selectedService) {
-      setMsg('請選擇服務項目');
+    if (step === 2 && (!selectedDesigner || !selectedService)) {
+      setMsg('請選擇設計師和服務項目');
       return;
     }
     setMsg('');
@@ -93,7 +89,7 @@ function Queue() {
         guestPhone: !isMember && guestPhone ? guestPhone : undefined
       });
       setQueueResult(res.data);
-      setStep(4);
+      setStep(3);
     } catch (err) {
       setMsg(err.response?.data?.error || '排隊失敗');
     } finally {
@@ -184,37 +180,43 @@ function Queue() {
       )}
       {step === 2 && (
         <div className="queue-step">
-          <h3>步驟2：選擇設計師</h3>
-          <select value={selectedDesigner} onChange={e => setSelectedDesigner(e.target.value)}>
-            <option value="">請選擇設計師</option>
-            {designers.map(d => (
-              <option key={d.id} value={d.id}>{d.name}</option>
-            ))}
-          </select>
+          <h3>步驟2：選擇設計師和服務項目</h3>
+          <div style={{marginBottom: '1em'}}>
+            <label style={{display: 'block', marginBottom: '0.5em', fontWeight: 'bold'}}>設計師：</label>
+            <select 
+              value={selectedDesigner} 
+              onChange={e => setSelectedDesigner(e.target.value)}
+              style={{width: '100%', padding: '8px', marginBottom: '1em'}}
+            >
+              <option value="">請選擇設計師</option>
+              {designers.map(d => (
+                <option key={d.id} value={d.id}>{d.name}</option>
+              ))}
+            </select>
+          </div>
+          <div style={{marginBottom: '1em'}}>
+            <label style={{display: 'block', marginBottom: '0.5em', fontWeight: 'bold'}}>服務項目：</label>
+            <select 
+              value={selectedService} 
+              onChange={e => setSelectedService(e.target.value)}
+              style={{width: '100%', padding: '8px'}}
+            >
+              <option value="">請選擇服務項目</option>
+              {services.map(s => (
+                <option key={s.id} value={s.id}>{s.name} - ${s.price}</option>
+              ))}
+            </select>
+          </div>
           <div style={{marginTop: '1em'}}>
             <button className="btn btn-secondary" onClick={handlePrev}>上一步</button>
-            <button className="btn btn-primary" onClick={handleNext} style={{marginLeft: '1em'}}>下一步</button>
+            <button className="btn btn-primary" onClick={handleQueue} style={{marginLeft: '1em'}} disabled={loading}>
+              {loading ? '送出中...' : '送出排隊'}
+            </button>
           </div>
           {msg && <div className="error-message">{msg}</div>}
         </div>
       )}
-      {step === 3 && (
-        <div className="queue-step">
-          <h3>步驟3：選擇服務項目</h3>
-          <select value={selectedService} onChange={e => setSelectedService(e.target.value)}>
-            <option value="">請選擇服務項目</option>
-            {services.map(s => (
-              <option key={s.id} value={s.id}>{s.name} - ${s.price}</option>
-            ))}
-          </select>
-          <div style={{marginTop: '1em'}}>
-            <button className="btn btn-secondary" onClick={handlePrev}>上一步</button>
-            <button className="btn btn-primary" onClick={handleQueue} style={{marginLeft: '1em'}} disabled={loading}>{loading ? '送出中...' : '送出排隊'}</button>
-          </div>
-          {msg && <div className="error-message">{msg}</div>}
-        </div>
-      )}
-      {step === 4 && queueResult && (
+      {step === 3 && queueResult && (
         <div className="queue-step">
           <h3>排隊成功！</h3>
           <p>您的號碼牌：<span style={{fontWeight: 'bold', fontSize: '1.5em'}}>{queueResult.number}</span></p>
