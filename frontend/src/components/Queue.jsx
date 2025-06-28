@@ -16,6 +16,9 @@ function Queue() {
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [queueResult, setQueueResult] = useState(null);
+  const [showDesignerModal, setShowDesignerModal] = useState(false);
+  const [showServiceModal, setShowServiceModal] = useState(false);
+  const [countdown, setCountdown] = useState(10);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,11 +81,48 @@ function Queue() {
         userId
       });
       setQueueResult(res.data);
+      
+      // 10秒後自動返回現場排隊頁面
+      setCountdown(10);
+      const timer = setInterval(() => {
+        setCountdown(prev => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setQueueResult(null);
+            setSelectedDesigner('');
+            setSelectedService('');
+            setIsMember(null);
+            setMsg('');
+            return 10;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     } catch (err) {
       setMsg(err.response?.data?.error || '排隊失敗');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDesignerSelect = (designerId) => {
+    setSelectedDesigner(designerId);
+    setShowDesignerModal(false);
+  };
+
+  const handleServiceSelect = (serviceId) => {
+    setSelectedService(serviceId);
+    setShowServiceModal(false);
+  };
+
+  const getSelectedDesignerName = () => {
+    const designer = designers.find(d => d.id === selectedDesigner);
+    return designer ? designer.name : '';
+  };
+
+  const getSelectedServiceName = () => {
+    const service = services.find(s => s.id === selectedService);
+    return service ? `${service.name} - $${service.price}` : '';
   };
 
   if (queueResult) {
@@ -96,7 +136,10 @@ function Queue() {
           <h3>排隊成功！</h3>
           <p>您的號碼牌：<span style={{fontWeight: 'bold', fontSize: '1.5em'}}>{queueResult.number}</span></p>
           <p>請留意現場叫號或手機通知。</p>
-          <Link to="/" className="btn btn-primary">回首頁</Link>
+          <p style={{color: '#666', fontSize: '0.9em', marginTop: '1em'}}>
+            {countdown} 秒後自動返回現場排隊頁面
+          </p>
+          <Link to="/" className="btn btn-primary" style={{marginTop: '1em'}}>回首頁</Link>
         </div>
       </div>
     );
@@ -132,30 +175,38 @@ function Queue() {
 
         <h3 style={{marginTop: '2em'}}>步驟2：選擇設計師</h3>
         <div style={{marginBottom: '1em'}}>
-          <select 
-            value={selectedDesigner} 
-            onChange={e => setSelectedDesigner(e.target.value)}
-            style={{width: '100%', padding: '8px'}}
+          <button 
+            className="btn btn-outline" 
+            onClick={() => setShowDesignerModal(true)}
+            style={{
+              width: '100%', 
+              padding: '12px', 
+              textAlign: 'left',
+              background: selectedDesigner ? '#f8f9fa' : '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '4px'
+            }}
           >
-            <option value="">請選擇設計師</option>
-            {designers.map(d => (
-              <option key={d.id} value={d.id}>{d.name}</option>
-            ))}
-          </select>
+            {selectedDesigner ? getSelectedDesignerName() : '請選擇設計師'}
+          </button>
         </div>
 
         <h3 style={{marginTop: '2em'}}>步驟3：選擇服務項目</h3>
         <div style={{marginBottom: '1em'}}>
-          <select 
-            value={selectedService} 
-            onChange={e => setSelectedService(e.target.value)}
-            style={{width: '100%', padding: '8px'}}
+          <button 
+            className="btn btn-outline" 
+            onClick={() => setShowServiceModal(true)}
+            style={{
+              width: '100%', 
+              padding: '12px', 
+              textAlign: 'left',
+              background: selectedService ? '#f8f9fa' : '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '4px'
+            }}
           >
-            <option value="">請選擇服務項目</option>
-            {services.map(s => (
-              <option key={s.id} value={s.id}>{s.name} - ${s.price}</option>
-            ))}
-          </select>
+            {selectedService ? getSelectedServiceName() : '請選擇服務項目'}
+          </button>
         </div>
 
         <div style={{marginTop: '2em', textAlign: 'center'}}>
@@ -171,6 +222,52 @@ function Queue() {
 
         {msg && <div className="error-message" style={{marginTop: '1em', textAlign: 'center'}}>{msg}</div>}
       </div>
+
+      {/* 設計師選擇彈窗 */}
+      {showDesignerModal && (
+        <div className="modal-overlay" onClick={() => setShowDesignerModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>選擇設計師</h3>
+              <button className="modal-close" onClick={() => setShowDesignerModal(false)}>×</button>
+            </div>
+            <div className="modal-body">
+              {designers.map(designer => (
+                <button
+                  key={designer.id}
+                  className={`modal-option ${selectedDesigner === designer.id ? 'selected' : ''}`}
+                  onClick={() => handleDesignerSelect(designer.id)}
+                >
+                  {designer.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 服務項目選擇彈窗 */}
+      {showServiceModal && (
+        <div className="modal-overlay" onClick={() => setShowServiceModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>選擇服務項目</h3>
+              <button className="modal-close" onClick={() => setShowServiceModal(false)}>×</button>
+            </div>
+            <div className="modal-body">
+              {services.map(service => (
+                <button
+                  key={service.id}
+                  className={`modal-option ${selectedService === service.id ? 'selected' : ''}`}
+                  onClick={() => handleServiceSelect(service.id)}
+                >
+                  {service.name} - ${service.price}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

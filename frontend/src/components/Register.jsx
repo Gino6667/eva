@@ -56,8 +56,6 @@ function Register({ setUser }) {
   };
 
   const redirect = searchParams.get('redirect');
-  const redirectText = redirect === 'queue' ? '現場排隊' : 
-                      redirect === 'reservation' ? '線上預約' : '';
 
   return (
     <div className="auth-container">
@@ -97,22 +95,25 @@ function Register({ setUser }) {
               placeholder="請輸入密碼"
             />
           </div>
-          <button 
-            type="submit" 
-            className="btn btn-primary"
-            disabled={loading}
-          >
-            {loading ? '註冊中...' : '註冊'}
-          </button>
-          {redirect && (
+          <div className="button-group">
+            {redirect && (
+              <button 
+                type="button"
+                onClick={handleGoBack}
+                className="btn btn-secondary"
+                style={{marginRight: '1em'}}
+              >
+                返回
+              </button>
+            )}
             <button 
-              onClick={handleGoBack}
-              className="btn btn-secondary"
-              style={{marginLeft: '1em'}}
+              type="submit" 
+              className="btn btn-primary"
+              disabled={loading}
             >
-              ← 返回{redirectText}頁面
+              {loading ? '註冊中...' : '註冊'}
             </button>
-          )}
+          </div>
           {msg && (
             <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
               {msg}
@@ -124,4 +125,4 @@ function Register({ setUser }) {
   );
 }
 
-export default Register; 
+export default Register;

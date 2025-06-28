@@ -1711,16 +1711,21 @@ function getFavoriteDesigners(reservations, designers) {
 
 // === LINE 登入 callback API ===
 app.get('/api/line/callback', async (req, res) => {
+  console.log('LINE callback 收到請求:', req.query);
+  
   const { code, state } = req.query;
   const client_id = 'l2007657170';
   const client_secret = '59ce418bc196c809a6f0064ebc895062';
   const redirect_uri = 'https://eva-36bg.onrender.com/api/line/callback';
 
   if (!code) {
+    console.error('缺少授權碼');
     return res.status(400).json({ error: '缺少授權碼' });
   }
 
   try {
+    console.log('開始與 LINE 交換 access token');
+    
     // 跟 LINE 交換 access token
     const tokenRes = await axios.post('https://api.line.me/oauth2/v2.1/token', null, {
       params: {
@@ -1734,6 +1739,7 @@ app.get('/api/line/callback', async (req, res) => {
     });
 
     const access_token = tokenRes.data.access_token;
+    console.log('成功取得 access token');
 
     // 取得用戶資料
     const profileRes = await axios.get('https://api.line.me/v2/profile', {
@@ -1741,6 +1747,7 @@ app.get('/api/line/callback', async (req, res) => {
     });
 
     const lineProfile = profileRes.data;
+    console.log('成功取得用戶資料:', lineProfile.userId);
     
     // 檢查用戶是否已存在
     const data = getData();
@@ -1761,6 +1768,9 @@ app.get('/api/line/callback', async (req, res) => {
       };
       data.users.push(user);
       saveData(data);
+      console.log('建立新用戶:', user.id);
+    } else {
+      console.log('找到現有用戶:', user.id);
     }
 
     // 生成 JWT token
@@ -1778,10 +1788,11 @@ app.get('/api/line/callback', async (req, res) => {
       redirectUrl = `https://gino6667.github.io/eva/login?token=${token}&success=true&redirect=reservation`;
     }
 
+    console.log('重定向到:', redirectUrl);
     // 重導向到前端並帶上 token
     res.redirect(redirectUrl);
   } catch (err) {
-    console.error('LINE 登入錯誤:', err);
+    console.error('LINE 登入錯誤:', err.response?.data || err.message);
     res.redirect(`https://gino6667.github.io/eva/login?error=line_login_failed`);
   }
 });
