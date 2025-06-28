@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #f7ab5e;
   background-color: #333d38;
 
   font-synthesis: none;
@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #f7ab5e;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #f7ab5e;
 }
 
 body, html {
@@ -28,13 +28,13 @@ body, html {
   padding: 0;
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
   background: #333d38 !important;
-  color: #fff;
+  color: #f7ab5e;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
   font-weight: bold;
-  color: #fff;
+  color: #f7ab5e;
 }
 
 button {
@@ -47,9 +47,10 @@ button {
   background-color: #333d38;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: #f7ab5e;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #f7ab5e;
 }
 button:focus,
 button:focus-visible {
@@ -58,21 +59,22 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #f7ab5e;
     background-color: #333d38;
   }
   a:hover {
-    color: #747bff;
+    color: #f7ab5e;
   }
   button {
     background-color: #333d38;
+    color: #f7ab5e;
   }
 }
 
 /* 統一卡片樣式 */
 .card, .auth-card, .admin-container, .feature-card, .modal-content, .admin-form, .admin-table, .stats-grid, .stat-card {
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 2rem;
@@ -94,15 +96,16 @@ button:focus-visible {
 }
 .btn-primary, .admin-btn-primary {
   background: #ff6b6b;
-  color: #fff;
+  color: #f7ab5e;
 }
 .btn-primary:hover, .admin-btn-primary:hover {
   background: #ff5252;
+  color: #f7ab5e;
 }
 .btn-secondary, .admin-btn-secondary {
   background: #333d38;
-  color: #fff;
-  border: 2px solid #fff;
+  color: #f7ab5e;
+  border: 2px solid #f7ab5e;
 }
 .btn-secondary:hover, .admin-btn-secondary:hover {
   background: #ffe082;
@@ -119,11 +122,11 @@ input, select, textarea {
   width: 100%;
   box-sizing: border-box;
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
 }
 input:focus, select:focus, textarea:focus {
-  outline: 2px solid #667eea;
-  border-color: #667eea;
+  outline: 2px solid #f7ab5e;
+  border-color: #f7ab5e;
 }
 
 /* 統一表格樣式 */
@@ -138,11 +141,11 @@ table {
 th, td {
   padding: 1rem;
   border-bottom: 1px solid #e9ecef;
-  color: #fff;
+  color: #f7ab5e;
 }
 th {
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   font-weight: 600;
 }
 tr:last-child td {

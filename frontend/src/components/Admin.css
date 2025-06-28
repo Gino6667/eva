@@ -118,7 +118,7 @@
 .admin-container {
   min-height: 100vh;
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   padding: 20px;
 }
 
@@ -126,7 +126,7 @@
   text-align: center;
   margin-bottom: 2rem;
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   padding: 1rem;
   border-radius: 12px;
 }
@@ -151,8 +151,8 @@
 
 .admin-nav button {
   background: #333d38;
-  color: #fff;
-  border: 1px solid #fff;
+  color: #f7ab5e;
+  border: 1px solid #f7ab5e;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -161,7 +161,7 @@
 
 .admin-nav button.active {
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   border-color: #007bff;
 }
 
@@ -170,7 +170,7 @@
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  color: #fff;
+  color: #f7ab5e;
 }
 
 .admin-card {

@@ -2,20 +2,20 @@
   background: #333d38;
   min-height: 100vh;
   padding: 20px;
-  color: #fff;
+  color: #f7ab5e;
 }
 
 .home {
   min-height: 100vh;
   background: #333d38;
-  color: white;
+  color: #f7ab5e;
 }
 
 .hero {
   text-align: center;
   padding: 80px 20px;
   background: rgba(0, 0, 0, 0.1);
-  color: white;
+  color: #f7ab5e;
   border-radius: 0;
   box-shadow: none;
   max-width: none;
@@ -27,7 +27,7 @@
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #fff;
+  color: #f7ab5e;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -35,7 +35,7 @@
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
-  color: #fff;
+  color: #f7ab5e;
   font-weight: 500;
   animation: fadeInUp 1s ease-out 0.2s both;
 }
@@ -43,7 +43,7 @@
 .hero-subtitle.highlight {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #ffe082;
+  color: #f7ab5e;
   text-shadow: 0 2px 8px rgba(0,0,0,0.10);
   letter-spacing: 1px;
   margin-bottom: 2.2rem;
@@ -53,7 +53,7 @@
 .highlight {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #ffe082;
+  color: #f7ab5e;
   text-shadow: 0 2px 8px rgba(0,0,0,0.10);
   letter-spacing: 1px;
   margin-bottom: 2.2rem;

@@ -2,7 +2,7 @@
 body, html {
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   margin: 0;
   padding: 0;
 }
@@ -15,7 +15,7 @@ body, html {
 
 .header {
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   padding: 0 0 0 0;
   display: flex;
   flex-direction: column;
@@ -26,6 +26,7 @@ body, html {
   padding: 16px 0 0 0;
   font-size: 2rem;
   letter-spacing: 2px;
+  color: #f7ab5e;
 }
 .header nav {
   display: flex;
@@ -34,7 +35,7 @@ body, html {
   margin: 12px 0 0 0;
 }
 .header nav a, .header nav button.btn {
-  color: #fff;
+  color: #f7ab5e;
   background: #007bff;
   border: none;
   border-radius: 4px;
@@ -46,6 +47,7 @@ body, html {
 }
 .header nav a:hover, .header nav button.btn:hover {
   background: #0056b3;
+  color: #f7ab5e;
 }
 
 .main {
@@ -60,7 +62,7 @@ body, html {
 
 .footer {
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   text-align: center;
   padding: 12px 0;
   font-size: 0.95rem;
@@ -74,9 +76,10 @@ body, html {
 .home .hero h1 {
   font-size: 2.2rem;
   margin-bottom: 8px;
+  color: #f7ab5e;
 }
 .home .hero p {
-  color: #ccc;
+  color: #f7ab5e;
   font-size: 1.1rem;
 }
 .features {
@@ -98,16 +101,17 @@ body, html {
   align-items: center;
   text-align: center;
   transition: box-shadow 0.2s;
+  color: #f7ab5e;
 }
 .feature-card:hover {
   box-shadow: 0 4px 16px rgba(0,123,255,0.12);
 }
 .feature-card h3 {
   margin: 0 0 8px 0;
-  color: #007bff;
+  color: #f7ab5e;
 }
 .feature-card p {
-  color: #ccc;
+  color: #f7ab5e;
   margin-bottom: 16px;
 }
 .feature-card .btn {
@@ -117,7 +121,7 @@ body, html {
 /* 按鈕統一樣式 */
 .btn {
   background: #007bff;
-  color: #fff;
+  color: #f7ab5e;
   border: none;
   border-radius: 4px;
   padding: 8px 16px;
@@ -128,10 +132,12 @@ body, html {
 }
 .btn:hover {
   background: #0056b3;
+  color: #f7ab5e;
 }
 .btn:disabled {
   background: #b0c4de;
   cursor: not-allowed;
+  color: #f7ab5e;
 }
 
 /* 表單統一樣式 */
@@ -144,11 +150,11 @@ input, select, textarea {
   width: 100%;
   box-sizing: border-box;
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
 }
 input:focus, select:focus, textarea:focus {
-  outline: 2px solid #007bff;
-  border-color: #007bff;
+  outline: 2px solid #f7ab5e;
+  border-color: #f7ab5e;
 }
 
 form {
@@ -169,11 +175,11 @@ th, td {
   padding: 10px 8px;
   border-bottom: 1px solid #f0f0f0;
   text-align: left;
-  color: #fff;
+  color: #f7ab5e;
 }
 th {
   background: #333d38;
-  color: #fff;
+  color: #f7ab5e;
   font-weight: 600;
 }
 tr:last-child td {
@@ -197,7 +203,7 @@ tr:last-child td {
   min-width: 320px;
   max-width: 90vw;
   box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-  color: #fff;
+  color: #f7ab5e;
 }
 
 /* loading/訊息提示 */

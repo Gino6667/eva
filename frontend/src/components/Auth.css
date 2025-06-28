@@ -67,13 +67,15 @@
   padding: 2rem;
   width: 100%;
   max-width: 400px;
-  color: #fff;
+  color: #f7ab5e;
 }
 
 .auth-card.login {
   background: #333d38;
+  color: #f7ab5e;
 }
 
 .auth-card.register {
   background: #333d38;
+  color: #f7ab5e;
 } 
