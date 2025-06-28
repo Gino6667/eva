@@ -70,7 +70,17 @@ jobs:
 
       - name: Trigger Render deployment
         run: |
+          echo "觸發 Render 重新部署..."
           # 如果有 Render webhook，可以觸發重新部署
           if [ -n "${{ secrets.RENDER_WEBHOOK_URL }}" ]; then
             curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
-          fi 
+            echo "已觸發 Render webhook"
+          else
+            echo "沒有設定 RENDER_WEBHOOK_URL，請手動觸發 Render 重新部署"
+            echo "請到 Render 後台點擊 'Manual Deploy' 或 'Redeploy'"
+          fi
+          
+          # 等待一下讓部署開始
+          sleep 10
+          
+          echo "部署觸發完成，請等待 2-3 分鐘讓 Render 完成部署" 
