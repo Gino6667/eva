@@ -389,4 +389,14 @@
   border: 2px solid #f7ab5e !important;
   border-radius: 12px !important;
   box-shadow: none !important;
+}
+
+.serving-card {
+  background: #333d38;
+  border-radius: 8px;
+  padding: 2rem;
+  border: 0.67px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 } 
