@@ -1770,7 +1770,6 @@ function getFavoriteDesigners(reservations, designers) {
 }
 
 // === LINE 登入 callback API ===
-const axios = require('axios');
 
 app.get('/api/line/callback', async (req, res) => {
   const { code } = req.query;
@@ -1805,19 +1804,9 @@ app.get('/api/line/callback', async (req, res) => {
       headers: { Authorization: `Bearer ${access_token}` }
     });
 
-    const userProfile = profileRes.data;
-    console.log('✅ 使用者資料：', userProfile);
+    const lineProfile = profileRes.data;
+    console.log('✅ 使用者資料：', lineProfile);
 
-    // 可導向到前端或顯示歡迎畫面
-    return res.send(`<h2>歡迎回來，${userProfile.displayName}</h2>`);
-
-  } catch (err) {
-    console.error('❌ 處理錯誤：', err.response?.data || err.message);
-    return res.status(500).send('LINE 登入流程失敗');
-  }
-});
-
-    
     // 檢查用戶是否已存在
     const data = getData();
     let user = data.users.find(u => u.lineId === lineProfile.userId);
