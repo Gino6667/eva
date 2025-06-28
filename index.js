@@ -68,37 +68,6 @@ function isWithin3Months(dateString) {
   return dt >= threeMonthsAgo && dt <= now
 }
 
-// 確保管理員帳號存在
-function ensureAdminAccount() {
-  try {
-    const data = getData();
-    const adminExists = data.users.find(u => u.phone === 'rowyha' && u.role === 'admin');
-    
-    if (!adminExists) {
-      console.log('管理員帳號不存在，正在添加...');
-      const newId = data.users.length ? Math.max(...data.users.map(u => u.id)) + 1 : 1;
-      const adminUser = {
-        id: newId,
-        email: 'admin@eva.com',
-        phone: 'rowyha',
-        password: '789raa',
-        name: '系統管理員',
-        role: 'admin'
-      };
-      data.users.push(adminUser);
-      saveData(data);
-      console.log('管理員帳號已添加');
-    } else {
-      console.log('管理員帳號已存在');
-    }
-  } catch (err) {
-    console.error('檢查管理員帳號時發生錯誤:', err);
-  }
-}
-
-// 啟動時檢查管理員帳號
-ensureAdminAccount();
-
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
