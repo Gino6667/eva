@@ -97,11 +97,11 @@
 }
 
 .features {
-  padding: 60px 20px;
+  padding: 60px 20px 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -109,11 +109,16 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1.2rem 1rem;
   text-align: center;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   animation: fadeInUp 0.8s ease-out;
+  cursor: pointer;
+  min-width: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
 }
 
 .feature-card.primary {
@@ -121,49 +126,46 @@
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.feature-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.feature-card:hover, .feature-card:focus {
+  transform: translateY(-8px) scale(1.04);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #ff6b6b;
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+  outline: none;
 }
 
-.feature-card.primary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+.feature-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
 }
 
 .feature-icon {
-  font-size: 3rem;
+  font-size: 2.2rem;
   margin-bottom: 1rem;
   display: block;
 }
 
 .feature-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
   font-weight: bold;
+  color: #2196f3;
 }
 
 .feature-card p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   opacity: 0.9;
-  line-height: 1.6;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
 
+/* 移除卡片內按鈕樣式 */
 .feature-card .btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 10px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.feature-card .btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  display: none;
 }
 
 /* 管理員入口 */
@@ -255,11 +257,12 @@
   
   .features {
     grid-template-columns: 1fr;
-    padding: 40px 20px;
+    max-width: 95vw;
+    padding: 30px 10px 0 10px;
   }
   
-  .feature-card {
-    padding: 1.5rem;
+  .feature-link {
+    min-height: 160px;
   }
   
   .admin-section {

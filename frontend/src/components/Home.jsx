@@ -35,36 +35,22 @@ function Home() {
 
   return (
     <div className="home">
-      <div className="hero">
-        <h1 className="hero-title">歡迎來到美髮沙龍</h1>
-        <p className="hero-subtitle highlight">專業的髮型設計，讓您展現最美的一面</p>
-        <div className="hero-buttons">
-          <Link to="/queue" className="btn btn-primary">現場排隊</Link>
-          <Link to="/reservation" className="btn btn-secondary">線上預約</Link>
-        </div>
-      </div>
-      
       <div className="features">
-        <div className="feature-card primary">
+        <Link to="/queue" className="feature-card primary feature-link">
           <div className="feature-icon">🎯</div>
           <h3>現場排隊</h3>
           <p>即時查看排隊狀況，快速抽號服務</p>
-          <Link to="/queue" className="btn btn-primary">立即排隊</Link>
-        </div>
-        
-        <div className="feature-card primary">
+        </Link>
+        <Link to="/reservation" className="feature-card primary feature-link">
           <div className="feature-icon">📅</div>
           <h3>線上預約</h3>
           <p>提前預約指定設計師，享受專屬服務</p>
-          <Link to="/reservation" className="btn btn-primary">立即預約</Link>
-        </div>
-        
-        <div className="feature-card primary">
+        </Link>
+        <Link to="/queue-progress" className="feature-card primary feature-link">
           <div className="feature-icon">🔍</div>
           <h3>排隊查詢</h3>
           <p>查詢您的排隊進度，掌握等待時間</p>
-          <Link to="/queue-progress" className="btn btn-primary">查詢進度</Link>
-        </div>
+        </Link>
       </div>
 
       {/* 管理員入口 */}
