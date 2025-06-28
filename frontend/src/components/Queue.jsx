@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Queue.css';
 
 function Queue() {
-  const [step, setStep] = useState(1);
   const [isMember, setIsMember] = useState(null);
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem('token');
@@ -49,30 +48,24 @@ function Queue() {
     }
   };
 
-  const handleNext = () => {
-    if (step === 1) {
-      if (isMember === null) {
-        setMsg('請選擇訪客或會員');
-        return;
-      }
-      if (isMember && !user) {
-        setMsg('請先登入會員');
-        return;
-      }
-    }
-    if (step === 2 && (!selectedDesigner || !selectedService)) {
-      setMsg('請選擇設計師和服務項目');
+  const handleQueue = async () => {
+    if (isMember === null) {
+      setMsg('請選擇訪客或會員');
       return;
     }
-    setMsg('');
-    setStep(step + 1);
-  };
+    if (isMember && !user) {
+      setMsg('請先登入會員');
+      return;
+    }
+    if (!selectedDesigner) {
+      setMsg('請選擇設計師');
+      return;
+    }
+    if (!selectedService) {
+      setMsg('請選擇服務項目');
+      return;
+    }
 
-  const handlePrev = () => {
-    setStep(step - 1);
-  };
-
-  const handleQueue = async () => {
     setLoading(true);
     setMsg('');
     try {
@@ -85,7 +78,6 @@ function Queue() {
         userId
       });
       setQueueResult(res.data);
-      setStep(3);
     } catch (err) {
       setMsg(err.response?.data?.error || '排隊失敗');
     } finally {
@@ -93,120 +85,92 @@ function Queue() {
     }
   };
 
-  const handleLineLogin = () => {
-    const lineLoginUrl = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=l2007657170&redirect_uri=https://eva-36bg.onrender.com/api/line/callback&state=eva_login_queue&scope=profile%20openid%20email`;
-    window.location.href = lineLoginUrl;
-  };
-
-  return (
-    <div className="queue-container">
-      <div className="queue-header">
-        <h2>現場排隊</h2>
-        <p>依步驟完成現場排隊登記</p>
-      </div>
-      {step === 1 && (
-        <div className="queue-step">
-          <h3>步驟1：選擇訪客或會員</h3>
-          <div style={{marginBottom: '1em'}}>
-            <button className={`btn ${isMember === false ? 'btn-primary' : ''}`} onClick={() => setIsMember(false)}>訪客</button>
-            <button className={`btn ${isMember === true ? 'btn-primary' : ''}`} onClick={handleMemberSelect} style={{marginLeft: '1em'}}>會員</button>
-          </div>
-          {isMember === false && (
-            <div style={{marginBottom: '1em'}}>
-              <p style={{color: '#666', fontSize: '0.9em', marginBottom: '0.5em'}}>
-                訪客排隊無需輸入個人資料
-              </p>
-            </div>
-          )}
-          {isMember === true && !user && (
-            <div style={{marginBottom: '1em'}}>
-              <p>請選擇登入方式：</p>
-              <div style={{marginBottom: '1em'}}>
-                <button 
-                  className="btn btn-line" 
-                  onClick={handleLineLogin}
-                  style={{
-                    background: '#06C755', 
-                    color: '#fff', 
-                    padding: '10px 20px', 
-                    borderRadius: '4px', 
-                    border: 'none',
-                    fontWeight: 'bold',
-                    marginRight: '1em'
-                  }}
-                >
-                  LINE 登入
-                </button>
-                <Link to="/login" className="btn btn-secondary">一般登入</Link>
-              </div>
-              <div style={{marginTop: '1em', padding: '1em', background: '#f5f5f5', borderRadius: '4px'}}>
-                <h4 style={{margin: '0 0 0.5em 0', color: '#333'}}>LINE 登入說明：</h4>
-                <ol style={{margin: '0', paddingLeft: '1.5em', color: '#666'}}>
-                  <li>點擊「LINE 登入」按鈕</li>
-                  <li>使用 LINE App 掃描 QR Code</li>
-                  <li>授權登入後自動返回</li>
-                  <li>完成會員身份驗證</li>
-                </ol>
-              </div>
-            </div>
-          )}
-          {isMember === true && user && (
-            <div style={{marginBottom: '1em', padding: '1em', background: '#e8f5e8', borderRadius: '4px'}}>
-              <p style={{margin: '0', color: '#2d5a2d'}}>
-                ✓ 已登入會員：{user.name}
-              </p>
-            </div>
-          )}
-          <button className="btn btn-primary" onClick={handleNext}>下一步</button>
-          {msg && <div className="error-message">{msg}</div>}
+  if (queueResult) {
+    return (
+      <div className="queue-container">
+        <div className="queue-header">
+          <h2>現場排隊</h2>
+          <p>排隊成功！</p>
         </div>
-      )}
-      {step === 2 && (
-        <div className="queue-step">
-          <h3>步驟2：選擇設計師和服務項目</h3>
-          <div style={{marginBottom: '1em'}}>
-            <label style={{display: 'block', marginBottom: '0.5em', fontWeight: 'bold'}}>設計師：</label>
-            <select 
-              value={selectedDesigner} 
-              onChange={e => setSelectedDesigner(e.target.value)}
-              style={{width: '100%', padding: '8px', marginBottom: '1em'}}
-            >
-              <option value="">請選擇設計師</option>
-              {designers.map(d => (
-                <option key={d.id} value={d.id}>{d.name}</option>
-              ))}
-            </select>
-          </div>
-          <div style={{marginBottom: '1em'}}>
-            <label style={{display: 'block', marginBottom: '0.5em', fontWeight: 'bold'}}>服務項目：</label>
-            <select 
-              value={selectedService} 
-              onChange={e => setSelectedService(e.target.value)}
-              style={{width: '100%', padding: '8px'}}
-            >
-              <option value="">請選擇服務項目</option>
-              {services.map(s => (
-                <option key={s.id} value={s.id}>{s.name} - ${s.price}</option>
-              ))}
-            </select>
-          </div>
-          <div style={{marginTop: '1em'}}>
-            <button className="btn btn-secondary" onClick={handlePrev}>上一步</button>
-            <button className="btn btn-primary" onClick={handleQueue} style={{marginLeft: '1em'}} disabled={loading}>
-              {loading ? '送出中...' : '送出排隊'}
-            </button>
-          </div>
-          {msg && <div className="error-message">{msg}</div>}
-        </div>
-      )}
-      {step === 3 && queueResult && (
         <div className="queue-step">
           <h3>排隊成功！</h3>
           <p>您的號碼牌：<span style={{fontWeight: 'bold', fontSize: '1.5em'}}>{queueResult.number}</span></p>
           <p>請留意現場叫號或手機通知。</p>
           <Link to="/" className="btn btn-primary">回首頁</Link>
         </div>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="queue-container">
+      <div className="queue-header">
+        <h2>現場排隊</h2>
+        <p>完成以下步驟即可現場排隊</p>
+      </div>
+
+      <div className="queue-step">
+        <h3>步驟1：選擇訪客或會員</h3>
+        <div style={{marginBottom: '1em'}}>
+          <button className={`btn ${isMember === false ? 'btn-primary' : ''}`} onClick={() => setIsMember(false)}>訪客</button>
+          <button className={`btn ${isMember === true ? 'btn-primary' : ''}`} onClick={handleMemberSelect} style={{marginLeft: '1em'}}>會員</button>
+        </div>
+        {isMember === false && (
+          <div style={{marginBottom: '1em'}}>
+            <p style={{color: '#666', fontSize: '0.9em', marginBottom: '0.5em'}}>
+              訪客排隊無需輸入個人資料
+            </p>
+          </div>
+        )}
+        {isMember === true && user && (
+          <div style={{marginBottom: '1em', padding: '1em', background: '#e8f5e8', borderRadius: '4px'}}>
+            <p style={{margin: '0', color: '#2d5a2d'}}>
+              ✓ 已登入會員：{user.name}
+            </p>
+          </div>
+        )}
+
+        <h3 style={{marginTop: '2em'}}>步驟2：選擇設計師</h3>
+        <div style={{marginBottom: '1em'}}>
+          <select 
+            value={selectedDesigner} 
+            onChange={e => setSelectedDesigner(e.target.value)}
+            style={{width: '100%', padding: '8px'}}
+          >
+            <option value="">請選擇設計師</option>
+            {designers.map(d => (
+              <option key={d.id} value={d.id}>{d.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <h3 style={{marginTop: '2em'}}>步驟3：選擇服務項目</h3>
+        <div style={{marginBottom: '1em'}}>
+          <select 
+            value={selectedService} 
+            onChange={e => setSelectedService(e.target.value)}
+            style={{width: '100%', padding: '8px'}}
+          >
+            <option value="">請選擇服務項目</option>
+            {services.map(s => (
+              <option key={s.id} value={s.id}>{s.name} - ${s.price}</option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{marginTop: '2em', textAlign: 'center'}}>
+          <button 
+            className="btn btn-primary" 
+            onClick={handleQueue} 
+            disabled={loading}
+            style={{fontSize: '1.1em', padding: '12px 24px'}}
+          >
+            {loading ? '送出中...' : '送出排隊'}
+          </button>
+        </div>
+
+        {msg && <div className="error-message" style={{marginTop: '1em', textAlign: 'center'}}>{msg}</div>}
+      </div>
     </div>
   );
 }
