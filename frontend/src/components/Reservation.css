@@ -198,7 +198,9 @@
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 2cm;
+  gap: 1cm;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-option {
@@ -208,7 +210,7 @@
   background: #f8f9fa;
   border: 2px solid #e9ecef;
   border-radius: 999px !important;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1.1rem;
@@ -258,14 +260,14 @@
 @media (max-width: 1200px) {
   .modal-body {
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5cm;
+    gap: 0.8cm;
   }
 }
 
 @media (max-width: 992px) {
   .modal-body {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1cm;
+    gap: 0.6cm;
   }
 }
 
@@ -300,13 +302,13 @@
   
   .modal-body {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.8cm;
+    gap: 0.5cm;
   }
 }
 
 @media (max-width: 480px) {
   .modal-body {
     grid-template-columns: 1fr;
-    gap: 0.5cm;
+    gap: 0.4cm;
   }
 } 
