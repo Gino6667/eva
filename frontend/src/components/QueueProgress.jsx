@@ -16,18 +16,21 @@ function QueueProgress() {
   });
   const [designers, setDesigners] = useState([]);
   const [currentServing, setCurrentServing] = useState([]);
+  const [nextInQueue, setNextInQueue] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
   useEffect(() => {
     loadTodayStats();
     loadDesigners();
     loadCurrentServing();
+    loadNextInQueue();
     if (user) {
       loadUserQueue();
     }
     // 每分鐘自動更新服務狀態
     const interval = setInterval(() => {
       loadCurrentServing();
+      loadNextInQueue();
     }, 60000);
     return () => clearInterval(interval);
   }, [user, date]);
@@ -57,6 +60,16 @@ function QueueProgress() {
       setLastUpdate(new Date());
     } catch (err) {
       console.error('載入當前服務狀態失敗:', err);
+    }
+  };
+
+  const loadNextInQueue = async () => {
+    try {
+      const res = await axios.get('/api/queue/next-in-queue');
+      setNextInQueue(res.data || []);
+    } catch (err) {
+      console.error('載入下一位客人資訊失敗:', err);
+      setNextInQueue([]);
     }
   };
 
@@ -130,7 +143,7 @@ function QueueProgress() {
   return (
     <div className="queue-progress-container">
       <div className="queue-progress-card">
-        <h2>排隊進度查詢</h2>
+        <h2>即時看板</h2>
         {/* 會員今日抽號自動顯示 */}
         {user && userQueue.length > 0 && (
           <div className="user-queue-list">
@@ -168,6 +181,7 @@ function QueueProgress() {
         <div className="serving-grid">
           {designers.filter(designer => designer.name !== '不指定').map(designer => {
             const serving = currentServing.find(s => s.designerId === designer.id);
+            const next = nextInQueue.find(n => n.designerId === designer.id);
             return (
               <div key={designer.id} className={`serving-card ${serving ? 'serving' : 'idle'}`}>
                 <div className="designer-name">{designer.name}</div>
@@ -175,13 +189,32 @@ function QueueProgress() {
                   {serving ? (
                     <>
                       <div className="status-badge serving">服務中</div>
-                      <div className="current-number">#{serving.number}</div>
-                      <div className="service-name">{serving.serviceName}</div>
+                      <div className="current-customer">
+                        <div className="customer-label">正在服務：</div>
+                        <div className="current-number">#{serving.number}</div>
+                        <div className="service-name">{serving.serviceName}</div>
+                      </div>
+                      {next && (
+                        <div className="next-customer">
+                          <div className="customer-label">下一位：</div>
+                          <div className="next-number">#{next.number}</div>
+                          <div className="service-name">{next.serviceName}</div>
+                        </div>
+                      )}
                     </>
                   ) : (
                     <>
                       <div className="status-badge idle">待機中</div>
-                      <div className="idle-text">等待下一位客人</div>
+                      {next && (
+                        <div className="next-customer">
+                          <div className="customer-label">下一位：</div>
+                          <div className="next-number">#{next.number}</div>
+                          <div className="service-name">{next.serviceName}</div>
+                        </div>
+                      )}
+                      {!next && (
+                        <div className="idle-text">等待下一位客人</div>
+                      )}
                     </>
                   )}
                 </div>

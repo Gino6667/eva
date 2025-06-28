@@ -399,4 +399,45 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+}
+
+.current-customer, .next-customer {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border-left: 3px solid #f7ab5e;
+}
+
+.customer-label {
+  font-size: 0.85rem;
+  color: #f7ab5e;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.current-number, .next-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.service-name {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 0.25rem;
+}
+
+.next-customer {
+  margin-top: 0.75rem;
+  border-left-color: #2196f3;
+}
+
+.next-customer .customer-label {
+  color: #2196f3;
+}
+
+.next-customer .next-number {
+  color: #2196f3;
 } 
