@@ -13,7 +13,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-const DATA_PATH = path.join(__dirname, 'data.sample.json');
+const DATA_PATH = path.join(__dirname, 'data.json');
 const git = simpleGit();
 const JWT_SECRET = 'your_jwt_secret_key'; // 請改成安全的 key
 
@@ -26,14 +26,14 @@ function saveData(data) {
     pushToGitHub();
     return true;
   } catch (err) {
-    console.error('寫入 data.sample.json 失敗:', err);
+    console.error('寫入 data.json 失敗:', err);
     return false;
   }
 }
 
 async function pushToGitHub() {
   try {
-    await git.add('./data.sample.json');
+    await git.add('./data.json');
     await git.commit('Update data');
     await git.push('origin', 'main');
   } catch (err) {
@@ -58,6 +58,37 @@ function isWithin3Months(dateString) {
   const threeMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 3, now.getDate())
   return dt >= threeMonthsAgo && dt <= now
 }
+
+// 確保管理員帳號存在
+function ensureAdminAccount() {
+  try {
+    const data = getData();
+    const adminExists = data.users.find(u => u.phone === 'rowyha' && u.role === 'admin');
+    
+    if (!adminExists) {
+      console.log('管理員帳號不存在，正在添加...');
+      const newId = data.users.length ? Math.max(...data.users.map(u => u.id)) + 1 : 1;
+      const adminUser = {
+        id: newId,
+        email: 'admin@eva.com',
+        phone: 'rowyha',
+        password: '789raa',
+        name: '系統管理員',
+        role: 'admin'
+      };
+      data.users.push(adminUser);
+      saveData(data);
+      console.log('管理員帳號已添加');
+    } else {
+      console.log('管理員帳號已存在');
+    }
+  } catch (err) {
+    console.error('檢查管理員帳號時發生錯誤:', err);
+  }
+}
+
+// 啟動時檢查管理員帳號
+ensureAdminAccount();
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
