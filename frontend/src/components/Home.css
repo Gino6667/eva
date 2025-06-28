@@ -3,12 +3,18 @@
   min-height: 100vh;
   padding: 20px;
   color: #f7ab5e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home {
   min-height: 100vh;
   background: #333d38;
   color: #f7ab5e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero {
@@ -68,26 +74,7 @@
   animation: fadeInUp 1s ease-out 0.4s both;
 }
 
-.btn-primary {
-  background: #ff6b6b;
-  color: #f7ab5e;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-.btn-primary:hover {
-  background: #ff5252;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-  color: #f7ab5e;
-}
-
-.btn-secondary {
+.btn-primary, .btn-secondary {
   background: transparent;
   color: #f7ab5e;
   border: 2px solid #f7ab5e;
@@ -96,21 +83,25 @@
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s ease;
+  box-shadow: none;
 }
 
-.btn-secondary:hover {
+.btn-primary:hover, .btn-secondary:hover {
   background: #f7ab5e;
   color: #333d38;
   transform: translateY(-2px);
+  border: 2px solid #f7ab5e;
 }
 
 .features {
   padding: 60px 20px 0 20px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1cm;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
   max-width: 1200px;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .feature-card {
@@ -228,41 +219,10 @@
 }
 
 /* 響應式設計 */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
+@media (max-width: 900px) {
   .features {
-    grid-template-columns: 1fr;
-    max-width: 95vw;
-    padding: 30px 10px 0 10px;
-  }
-  
-  .feature-card {
-    width: 95% !important;
-    transform: scale(0.85);
-  }
-  
-  .feature-link {
-    min-height: 100px;
-  }
-  
-  .admin-section {
-    padding: 20px;
-  }
-  
-  .admin-card {
-    padding: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 }
 
@@ -280,7 +240,8 @@
   }
   
   .features {
-    padding: 30px 15px;
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
   
   .feature-card {

@@ -20,19 +20,6 @@ function Home() {
     }
   }, []);
 
-  const handleAdminClick = () => {
-    if (!user) {
-      // 未登入，導向登入頁面
-      navigate('/login?redirect=admin');
-    } else if (user.role === 'admin') {
-      // 已登入且為管理員，導向管理員頁面
-      navigate('/admin');
-    } else {
-      // 已登入但不是管理員
-      alert('只有管理員可以進入管理系統');
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.reload();
@@ -59,7 +46,7 @@ function Home() {
         </Link>
         <Link to="/queue-progress" className="feature-card primary feature-link">
           <div className="feature-icon">🔍</div>
-          <h3>排隊查詢</h3>
+          <h3>排隊進度查詢</h3>
           <p>查詢您的排隊進度，掌握等待時間</p>
         </Link>
         {user && user.role !== 'admin' && (
@@ -70,14 +57,6 @@ function Home() {
           </Link>
         )}
       </div>
-
-      {/* 管理員入口按鈕（縮小版） */}
-      <div className="admin-btn-bar">
-        <button onClick={handleAdminClick} className="btn btn-admin-mini">
-          <span role="img" aria-label="管理員">⚙️</span> {user?.role === 'admin' ? '管理員後台' : '管理員登入'}
-        </button>
-      </div>
-
       {/* 新增首頁下方大按鈕區塊 */}
       {/* <div className="home-action-bar">
         {user && user.role !== 'admin' && (
