@@ -759,4 +759,8 @@
     font-size: 0.7rem;
     padding: 0.25rem 0.6rem;
   }
+}
+
+body, .queue-container, .queue-step, .modal-header, .modal-header h3, .modal-option, .modal-option.selected, .queue-step h3, .queue-step span, .queue-step span[style*='fontWeight: bold'], .queue-status, .queue-info, .queue-number, .status-badge, .info-details, .detail-item, .detail-item .label, .detail-item .value {
+  color: #fff !important;
 } 

@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #f7ab5e;
+  color: #fff;
   background-color: #333d38;
 
   font-synthesis: none;
@@ -28,7 +28,7 @@ body, html {
   padding: 0;
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
   background: #333d38 !important;
-  color: #f7ab5e;
+  color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {

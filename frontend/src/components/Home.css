@@ -2,7 +2,7 @@
   background: #333d38;
   min-height: 100vh;
   padding: 20px;
-  color: #f7ab5e;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,7 @@
 .home {
   min-height: 100vh;
   background: #333d38;
-  color: #f7ab5e;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +21,7 @@
   text-align: center;
   padding: 80px 20px;
   background: rgba(0, 0, 0, 0.1);
-  color: #f7ab5e;
+  color: #fff;
   border-radius: 0;
   box-shadow: none;
   max-width: none;
@@ -33,7 +33,7 @@
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #f7ab5e;
+  color: #fff;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -41,7 +41,7 @@
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
-  color: #f7ab5e;
+  color: #fff;
   font-weight: 500;
   animation: fadeInUp 1s ease-out 0.2s both;
 }
@@ -49,7 +49,7 @@
 .hero-subtitle.highlight {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #f7ab5e;
+  color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.10);
   letter-spacing: 1px;
   margin-bottom: 2.2rem;
@@ -59,7 +59,7 @@
 .highlight {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #f7ab5e;
+  color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.10);
   letter-spacing: 1px;
   margin-bottom: 2.2rem;
@@ -76,8 +76,8 @@
 
 .btn-primary, .btn-secondary {
   background: transparent;
-  color: #f7ab5e;
-  border: 2px solid #f7ab5e;
+  color: #fff;
+  border: 2px solid #fff;
   padding: 12px 24px;
   border-radius: 25px;
   text-decoration: none;
@@ -87,10 +87,10 @@
 }
 
 .btn-primary:hover, .btn-secondary:hover {
-  background: #f7ab5e;
+  background: #fff;
   color: #333d38;
   transform: translateY(-2px);
-  border: 2px solid #f7ab5e;
+  border: 2px solid #fff;
 }
 
 .features {
@@ -156,7 +156,7 @@
   font-size: 0.8rem;
   margin-bottom: 0.47rem;
   font-weight: bold;
-  color: #2196f3;
+  color: #fff;
 }
 
 .feature-card p {
@@ -291,4 +291,8 @@
   box-shadow: 0 8px 24px rgba(255, 107, 107, 0.18);
   background: linear-gradient(135deg, #ff6b6b 0%, #667eea 100%);
   color: #fff;
+}
+
+.home-container, .home, .hero-title, .hero-subtitle, .highlight, .feature-card, .feature-link, .feature-icon, .btn-primary, .btn-secondary, h3, p, label, span {
+  color: #fff !important;
 } 

@@ -241,11 +241,13 @@ function Login({ setUser }) {
             使用 LINE 登入
           </a>
         )}
-        <div className="login-extra-bar">
-          <button className="login-register-btn" onClick={() => navigate('/register')}>
-            註冊會員
-          </button>
-        </div>
+        {!isAdminLogin && (
+          <div className="login-extra-bar" style={{marginTop: '1.5em', textAlign: 'center'}}>
+            <button className="btn btn-secondary" onClick={() => navigate('/register')}>
+              註冊會員
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

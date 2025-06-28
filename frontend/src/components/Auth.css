@@ -208,4 +208,8 @@
 .auth-card.register {
   background: #333d38;
   color: #f7ab5e;
+}
+
+.auth-container, .auth-card, .auth-card h2, .form-group label, .form-group input, .form-group input::placeholder, .btn-auth, .auth-links, .auth-links a, .auth-divider, .auth-divider span, .line-login-btn {
+  color: #fff !important;
 } 

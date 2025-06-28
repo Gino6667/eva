@@ -81,8 +81,7 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <Link to="/login" className="nav-link">登入</Link>
-                    <Link to="/register" className="nav-link">註冊</Link>
+                    <Link to="/login" className="nav-link">會員登入/註冊</Link>
                   </>
                 )}
               </nav>
