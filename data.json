@@ -854,10 +854,11 @@
       "designerId": 2,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "cancelled",
       "number": 4,
       "createdAt": "2025-06-29T12:01:14.012Z",
-      "userId": 4
+      "userId": 4,
+      "cancelledAt": "2025-06-29T12:13:05.228Z"
     },
     {
       "id": 9008,
