@@ -461,10 +461,12 @@
 }
 
 .queue-step {
-  background: rgba(51, 61, 56, 0.8);
-  border-radius: 16px;
-  padding: 2rem;
-  border: 1px solid rgba(247, 171, 94, 0.3);
+  background: #333d38;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid #f0f0f0;
 }
 
 .queue-step h3 {
