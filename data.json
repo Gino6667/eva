@@ -1038,10 +1038,11 @@
       "designerId": 9,
       "serviceId": 2,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 8,
       "createdAt": "2025-06-29T19:24:33.312Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-29T19:29:08.858Z"
     },
     {
       "id": 9022,
