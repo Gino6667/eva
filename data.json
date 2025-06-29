@@ -1076,6 +1076,16 @@
       "createdAt": "2025-06-29T19:28:52.335Z",
       "userId": 3,
       "checkinAt": "2025-06-29T19:29:10.984Z"
+    },
+    {
+      "id": 9025,
+      "designerId": 5,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 12,
+      "createdAt": "2025-06-29T19:29:23.727Z",
+      "userId": 3
     }
   ],
   "reservations": [
