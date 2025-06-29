@@ -844,10 +844,11 @@
       "designerId": 2,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "cancelled",
       "number": 3,
       "createdAt": "2025-06-29T11:59:15.783Z",
-      "userId": 4
+      "userId": 4,
+      "cancelledAt": "2025-06-29T12:13:21.286Z"
     },
     {
       "id": 9007,
