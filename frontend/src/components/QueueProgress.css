@@ -443,9 +443,9 @@
   border-radius: 18px;
   border: 2.5px solid #f7ab5e;
   box-shadow: 0 6px 32px #f7ab5e22, 0 1.5px 0 #f7ab5e33;
-  min-width: 420px;
-  max-width: 600px;
-  flex: 1 1 520px;
+  min-width: 620px;
+  max-width: 800px;
+  flex: 1 1 720px;
   position: relative;
   overflow: hidden;
   margin-bottom: 0.5rem;
