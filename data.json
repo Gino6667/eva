@@ -1042,6 +1042,16 @@
       "number": 8,
       "createdAt": "2025-06-29T19:24:33.312Z",
       "userId": 3
+    },
+    {
+      "id": 9022,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "online",
+      "status": "waiting",
+      "number": 9,
+      "createdAt": "2025-06-29T19:24:43.956Z",
+      "userId": 3
     }
   ],
   "reservations": [
