@@ -1,16 +1,6 @@
 {
   "designers": [
     {
-      "id": 1,
-      "name": "小美",
-      "isPaused": false,
-      "services": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
       "id": 5,
       "name": "阿花"
     }
