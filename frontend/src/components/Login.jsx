@@ -228,9 +228,11 @@ function Login({ setUser }) {
             >
               {loading ? '登入中...' : '登入'}
             </button>
-            <button className="btn btn-secondary" onClick={() => navigate('/register')}>
-              註冊會員
-            </button>
+            {!isAdminLogin && (
+              <button className="btn btn-secondary" onClick={() => navigate('/register')}>
+                註冊會員
+              </button>
+            )}
           </div>
           {msg && (
             <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
