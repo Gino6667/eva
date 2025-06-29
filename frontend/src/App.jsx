@@ -66,8 +66,8 @@ function App() {
         {window.location.pathname !== '/eva/admin' && (
         <header className="header">
           <div className="header-content">
-            <h1>美髮沙龍管理系統</h1>
             <button className="nav-toggle" onClick={() => setNavOpen(v => !v)} aria-label="展開選單">☰</button>
+            <h1>美髮沙龍管理系統</h1>
             <nav className={`nav-menu${navOpen ? ' open' : ''}`}
               onMouseLeave={() => setNavOpen(false)}
             >
