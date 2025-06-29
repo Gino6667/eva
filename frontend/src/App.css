@@ -271,8 +271,7 @@ tr:last-child td {
 }
 
 .nav-toggle {
-  margin-right: 0;
-  margin-left: 0;
+  margin: 0;
   background: none;
   border: none;
   color: #f7ab5e;
@@ -284,6 +283,7 @@ tr:last-child td {
   align-items: center;
   justify-content: center;
   padding: 0.2em 0.5em;
+  line-height: 1;
 }
 
 .header h1 {
