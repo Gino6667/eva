@@ -121,31 +121,31 @@ function Admin() {
   // 側邊欄選單項目 - 根據角色顯示不同選項
   const getSidebarItems = () => {
     const baseItems = [
-      { path: '/admin', icon: '🏠', label: '儀表板', active: location.pathname === '/admin' },
-      { path: '/admin/queue-progress', icon: '📋', label: '即時看板', active: location.pathname === '/admin/queue-progress' },
-      { path: '/admin/queue', icon: '🎯', label: '排隊管理', active: location.pathname === '/admin/queue' },
-      { path: '/admin/reservation', icon: '📅', label: '預約管理', active: location.pathname === '/admin/reservation' },
+      { path: '', icon: '🏠', label: '儀表板', active: location.pathname === '/admin' },
+      { path: 'queue-progress', icon: '📋', label: '即時看板', active: location.pathname === '/admin/queue-progress' },
+      { path: 'queue', icon: '🎯', label: '排隊管理', active: location.pathname === '/admin/queue' },
+      { path: 'reservation', icon: '📅', label: '預約管理', active: location.pathname === '/admin/reservation' },
     ];
 
     // 只有管理員或設計師才顯示客人調整
     if (user?.role === 'admin' || user?.role === 'designer') {
-      baseItems.push({ path: '/admin/queue-transfer', icon: '🔄', label: '客人調整', active: location.pathname === '/admin/queue-transfer' });
+      baseItems.push({ path: 'queue-transfer', icon: '🔄', label: '客人調整', active: location.pathname === '/admin/queue-transfer' });
     }
 
     // 只有管理員才顯示管理功能
     if (user?.role === 'admin') {
       baseItems.push(
-        { path: '/admin/worktime', icon: '⏰', label: '工作時間設定', active: location.pathname === '/admin/worktime' },
-        { path: '/admin/reports', icon: '📊', label: '報表統計', active: location.pathname === '/admin/reports' },
-        { path: '/admin/customers', icon: '👥', label: '客戶管理', active: location.pathname === '/admin/customers' },
-        { path: '/admin/finance', icon: '💰', label: '財務管理', active: location.pathname === '/admin/finance' },
-        { path: '/admin/designers', icon: '✂️', label: '設計師管理', active: location.pathname === '/admin/designers' },
-        { path: '/admin/profile', icon: '⚙️', label: '系統設定', active: location.pathname === '/admin/profile' }
+        { path: 'worktime', icon: '⏰', label: '工作時間設定', active: location.pathname === '/admin/worktime' },
+        { path: 'reports', icon: '📊', label: '報表統計', active: location.pathname === '/admin/reports' },
+        { path: 'customers', icon: '👥', label: '客戶管理', active: location.pathname === '/admin/customers' },
+        { path: 'finance', icon: '💰', label: '財務管理', active: location.pathname === '/admin/finance' },
+        { path: 'designers', icon: '✂️', label: '設計師管理', active: location.pathname === '/admin/designers' },
+        { path: 'profile', icon: '⚙️', label: '系統設定', active: location.pathname === '/admin/profile' }
       );
     } else if (user?.role === 'designer') {
       // 設計師專用功能
       baseItems.push(
-        { path: '/admin/profile', icon: '👤', label: '個人資料', active: location.pathname === '/admin/profile' }
+        { path: 'profile', icon: '👤', label: '個人資料', active: location.pathname === '/admin/profile' }
       );
     }
 
