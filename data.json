@@ -1006,11 +1006,12 @@
       "designerId": 10,
       "serviceId": 4,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 5,
       "createdAt": "2025-06-29T18:51:40.554Z",
       "userId": 3,
-      "checkinAt": "2025-06-29T18:51:52.651Z"
+      "checkinAt": "2025-06-29T18:51:52.651Z",
+      "completedAt": "2025-06-29T19:18:31.273Z"
     }
   ],
   "reservations": [
