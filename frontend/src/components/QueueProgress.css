@@ -428,10 +428,14 @@
 }
 
 .serving-grid-progress {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 2.5rem 2.5rem;
-  justify-content: flex-start;
+  justify-items: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
 }
 
 .serving-card-progress {
@@ -560,6 +564,8 @@
     padding: 1.1rem 0.2rem 1.1rem 0.2rem;
   }
   .serving-grid-progress {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
     gap: 1.2rem 0.5rem;
   }
 }
