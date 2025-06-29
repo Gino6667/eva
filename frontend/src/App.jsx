@@ -105,16 +105,21 @@ function App() {
             <Route path="/queue" element={<Queue />} />
             <Route path="/queue-progress" element={<QueueProgress />} />
             <Route path="/reservation" element={<Reservation />} />
-            <Route path="/worktime" element={<Worktime />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/finance" element={<Finance />} />
-            <Route path="/designers" element={<Designers />} />
             <Route path="/login" element={<Login setUser={setUser} />} />
             <Route path="/register" element={<Register setUser={setUser} />} />
             <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
             <Route path="/admin" element={<Admin />}>
+              <Route index element={<Home />} />
+              <Route path="queue-progress" element={<QueueProgress />} />
+              <Route path="queue" element={<Queue />} />
+              <Route path="reservation" element={<Reservation />} />
               <Route path="queue-transfer" element={<QueueTransfer />} />
+              <Route path="worktime" element={<Worktime />} />
+              <Route path="reports" element={<Reports />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="finance" element={<Finance />} />
+              <Route path="designers" element={<Designers />} />
+              <Route path="profile" element={<Profile user={user} setUser={setUser} />} />
             </Route>
           </Routes>
         </main>
