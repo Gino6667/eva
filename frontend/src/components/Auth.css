@@ -175,7 +175,7 @@
   width: 100%;
   padding: 12px;
   background: #00B900;
-  color: #f7ab5e;
+  color: #fff;
   border: none;
   border-radius: 10px;
   font-size: 16px;
@@ -193,7 +193,7 @@
   background: #009900;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 185, 0, 0.3);
-  color: #f7ab5e;
+  color: #fff;
 }
 
 .line-login-btn img {
