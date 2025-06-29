@@ -26,7 +26,7 @@
 }
 
 .queue-form {
-  background: #fff;
+  background: #333d38;
   border-radius: 16px;
   border: 2px solid #f0f0f0;
   box-shadow: 0 6px 24px rgba(0,0,0,0.10);
@@ -113,7 +113,7 @@
 }
 
 .queue-list {
-  background: #fff;
+  background: #333d38;
   border-radius: 16px;
   border: 2px solid #f0f0f0;
   box-shadow: 0 6px 24px rgba(0,0,0,0.10);
@@ -144,7 +144,7 @@
 }
 
 .queue-item {
-  background: #fff;
+  background: #333d38;
   border-radius: 12px;
   border: 2px solid #e9ecef;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -789,7 +789,7 @@
 
 /* 左側 Sidebar */
 .queue-sidebar {
-  background: #fff;
+  background: #333d38;
   border-radius: 16px;
   border: 2px solid #f0f0f0;
   box-shadow: 0 6px 24px rgba(0,0,0,0.10);
@@ -800,7 +800,7 @@
 
 /* 右側主要內容 */
 .queue-main {
-  background: #fff;
+  background: #333d38;
   border-radius: 16px;
   border: 2px solid #f0f0f0;
   box-shadow: 0 6px 24px rgba(0,0,0,0.10);
