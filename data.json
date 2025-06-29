@@ -3,22 +3,46 @@
     {
       "id": 1,
       "name": "小美",
-      "isPaused": false
+      "isPaused": false,
+      "services": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 2,
       "name": "阿強",
-      "isPaused": false
+      "isPaused": false,
+      "services": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 3,
       "name": "小華",
       "isPaused": false,
-      "isResting": false
+      "isResting": false,
+      "services": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 4,
-      "name": "不指定"
+      "name": "不指定",
+      "services": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 5,
+      "name": "阿花"
     }
   ],
   "services": [
