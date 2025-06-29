@@ -1,4 +1,26 @@
-<script>
-  // 自動導向到 /eva/ 並保留查詢與 hash
-  location.replace('/eva/' + location.search + location.hash)
-</script> 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>美髮沙龍管理系統</title>
+  <script>
+    // GitHub Pages 404 重定向處理
+    // 獲取當前路徑
+    var pathSegmentsToKeep = 1;
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+</head>
+<body>
+  <div style="text-align: center; padding: 50px;">
+    <h1>載入中...</h1>
+    <p>正在重新導向到正確的頁面...</p>
+  </div>
+</body>
+</html> 
