@@ -290,163 +290,125 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(51,61,56,0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(6px);
 }
 
 .modal-content {
   background: #333d38;
-  border-radius: 20px;
-  max-width: 600px;
+  border-radius: 28px;
+  max-width: 420px;
   width: 100%;
   max-height: 80vh;
   overflow: hidden;
-  box-shadow: 0 24px 80px 0 rgba(0,0,0,0.35), 0 0 0 4px #007bff44;
+  box-shadow: 0 8px 40px 0 #f7ab5e55, 0 0 0 4px #f7ab5e33;
   animation: modalPop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
-  border: 4px solid #007bff;
+  border: 4px solid #f7ab5e;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 步驟3服務項目彈窗特殊樣式 */
 .modal-content.service-modal {
-  border: 4px solid #28a745;
-  box-shadow: 0 24px 80px 0 rgba(40,167,69,0.25), 0 0 0 4px #28a74544;
+  border: 4px solid #f7ab5e;
+  box-shadow: 0 8px 40px 0 #f7ab5e55, 0 0 0 4px #f7ab5e33;
 }
 
-.modal-header.service-header {
-  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-}
-
-.modal-option.service-option:hover {
-  border-color: #28a745;
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
-}
-
-.modal-option.service-option.selected {
-  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-  border-color: #28a745;
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
-}
-
-.modal-option.service-option.selected:hover {
-  background: linear-gradient(135deg, #1e7e34 0%, #155724 100%);
-  box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
-}
-
-@keyframes modalPop {
-  0% { transform: scale(0.7); opacity: 0; }
-  80% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
-.modal-header {
+.modal-header, .modal-header.service-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
-  border-bottom: 2px solid #e9ecef;
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  padding: 1.5rem 2rem 1.2rem 2rem;
+  border-bottom: 2px solid #f7ab5e;
+  background: linear-gradient(135deg, #333d38 80%, #f7ab5e 100%);
   color: #f7ab5e;
 }
 
 .modal-header h3 {
   margin: 0;
   color: #f7ab5e;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .modal-close {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255,255,255,0.08);
   border: none;
-  font-size: 1.8rem;
+  font-size: 2rem;
   cursor: pointer;
   color: #f7ab5e;
   padding: 0;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px #f7ab5e22;
 }
-
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
+  background: #f7ab5e;
+  color: #333d38;
+  transform: scale(1.12) rotate(-8deg);
+  box-shadow: 0 4px 16px #f7ab5e55;
 }
 
 .modal-body {
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   max-height: 60vh;
   overflow-y: auto;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1cm;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: stretch;
 }
 
-.modal-option {
+.modal-option, .modal-option.service-option {
   display: block;
   width: 100%;
-  padding: 16px 20px;
-  background: #333d38;
-  border: 2px solid #e9ecef;
-  border-radius: 999px !important;
+  padding: 1.1em 1.2em;
+  background: #222e28;
+  border: 2.5px solid #f7ab5e;
+  border-radius: 16px !important;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.18s;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 700;
+  color: #f7ab5e;
+  margin-bottom: 0;
+  box-shadow: 0 2px 12px #f7ab5e22;
   position: relative;
   overflow: hidden;
-  margin-bottom: 0;
-  color: #f7ab5e;
+  letter-spacing: 1px;
 }
-
-.modal-option::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.5s;
+.modal-option:hover, .modal-option.service-option:hover {
+  background: #f7ab5e;
+  color: #333d38;
+  border-color: #f7ab5e;
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 4px 24px #f7ab5e55;
 }
-
-.modal-option:hover::before {
-  left: 100%;
+.modal-option.selected, .modal-option.service-option.selected {
+  background: linear-gradient(135deg, #f7ab5e 80%, #fffbe6 100%);
+  color: #333d38;
+  border-color: #f7ab5e;
+  box-shadow: 0 4px 24px #f7ab5e99;
+  transform: scale(1.06);
 }
-
-.modal-option:hover {
-  background: #4a5a4f;
-  border-color: #007bff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
-  color: #f7ab5e;
-}
-
-.modal-option.selected {
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: #f7ab5e;
-  border-color: #007bff;
-  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-.modal-option.selected:hover {
-  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(0, 123, 255, 0.4);
-  color: #f7ab5e;
+.modal-option.selected:hover, .modal-option.service-option.selected:hover {
+  background: linear-gradient(135deg, #fffbe6 80%, #f7ab5e 100%);
+  color: #333d38;
+  border-color: #f7ab5e;
+  box-shadow: 0 8px 32px #f7ab5e99;
+  transform: scale(1.08);
 }
 
 /* 響應式設計 - 彈窗 */
@@ -589,11 +551,12 @@
   transform: rotate(180deg);
 }
 
-.serving-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.queue-container .serving-grid {
+  display: flex;
+  flex-direction: row;
   gap: 0.75rem;
   margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .serving-card {
@@ -826,23 +789,23 @@
 
 /* 左側 Sidebar */
 .queue-sidebar {
-  background: rgba(74, 90, 79, 0.3);
-  border-radius: 20px;
-  padding: 1.5rem;
-  border: 2px solid #f7ab5e;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  padding: 2rem;
+  margin-bottom: 2rem;
   min-width: 0;
 }
 
 /* 右側主要內容 */
 .queue-main {
-  background: rgba(74, 90, 79, 0.2);
-  border-radius: 20px;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
   padding: 2rem;
-  border: 2px solid #f7ab5e;
-  backdrop-filter: blur(10px);
-  min-width: 0;
+  margin-bottom: 2rem;
 }
 
 .queue-success-card {

@@ -201,46 +201,27 @@ function QueueProgress() {
             <span>最後更新: {lastUpdate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
           </div>
         </div>
-        <div className="serving-grid">
+        <div className="serving-grid serving-grid-progress">
           {designers.filter(designer => designer.name !== '不指定').map(designer => {
             const serving = currentServing.find(s => s.designerId === designer.id);
             const next = nextInQueue.find(n => n.designerId === designer.id);
+            const isRest = !serving && !next;
             return (
-              <div key={designer.id} className={`serving-card ${serving ? 'serving' : 'idle'}`}>
-                <div className="designer-name">{designer.name}</div>
-                <div className="serving-status">
-                  {serving ? (
-                    <>
-                      <div className="status-badge serving">服務中</div>
-                      <div className="current-customer">
-                        <div className="customer-label">正在服務：</div>
-                        <div className="current-number">#{serving.number}</div>
-                        <div className="service-name">{serving.serviceName}</div>
-                      </div>
-                      {next && (
-                        <div className="next-customer">
-                          <div className="customer-label">下一位：</div>
-                          <div className="next-number">#{next.number}</div>
-                          <div className="service-name">{next.serviceName}</div>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      <div className="status-badge idle">待機中</div>
-                      {next && (
-                        <div className="next-customer">
-                          <div className="customer-label">下一位：</div>
-                          <div className="next-number">#{next.number}</div>
-                          <div className="service-name">{next.serviceName}</div>
-                        </div>
-                      )}
-                      {!next && (
-                        <div className="idle-text">等待下一位客人</div>
-                      )}
-                    </>
-                  )}
+              <div key={designer.id} className={`serving-card-progress${isRest ? ' rest' : ''}`}>
+                <div className="designer-header">
+                  <span className="designer-title">設計師 <b>{designer.name}</b></span>
                 </div>
+                <div className="card-main-row">
+                  <div className="card-col card-col-now">
+                    <div className="col-label">目前號碼</div>
+                    <div className="col-number now-number">{serving ? <>{serving.number}<div className="col-customer">{serving.customerName}</div></> : '-'}</div>
+                  </div>
+                  <div className="card-col card-col-next">
+                    <div className="col-label">下一號</div>
+                    <div className="col-number next-number">{next ? <>{next.number}<div className="col-customer">{next.customerName}</div></> : '-'}</div>
+                  </div>
+                </div>
+                {isRest && <div className="rest-mask">休息中</div>}
               </div>
             );
           })}
