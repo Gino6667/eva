@@ -1,7 +1,9 @@
 .queue-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  min-height: 100vh;
+  background: #333d38;
 }
 
 .queue-header {
@@ -10,13 +12,17 @@
 }
 
 .queue-header h2 {
-  color: #333;
+  color: #f7ab5e;
   margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-shadow: 0 2px 8px rgba(247, 171, 94, 0.3);
 }
 
 .queue-header p {
-  color: #666;
+  color: #f7ab5e;
   font-size: 1.1rem;
+  opacity: 0.9;
 }
 
 .queue-form {
@@ -60,34 +66,50 @@
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
-.btn-primary {
-  background: #007bff;
-  color: white;
+.btn {
+  background: linear-gradient(135deg, #f7ab5e 0%, #e89b4e 100%);
+  color: #333d38;
   border: none;
+  border-radius: 12px;
   padding: 12px 24px;
-  border-radius: 8px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(247, 171, 94, 0.2);
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: #0056b3;
-  transform: translateY(-1px);
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(247, 171, 94, 0.3);
+  background: linear-gradient(135deg, #e89b4e 0%, #f7ab5e 100%);
 }
 
-.btn-primary:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.btn-primary {
+  background: linear-gradient(135deg, #f7ab5e 0%, #e89b4e 100%);
+  color: #333d38;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #f7ab5e;
+  border: 2px solid #f7ab5e;
+}
+
+.btn-outline:hover {
+  background: #f7ab5e;
+  color: #333d38;
 }
 
 .error-message {
-  background: #f8d7da;
-  color: #721c24;
+  background: rgba(220, 53, 69, 0.1);
+  color: #f7ab5e;
   padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  border: 1px solid #f5c6cb;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  text-align: center;
+  font-weight: 500;
 }
 
 .queue-list {
@@ -213,35 +235,56 @@
 }
 
 /* 響應式設計 */
-@media (max-width: 768px) {
-  .queue-form form {
+@media (max-width: 1024px) {
+  .queue-flex-layout {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
-  .queue-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+  .queue-sidebar {
+    order: 2;
   }
   
-  .queue-number {
-    margin-right: 0;
+  .queue-main {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .queue-container {
+    padding: 10px;
   }
   
-  .queue-actions {
-    margin-left: 0;
-    align-self: flex-end;
+  .queue-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .queue-step {
+    padding: 1.5rem;
+  }
+  
+  .queue-step h3 {
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .queue-container {
-    padding: 10px;
+    padding: 5px;
   }
   
-  .queue-form,
-  .queue-list {
+  .queue-sidebar,
+  .queue-main {
     padding: 1rem;
+  }
+  
+  .queue-step {
+    padding: 1rem;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
 
@@ -461,24 +504,19 @@
 }
 
 .queue-step {
-  background: #333d38;
-  border: 3px solid #ff9800;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(255,152,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
-  padding: 2.5rem 2rem 2rem 2rem;
-  text-align: center;
-  margin: 0 auto 2rem auto;
-  max-width: 400px;
-  animation: popIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+  background: rgba(51, 61, 56, 0.8);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(247, 171, 94, 0.3);
 }
 
 .queue-step h3 {
   color: #f7ab5e;
-  font-size: 2.1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  margin-bottom: 1.2rem;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 12px #fff3cd, 0 1px 0 #f7ab5e;
+  border-bottom: 2px solid #f7ab5e;
+  padding-bottom: 0.5rem;
 }
 
 .queue-step span[style*='fontWeight: bold'] {
@@ -488,12 +526,6 @@
   letter-spacing: 2px;
   text-shadow: 0 4px 24px #ffcc80, 0 1px 0 #f7ab5e;
   animation: popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55);
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  80% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); }
 }
 
 @keyframes popNumber {
@@ -754,4 +786,31 @@
   .status-badge {
     font-size: 0.7rem;
     padding: 0.25rem 0.6rem;
-  }} 
+  }}
+
+/* 響應式佈局 */
+.queue-flex-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* 左側 Sidebar */
+.queue-sidebar {
+  background: rgba(74, 90, 79, 0.3);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 2px solid #f7ab5e;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* 右側主要內容 */
+.queue-main {
+  background: rgba(74, 90, 79, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 2px solid #f7ab5e;
+  backdrop-filter: blur(10px);
+} 
