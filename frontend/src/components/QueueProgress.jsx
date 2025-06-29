@@ -161,7 +161,7 @@ function QueueProgress() {
         
         {/* 會員今日抽號自動顯示 */}
         {user && userQueue.length > 0 && (
-          <div className="user-queue-list" style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.1)', borderRadius: '12px', border: '2px solid #2196f3'}}>
+          <div className="user-queue-list" style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.1)', borderRadius: '12px', border: '2px solid #f7ab5e'}}>
             <div style={{marginBottom: '0.5em', fontWeight: 500, color: '#f7ab5e', fontSize: '1.1rem'}}>您今日抽到的號碼：</div>
             <div style={{display: 'flex', gap: '0.5em', flexWrap: 'wrap'}}>
               {userQueue.map(q => (
@@ -180,7 +180,7 @@ function QueueProgress() {
                     fontSize: '1.1em',
                   }}
                 >
-                  #{q.number}
+                  <span className="user-queue-number">{q.number} 號</span>
                 </button>
               ))}
             </div>
