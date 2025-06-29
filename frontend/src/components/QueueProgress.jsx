@@ -194,9 +194,9 @@ function QueueProgress() {
             <div style={{color: '#f7ab5e', fontSize: '0.9rem', marginTop: '0.5rem'}}>請前往現場排隊頁面抽號</div>
           </div>
         )}
-        {/* 即時服務狀態卡片區塊 */}
+        {/* 即時看板卡片區塊 */}
         <div className="serving-header">
-          <h3>即時服務狀態</h3>
+          <h3>即時看板</h3>
           <div className="update-info">
             <span>最後更新: {lastUpdate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
           </div>

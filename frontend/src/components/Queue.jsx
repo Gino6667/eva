@@ -160,7 +160,7 @@ function Queue() {
   const CurrentServingDisplay = () => (
     <>
       <div className="serving-header">
-        <h3>即時服務狀態</h3>
+        <h3>即時看板</h3>
         <div className="update-info">
           <span>最後更新: {formatTime(lastUpdate)}</span>
         </div>
@@ -222,7 +222,7 @@ function Queue() {
 
   return (
     <div className="queue-container queue-flex-layout">
-      {/* 左側 Sidebar：即時服務狀態 */}
+      {/* 左側 Sidebar：即時看板 */}
       <div className="queue-sidebar">
         <CurrentServingDisplay />
       </div>
