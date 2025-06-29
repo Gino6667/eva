@@ -149,6 +149,16 @@ function QueueProgress() {
     <div className="queue-progress-container">
       <div className="queue-progress-card">
         <h2>即時看板</h2>
+        {todayStats && (
+          <div className="today-stats" style={{marginBottom:'2.2rem'}}>
+            <div className="stats-grid">
+              <div className="stat-item">
+                <span className="stat-number waiting">{todayStats.waiting}</span>
+                <span className="stat-label">目前排隊中人數</span>
+              </div>
+            </div>
+          </div>
+        )}
         
         {/* 除錯資訊 */}
         {user && (
