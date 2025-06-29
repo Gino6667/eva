@@ -1049,10 +1049,11 @@
       "designerId": 10,
       "serviceId": 4,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 9,
       "createdAt": "2025-06-29T19:24:43.956Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-29T19:29:09.892Z"
     },
     {
       "id": 9023,
