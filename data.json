@@ -1059,6 +1059,16 @@
       "status": "cancelled",
       "createdAt": "2025-06-29T12:13:27.776Z",
       "cancelledAt": "2025-06-29T12:46:27.523Z"
+    },
+    {
+      "id": 217,
+      "designerId": 4,
+      "serviceId": 1,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "booked",
+      "createdAt": "2025-06-29T15:20:41.480Z"
     }
   ],
   "users": [
