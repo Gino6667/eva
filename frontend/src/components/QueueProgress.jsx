@@ -191,7 +191,7 @@ function QueueProgress() {
         {user && userQueue.length === 0 && (
           <div style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(255, 193, 7, 0.1)', borderRadius: '12px', border: '2px solid #ffc107', textAlign: 'center'}}>
             <div style={{color: '#f7ab5e', fontWeight: 500}}>您今日還沒有抽號</div>
-            <div style={{color: '#f7ab5e', fontSize: '0.9rem', marginTop: '0.5rem'}}>請前往現場排隊頁面抽號</div>
+            <div style={{color: '#f7ab5e', fontSize: '0.9rem', marginTop: '0.5rem'}}>請前往現場排隊或線上預約抽號</div>
           </div>
         )}
         {/* 即時看板卡片區塊 */}
