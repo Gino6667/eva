@@ -50,7 +50,7 @@ function Login({ setUser }) {
 
     const redirect = searchParams.get('redirect');
     
-    // 管理員登入使用帳號密碼
+    // 管理員/設計師登入使用帳號密碼
     if (redirect === 'admin') {
       if (!account || !password) {
         setMsg('請填寫帳號和密碼');
@@ -60,7 +60,7 @@ function Login({ setUser }) {
       
       try {
         const loginData = { 
-          phone: account, // 管理員帳號使用phone欄位
+          phone: account, // 管理員/設計師帳號使用phone欄位
           password 
         };
 
@@ -71,10 +71,10 @@ function Login({ setUser }) {
         setMsg('登入成功！');
         
         setTimeout(() => {
-          if (res.data.user.role === 'admin') {
+          if (res.data.user.role === 'admin' || res.data.user.role === 'designer') {
             navigate('/admin');
           } else {
-            alert('只有管理員可以進入管理系統');
+            alert('只有管理員或設計師可以進入管理系統');
             navigate('/profile');
           }
         }, 800);
@@ -112,7 +112,7 @@ function Login({ setUser }) {
           navigate('/queue');
         } else if (redirect === 'reservation') {
           navigate('/reservation');
-        } else if (res.data.user.role === 'admin') {
+        } else if (res.data.user.role === 'admin' || res.data.user.role === 'designer') {
           navigate('/admin');
         } else {
           navigate('/profile');
@@ -144,10 +144,10 @@ function Login({ setUser }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>{isAdminLogin ? '管理員登入' : '會員登入'}</h2>
+        <h2>{isAdminLogin ? '管理員/設計師登入' : '會員登入'}</h2>
         <form onSubmit={handleLogin}>
           {isAdminLogin ? (
-            // 管理員登入表單
+            // 管理員/設計師登入表單
             <>
               <div className="form-group">
                 <label htmlFor="account">帳號</label>
@@ -156,7 +156,7 @@ function Login({ setUser }) {
                   id="account"
                   value={account}
                   onChange={e => setAccount(e.target.value)}
-                  placeholder="請輸入管理員帳號"
+                  placeholder="請輸入管理員或設計師帳號"
                   required
                 />
               </div>
