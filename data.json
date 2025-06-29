@@ -879,10 +879,11 @@
       "designerId": 1,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 6,
       "createdAt": "2025-06-29T12:49:26.104Z",
-      "userId": 4
+      "userId": 4,
+      "checkinAt": "2025-06-29T16:52:53.319Z"
     },
     {
       "id": 9010,
