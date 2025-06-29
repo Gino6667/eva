@@ -21,17 +21,6 @@
       ]
     },
     {
-      "id": 3,
-      "name": "小華",
-      "isPaused": false,
-      "isResting": false,
-      "services": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
       "id": 5,
       "name": "阿花"
     }
