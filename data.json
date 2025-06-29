@@ -901,10 +901,11 @@
       "designerId": 2,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 8,
       "createdAt": "2025-06-29T12:53:11.246Z",
-      "userId": 4
+      "userId": 4,
+      "checkinAt": "2025-06-29T16:55:59.385Z"
     },
     {
       "id": 9012,
