@@ -1058,10 +1058,11 @@
       "designerId": 5,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 10,
       "createdAt": "2025-06-29T19:28:41.161Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-29T19:29:06.270Z"
     },
     {
       "id": 9024,
