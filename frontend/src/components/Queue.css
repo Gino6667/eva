@@ -238,15 +238,10 @@
 @media (max-width: 1024px) {
   .queue-flex-layout {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
-  
-  .queue-sidebar {
-    order: 2;
-  }
-  
-  .queue-main {
-    order: 1;
+  .queue-main, .queue-sidebar {
+    width: 100%;
+    min-width: 0;
   }
 }
 
@@ -791,7 +786,7 @@
 /* 響應式佈局 */
 .queue-flex-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 2rem;
   align-items: start;
 }
@@ -804,6 +799,7 @@
   border: 2px solid #f7ab5e;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  min-width: 0;
 }
 
 /* 右側主要內容 */
@@ -813,6 +809,7 @@
   padding: 2rem;
   border: 2px solid #f7ab5e;
   backdrop-filter: blur(10px);
+  min-width: 0;
 }
 
 .queue-success-card {
