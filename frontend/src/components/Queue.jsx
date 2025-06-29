@@ -205,13 +205,13 @@ function Queue() {
           <p>完成以下步驟即可現場排隊</p>
         </div>
 
-        <div className="queue-step">
-          <h3 style={{fontSize: '2.2rem', color: '#f7ab5e', fontWeight: 'bold', marginBottom: '1.2rem', letterSpacing: '2px', textShadow: '0 2px 12px #fff3cd, 0 1px 0 #f7ab5e'}}>排隊成功！</h3>
-          <div style={{fontSize: '1.2rem', color: '#f7ab5e', marginBottom: '1rem'}}>請記住您的號碼牌</div>
-          <div style={{fontSize: '3.2rem', fontWeight: '900', color: '#f7ab5e', letterSpacing: '4px', textShadow: '0 4px 24px #ffcc80, 0 1px 0 #f7ab5e', animation: 'popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55)'}}>您的號碼牌</div>
-          <div style={{fontSize: '5rem', fontWeight: '900', color: '#f7ab5e', letterSpacing: '6px', textShadow: '0 6px 32px #fffbe6, 0 2px 0 #f7ab5e', margin: '0.2em 0', animation: 'popNumber 0.7s cubic-bezier(.68,-0.55,.27,1.55)'}}>{queueResult.number}</div>
-          <p style={{fontSize: '1.3em', color: '#333', fontWeight: 'bold', marginBottom: '0.5em'}}>請留意現場叫號或手機通知！</p>
-          <p style={{color: '#666', fontSize: '0.9em', marginTop: '1em'}}>
+        <div className="queue-step queue-success-card">
+          <h3 className="queue-success-title">排隊成功！</h3>
+          <div className="queue-success-subtitle">請記住您的號碼牌</div>
+          <div className="queue-success-label">您的號碼牌</div>
+          <div className="queue-success-number">{queueResult.number}</div>
+          <p className="queue-success-tip">請留意現場叫號或手機通知！</p>
+          <p className="queue-success-countdown">
             {countdown} 秒後自動返回現場排隊頁面
           </p>
           <Link to="/" className="btn btn-primary" style={{marginTop: '1em'}}>回首頁</Link>
