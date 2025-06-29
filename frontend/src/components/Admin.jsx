@@ -186,183 +186,130 @@ function Admin() {
 
       {/* 主要內容區域 */}
       <main className="admin-main">
-    <div className="admin-container">
-      <div className="admin-header">
+        <div className="admin-content">
+          <div className="admin-header modern">
             <h1>{user?.role === 'admin' ? '管理員儀表板' : '設計師儀表板'}</h1>
-        <p>歡迎回來，{user?.name || (user?.role === 'admin' ? '管理員' : '設計師')}！這裡是您的{user?.role === 'admin' ? '管理控制台' : '工作控制台'}</p>
-      </div>
+            <p>歡迎回來，{user?.name || (user?.role === 'admin' ? '管理員' : '設計師')}！這裡是您的{user?.role === 'admin' ? '管理控制台' : '工作控制台'}</p>
+          </div>
 
-      {/* 統計卡片 - 根據角色顯示不同內容 */}
-      <div className="stats-grid">
-        {user?.role === 'admin' ? (
-          // 管理員統計卡片
-          <>
-            <div className="stat-card">
-              <div className="number">{stats.totalCustomers}</div>
-              <div className="label">總客戶數</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">{stats.totalDesigners}</div>
-              <div className="label">設計師數量</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">{stats.totalReservations}</div>
-              <div className="label">本月預約</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">${stats.totalRevenue.toLocaleString()}</div>
-              <div className="label">本月營收</div>
-            </div>
-          </>
-        ) : (
-          // 設計師統計卡片
-          <>
-            <div className="stat-card">
-              <div className="number">12</div>
-              <div className="label">今日預約</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">8</div>
-              <div className="label">等待中客人</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">5</div>
-              <div className="label">已完成服務</div>
-            </div>
-            <div className="stat-card">
-              <div className="number">4.8</div>
-              <div className="label">平均評分</div>
-            </div>
-          </>
-        )}
-      </div>
+          {/* 統計卡片 - 橫向排列 */}
+          <div className="admin-stats modern">
+            {user?.role === 'admin' ? (
+              <>
+                <div className="stat-card modern">
+                  <div className="number">{stats.totalCustomers}</div>
+                  <div className="label">總客戶數</div>
+                </div>
+                <div className="stat-card modern">
+                  <div className="number">{stats.totalDesigners}</div>
+                  <div className="label">設計師數量</div>
+                </div>
+                <div className="stat-card modern">
+                  <div className="number">{stats.totalReservations}</div>
+                  <div className="label">本月預約</div>
+                </div>
+                <div className="stat-card modern">
+                  <div className="number">${stats.totalRevenue.toLocaleString()}</div>
+                  <div className="label">本月營收</div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="stat-card modern">
+                  <div className="number">12</div>
+                  <div className="label">今日預約</div>
+                </div>
+                <div className="stat-card modern">
+                  <div className="number">8</div>
+                  <div className="label">等待中客人</div>
+                </div>
+                <div className="stat-card modern">
+                  <div className="number">5</div>
+                  <div className="label">已完成服務</div>
+                </div>
+                <div className="stat-card modern">
+                  <div className="number">4.8</div>
+                  <div className="label">平均評分</div>
+                </div>
+              </>
+            )}
+          </div>
 
-      {/* 快速操作 - 根據角色顯示不同操作 */}
-      <div className="admin-section">
-        <h3>快速操作</h3>
-            <div className="quick-actions">
-          {user?.role === 'admin' ? (
-            // 管理員快速操作
-            <>
-              <button className="admin-btn admin-btn-primary" onClick={() => handleNavigation('/customers')}>
-                新增客戶
-              </button>
-              <button className="admin-btn admin-btn-success" onClick={() => handleNavigation('/designers')}>
-                新增設計師
-              </button>
-              <button className="admin-btn admin-btn-warning" onClick={() => handleNavigation('/reservation')}>
-                查看今日預約
-              </button>
-              <button className="admin-btn admin-btn-secondary" onClick={() => handleNavigation('/reports')}>
-                生成報表
-              </button>
-            </>
-          ) : (
-            // 設計師快速操作
-            <>
-              <button className="admin-btn admin-btn-primary" onClick={() => handleNavigation('/queue-progress')}>
-                查看即時看板
-              </button>
-              <button className="admin-btn admin-btn-success" onClick={() => handleNavigation('/queue')}>
-                管理排隊
-              </button>
-              <button className="admin-btn admin-btn-warning" onClick={() => handleNavigation('/reservation')}>
-                查看預約
-              </button>
-              <button className="admin-btn admin-btn-secondary" onClick={() => handleNavigation('/profile')}>
-                更新個人資料
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+          {/* 快速操作 - 分組大按鈕 */}
+          <section className="admin-section modern">
+            <div className="section-header modern">
+              <h3>快速操作</h3>
+            </div>
+            <div className="quick-actions modern">
+              {user?.role === 'admin' ? (
+                <>
+                  <button className="admin-btn admin-btn-primary modern" onClick={() => handleNavigation('/customers')}>新增客戶</button>
+                  <button className="admin-btn admin-btn-success modern" onClick={() => handleNavigation('/designers')}>新增設計師</button>
+                  <button className="admin-btn admin-btn-warning modern" onClick={() => handleNavigation('/reservation')}>查看今日預約</button>
+                  <button className="admin-btn admin-btn-secondary modern" onClick={() => handleNavigation('/reports')}>生成報表</button>
+                </>
+              ) : (
+                <>
+                  <button className="admin-btn admin-btn-primary modern" onClick={() => handleNavigation('/queue-progress')}>查看即時看板</button>
+                  <button className="admin-btn admin-btn-success modern" onClick={() => handleNavigation('/queue')}>管理排隊</button>
+                  <button className="admin-btn admin-btn-warning modern" onClick={() => handleNavigation('/reservation')}>查看預約</button>
+                  <button className="admin-btn admin-btn-secondary modern" onClick={() => handleNavigation('/profile')}>更新個人資料</button>
+                </>
+              )}
+            </div>
+          </section>
 
           {/* 設計師權限管理 - 只有管理員才能看到 */}
           {user?.role === 'admin' && (
-            <div className="admin-section">
-              <div className="section-header">
+            <section className="admin-section modern">
+              <div className="section-header modern">
                 <h3>設計師權限管理</h3>
                 <button 
-                  className="admin-btn admin-btn-primary"
+                  className="admin-btn admin-btn-primary modern"
                   onClick={() => setShowDesignerForm(!showDesignerForm)}
                 >
                   {showDesignerForm ? '取消' : '新增設計師帳號'}
                 </button>
               </div>
-              
               {message && (
-                <div className={`message ${message.includes('成功') ? 'success' : 'error'}`}>
-                  {message}
-                </div>
+                <div className={`message ${message.includes('成功') ? 'success' : 'error'}`}>{message}</div>
               )}
-              
               {showDesignerForm && (
-                <div className="admin-form">
+                <div className="admin-form modern">
                   <form onSubmit={handleAddDesigner}>
                     <div className="form-row">
                       <div className="form-group">
                         <label>姓名 *</label>
-                        <input
-                          type="text"
-                          value={newDesigner.name}
-                          onChange={e => setNewDesigner({...newDesigner, name: e.target.value})}
-                          required
-                          placeholder="請輸入姓名"
-                        />
+                        <input type="text" value={newDesigner.name} onChange={e => setNewDesigner({...newDesigner, name: e.target.value})} required placeholder="請輸入姓名" />
                       </div>
                       <div className="form-group">
                         <label>密碼 *</label>
-                        <input
-                          type="password"
-                          value={newDesigner.password}
-                          onChange={e => setNewDesigner({...newDesigner, password: e.target.value})}
-                          required
-                          placeholder="請輸入密碼"
-                        />
+                        <input type="password" value={newDesigner.password} onChange={e => setNewDesigner({...newDesigner, password: e.target.value})} required placeholder="請輸入密碼" />
                       </div>
                     </div>
                     <div className="form-row">
                       <div className="form-group">
                         <label>信箱</label>
-                        <input
-                          type="email"
-                          value={newDesigner.email}
-                          onChange={e => setNewDesigner({...newDesigner, email: e.target.value})}
-                          placeholder="請輸入信箱"
-                        />
+                        <input type="email" value={newDesigner.email} onChange={e => setNewDesigner({...newDesigner, email: e.target.value})} placeholder="請輸入信箱" />
                       </div>
                       <div className="form-group">
                         <label>手機號碼</label>
-                        <input
-                          type="tel"
-                          value={newDesigner.phone}
-                          onChange={e => setNewDesigner({...newDesigner, phone: e.target.value})}
-                          placeholder="請輸入手機號碼"
-                        />
+                        <input type="tel" value={newDesigner.phone} onChange={e => setNewDesigner({...newDesigner, phone: e.target.value})} placeholder="請輸入手機號碼" />
                       </div>
                     </div>
                     <div className="form-actions">
-                      <button type="submit" className="admin-btn admin-btn-success">
-                        新增帳號
-                      </button>
-                      <button 
-                        type="button" 
-                        className="admin-btn admin-btn-secondary"
-                        onClick={() => setShowDesignerForm(false)}
-                      >
-                        取消
-                      </button>
+                      <button type="submit" className="admin-btn admin-btn-success modern">新增帳號</button>
+                      <button type="button" className="admin-btn admin-btn-secondary modern" onClick={() => setShowDesignerForm(false)}>取消</button>
                     </div>
                   </form>
                 </div>
               )}
-              
-              <div className="designer-accounts-list">
+              <div className="designer-accounts-list modern">
                 <h4>現有設計師帳號</h4>
                 {designerAccounts.length === 0 ? (
                   <p className="no-data">目前沒有設計師帳號</p>
                 ) : (
-                  <div className="accounts-table">
+                  <div className="accounts-table modern">
                     <table>
                       <thead>
                         <tr>
@@ -381,12 +328,7 @@ function Admin() {
                             <td>{account.email || '-'}</td>
                             <td>{account.phone || '-'}</td>
                             <td>
-                              <button 
-                                className="admin-btn admin-btn-danger"
-                                onClick={() => handleDeleteDesigner(account.id)}
-                              >
-                                刪除
-                              </button>
+                              <button className="admin-btn admin-btn-danger modern" onClick={() => handleDeleteDesigner(account.id)}>刪除</button>
                             </td>
                           </tr>
                         ))}
@@ -395,7 +337,7 @@ function Admin() {
                   </div>
                 )}
               </div>
-            </div>
+            </section>
           )}
         </div>
       </main>

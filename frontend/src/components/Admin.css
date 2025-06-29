@@ -659,3 +659,165 @@
   font-size: 1rem;
   border-radius: 8px;
   font-weight: 500;
+}
+
+/* Modern admin content card */
+.admin-content.modern {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  max-width: 1100px;
+  margin: 2.5rem auto 0 auto;
+  color: #222;
+}
+.admin-header.modern {
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  margin-bottom: 2.5rem;
+  padding: 0 0 1.5rem 0;
+  border-bottom: 2px solid #f7ab5e;
+  color: #222;
+}
+.admin-header.modern h1 {
+  color: #f7ab5e;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.admin-header.modern p {
+  color: #666;
+  font-size: 1.1rem;
+}
+.admin-stats.modern {
+  display: flex;
+  gap: 2.2rem;
+  margin-bottom: 2.5rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.stat-card.modern {
+  background: linear-gradient(135deg, #fffbe6 70%, #ffe0b2 100%);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #fffbe6;
+  padding: 2.2rem 2.5rem 1.5rem 2.5rem;
+  min-width: 180px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #f7ab5e;
+  transition: box-shadow 0.2s;
+}
+.stat-card.modern:hover {
+  box-shadow: 0 8px 32px #ffecb3;
+}
+.stat-card.modern .number {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #ff9800;
+  margin-bottom: 0.3em;
+  text-shadow: 0 2px 12px #fffbe6;
+}
+.stat-card.modern .label {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+}
+.admin-section.modern {
+  background: #faf8f6;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #f7ab5e22;
+  padding: 2rem 2rem 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  border: 1.5px solid #f7ab5e;
+}
+.section-header.modern {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #f7ab5e;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+.section-header.modern h3 {
+  font-size: 1.3rem;
+  color: #ff9800;
+  font-weight: bold;
+  margin: 0;
+}
+.quick-actions.modern {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.admin-btn.modern {
+  font-size: 1.15rem;
+  padding: 1.1em 2.2em;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px #ffe0b2;
+  border-width: 2px;
+  margin-bottom: 0.5em;
+}
+.admin-btn.modern:active {
+  transform: scale(0.97);
+}
+.admin-form.modern input {
+  background: #fffbe6;
+  border: 1.5px solid #f7ab5e;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+.admin-form.modern label {
+  color: #ff9800;
+  font-weight: 500;
+}
+.accounts-table.modern table {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px #ffe0b2;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.accounts-table.modern th, .accounts-table.modern td {
+  padding: 1em 0.7em;
+  border-bottom: 1.5px solid #ffe0b2;
+  color: #333;
+  font-size: 1.05em;
+}
+.accounts-table.modern th {
+  background: #fffbe6;
+  color: #ff9800;
+  font-weight: bold;
+}
+.accounts-table.modern tr:last-child td {
+  border-bottom: none;
+}
+.designer-accounts-list.modern h4 {
+  color: #ff9800;
+  font-size: 1.1rem;
+  margin-bottom: 1em;
+}
+@media (max-width: 900px) {
+  .admin-content.modern {
+    padding: 1.2rem 0.5rem;
+  }
+  .admin-stats.modern {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .stat-card.modern {
+    min-width: 120px;
+    padding: 1.2rem 1.2rem 1rem 1.2rem;
+  }
+  .admin-section.modern {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+}
