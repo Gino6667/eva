@@ -75,11 +75,16 @@ function QueueProgress() {
 
   const loadUserQueue = async () => {
     try {
+      console.log('載入會員號碼，用戶ID:', user.id);
       const res = await axios.get(`/api/queue/user/${user.id}`);
+      console.log('會員號碼API回應:', res.data);
       // 只顯示今日的號碼
       const today = date;
-      setUserQueue(res.data.filter(q => q.createdAt.slice(0,10) === today));
+      const todayQueues = res.data.filter(q => q.createdAt.slice(0,10) === today);
+      console.log('今日號碼:', todayQueues);
+      setUserQueue(todayQueues);
     } catch (err) {
+      console.error('載入會員號碼失敗:', err);
       setUserQueue([]);
     }
   };
@@ -144,10 +149,20 @@ function QueueProgress() {
     <div className="queue-progress-container">
       <div className="queue-progress-card">
         <h2>即時看板</h2>
+        
+        {/* 除錯資訊 */}
+        {user && (
+          <div style={{marginBottom: '1rem', padding: '0.5rem', background: 'rgba(255,255,255,0.1)', borderRadius: '8px', fontSize: '0.9rem'}}>
+            <div>會員狀態: {user.name} (ID: {user.id})</div>
+            <div>今日日期: {date}</div>
+            <div>載入的號碼數量: {userQueue.length}</div>
+          </div>
+        )}
+        
         {/* 會員今日抽號自動顯示 */}
         {user && userQueue.length > 0 && (
-          <div className="user-queue-list">
-            <div style={{marginBottom: '0.5em', fontWeight: 500}}>您今日抽到的號碼：</div>
+          <div className="user-queue-list" style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.1)', borderRadius: '12px', border: '2px solid #2196f3'}}>
+            <div style={{marginBottom: '0.5em', fontWeight: 500, color: '#f7ab5e', fontSize: '1.1rem'}}>您今日抽到的號碼：</div>
             <div style={{display: 'flex', gap: '0.5em', flexWrap: 'wrap'}}>
               {userQueue.map(q => (
                 <button
@@ -169,6 +184,14 @@ function QueueProgress() {
                 </button>
               ))}
             </div>
+          </div>
+        )}
+        
+        {/* 會員但沒有號碼的提示 */}
+        {user && userQueue.length === 0 && (
+          <div style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(255, 193, 7, 0.1)', borderRadius: '12px', border: '2px solid #ffc107', textAlign: 'center'}}>
+            <div style={{color: '#f7ab5e', fontWeight: 500}}>您今日還沒有抽號</div>
+            <div style={{color: '#f7ab5e', fontSize: '0.9rem', marginTop: '0.5rem'}}>請前往現場排隊頁面抽號</div>
           </div>
         )}
         {/* 即時服務狀態卡片區塊 */}
