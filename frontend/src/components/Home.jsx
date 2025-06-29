@@ -59,7 +59,7 @@ function Home() {
       </div>
       {/* 新增首頁下方大按鈕區塊 */}
       <div className="home-action-bar">
-        <Link to="/eva/admin" className="home-action-btn">管理員登入</Link>
+        <Link to="/login?redirect=admin" className="home-action-btn">管理員登入</Link>
       </div>
     </div>
   );
