@@ -873,6 +873,16 @@
       "createdAt": "2025-06-29T12:04:04.589Z",
       "userId": 4,
       "cancelledAt": "2025-06-29T12:10:41.575Z"
+    },
+    {
+      "id": 9009,
+      "designerId": 1,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 6,
+      "createdAt": "2025-06-29T12:49:26.104Z",
+      "userId": 4
     }
   ],
   "reservations": [
