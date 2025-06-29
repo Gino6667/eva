@@ -48,22 +48,26 @@
     {
       "id": 1,
       "name": "洗剪吹",
-      "price": 200
+      "price": 200,
+      "duration": 20
     },
     {
       "id": 2,
       "name": "染髮",
-      "price": 0
+      "price": 0,
+      "duration": 120
     },
     {
       "id": 3,
       "name": "燙髮",
-      "price": 0
+      "price": 0,
+      "duration": 180
     },
     {
       "id": 4,
       "name": "66",
-      "price": 500
+      "price": 500,
+      "duration": 90
     }
   ],
   "queue": [
@@ -1223,5 +1227,6 @@
       [],
       []
     ]
-  }
+  },
+  "transactions": []
 }
