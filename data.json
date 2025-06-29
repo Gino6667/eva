@@ -834,10 +834,11 @@
       "designerId": 2,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "cancelled",
       "number": 2,
       "createdAt": "2025-06-29T11:57:33.457Z",
-      "userId": 4
+      "userId": 4,
+      "cancelledAt": "2025-06-29T12:43:58.149Z"
     },
     {
       "id": 9006,
