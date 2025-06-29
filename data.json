@@ -912,10 +912,11 @@
       "designerId": 2,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 9,
       "createdAt": "2025-06-29T14:30:33.292Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-29T16:56:06.320Z"
     },
     {
       "id": 9013,
