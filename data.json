@@ -937,6 +937,16 @@
       "number": 1,
       "createdAt": "2025-06-29T17:01:27.208Z",
       "userId": 4
+    },
+    {
+      "id": 9015,
+      "designerId": 4,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 2,
+      "createdAt": "2025-06-29T17:07:19.915Z",
+      "userId": 4
     }
   ],
   "reservations": [
