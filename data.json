@@ -1067,8 +1067,9 @@
       "userId": 3,
       "date": "2025-06-29",
       "time": "09:00",
-      "status": "booked",
-      "createdAt": "2025-06-29T15:20:41.480Z"
+      "status": "cancelled",
+      "createdAt": "2025-06-29T15:20:41.480Z",
+      "cancelledAt": "2025-06-29T15:21:38.577Z"
     }
   ],
   "users": [
