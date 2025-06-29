@@ -1071,10 +1071,11 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 11,
       "createdAt": "2025-06-29T19:28:52.335Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-29T19:29:10.984Z"
     }
   ],
   "reservations": [
