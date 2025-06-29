@@ -271,7 +271,7 @@ tr:last-child td {
 }
 
 .nav-toggle {
-  margin-right: 1.5rem;
+  margin-right: 0;
   margin-left: 0;
   background: none;
   border: none;
@@ -287,7 +287,7 @@ tr:last-child td {
 }
 
 .header h1 {
-  flex: 1 1 auto;
+  flex: 1 1 0;
   text-align: center;
   margin: 0;
   padding: 16px 0 0 0;
@@ -303,4 +303,34 @@ tr:last-child td {
   gap: 8px;
   align-items: center;
   margin-left: auto;
+}
+
+@media (max-width: 900px) {
+  .header-content {
+    flex-direction: row;
+    padding: 0 1vw;
+  }
+  .header h1 {
+    font-size: 1.3rem;
+    padding: 8px 0 0 0;
+  }
+  .nav-menu {
+    gap: 4px;
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 600px) {
+  .header-content {
+    flex-direction: row;
+    padding: 0 0.5vw;
+    min-height: 48px;
+  }
+  .header h1 {
+    font-size: 1.1rem;
+    padding: 4px 0 0 0;
+  }
+  .nav-menu {
+    gap: 2px;
+    font-size: 0.9rem;
+  }
 }

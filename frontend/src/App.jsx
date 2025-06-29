@@ -65,30 +65,36 @@ function App() {
         {/* 只有不是 admin 頁面時才顯示 header */}
         {window.location.pathname !== '/eva/admin' && (
         <header className="header">
-          <div className="header-content">
-            <button className="nav-toggle" onClick={() => setNavOpen(v => !v)} aria-label="展開選單">☰</button>
-            <h1>美髮沙龍管理系統</h1>
-            <nav className={`nav-menu${navOpen ? ' open' : ''}`}
-              onMouseLeave={() => setNavOpen(false)}
-            >
-              <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
-              <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
-              <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
-              {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
-              <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上預約</Link>
-              {user ? (
-                <>
-                  {user.role !== 'admin' && (
-                    <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
-                  )}
-                  <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
-                </>
-              ) : (
-                <>
-                  <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>會員登入/註冊</Link>
-                </>
-              )}
-            </nav>
+          <div className="header-content" style={{display:'flex',alignItems:'center',justifyContent:'space-between',width:'100%',padding:'0 2vw',minHeight:'64px'}}>
+            <div style={{flex:'0 0 auto',display:'flex',alignItems:'center'}}>
+              <button className="nav-toggle" onClick={() => setNavOpen(v => !v)} aria-label="展開選單">☰</button>
+            </div>
+            <div style={{flex:'1 1 0',textAlign:'center'}}>
+              <h1 style={{margin:0,padding:'16px 0 0 0',fontSize:'2rem',letterSpacing:'2px',color:'#f7ab5e',minWidth:0}}>美髮沙龍管理系統</h1>
+            </div>
+            <div style={{flex:'0 0 auto',display:'flex',alignItems:'center',justifyContent:'flex-end'}}>
+              <nav className={`nav-menu${navOpen ? ' open' : ''}`}
+                onMouseLeave={() => setNavOpen(false)}
+              >
+                <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
+                <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
+                <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
+                {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
+                <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上預約</Link>
+                {user ? (
+                  <>
+                    {user.role !== 'admin' && (
+                      <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
+                    )}
+                    <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>會員登入/註冊</Link>
+                  </>
+                )}
+              </nav>
+            </div>
           </div>
         </header>
         )}
