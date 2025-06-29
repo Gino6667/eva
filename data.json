@@ -54,8 +54,8 @@
     {
       "id": 2,
       "name": "染髮",
-      "price": 0,
-      "duration": 120
+      "price": 200,
+      "duration": 20
     },
     {
       "id": 3,
