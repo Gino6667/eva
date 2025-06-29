@@ -11,16 +11,6 @@
       ]
     },
     {
-      "id": 2,
-      "name": "阿強",
-      "isPaused": false,
-      "services": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
       "id": 5,
       "name": "阿花"
     }
