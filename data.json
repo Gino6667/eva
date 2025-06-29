@@ -890,10 +890,11 @@
       "designerId": 2,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 7,
       "createdAt": "2025-06-29T12:53:02.137Z",
-      "userId": 4
+      "userId": 4,
+      "checkinAt": "2025-06-29T16:53:10.226Z"
     },
     {
       "id": 9011,
