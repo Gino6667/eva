@@ -1525,10 +1525,11 @@
       "designerId": 10,
       "serviceId": 11,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 49,
       "createdAt": "2025-06-30T13:37:14.954Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-30T16:06:00.723Z"
     }
   ],
   "reservations": [
