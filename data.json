@@ -2045,6 +2045,15 @@
       "category": "服務收入",
       "date": "2025-06-30",
       "customer": ""
+    },
+    {
+      "id": 3,
+      "type": "expense",
+      "amount": 500,
+      "description": "22",
+      "category": "服務收入",
+      "date": "2025-06-30",
+      "customer": ""
     }
   ]
 }
