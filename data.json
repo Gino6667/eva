@@ -1969,6 +1969,13 @@
       "password": "1234",
       "name": "是測試",
       "role": "customer"
+    },
+    {
+      "id": 9,
+      "phone": "0988566541",
+      "password": "1234",
+      "name": "是測試",
+      "role": "customer"
     }
   ],
   "worktime": {
