@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Admin.css';
+import './Finance.css';
 
 function Finance() {
   const navigate = useNavigate();
@@ -77,48 +77,48 @@ function Finance() {
   );
 
   return (
-    <div className="admin-container">
-      <div className="admin-header">
+    <div className="finance-container">
+      <div className="finance-header">
         <h1>財務管理</h1>
         <p>管理收入支出、查看財務報表、分析營運狀況</p>
       </div>
 
       {/* 財務統計 */}
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="number">${financialStats.totalIncome.toLocaleString()}</div>
-          <div className="label">總收入</div>
+      <div className="finance-stats">
+        <div className="finance-stat-card">
+          <div className="finance-stat-number income">${financialStats.totalIncome.toLocaleString()}</div>
+          <div className="finance-stat-label">總收入</div>
         </div>
-        <div className="stat-card">
-          <div className="number">${financialStats.totalExpense.toLocaleString()}</div>
-          <div className="label">總支出</div>
+        <div className="finance-stat-card">
+          <div className="finance-stat-number expense">${financialStats.totalExpense.toLocaleString()}</div>
+          <div className="finance-stat-label">總支出</div>
         </div>
-        <div className="stat-card">
-          <div className="number">${financialStats.netProfit.toLocaleString()}</div>
-          <div className="label">淨利潤</div>
+        <div className="finance-stat-card">
+          <div className="finance-stat-number profit">${financialStats.netProfit.toLocaleString()}</div>
+          <div className="finance-stat-label">淨利潤</div>
         </div>
-        <div className="stat-card">
-          <div className="number">+{financialStats.monthlyGrowth}%</div>
-          <div className="label">月成長率</div>
+        <div className="finance-stat-card">
+          <div className="finance-stat-number growth">+{financialStats.monthlyGrowth}%</div>
+          <div className="finance-stat-label">月成長率</div>
         </div>
       </div>
 
       {/* 標籤頁 */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+      <div className="finance-tabs">
         <button 
-          className={`admin-btn ${activeTab === 'overview' ? 'admin-btn-primary' : 'admin-btn-secondary'}`}
+          className={`finance-tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
           onClick={() => setActiveTab('overview')}
         >
           財務概覽
         </button>
         <button 
-          className={`admin-btn ${activeTab === 'transactions' ? 'admin-btn-primary' : 'admin-btn-secondary'}`}
+          className={`finance-tab-btn ${activeTab === 'transactions' ? 'active' : ''}`}
           onClick={() => setActiveTab('transactions')}
         >
           交易記錄
         </button>
         <button 
-          className={`admin-btn ${activeTab === 'reports' ? 'admin-btn-primary' : 'admin-btn-secondary'}`}
+          className={`finance-tab-btn ${activeTab === 'reports' ? 'active' : ''}`}
           onClick={() => setActiveTab('reports')}
         >
           財務報表
@@ -127,20 +127,20 @@ function Finance() {
 
       {/* 財務概覽 */}
       {activeTab === 'overview' && (
-        <div className="admin-form">
+        <div className="finance-content">
           <h3>財務概覽</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            <div>
+          <div className="finance-analysis">
+            <div className="finance-analysis-item">
               <h4>收入分析</h4>
-              <div style={{ background: '#f8f9fa', padding: '1rem', borderRadius: '8px' }}>
+              <div className="finance-analysis-content">
                 <p>服務收入: ${(financialStats.totalIncome * 0.7).toLocaleString()}</p>
                 <p>預付收入: ${(financialStats.totalIncome * 0.2).toLocaleString()}</p>
                 <p>其他收入: ${(financialStats.totalIncome * 0.1).toLocaleString()}</p>
               </div>
             </div>
-            <div>
+            <div className="finance-analysis-item">
               <h4>支出分析</h4>
-              <div style={{ background: '#f8f9fa', padding: '1rem', borderRadius: '8px' }}>
+              <div className="finance-analysis-content">
                 <p>材料成本: ${(financialStats.totalExpense * 0.4).toLocaleString()}</p>
                 <p>營運成本: ${(financialStats.totalExpense * 0.3).toLocaleString()}</p>
                 <p>人事成本: ${(financialStats.totalExpense * 0.3).toLocaleString()}</p>
@@ -152,9 +152,9 @@ function Finance() {
 
       {/* 交易記錄 */}
       {activeTab === 'transactions' && (
-        <div>
+        <div className="finance-content">
           {/* 搜尋和篩選 */}
-          <div className="admin-filters">
+          <div className="finance-filters">
             <input
               type="text"
               placeholder="搜尋交易記錄..."
@@ -167,7 +167,7 @@ function Finance() {
               <option value="expense">支出</option>
             </select>
             <button 
-              className="admin-btn admin-btn-success"
+              className="finance-btn finance-btn-success"
               onClick={() => setShowAddForm(true)}
             >
               新增交易
@@ -176,10 +176,10 @@ function Finance() {
 
           {/* 新增交易表單 */}
           {showAddForm && (
-            <div className="admin-form">
+            <div className="finance-form">
               <h3>新增交易記錄</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                <div className="form-group">
+              <div className="finance-form-grid">
+                <div className="finance-form-group">
                   <label>類型</label>
                   <select 
                     value={newTransaction.type} 
@@ -189,7 +189,7 @@ function Finance() {
                     <option value="expense">支出</option>
                   </select>
                 </div>
-                <div className="form-group">
+                <div className="finance-form-group">
                   <label>金額</label>
                   <input
                     type="number"
@@ -198,7 +198,7 @@ function Finance() {
                     placeholder="請輸入金額"
                   />
                 </div>
-                <div className="form-group">
+                <div className="finance-form-group">
                   <label>日期</label>
                   <input
                     type="date"
@@ -206,7 +206,7 @@ function Finance() {
                     onChange={(e) => setNewTransaction({...newTransaction, date: e.target.value})}
                   />
                 </div>
-                <div className="form-group">
+                <div className="finance-form-group">
                   <label>類別</label>
                   <select 
                     value={newTransaction.category} 
@@ -221,7 +221,7 @@ function Finance() {
                   </select>
                 </div>
               </div>
-              <div className="form-group">
+              <div className="finance-form-group">
                 <label>描述</label>
                 <input
                   type="text"
@@ -231,10 +231,10 @@ function Finance() {
                 />
               </div>
               <div style={{ display: 'flex', gap: '1rem' }}>
-                <button className="admin-btn admin-btn-success" onClick={handleAddTransaction}>
+                <button className="finance-btn finance-btn-success" onClick={handleAddTransaction}>
                   新增
                 </button>
-                <button className="admin-btn admin-btn-secondary" onClick={() => setShowAddForm(false)}>
+                <button className="finance-btn finance-btn-secondary" onClick={() => setShowAddForm(false)}>
                   取消
                 </button>
               </div>
@@ -242,7 +242,7 @@ function Finance() {
           )}
 
           {/* 交易記錄表格 */}
-          <div className="admin-table">
+          <div className="finance-table">
             <table>
               <thead>
                 <tr>
@@ -260,24 +260,21 @@ function Finance() {
                   <tr key={transaction.id}>
                     <td>{transaction.date}</td>
                     <td>
-                      <span style={{ 
-                        color: transaction.type === 'income' ? '#28a745' : '#dc3545',
-                        fontWeight: 'bold'
-                      }}>
+                      <span className={`transaction-type ${transaction.type}`}>
                         {transaction.type === 'income' ? '收入' : '支出'}
                       </span>
                     </td>
-                    <td style={{ fontWeight: 'bold' }}>
+                    <td className="transaction-amount">
                       ${transaction.amount.toLocaleString()}
                     </td>
                     <td>{transaction.category}</td>
                     <td>{transaction.description}</td>
                     <td>{transaction.customer || '-'}</td>
                     <td>
-                      <button className="admin-btn admin-btn-warning" style={{ fontSize: '0.8rem' }}>
+                      <button className="finance-btn finance-btn-warning" style={{ fontSize: '0.8rem' }}>
                         編輯
                       </button>
-                      <button className="admin-btn admin-btn-danger" style={{ fontSize: '0.8rem' }}>
+                      <button className="finance-btn finance-btn-danger" style={{ fontSize: '0.8rem' }}>
                         刪除
                       </button>
                     </td>
@@ -289,7 +286,7 @@ function Finance() {
 
           {/* 分頁 */}
           {totalPages > 1 && (
-            <div className="admin-pagination">
+            <div className="finance-pagination">
               <button 
                 onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
@@ -318,18 +315,22 @@ function Finance() {
 
       {/* 財務報表 */}
       {activeTab === 'reports' && (
-        <div className="admin-form">
+        <div className="finance-content">
           <h3>財務報表</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            <div>
+          <div className="finance-analysis">
+            <div className="finance-analysis-item">
               <h4>月度報表</h4>
-              <button className="admin-btn admin-btn-primary">下載 PDF</button>
-              <button className="admin-btn admin-btn-secondary">下載 Excel</button>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button className="finance-btn finance-btn-primary">下載 PDF</button>
+                <button className="finance-btn finance-btn-secondary">下載 Excel</button>
+              </div>
             </div>
-            <div>
+            <div className="finance-analysis-item">
               <h4>年度報表</h4>
-              <button className="admin-btn admin-btn-primary">下載 PDF</button>
-              <button className="admin-btn admin-btn-secondary">下載 Excel</button>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button className="finance-btn finance-btn-primary">下載 PDF</button>
+                <button className="finance-btn finance-btn-secondary">下載 Excel</button>
+              </div>
             </div>
           </div>
         </div>
@@ -337,7 +338,7 @@ function Finance() {
 
       {/* 返回按鈕 */}
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <button className="admin-btn admin-btn-secondary" onClick={() => navigate('/admin')}>
+        <button className="finance-btn finance-btn-secondary" onClick={() => navigate('/admin')}>
           返回管理後台
         </button>
       </div>

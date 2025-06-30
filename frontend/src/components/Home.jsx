@@ -28,11 +28,11 @@ function Home() {
   return (
     <div className="home">
       {/* 右上角登出按鈕 */}
-      {user && (
+      {/* {user && (
         <button className="btn btn-logout" style={{position: 'absolute', top: 24, right: 32, zIndex: 10}} onClick={handleLogout}>
           登出
         </button>
-      )}
+      )} */}
       <div className="features">
         <Link to="/queue" className="feature-card primary feature-link">
           <div className="feature-icon">🎯</div>
@@ -40,14 +40,14 @@ function Home() {
           <p>即時查看排隊狀況，快速抽號服務</p>
         </Link>
         <Link to="/reservation" className="feature-card primary feature-link">
-          <div className="feature-icon">📅</div>
-          <h3>線上預約</h3>
-          <p>提前預約指定設計師，享受專屬服務</p>
+          <div className="feature-icon">🎫</div>
+          <h3>線上抽號</h3>
+          <p>在家也能輕鬆抽號，不用到現場排隊</p>
         </Link>
         <Link to="/queue-progress" className="feature-card primary feature-link">
           <div className="feature-icon">🔍</div>
           <h3>即時看板</h3>
-          <p>查詢您的排隊進度，掌握等待時間</p>
+          <p>查詢您的即時看板，掌握等待時間</p>
         </Link>
         {user && user.role !== 'admin' && (
           <Link to="/profile" className="feature-card primary feature-link">

@@ -72,8 +72,10 @@ function Register({ setUser }) {
       navigate('/queue');
     } else if (redirect === 'reservation') {
       navigate('/reservation');
+    } else if (redirect) {
+      navigate('/' + redirect);
     } else {
-      navigate('/');
+      navigate(-1); // 回上一頁
     }
   };
 
@@ -137,16 +139,14 @@ function Register({ setUser }) {
             <strong>注意：</strong>信箱和手機號碼至少需要填寫一項
           </div>
           <div className="button-group">
-            {redirect && (
-              <button 
-                type="button"
-                onClick={handleGoBack}
-                className="btn btn-secondary"
-                style={{marginRight: '1em'}}
-              >
-                返回
-              </button>
-            )}
+            <button 
+              type="button"
+              onClick={handleGoBack}
+              className="btn btn-secondary"
+              style={{marginRight: '1em'}}
+            >
+              返回
+            </button>
             <button 
               type="submit" 
               className="btn btn-primary"

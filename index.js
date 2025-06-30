@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const simpleGit = require('simple-git');
@@ -7,11 +6,31 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 
 const app = express();
-app.use(cors({
-  origin: ['https://gino6667.github.io', 'https://gino6667.github.io/eva'],
-  credentials: true
-}));
 app.use(express.json());
+
+// 簡化的 CORS 處理
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://gino6667.github.io'
+  ];
+  
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+  if (req.method === 'OPTIONS') {
+    res.status(204).end();
+    return;
+  }
+  next();
+});
 
 const DATA_PATH = path.join(__dirname, 'data.json');
 const git = simpleGit();
@@ -136,62 +155,68 @@ app.get('/api/users', (req, res) => {
 
 // 新增抽號
 app.post('/api/queue', (req, res) => {
-  const data = getData();
-  let { designerId, serviceId, type, userId } = req.body;
-  // 營業時間檢查
-  const worktime = data.worktime || {};
-  const now = new Date();
-  const week = now.getDay();
-  if (!worktime.openDays?.[week]) return res.status(400).json({ error: '非營業日不可抽號' });
-  const open = worktime.openTimes?.[week]?.start;
-  const close = worktime.openTimes?.[week]?.end;
-  if (open && close) {
-    const nowStr = now.toTimeString().slice(0,5);
-    if (nowStr < open || nowStr >= close) {
-      return res.status(400).json({ error: '非營業時間不可抽號' });
+  try {
+    const data = getData();
+    const { designerId, serviceId, userId, type } = req.body;
+    if (!designerId || !serviceId || serviceId === 0) {
+      return res.status(400).json({ error: 'designerId 和 serviceId 必填且有效' });
     }
-  }
-  // 若 designerId 為 0，優先分配空閒設計師，否則分配給 queue 最少的設計師
-  if (designerId === 0 || designerId === '0') {
-    let designers = data.designers.filter(d => !d.isPaused);
-    if (designers.length > 0) {
-      // 找出所有沒客人的設計師（沒有 waiting/called 狀態的 queue）
-      const busyDesignerIds = data.queue.filter(q => q.status === 'waiting' || q.status === 'called').map(q => q.designerId);
-      const freeDesigners = designers.filter(d => !busyDesignerIds.includes(d.id));
-      let assignList = freeDesigners;
-      
-      if (assignList.length === 0) {
-        // 如果沒有空閒設計師，則按順序分配（照設計師 ID 順序）
-        assignList = designers.sort((a, b) => a.id - b.id);
+    // 營業時間檢查
+    const worktime = data.worktime || {};
+    const now = new Date();
+    const week = now.getDay();
+    if (!worktime.openDays?.[week]) return res.status(400).json({ error: '非營業日不可抽號' });
+    const open = worktime.openTimes?.[week]?.start;
+    const close = worktime.openTimes?.[week]?.end;
+    if (open && close) {
+      const nowStr = now.toTimeString().slice(0,5);
+      if (nowStr < open || nowStr >= close) {
+        return res.status(400).json({ error: '非營業時間不可抽號' });
       }
-      
-      // 選擇第一位設計師（優先順序：空閒 > 順序）
-      designerId = assignList[0].id;
     }
-  } else {
-    // 指定設計師時，若該設計師 isPaused，則回傳錯誤
-    const designer = data.designers.find(d => d.id === Number(designerId));
-    if (designer && designer.isPaused) {
-      return res.status(400).json({ error: '該設計師今日暫停接客' });
+    if (designerId === 0 || designerId === '0') {
+      let designers = data.designers.filter(d => !d.isPaused);
+      if (designers.length > 0) {
+        const busyDesignerIds = data.queue.filter(q => q.status === 'waiting' || q.status === 'called').map(q => q.designerId);
+        const freeDesigners = designers.filter(d => !busyDesignerIds.includes(d.id));
+        let assignList = freeDesigners;
+        if (assignList.length === 0) {
+          assignList = designers.sort((a, b) => a.id - b.id);
+        }
+        designerId = assignList[0].id;
+      }
+    } else {
+      const designer = data.designers.find(d => d.id === Number(designerId));
+      if (!designer) {
+        return res.status(400).json({ error: '找不到設計師' });
+      }
+      if (designer.isPaused) {
+        return res.status(400).json({ error: '該設計師今日暫停接客' });
+      }
+      if (!designer.services || !designer.services.includes(Number(serviceId))) {
+        return res.status(400).json({ error: '該設計師未提供此服務' });
+      }
     }
+    const todayQueue = data.queue.filter(q => isToday(q.createdAt));
+    const newId = data.queue.length ? Math.max(...data.queue.map(q => q.id)) + 1 : 1;
+    const newNumber = todayQueue.length ? Math.max(...todayQueue.map(q => q.number)) + 1 : 1;
+    const newQueue = {
+      id: newId,
+      designerId,
+      serviceId,
+      type,
+      status: 'waiting',
+      number: newNumber,
+      createdAt: new Date().toISOString(),
+      userId: userId || null
+    };
+    data.queue.push(newQueue);
+    saveData(data);
+    res.json(newQueue);
+  } catch (err) {
+    console.error('抽號失敗:', err);
+    res.status(500).json({ error: '抽號失敗: ' + (err.message || err) });
   }
-  // 只取今天的 queue 計算號碼
-  const todayQueue = data.queue.filter(q => isToday(q.createdAt));
-  const newId = data.queue.length ? Math.max(...data.queue.map(q => q.id)) + 1 : 1;
-  const newNumber = todayQueue.length ? Math.max(...todayQueue.map(q => q.number)) + 1 : 1;
-  const newQueue = {
-    id: newId,
-    designerId,
-    serviceId,
-    type, // 'onsite' or 'online'
-    status: 'waiting',
-    number: newNumber,
-    createdAt: new Date().toISOString(),
-    userId: userId || null
-  };
-  data.queue.push(newQueue);
-  saveData(data);
-  res.json(newQueue);
 });
 
 // 新增預約
@@ -494,18 +519,53 @@ app.post('/api/profile', auth, (req, res) => {
 // 新增會員註冊
 app.post('/api/register', (req, res) => {
   const data = getData();
-  const { email, password, name } = req.body;
-  if (!email || !password || !name) return res.status(400).json({ error: '缺少欄位' });
-  if (data.users.find(u => u.email === email)) {
+  const { email, password, name, phone, role = 'user' } = req.body;
+  if (!password || !name) return res.status(400).json({ error: '缺少必要欄位' });
+  
+  // 檢查 email 是否已被註冊
+  if (email && data.users.find(u => u.email === email)) {
     return res.status(400).json({ error: 'Email 已被註冊' });
   }
+  
+  // 檢查 phone 是否已被註冊
+  if (phone && data.users.find(u => u.phone === phone)) {
+    return res.status(400).json({ error: '手機號碼已被註冊' });
+  }
+  
   const newId = data.users.length ? Math.max(...data.users.map(u => u.id)) + 1 : 1;
-  const newUser = { id: newId, email, password, name };
+  const newUser = { 
+    id: newId, 
+    email, 
+    phone,
+    password, 
+    name,
+    role: role || 'user' // 預設為一般用戶
+  };
   data.users.push(newUser);
   saveData(data);
-  // 自動登入
-  const token = jwt.sign({ id: newUser.id, email: newUser.email }, JWT_SECRET, { expiresIn: '7d' });
-  res.json({ token, user: { id: newUser.id, email: newUser.email, name: newUser.name } });
+  
+  // 如果是管理員新增的帳號，不自動登入
+  if (role === 'admin' || role === 'designer') {
+    res.json({ success: true, message: '新增帳號成功' });
+  } else {
+    // 一般用戶註冊自動登入
+    const token = jwt.sign({ 
+      id: newUser.id, 
+      email: newUser.email, 
+      phone: newUser.phone,
+      role: newUser.role 
+    }, JWT_SECRET, { expiresIn: '7d' });
+    res.json({ 
+      token, 
+      user: { 
+        id: newUser.id, 
+        email: newUser.email, 
+        phone: newUser.phone,
+        name: newUser.name,
+        role: newUser.role 
+      } 
+    });
+  }
 });
 
 // 登入
@@ -576,6 +636,36 @@ app.patch('/api/users/:id', auth, (req, res) => {
   res.json({ id: user.id, email: user.email, name: user.name });
 });
 
+// 刪除用戶
+app.delete('/api/users/:id', auth, (req, res) => {
+  const data = getData();
+  const id = Number(req.params.id);
+  const index = data.users.findIndex(u => u.id === id);
+  
+  if (index === -1) {
+    return res.status(404).json({ error: '找不到用戶' });
+  }
+  
+  const user = data.users[index];
+  
+  // 防止刪除自己
+  if (user.id === req.user.id) {
+    return res.status(400).json({ error: '不能刪除自己的帳號' });
+  }
+  
+  // 防止刪除最後一個管理員
+  if (user.role === 'admin') {
+    const adminCount = data.users.filter(u => u.role === 'admin').length;
+    if (adminCount <= 1) {
+      return res.status(400).json({ error: '不能刪除最後一個管理員' });
+    }
+  }
+  
+  data.users.splice(index, 1);
+  saveData(data);
+  res.json({ success: true, message: '刪除用戶成功' });
+});
+
 // 叫號（將第一位 waiting 狀態改為 called）
 app.post('/api/queue/call', (req, res) => {
   const data = getData();
@@ -624,10 +714,14 @@ app.post('/api/queue/absent', (req, res) => {
 // 新增設計師
 app.post('/api/designers', (req, res) => {
   const data = getData();
-  const { name } = req.body;
+  const { name, services } = req.body;
   if (!name) return res.status(400).json({ error: '請輸入設計師名稱' });
   const newId = data.designers.length ? Math.max(...data.designers.map(d => d.id)) + 1 : 1;
-  const newDesigner = { id: newId, name };
+  const newDesigner = { 
+    id: newId, 
+    name,
+    services: services || [1, 2, 3] // 預設提供所有服務
+  };
   data.designers.push(newDesigner);
   saveData(data);
   res.json(newDesigner);
@@ -647,10 +741,15 @@ app.delete('/api/designers/:id', (req, res) => {
 // 新增服務項目
 app.post('/api/services', (req, res) => {
   const data = getData();
-  const { name, price } = req.body;
+  const { name, price, duration } = req.body;
   if (!name) return res.status(400).json({ error: '請輸入服務名稱' });
   const newId = data.services.length ? Math.max(...data.services.map(s => s.id)) + 1 : 1;
-  const newService = { id: newId, name, price: typeof price === 'number' ? price : 0 };
+  const newService = { 
+    id: newId, 
+    name, 
+    price: typeof price === 'number' ? price : 0,
+    duration: typeof duration === 'number' ? duration : 60 // 預設 60 分鐘
+  };
   data.services.push(newService);
   saveData(data);
   res.json(newService);
@@ -693,12 +792,42 @@ app.patch('/api/designers/:id/pause', (req, res) => {
 
 // 修改 queue 的設計師
 app.patch('/api/queue/:id', (req, res) => {
+  const { serviceId } = req.body;
+  if (serviceId === undefined || serviceId === 0) {
+    return res.status(400).json({ error: 'serviceId 必填且有效' });
+  }
   const data = getData();
   const id = Number(req.params.id);
-  const { designerId } = req.body;
   const queueItem = data.queue.find(q => q.id === id);
   if (!queueItem) return res.status(404).json({ error: '找不到該號碼' });
-  queueItem.designerId = designerId;
+  queueItem.designerId = Number(req.body.designerId);
+  saveData(data);
+  res.json(queueItem);
+});
+
+// 取消現場排隊
+app.patch('/api/queue/:id/cancel', auth, (req, res) => {
+  const data = getData();
+  const queueId = Number(req.params.id);
+  const queueItem = data.queue.find(q => q.id === queueId);
+  
+  if (!queueItem) {
+    return res.status(404).json({ error: '找不到該排隊項目' });
+  }
+  
+  // 檢查權限（只能取消自己的排隊）
+  if (queueItem.userId !== req.user.id) {
+    return res.status(403).json({ error: '無權限取消此排隊' });
+  }
+  
+  // 只能取消等待中的排隊
+  if (queueItem.status !== 'waiting') {
+    return res.status(400).json({ error: '只能取消等待中的排隊' });
+  }
+  
+  queueItem.status = 'cancelled';
+  queueItem.cancelledAt = new Date().toISOString();
+  
   saveData(data);
   res.json(queueItem);
 });
@@ -768,12 +897,25 @@ app.get('/api/reports/revenue', (req, res) => {
         date: key,
         revenue: 0,
         count: 0,
-        services: {}
+        services: {},
+        designerStats: {
+          specified: { count: 0, revenue: 0 },
+          unspecified: { count: 0, revenue: 0 }
+        }
       };
     }
     
     revenueData[key].revenue += amount;
     revenueData[key].count += 1;
+    
+    // 統計指定設計師 vs 未指定設計師
+    if (reservation.designerId) {
+      revenueData[key].designerStats.specified.count += 1;
+      revenueData[key].designerStats.specified.revenue += amount;
+    } else {
+      revenueData[key].designerStats.unspecified.count += 1;
+      revenueData[key].designerStats.unspecified.revenue += amount;
+    }
     
     const serviceName = service?.name || '未知服務';
     if (!revenueData[key].services[serviceName]) {
@@ -785,11 +927,53 @@ app.get('/api/reports/revenue', (req, res) => {
   
   const result = Object.values(revenueData).sort((a, b) => a.date.localeCompare(b.date));
   
+  // 計算總計統計
+  const totalSpecified = result.reduce((sum, item) => sum + item.designerStats.specified.count, 0);
+  const totalUnspecified = result.reduce((sum, item) => sum + item.designerStats.unspecified.count, 0);
+  const totalSpecifiedRevenue = result.reduce((sum, item) => sum + item.designerStats.specified.revenue, 0);
+  const totalUnspecifiedRevenue = result.reduce((sum, item) => sum + item.designerStats.unspecified.revenue, 0);
+  
+  // 統計每位被指定設計師的預約數與營業額
+  const designerMap = {};
+  reservations.forEach(reservation => {
+    if (reservation.designerId) {
+      const designer = data.designers.find(d => d.id === Number(reservation.designerId));
+      const designerName = designer ? designer.name : `ID:${reservation.designerId}`;
+      if (!designerMap[reservation.designerId]) {
+        designerMap[reservation.designerId] = {
+          designerId: reservation.designerId,
+          designerName,
+          count: 0,
+          revenue: 0
+        };
+      }
+      const service = data.services.find(s => s.id === reservation.serviceId);
+      const amount = service?.price || 0;
+      designerMap[reservation.designerId].count += 1;
+      designerMap[reservation.designerId].revenue += amount;
+    }
+  });
+  
   res.json({
     summary: {
       totalRevenue: result.reduce((sum, item) => sum + item.revenue, 0),
       totalCount: result.reduce((sum, item) => sum + item.count, 0),
-      averageRevenue: result.length > 0 ? result.reduce((sum, item) => sum + item.revenue, 0) / result.length : 0
+      averageRevenue: result.length > 0 ? result.reduce((sum, item) => sum + item.revenue, 0) / result.length : 0,
+      designerStats: {
+        specified: {
+          count: totalSpecified,
+          revenue: totalSpecifiedRevenue,
+          percentage: result.reduce((sum, item) => sum + item.count, 0) > 0 ? 
+            Math.round((totalSpecified / result.reduce((sum, item) => sum + item.count, 0)) * 100) : 0
+        },
+        unspecified: {
+          count: totalUnspecified,
+          revenue: totalUnspecifiedRevenue,
+          percentage: result.reduce((sum, item) => sum + item.count, 0) > 0 ? 
+            Math.round((totalUnspecified / result.reduce((sum, item) => sum + item.count, 0)) * 100) : 0
+        },
+        list: Object.values(designerMap)
+      }
     },
     data: result
   });
@@ -1630,7 +1814,7 @@ app.patch('/api/designers/:id/profile', (req, res) => {
   
   const { 
     name, phone, email, experience, education, skills, 
-    certifications, schedule, commissionRate, bio 
+    certifications, schedule, commissionRate, bio, services 
   } = req.body;
   
   if (name) designer.name = name;
@@ -1643,6 +1827,7 @@ app.patch('/api/designers/:id/profile', (req, res) => {
   if (schedule) designer.schedule = schedule;
   if (commissionRate !== undefined) designer.commissionRate = Number(commissionRate);
   if (bio) designer.bio = bio;
+  if (services !== undefined) designer.services = services;
   
   saveData(data);
   res.json(designer);
@@ -1972,11 +2157,13 @@ app.get('/api/queue/today-stats', (req, res) => {
     
     // 當前正在服務的號碼
     const currentServing = todayQueue
-      .filter(q => q.status === 'called')
+      .filter(q => q.status === 'called' || q.status === 'serving')
       .map(q => ({
+        id: q.id, // 加入 queueId
         number: q.number,
         designerId: q.designerId,
         designerName: data.designers.find(d => d.id === q.designerId)?.name || '未知設計師',
+        serviceId: q.serviceId, // 新增這一行
         serviceName: data.services.find(s => s.id === q.serviceId)?.name || '未知服務'
       }));
     
@@ -2100,4 +2287,269 @@ app.get('/api/queue/designer/:designerId', (req, res) => {
     total: todayQueue.length,
     queueItems: todayQueue
   });
+});
+
+// 獲取下一位客人資訊
+app.get('/api/queue/next-in-queue', (req, res) => {
+  const data = getData();
+  const today = new Date().toISOString().slice(0, 10);
+  const todayQueue = data.queue.filter(q => q.createdAt.slice(0, 10) === today);
+
+  // 依設計師分組
+  const result = data.designers
+    .filter(designer => designer.name !== '不指定')
+    .map(designer => {
+      // 取得該設計師所有 waiting 狀態的 queue
+      const designerQueue = todayQueue.filter(q => q.designerId === designer.id && q.status === 'waiting');
+      if (designerQueue.length === 0) return null;
+
+      // 分成正常 waiting 與過號回來 waiting
+      const normalWaiting = designerQueue.filter(q => !q.absentAt || (q.absentAt && !q.checkinAt));
+      const returnedAbsent = designerQueue.filter(q => q.absentAt && q.checkinAt);
+      // 依號碼排序
+      normalWaiting.sort((a, b) => a.number - b.number);
+      // 過號回來依報到時間排序
+      returnedAbsent.sort((a, b) => new Date(a.checkinAt) - new Date(b.checkinAt));
+
+      // 間隔插入
+      const merged = [];
+      let i = 0, j = 0;
+      while (i < normalWaiting.length || j < returnedAbsent.length) {
+        if (i < normalWaiting.length) {
+          merged.push(normalWaiting[i]);
+          i++;
+        }
+        if (j < returnedAbsent.length) {
+          merged.push(returnedAbsent[j]);
+          j++;
+        }
+      }
+      // 取第一位作為 next-in-queue
+      const next = merged[0];
+      if (!next) return null;
+      return {
+        id: next.id, // 加入 id
+        designerId: designer.id,
+        designerName: designer.name,
+        number: next.number,
+        serviceId: next.serviceId,
+        serviceName: data.services.find(s => s.id === Number(next.serviceId))?.name || '未知服務',
+        createdAt: next.createdAt
+      };
+    })
+    .filter(item => item !== null);
+
+  
+  res.json(result);
+});
+
+// 查詢我的現場排隊紀錄（需要登入）
+app.get('/api/my-queue', auth, (req, res) => {
+  const data = getData();
+  const userId = req.user.id;
+  const today = new Date().toISOString().slice(0, 10);
+  const result = (data.queue || [])
+    .filter(q => q.userId === userId && q.createdAt.slice(0, 10) === today)
+    .map(q => ({
+      ...q,
+      designerName: data.designers.find(d => d.id === q.designerId)?.name || '未知設計師',
+      serviceName: data.services.find(s => s.id === q.serviceId)?.name || '未知服務'
+    }))
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  res.json(result);
+});
+
+// 會員取消自己的現場排隊
+app.patch('/api/queue/:id/cancel', auth, (req, res) => {
+  const data = getData();
+  const queueId = Number(req.params.id);
+  const queueItem = (data.queue || []).find(q => q.id === queueId);
+  if (!queueItem) return res.status(404).json({ error: '找不到該號碼' });
+  if (queueItem.userId !== req.user.id) return res.status(403).json({ error: '無權限取消此號碼' });
+  if (queueItem.status !== 'waiting') return res.status(400).json({ error: '僅可取消等待中的號碼' });
+  queueItem.status = 'cancelled';
+  queueItem.cancelledAt = new Date().toISOString();
+  saveData(data);
+  res.json(queueItem);
+});
+
+// 報到 API
+app.post('/api/queue/checkin', (req, res) => {
+  const data = getData();
+  const { designerId, number } = req.body;
+
+  // 找到該設計師的 waiting 狀態、號碼最小的客人
+  const queueItem = data.queue.find(q =>
+    q.designerId === Number(designerId) &&
+    q.number === Number(number) &&
+    q.status === 'waiting'
+  );
+
+  if (!queueItem) {
+    return res.status(404).json({ error: '找不到該客人或已非等待狀態' });
+  }
+
+  // 將該客人狀態設為 serving
+  queueItem.status = 'serving';
+  queueItem.checkinAt = new Date().toISOString();
+
+  saveData(data);
+
+  res.json({ success: true, queueItem });
+});
+
+// 編輯服務項目
+app.patch('/api/services/:id', (req, res) => {
+  const data = getData();
+  const id = Number(req.params.id);
+  const service = data.services.find(s => s.id === id);
+  if (!service) return res.status(404).json({ error: '找不到服務項目' });
+  const { name, price, duration, status } = req.body;
+  if (name) service.name = name;
+  if (price !== undefined) service.price = price;
+  if (duration !== undefined) service.duration = duration;
+  if (status) service.status = status; // 新增這一行
+  saveData(data);
+  res.json(service);
+});
+
+// ==================== 財務交易資料 API ====================
+
+// 取得所有交易（支援 type、search、分頁）
+app.get('/api/transactions', (req, res) => {
+  const data = getData();
+  let transactions = data.transactions || [];
+  const { type, search, page = 1, pageSize = 20 } = req.query;
+
+  if (type && type !== 'all') {
+    transactions = transactions.filter(t => t.type === type);
+  }
+  if (search) {
+    const s = search.toLowerCase();
+    transactions = transactions.filter(t =>
+      (t.description || '').toLowerCase().includes(s) ||
+      (t.customer || '').toLowerCase().includes(s)
+    );
+  }
+  // 分頁
+  const total = transactions.length;
+  const p = Number(page);
+  const ps = Number(pageSize);
+  const paged = transactions.slice((p - 1) * ps, p * ps);
+  res.json({ total, page: p, pageSize: ps, data: paged });
+});
+
+// 新增交易
+app.post('/api/transactions', (req, res) => {
+  const data = getData();
+  const { type, amount, description, category, date, customer } = req.body;
+  if (!type || !amount || !description || !category || !date) {
+    return res.status(400).json({ error: '缺少必要欄位' });
+  }
+  const newId = data.transactions.length ? Math.max(...data.transactions.map(t => t.id)) + 1 : 1;
+  const transaction = {
+    id: newId,
+    type,
+    amount: Number(amount),
+    description,
+    category,
+    date,
+    customer: customer || ''
+  };
+  data.transactions.push(transaction);
+  saveData(data);
+  res.json(transaction);
+});
+
+// 編輯交易
+app.patch('/api/transactions/:id', (req, res) => {
+  const data = getData();
+  const id = Number(req.params.id);
+  const transaction = data.transactions.find(t => t.id === id);
+  if (!transaction) return res.status(404).json({ error: '找不到交易' });
+  const { type, amount, description, category, date, customer } = req.body;
+  if (type) transaction.type = type;
+  if (amount !== undefined) transaction.amount = Number(amount);
+  if (description) transaction.description = description;
+  if (category) transaction.category = category;
+  if (date) transaction.date = date;
+  if (customer !== undefined) transaction.customer = customer;
+  saveData(data);
+  res.json(transaction);
+});
+
+// 刪除交易
+app.delete('/api/transactions/:id', (req, res) => {
+  const data = getData();
+  const id = Number(req.params.id);
+  const idx = data.transactions.findIndex(t => t.id === id);
+  if (idx === -1) return res.status(404).json({ error: '找不到交易' });
+  data.transactions.splice(idx, 1);
+  saveData(data);
+  res.json({ success: true });
+});
+
+// 完成服務 API
+app.patch('/api/queue/:id/complete', (req, res) => {
+  const data = getData();
+  const queueId = Number(req.params.id);
+  const { designerId, number } = req.body;
+  
+  // 找到對應的排隊項目
+  const queueItem = data.queue.find(q => q.id === queueId);
+  
+  if (!queueItem) {
+    return res.status(404).json({ error: '找不到該排隊項目' });
+  }
+  
+  // 驗證設計師和號碼是否匹配
+  if (queueItem.designerId !== Number(designerId) || queueItem.number !== Number(number)) {
+    return res.status(400).json({ error: '設計師或號碼不匹配' });
+  }
+  
+  // 將狀態改為完成
+  queueItem.status = 'done';
+  queueItem.completedAt = new Date().toISOString();
+
+  // 方案一：自動新增 reservation 並設為 completed
+  if (queueItem.userId) {
+    const dateObj = new Date(queueItem.createdAt);
+    const date = dateObj.toISOString().split('T')[0];
+    const time = '09:00'; // 預設時間
+    const newId = data.reservations.length ? Math.max(...data.reservations.map(r => r.id)) + 1 : 1;
+    const newReservation = {
+      id: newId,
+      designerId: queueItem.designerId,
+      serviceId: queueItem.serviceId,
+      userId: queueItem.userId,
+      date,
+      time,
+      status: 'completed',
+      createdAt: new Date().toISOString(),
+      completedAt: new Date().toISOString()
+    };
+    data.reservations.push(newReservation);
+  }
+
+  saveData(data);
+  
+  res.json({ 
+    success: true, 
+    message: '服務完成',
+    queueItem 
+  });
+});
+
+// 過號 API
+app.patch('/api/queue/:id/absent', (req, res) => {
+  const data = getData();
+  const queueId = Number(req.params.id);
+  const queueItem = data.queue.find(q => q.id === queueId);
+  if (!queueItem) {
+    return res.status(404).json({ error: '找不到該排隊項目' });
+  }
+  queueItem.status = 'absent';
+  queueItem.absentAt = new Date().toISOString();
+  saveData(data);
+  res.json({ success: true, queueItem });
 });

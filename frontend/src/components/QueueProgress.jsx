@@ -32,7 +32,25 @@ function QueueProgress() {
       loadCurrentServing();
       loadNextInQueue();
     }, 60000);
-    return () => clearInterval(interval);
+    // 新增 queue-updated 事件監聽
+    const reload = () => { if (user) loadUserQueue(); };
+    window.addEventListener('queue-updated', reload);
+    
+    // 監聽設計師狀態變更事件
+    const handleDesignerStateChange = () => {
+      console.log('QueueProgress: 收到設計師狀態變更事件，重新載入資料');
+      loadDesigners();
+      loadCurrentServing();
+      loadNextInQueue();
+    };
+    
+    window.addEventListener('designer-state-changed', handleDesignerStateChange);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('queue-updated', reload);
+      window.removeEventListener('designer-state-changed', handleDesignerStateChange);
+    };
   }, [user, date]);
 
   const loadTodayStats = async () => {
@@ -78,9 +96,9 @@ function QueueProgress() {
       console.log('載入會員號碼，用戶ID:', user.id);
       const res = await axios.get(`/api/queue/user/${user.id}`);
       console.log('會員號碼API回應:', res.data);
-      // 只顯示今日的號碼
+      // 只顯示今日且未取消的號碼
       const today = date;
-      const todayQueues = res.data.filter(q => q.createdAt.slice(0,10) === today);
+      const todayQueues = res.data.filter(q => q.createdAt.slice(0,10) === today && q.status !== 'cancelled');
       console.log('今日號碼:', todayQueues);
       setUserQueue(todayQueues);
     } catch (err) {
@@ -149,29 +167,17 @@ function QueueProgress() {
     <div className="queue-progress-container">
       <div className="queue-progress-card">
         <h2>即時看板</h2>
-        {todayStats && (
-          <div className="today-stats" style={{marginBottom:'2.2rem'}}>
-            <div className="stats-grid">
-              <div className="stat-item">
-                <span className="stat-number waiting">{todayStats.waiting}</span>
-                <span className="stat-label">目前排隊中人數</span>
-              </div>
-            </div>
-          </div>
-        )}
-        
         {/* 除錯資訊 */}
         {user && (
-          <div style={{marginBottom: '1rem', padding: '0.5rem', background: 'rgba(255,255,255,0.1)', borderRadius: '8px', fontSize: '0.9rem'}}>
-            <div>會員狀態: {user.name} (ID: {user.id})</div>
+          <div style={{marginBottom: '1rem', padding: '0.5rem', background: 'transparent', borderRadius: '8px', fontSize: '0.9rem'}}>
+            <div>會員狀態: {user.name}（已登入）</div>
             <div>今日日期: {date}</div>
-            <div>載入的號碼數量: {userQueue.length}</div>
           </div>
         )}
         
         {/* 會員今日抽號自動顯示 */}
         {user && userQueue.length > 0 && (
-          <div className="user-queue-list" style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.1)', borderRadius: '12px', border: '2px solid #f7ab5e'}}>
+          <div className="user-queue-list" style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.07)', borderRadius: '12px', border: '2px solid #f7ab5e'}}>
             <div style={{marginBottom: '0.5em', fontWeight: 500, color: '#f7ab5e', fontSize: '1.1rem'}}>您今日抽到的號碼：</div>
             <div style={{display: 'flex', gap: '0.5em', flexWrap: 'wrap'}}>
               {userQueue.map(q => (
@@ -199,14 +205,13 @@ function QueueProgress() {
         
         {/* 會員但沒有號碼的提示 */}
         {user && userQueue.length === 0 && (
-          <div style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(255, 193, 7, 0.1)', borderRadius: '12px', border: '2px solid #ffc107', textAlign: 'center'}}>
+          <div style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.07)', borderRadius: '12px', border: '2px solid #ffc107', textAlign: 'center'}}>
             <div style={{color: '#f7ab5e', fontWeight: 500}}>您今日還沒有抽號</div>
             <div style={{color: '#f7ab5e', fontSize: '0.9rem', marginTop: '0.5rem'}}>請前往現場排隊或線上預約抽號</div>
           </div>
         )}
         {/* 即時看板卡片區塊 */}
         <div className="serving-header">
-          <h3>即時看板</h3>
           <div className="update-info">
             <span>最後更新: {lastUpdate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
           </div>
@@ -215,23 +220,45 @@ function QueueProgress() {
           {designers.filter(designer => designer.name !== '不指定').map(designer => {
             const serving = currentServing.find(s => s.designerId === designer.id);
             const next = nextInQueue.find(n => n.designerId === designer.id);
-            const isRest = !serving && !next;
             return (
-              <div key={designer.id} className={`serving-card-progress${isRest ? ' rest' : ''}`}>
+              <div key={designer.id} className="serving-card-progress">
                 <div className="designer-header">
                   <span className="designer-title">設計師 <b>{designer.name}</b></span>
                 </div>
                 <div className="card-main-row">
                   <div className="card-col card-col-now">
                     <div className="col-label">目前號碼</div>
-                    <div className="col-number now-number">{serving ? <>{serving.number}<div className="col-customer">{serving.customerName}</div></> : '-'}</div>
+                    <div className="col-number now-number">
+                      {serving ? (
+                        <>
+                          {serving.number}
+                          <div className="col-service">{serving.serviceName || ''}</div>
+                        </>
+                      ) : (
+                        <>
+                          -
+                          <div className="col-service"></div>
+                        </>
+                      )}
+                    </div>
                   </div>
                   <div className="card-col card-col-next">
                     <div className="col-label">下一號</div>
-                    <div className="col-number next-number">{next ? <>{next.number}<div className="col-customer">{next.customerName}</div></> : '-'}</div>
+                    <div className="col-number next-number">
+                      {next ? (
+                        <>
+                          {next.number}
+                          <div className="col-service">{next.serviceName || ''}</div>
+                        </>
+                      ) : (
+                        <>
+                          -
+                          <div className="col-service"></div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
-                {isRest && <div className="rest-mask">休息中</div>}
               </div>
             );
           })}

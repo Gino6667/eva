@@ -17,6 +17,40 @@
   top: 0;
   z-index: 1000;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  transition: width 0.3s ease;
+}
+
+/* 收合狀態 */
+.admin-sidebar.collapsed {
+  width: 80px;
+}
+
+.admin-sidebar.collapsed .sidebar-header {
+  padding: 2rem 0.5rem 1.5rem;
+  text-align: center;
+}
+
+.admin-sidebar.collapsed .sidebar-item {
+  padding: 0.75rem 0.5rem;
+  justify-content: center;
+}
+
+.admin-sidebar.collapsed .sidebar-icon {
+  margin-right: 0;
+  font-size: 1.4rem;
+}
+
+.admin-sidebar.collapsed .sidebar-footer {
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.admin-sidebar.collapsed .logout-btn {
+  justify-content: center;
+}
+
+.admin-sidebar.collapsed .logout-btn .sidebar-icon {
+  margin-right: 0;
 }
 
 .sidebar-header {
@@ -111,12 +145,15 @@
 .admin-main {
   flex: 1;
   margin-left: 280px;
-  background: #f8f9fa;
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.admin-sidebar.collapsed + .admin-main {
+  margin-left: 80px;
 }
 
 .admin-container {
-  padding: 20px;
   background: #333d38;
   min-height: 100vh;
   display: flex;
@@ -217,33 +254,77 @@
 }
 
 /* 表格樣式 */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #333d38;
+.admin-table, .admin-table table, .admin-table th, .admin-table td {
+  background: transparent !important;
   color: #fff !important;
+  border: 1px solid #555 !important;
 }
 
-.admin-table th,
-.admin-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #f7ab5e;
-  color: #fff !important;
+.admin-table {
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100vw;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  overflow: hidden;
+  background: rgba(34,46,40,0.98);
+  margin: 0 auto 2.5rem auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-table table {
+  width: 100% !important;
+  min-width: 1200px !important;
+  table-layout: auto !important;
+}
+
+.admin-table th, .admin-table td {
+  text-align: center !important;
+  font-weight: bold !important;
+  white-space: pre-line !important;
+  word-break: break-all !important;
+  padding: 12px 8px !important;
+}
+
+.admin-table td button {
+  margin: 0 6px !important;
+  min-width: 60px !important;
+  font-size: 0.9rem !important;
 }
 
 .admin-table th {
-  background: #4a5a4f;
-  font-weight: bold;
-  color: #f7ab5e;
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: #222e28 !important;
+  color: #f7ab5e !important;
+  border-bottom: 2.5px solid #f7ab5e !important;
+}
+
+.admin-table tr {
+  transition: background 0.18s;
 }
 
 .admin-table tr:hover {
-  background: #4a5a4f;
+  background: #2e3934 !important;
 }
 
-.admin-table tr:last-child td {
-  border-bottom: none;
+.admin-table td:last-child {
+  text-align: right !important;
+  padding-right: 2em !important;
+}
+
+.admin-table .admin-btn {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  min-width: 70px;
+  font-size: 1rem;
+}
+
+.admin-btn {
+  margin: 0 4px;
+  min-width: 48px;
 }
 
 /* 按鈕樣式 */
@@ -314,12 +395,12 @@
 }
 
 .admin-section {
-  background: #333d38;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  border: 2px solid #f7ab5e;
-  color: #fff !important;
+  background: #fff !important;
+  color: #222 !important;
+  min-height: 200px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .admin-section h2 {
@@ -396,7 +477,8 @@
 .accounts-table table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: #333d38 !important;
+  color: #fff !important;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -459,15 +541,11 @@
 
 /* 搜尋和篩選 */
 .admin-filters {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0 0 1.5rem 0;
+  margin-bottom: 1.5rem;
 }
 
 .admin-filters input {
@@ -820,4 +898,243 @@
   .admin-section.modern {
     padding: 1.2rem 0.7rem 1rem 0.7rem;
   }
+}
+
+.admin-header .admin-btn {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0.3em 0.6em;
+}
+
+.designer-header .admin-btn {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0.3em 0.6em;
+}
+
+/* 設計師管理卡片美化 */
+.serving-card-progress {
+  background: transparent;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10), 0 1.5px 6px rgba(0,0,0,0.08);
+  margin: 32px 18px 0 0;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+  border: 2px solid #f7ab5e;
+  overflow: hidden;
+  min-width: 360px;
+}
+.serving-card-progress:hover {
+  transform: scale(1.035);
+  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.18), 0 2px 12px rgba(0,0,0,0.12);
+}
+.designer-header {
+  background: transparent;
+  color: #f7ab5e;
+  font-size: 1.2em;
+  font-weight: 700;
+  padding: 1.1em 1.2em 1em 1.2em;
+  border-bottom: 1.5px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 1px;
+}
+.card-main-row {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 0.5em;
+}
+.card-col-now {
+  background: transparent !important;
+  box-shadow: 0 0 16px 2px #fff inset !important;
+  flex: 1;
+  padding: 1.2em 1em;
+  border-right: 1px solid #e0e0e0;
+  text-align: center;
+  min-height: 160px;
+}
+.card-col-next {
+  flex: 1;
+  padding: 1.2em 1em;
+  text-align: center;
+  background: transparent;
+  min-height: 160px;
+  box-shadow: 0 0 16px 2px #ffe082 inset;
+}
+.col-label {
+  font-weight: 800;
+  margin-bottom: 0.5em;
+  color: #1565c0;
+  letter-spacing: 0.5px;
+  font-size: 1.1em;
+}
+.card-col-next .col-label {
+  color: #ff9800;
+}
+.col-number {
+  font-size: 2.5em;
+  font-weight: 900;
+  margin-bottom: 0.1em;
+  color: #333d38;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px #fffde7;
+}
+.col-service {
+  font-size: 1.15em;
+  font-weight: 800;
+  margin-top: 0.3em;
+  color: #1565c0;
+  letter-spacing: 0.5px;
+}
+.card-col-next .col-service {
+  color: #ff9800;
+}
+.serving-grid-progress {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(540px, 1fr));
+  grid-template-rows: repeat(2, auto);
+  gap: 40px 32px;
+  justify-content: center;
+  align-items: stretch;
+  padding: 24px 0 40px 0;
+}
+@media (max-width: 1200px) {
+  .serving-grid-progress {
+    grid-template-columns: 1fr;
+  }
+}
+
+.now-number {
+  background: transparent;
+  box-shadow: none;
+}
+.next-number {
+  background: transparent;
+  text-shadow: none;
+}
+.card-col-next {
+  background: transparent;
+}
+.col-label {
+  color: #1565c0;
+}
+.card-col-next .col-label {
+  color: #ff9800;
+}
+.col-number {
+  color: #333d38;
+}
+.col-service {
+  color: #1565c0;
+}
+.card-col-next .col-service {
+  color: #ff9800;
+}
+.card-col-now .col-label {
+  color: #ff9800;
+}
+.card-col-now .col-number {
+  color: #ff9800;
+}
+.card-col-now .col-service {
+  color: #ff9800;
+}
+
+/* 強制顯示帳號列表區塊與表格內容 */
+.admin-section {
+  background: #fff !important;
+  color: #222 !important;
+  min-height: 200px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.admin-table th, .admin-table td {
+  color: #222 !important;
+  background: #fff !important;
+  border: 1px solid #ccc !important;
+}
+
+/* 全站表格深色主題自動修正 */
+table, th, td {
+  background: #333d38 !important;
+  color: #fff !important;
+}
+
+.accounts-table table {
+  background: #333d38 !important;
+  color: #fff !important;
+}
+
+.accounts-table th, .accounts-table td {
+  background: #333d38 !important;
+  color: #fff !important;
+}
+
+/* 終極覆蓋：徹底移除表格白底 */
+.admin-table th, .admin-table td, 
+.admin-table tr > th, .admin-table tr > td, 
+.admin-table table th, .admin-table table td {
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}
+
+/* 服務項目管理表格操作欄排版優化 */
+.admin-table th:last-child, .admin-table td:last-child {
+  min-width: 180px;
+  width: 180px;
+  text-align: right !important;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .admin-table th:last-child, .admin-table td:last-child {
+    min-width: 100px;
+    font-size: 0.95rem;
+    padding-right: 0.5em !important;
+    white-space: normal;
+  }
+  .admin-table .admin-btn {
+    min-width: 60px;
+    font-size: 0.95rem;
+    margin: 0.2em 0.2em;
+  }
+}
+
+.service-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0;
+}
+.service-card-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: rgba(34,46,40,0.98);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 24px 32px;
+  gap: 32px;
+  border: 2px solid #444;
+  position: relative;
+}
+.service-card-row {
+  font-size: 1.1rem;
+  margin-right: 24px;
+  min-width: 120px;
+  word-break: break-all;
+}
+.service-card-row button {
+  vertical-align: middle;
+}
+.service-card-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }

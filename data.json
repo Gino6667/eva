@@ -6,8 +6,15 @@
       "services": [
         1,
         2,
-        3
-      ]
+        3,
+        5,
+        4,
+        6,
+        9,
+        8,
+        7
+      ],
+      "isPaused": false
     },
     {
       "id": 7,
@@ -28,35 +35,35 @@
       ]
     },
     {
-      "id": 9,
-      "name": "小美",
+      "id": 10,
+      "name": "我有五個字",
       "services": [
         1,
-        2,
-        3
-      ]
+        4,
+        5,
+        11
+      ],
+      "isPaused": false
     },
     {
-      "id": 10,
-      "name": "55",
+      "id": 11,
+      "name": "小美",
       "services": [
-        1,
-        4
+        5,
+        8,
+        9,
+        2,
+        3
       ]
     }
   ],
   "services": [
     {
-      "id": 1,
-      "name": "洗剪吹",
-      "price": 200,
-      "duration": 20
-    },
-    {
       "id": 2,
       "name": "染髮",
       "price": 200,
-      "duration": 20
+      "duration": 30,
+      "status": "inactive"
     },
     {
       "id": 3,
@@ -66,9 +73,52 @@
     },
     {
       "id": 4,
-      "name": "66",
+      "name": "好喔",
       "price": 500,
       "duration": 90
+    },
+    {
+      "id": 5,
+      "name": "平頭/國小下/後面推平",
+      "price": 200,
+      "duration": 20,
+      "status": "inactive"
+    },
+    {
+      "id": 6,
+      "name": "平頭/國小下/後面推平6",
+      "price": 600,
+      "duration": 20
+    },
+    {
+      "id": 7,
+      "name": "平頭/國小下/後面推平7",
+      "price": 699,
+      "duration": 70
+    },
+    {
+      "id": 8,
+      "name": "平頭/國小下/後面推平8",
+      "price": 800,
+      "duration": 80
+    },
+    {
+      "id": 9,
+      "name": "平頭/國小下/後面推平9",
+      "price": 900,
+      "duration": 90
+    },
+    {
+      "id": 10,
+      "name": "洗吹剪",
+      "price": 300,
+      "duration": 20
+    },
+    {
+      "id": 11,
+      "name": "平頭國小嚇嚇嚇嚇嚇嚇嚇嚇嚇嚇嚇嚇",
+      "price": 200,
+      "duration": 20
     }
   ],
   "queue": [
@@ -703,26 +753,6 @@
       "number": 63
     },
     {
-      "id": 207,
-      "designerId": 4,
-      "serviceId": 0,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 64,
-      "createdAt": "2025-06-27T12:32:24.381Z",
-      "userId": null
-    },
-    {
-      "id": 208,
-      "designerId": 4,
-      "serviceId": 0,
-      "type": "onsite",
-      "status": "waiting",
-      "number": 65,
-      "createdAt": "2025-06-27T12:32:32.374Z",
-      "userId": null
-    },
-    {
       "id": 209,
       "designerId": 3,
       "serviceId": 1,
@@ -1038,22 +1068,24 @@
       "designerId": 9,
       "serviceId": 2,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 8,
       "createdAt": "2025-06-29T19:24:33.312Z",
       "userId": 3,
-      "checkinAt": "2025-06-29T19:29:08.858Z"
+      "checkinAt": "2025-06-29T19:29:08.858Z",
+      "completedAt": "2025-06-29T20:21:31.436Z"
     },
     {
       "id": 9022,
       "designerId": 10,
       "serviceId": 4,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 9,
       "createdAt": "2025-06-29T19:24:43.956Z",
       "userId": 3,
-      "checkinAt": "2025-06-29T19:29:09.892Z"
+      "checkinAt": "2025-06-29T19:29:09.892Z",
+      "completedAt": "2025-06-30T12:52:22.123Z"
     },
     {
       "id": 9023,
@@ -1072,62 +1104,429 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 11,
       "createdAt": "2025-06-29T19:28:52.335Z",
       "userId": 3,
-      "checkinAt": "2025-06-29T19:29:10.984Z"
+      "checkinAt": "2025-06-29T19:29:10.984Z",
+      "completedAt": "2025-06-30T12:52:15.907Z"
     },
     {
       "id": 9025,
       "designerId": 5,
       "serviceId": 2,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 12,
       "createdAt": "2025-06-29T19:29:23.727Z",
       "userId": 3,
-      "checkinAt": "2025-06-29T19:39:11.498Z"
+      "checkinAt": "2025-06-29T19:39:11.498Z",
+      "completedAt": "2025-06-29T19:54:40.979Z"
     },
     {
       "id": 9026,
       "designerId": 5,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 13,
       "createdAt": "2025-06-29T19:29:42.525Z",
-      "userId": null
+      "userId": null,
+      "absentAt": "2025-06-29T19:54:20.584Z"
     },
     {
       "id": 9027,
       "designerId": 5,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 14,
       "createdAt": "2025-06-29T19:38:57.426Z",
-      "userId": null
+      "userId": null,
+      "absentAt": "2025-06-29T19:54:25.455Z"
     },
     {
       "id": 9028,
       "designerId": 5,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "done",
       "number": 15,
       "createdAt": "2025-06-29T19:39:05.401Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-06-29T19:54:45.729Z",
+      "completedAt": "2025-06-29T20:00:47.713Z"
     },
     {
       "id": 9029,
       "designerId": 5,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "done",
       "number": 16,
       "createdAt": "2025-06-29T19:46:31.984Z",
+      "userId": null,
+      "checkinAt": "2025-06-29T20:01:58.795Z",
+      "completedAt": "2025-06-29T20:02:01.943Z"
+    },
+    {
+      "id": 9030,
+      "designerId": 5,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "done",
+      "number": 17,
+      "createdAt": "2025-06-29T19:51:34.492Z",
+      "userId": 3,
+      "checkinAt": "2025-06-29T20:21:27.044Z",
+      "completedAt": "2025-06-29T22:47:29.042Z"
+    },
+    {
+      "id": 9031,
+      "designerId": 5,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "done",
+      "number": 18,
+      "createdAt": "2025-06-29T19:51:43.454Z",
+      "userId": 3,
+      "checkinAt": "2025-06-29T22:47:31.227Z",
+      "completedAt": "2025-06-30T12:52:10.143Z"
+    },
+    {
+      "id": 9032,
+      "designerId": 5,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 19,
+      "createdAt": "2025-06-29T19:51:51.755Z",
       "userId": null
+    },
+    {
+      "id": 9033,
+      "designerId": 5,
+      "serviceId": 1,
+      "type": "online",
+      "status": "done",
+      "number": 20,
+      "createdAt": "2025-06-29T20:05:03.470Z",
+      "userId": 3,
+      "completedAt": "2025-06-29T20:05:07.635Z"
+    },
+    {
+      "id": 9034,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 21,
+      "createdAt": "2025-06-30T06:46:44.917Z",
+      "userId": 3
+    },
+    {
+      "id": 9035,
+      "designerId": 8,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 22,
+      "createdAt": "2025-06-30T07:48:30.082Z",
+      "userId": 3
+    },
+    {
+      "id": 9036,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "online",
+      "status": "done",
+      "number": 23,
+      "createdAt": "2025-06-30T11:42:36.815Z",
+      "userId": 4,
+      "checkinAt": "2025-06-30T12:52:22.805Z",
+      "completedAt": "2025-06-30T13:23:06.440Z"
+    },
+    {
+      "id": 9037,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "onsite",
+      "status": "done",
+      "number": 24,
+      "createdAt": "2025-06-30T12:16:55.130Z",
+      "userId": null,
+      "checkinAt": "2025-06-30T13:23:07.895Z",
+      "completedAt": "2025-06-30T13:23:08.853Z"
+    },
+    {
+      "id": 9038,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "onsite",
+      "status": "done",
+      "number": 25,
+      "createdAt": "2025-06-30T12:20:26.599Z",
+      "userId": 4,
+      "checkinAt": "2025-06-30T13:23:09.738Z",
+      "completedAt": "2025-06-30T13:23:10.623Z"
+    },
+    {
+      "id": 9039,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 26,
+      "createdAt": "2025-06-30T12:22:01.375Z",
+      "userId": 4
+    },
+    {
+      "id": 9040,
+      "designerId": 11,
+      "serviceId": 8,
+      "type": "onsite",
+      "status": "done",
+      "number": 27,
+      "createdAt": "2025-06-30T12:24:04.662Z",
+      "userId": 4,
+      "checkinAt": "2025-06-30T12:46:23.543Z",
+      "completedAt": "2025-06-30T12:52:18.943Z"
+    },
+    {
+      "id": 9041,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 28,
+      "createdAt": "2025-06-30T12:24:54.300Z",
+      "userId": 4
+    },
+    {
+      "id": 9042,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 29,
+      "createdAt": "2025-06-30T12:28:58.793Z",
+      "userId": 4
+    },
+    {
+      "id": 9043,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "onsite",
+      "status": "done",
+      "number": 30,
+      "createdAt": "2025-06-30T12:30:11.407Z",
+      "userId": 4,
+      "checkinAt": "2025-06-30T13:23:12.475Z",
+      "completedAt": "2025-06-30T13:23:13.387Z"
+    },
+    {
+      "id": 9044,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 31,
+      "createdAt": "2025-06-30T12:37:30.879Z",
+      "userId": null
+    },
+    {
+      "id": 9045,
+      "designerId": 11,
+      "serviceId": 9,
+      "type": "onsite",
+      "status": "serving",
+      "number": 32,
+      "createdAt": "2025-06-30T12:45:27.687Z",
+      "userId": 4,
+      "checkinAt": "2025-06-30T12:52:19.638Z"
+    },
+    {
+      "id": 9046,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "serving",
+      "number": 33,
+      "createdAt": "2025-06-30T12:47:08.815Z",
+      "userId": 3,
+      "checkinAt": "2025-06-30T12:52:16.938Z"
+    },
+    {
+      "id": 9047,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 34,
+      "createdAt": "2025-06-30T12:47:22.029Z",
+      "userId": 3
+    },
+    {
+      "id": 9048,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 35,
+      "createdAt": "2025-06-30T12:48:08.063Z",
+      "userId": 3
+    },
+    {
+      "id": 9049,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "online",
+      "status": "done",
+      "number": 36,
+      "createdAt": "2025-06-30T12:50:14.233Z",
+      "userId": 3,
+      "checkinAt": "2025-06-30T13:23:15.066Z",
+      "completedAt": "2025-06-30T13:23:56.368Z"
+    },
+    {
+      "id": 9050,
+      "designerId": 5,
+      "serviceId": 6,
+      "type": "online",
+      "status": "done",
+      "number": 37,
+      "createdAt": "2025-06-30T12:51:57.370Z",
+      "userId": 3,
+      "checkinAt": "2025-06-30T12:52:12.344Z",
+      "completedAt": "2025-06-30T13:24:32.636Z"
+    },
+    {
+      "id": 9051,
+      "designerId": 11,
+      "serviceId": 8,
+      "type": "online",
+      "status": "waiting",
+      "number": 38,
+      "createdAt": "2025-06-30T12:54:56.308Z",
+      "userId": 3
+    },
+    {
+      "id": 9052,
+      "designerId": 11,
+      "serviceId": 8,
+      "type": "online",
+      "status": "waiting",
+      "number": 39,
+      "createdAt": "2025-06-30T12:55:19.914Z",
+      "userId": 3
+    },
+    {
+      "id": 9053,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 40,
+      "createdAt": "2025-06-30T12:56:41.010Z",
+      "userId": 3
+    },
+    {
+      "id": 9054,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 41,
+      "createdAt": "2025-06-30T12:58:34.951Z",
+      "userId": 3
+    },
+    {
+      "id": 9055,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "online",
+      "status": "done",
+      "number": 42,
+      "createdAt": "2025-06-30T12:58:52.329Z",
+      "userId": 3,
+      "checkinAt": "2025-06-30T13:24:01.160Z",
+      "completedAt": "2025-06-30T13:24:05.416Z"
+    },
+    {
+      "id": 9056,
+      "designerId": 10,
+      "serviceId": 4,
+      "type": "online",
+      "status": "done",
+      "number": 43,
+      "createdAt": "2025-06-30T12:59:54.398Z",
+      "userId": 3,
+      "checkinAt": "2025-06-30T13:24:15.487Z",
+      "completedAt": "2025-06-30T13:24:16.411Z"
+    },
+    {
+      "id": 9057,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 44,
+      "createdAt": "2025-06-30T13:00:50.804Z",
+      "userId": 3
+    },
+    {
+      "id": 9058,
+      "designerId": 5,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "done",
+      "number": 45,
+      "createdAt": "2025-06-30T13:01:28.292Z",
+      "userId": 3,
+      "checkinAt": "2025-06-30T13:24:37.757Z",
+      "completedAt": "2025-06-30T13:24:46.944Z"
+    },
+    {
+      "id": 9059,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 46,
+      "createdAt": "2025-06-30T13:01:55.428Z",
+      "userId": null
+    },
+    {
+      "id": 9060,
+      "designerId": 5,
+      "serviceId": 7,
+      "type": "onsite",
+      "status": "done",
+      "number": 47,
+      "createdAt": "2025-06-30T13:03:09.642Z",
+      "userId": 4,
+      "checkinAt": "2025-06-30T13:24:56.658Z",
+      "completedAt": "2025-06-30T13:25:02.095Z"
+    },
+    {
+      "id": 9061,
+      "designerId": 8,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 48,
+      "createdAt": "2025-06-30T13:35:58.936Z",
+      "userId": 3
+    },
+    {
+      "id": 9062,
+      "designerId": 10,
+      "serviceId": 11,
+      "type": "online",
+      "status": "waiting",
+      "number": 49,
+      "createdAt": "2025-06-30T13:37:14.954Z",
+      "userId": 3
     }
   ],
   "reservations": [
@@ -1275,6 +1674,182 @@
       "status": "cancelled",
       "createdAt": "2025-06-29T15:20:41.480Z",
       "cancelledAt": "2025-06-29T15:21:38.577Z"
+    },
+    {
+      "id": 218,
+      "designerId": 5,
+      "serviceId": 1,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-29T20:05:07.635Z",
+      "completedAt": "2025-06-29T20:05:07.635Z"
+    },
+    {
+      "id": 219,
+      "designerId": 9,
+      "serviceId": 2,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-29T20:21:31.436Z",
+      "completedAt": "2025-06-29T20:21:31.436Z"
+    },
+    {
+      "id": 220,
+      "designerId": 5,
+      "serviceId": 2,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-29T22:47:29.042Z",
+      "completedAt": "2025-06-29T22:47:29.042Z"
+    },
+    {
+      "id": 221,
+      "designerId": 5,
+      "serviceId": 1,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T12:52:10.143Z",
+      "completedAt": "2025-06-30T12:52:10.143Z"
+    },
+    {
+      "id": 222,
+      "designerId": 7,
+      "serviceId": 2,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T12:52:15.907Z",
+      "completedAt": "2025-06-30T12:52:15.907Z"
+    },
+    {
+      "id": 223,
+      "designerId": 11,
+      "serviceId": 8,
+      "userId": 4,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T12:52:18.943Z",
+      "completedAt": "2025-06-30T12:52:18.943Z"
+    },
+    {
+      "id": 224,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 3,
+      "date": "2025-06-29",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T12:52:22.123Z",
+      "completedAt": "2025-06-30T12:52:22.123Z"
+    },
+    {
+      "id": 225,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 4,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:23:06.440Z",
+      "completedAt": "2025-06-30T13:23:06.440Z"
+    },
+    {
+      "id": 226,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 4,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:23:10.623Z",
+      "completedAt": "2025-06-30T13:23:10.623Z"
+    },
+    {
+      "id": 227,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 4,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:23:13.387Z",
+      "completedAt": "2025-06-30T13:23:13.387Z"
+    },
+    {
+      "id": 228,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 3,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:23:56.368Z",
+      "completedAt": "2025-06-30T13:23:56.368Z"
+    },
+    {
+      "id": 229,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 3,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:24:05.416Z",
+      "completedAt": "2025-06-30T13:24:05.416Z"
+    },
+    {
+      "id": 230,
+      "designerId": 10,
+      "serviceId": 4,
+      "userId": 3,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:24:16.411Z",
+      "completedAt": "2025-06-30T13:24:16.411Z"
+    },
+    {
+      "id": 231,
+      "designerId": 5,
+      "serviceId": 6,
+      "userId": 3,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:24:32.636Z",
+      "completedAt": "2025-06-30T13:24:32.636Z"
+    },
+    {
+      "id": 232,
+      "designerId": 5,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:24:46.944Z",
+      "completedAt": "2025-06-30T13:24:46.944Z"
+    },
+    {
+      "id": 233,
+      "designerId": 5,
+      "serviceId": 7,
+      "userId": 4,
+      "date": "2025-06-30",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-06-30T13:25:02.095Z",
+      "completedAt": "2025-06-30T13:25:02.095Z"
     }
   ],
   "users": [
@@ -1283,13 +1858,6 @@
       "email": "test@example.com",
       "password": "hashedpassword",
       "name": "王小明",
-      "role": "customer"
-    },
-    {
-      "id": 2,
-      "email": "akapb8641@gmail.com",
-      "password": "123456",
-      "name": "賴",
       "role": "customer"
     },
     {
@@ -1306,12 +1874,36 @@
       "password": "123",
       "name": "測試會員",
       "role": "customer"
+    },
+    {
+      "id": 5,
+      "email": "",
+      "phone": "",
+      "password": "123",
+      "name": "設計師test",
+      "role": "designer"
+    },
+    {
+      "id": 6,
+      "email": "",
+      "phone": "",
+      "password": "123",
+      "name": "設計師test",
+      "role": "designer"
+    },
+    {
+      "id": 7,
+      "email": "",
+      "phone": "",
+      "password": "123",
+      "name": "設test",
+      "role": "designer"
     }
   ],
   "worktime": {
     "openDays": [
       true,
-      true,
+      false,
       true,
       true,
       true,

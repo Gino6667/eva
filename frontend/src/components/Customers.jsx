@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
+import axios from 'axios';
 
 function Customers() {
   const navigate = useNavigate();
@@ -10,80 +11,31 @@ function Customers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCustomer, setEditingCustomer] = useState(null);
-  
-  const [newCustomer, setNewCustomer] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    membershipLevel: 'regular',
-    totalVisits: 0,
-    totalSpent: 0,
-    lastVisit: '',
-    notes: ''
-  });
 
-  // 模擬客戶數據
   useEffect(() => {
-    const mockCustomers = [
-      {
-        id: 1,
-        name: '張美玲',
-        phone: '0912-345-678',
-        email: 'meiling@email.com',
-        membershipLevel: 'vip',
-        totalVisits: 15,
-        totalSpent: 25000,
-        lastVisit: '2024-01-10',
-        joinDate: '2023-03-15',
-        status: 'active',
-        notes: '喜歡染髮，偏好暖色系'
-      },
-      {
-        id: 2,
-        name: '李雅婷',
-        phone: '0923-456-789',
-        email: 'yating@email.com',
-        membershipLevel: 'regular',
-        totalVisits: 8,
-        totalSpent: 12000,
-        lastVisit: '2024-01-08',
-        joinDate: '2023-06-20',
-        status: 'active',
-        notes: '定期修剪，喜歡簡約風格'
-      },
-      {
-        id: 3,
-        name: '王曉華',
-        phone: '0934-567-890',
-        email: 'xiaohua@email.com',
-        membershipLevel: 'premium',
-        totalVisits: 25,
-        totalSpent: 45000,
-        lastVisit: '2024-01-12',
-        joinDate: '2022-11-10',
-        status: 'active',
-        notes: 'VIP客戶，喜歡嘗試新造型'
-      },
-      {
-        id: 4,
-        name: '陳淑芬',
-        phone: '0945-678-901',
-        email: 'shufen@email.com',
-        membershipLevel: 'regular',
-        totalVisits: 3,
-        totalSpent: 5000,
-        lastVisit: '2023-12-20',
-        joinDate: '2023-10-05',
-        status: 'inactive',
-        notes: '新客戶，需要更多關懷'
-      }
-    ];
-    setCustomers(mockCustomers);
+    const saved = localStorage.getItem('users');
+    if (saved && JSON.parse(saved).length > 0) {
+      setCustomers(filterOnlyCustomers(JSON.parse(saved)));
+    } else {
+      // localStorage 沒有資料，自動同步 API
+      axios.get('/api/users')
+        .then(res => {
+          const onlyCustomers = filterOnlyCustomers(res.data);
+          setCustomers(onlyCustomers);
+          localStorage.setItem('users', JSON.stringify(onlyCustomers));
+        })
+        .catch(() => setCustomers([]));
+    }
   }, []);
 
+  // 每次 customers 變動時自動儲存到 localStorage:users
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(customers));
+  }, [customers]);
+
   const handleAddCustomer = () => {
-    if (!newCustomer.name || !newCustomer.phone) {
-      alert('請填寫姓名和電話');
+    if (!newCustomer.name || (!newCustomer.phone && !newCustomer.email)) {
+      alert('請填寫姓名，且電話或信箱至少填寫一項');
       return;
     }
 
@@ -97,6 +49,7 @@ function Customers() {
     };
 
     setCustomers([customer, ...customers]);
+
     setNewCustomer({
       name: '',
       phone: '',
@@ -122,9 +75,26 @@ function Customers() {
     setEditingCustomer(null);
   };
 
-  const handleDeleteCustomer = (id) => {
+  const handleDeleteCustomer = async (id) => {
     if (window.confirm('確定要刪除此客戶嗎？')) {
-      setCustomers(customers.filter(customer => customer.id !== id));
+      // 判斷是否為測試會員（id 為 10 位數以上的數字）
+      if (typeof id === 'number' && id.toString().length >= 10) {
+        const updated = customers.filter(customer => customer.id !== id);
+        setCustomers(updated);
+        localStorage.setItem('users', JSON.stringify(updated));
+        return;
+      }
+      try {
+        const token = localStorage.getItem('token');
+        await axios.delete(`/api/users/${id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const updated = customers.filter(customer => customer.id !== id);
+        setCustomers(updated);
+        localStorage.setItem('users', JSON.stringify(updated));
+      } catch (err) {
+        alert('刪除失敗，請稍後再試');
+      }
     }
   };
 
@@ -132,7 +102,10 @@ function Customers() {
     const matchesSearch = customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          customer.phone.includes(searchTerm) ||
                          customer.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = filterStatus === 'all' || customer.status === filterStatus;
+    const matchesStatus =
+      filterStatus === 'all' ||
+      (filterStatus === 'active' && customer.status === 'active') ||
+      (filterStatus === 'inactive' && customer.status === 'inactive');
     return matchesSearch && matchesStatus;
   });
 
@@ -143,13 +116,57 @@ function Customers() {
     currentPage * itemsPerPage
   );
 
-  const getMembershipColor = (level) => {
-    switch (level) {
-      case 'vip': return '#ffd700';
-      case 'premium': return '#c0c0c0';
-      default: return '#cd7f32';
-    }
+  // 新增測試會員
+  const handleAddTestMembers = () => {
+    const defaultMembers = [
+      {
+        id: Date.now(),
+        name: '王小明',
+        phone: '0912345678',
+        email: 'xiaoming@example.com',
+        totalVisits: 12,
+        totalSpent: 15000,
+        lastVisit: '2024-06-01',
+        joinDate: '2023-10-10',
+        status: 'active',
+        notes: '常客，偏好燙髮'
+      },
+      {
+        id: Date.now() + 1,
+        name: '陳美麗',
+        phone: '0922333444',
+        email: 'meili@example.com',
+        totalVisits: 8,
+        totalSpent: 9000,
+        lastVisit: '2024-05-28',
+        joinDate: '2024-01-15',
+        status: 'active',
+        notes: '喜歡護髮'
+      },
+      {
+        id: Date.now() + 2,
+        name: '林大華',
+        phone: '0933555666',
+        email: 'dahua@example.com',
+        totalVisits: 5,
+        totalSpent: 4000,
+        lastVisit: '2024-05-20',
+        joinDate: '2024-03-05',
+        status: 'active',
+        notes: '新會員'
+      }
+    ];
+    const existPhones = customers.map(c => c.phone);
+    const existEmails = customers.map(c => c.email);
+    const toAdd = defaultMembers.filter(m => !existPhones.includes(m.phone) && !existEmails.includes(m.email));
+    const merged = [...customers, ...toAdd];
+    setCustomers(merged);
+    localStorage.setItem('users', JSON.stringify(merged));
   };
+
+  // 過濾只顯示客戶（非設計師/管理員）
+  const filterOnlyCustomers = (list) =>
+    list.filter(c => !c.role || c.role === 'customer');
 
   return (
     <div className="admin-container">
@@ -197,6 +214,7 @@ function Customers() {
         >
           新增客戶
         </button>
+        <button className="admin-btn admin-btn-secondary" onClick={handleAddTestMembers} style={{marginLeft:'1rem'}}>一鍵新增3位測試會員</button>
       </div>
 
       {/* 新增客戶表單 */}
@@ -293,17 +311,6 @@ function Customers() {
               />
             </div>
             <div className="form-group">
-              <label>會員等級</label>
-              <select 
-                value={editingCustomer.membershipLevel} 
-                onChange={(e) => setEditingCustomer({...editingCustomer, membershipLevel: e.target.value})}
-              >
-                <option value="regular">一般會員</option>
-                <option value="premium">高級會員</option>
-                <option value="vip">VIP會員</option>
-              </select>
-            </div>
-            <div className="form-group">
               <label>狀態</label>
               <select 
                 value={editingCustomer.status} 
@@ -349,7 +356,6 @@ function Customers() {
               <th>姓名</th>
               <th>電話</th>
               <th>信箱</th>
-              <th>會員等級</th>
               <th>總消費</th>
               <th>最後到訪</th>
               <th>狀態</th>
@@ -362,23 +368,18 @@ function Customers() {
                 <td style={{ fontWeight: 'bold' }}>{customer.name}</td>
                 <td>{customer.phone}</td>
                 <td>{customer.email || '-'}</td>
-                <td>
-                  <span style={{ 
-                    color: getMembershipColor(customer.membershipLevel),
-                    fontWeight: 'bold'
-                  }}>
-                    {customer.membershipLevel === 'vip' ? 'VIP' : 
-                     customer.membershipLevel === 'premium' ? '高級' : '一般'}
-                  </span>
-                </td>
-                <td>${customer.totalSpent.toLocaleString()}</td>
+                <td>${(Number(customer.totalSpent) || 0).toLocaleString()}</td>
                 <td>{customer.lastVisit || '-'}</td>
                 <td>
                   <span style={{ 
-                    color: customer.status === 'active' ? '#28a745' : '#6c757d',
+                    color: customer.status === 'active' ? '#28a745' : customer.status === 'inactive' ? '#6c757d' : '#888',
                     fontWeight: 'bold'
                   }}>
-                    {customer.status === 'active' ? '活躍' : '非活躍'}
+                    {customer.status === 'active'
+                      ? '活躍'
+                      : customer.status === 'inactive'
+                        ? '非活躍'
+                        : '-'}
                   </span>
                 </td>
                 <td>

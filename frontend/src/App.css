@@ -262,47 +262,48 @@ tr:last-child td {
 
 .header-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   padding: 0 2vw;
   min-height: 64px;
+  position: relative;
 }
 
 .nav-toggle {
-  margin: 0;
+  display: block;
   background: none;
   border: none;
-  color: #f7ab5e;
-  font-size: 2.2rem;
   cursor: pointer;
-  outline: none;
-  box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.2em 0.5em;
-  line-height: 1;
+  margin: 0 auto 8px auto;
+  position: static;
+  z-index: 1001;
 }
 
 .header h1 {
-  flex: 1 1 0;
   text-align: center;
   margin: 0;
-  padding: 16px 0 0 0;
+  padding: 24px 0 0 0;
   font-size: 2rem;
   letter-spacing: 2px;
   color: #f7ab5e;
-  min-width: 0;
+  width: 100%;
 }
 
 .nav-menu {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: row;
   align-items: center;
-  margin-left: auto;
+  gap: 12px;
+  margin-top: 8px;
+  animation: fadeInDown 0.4s;
+  justify-content: center;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 900px) {
@@ -315,8 +316,22 @@ tr:last-child td {
     padding: 8px 0 0 0;
   }
   .nav-menu {
-    gap: 4px;
-    font-size: 0.95rem;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #333d38;
+    padding: 24px 0 16px 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    border-bottom: 2px solid #f7ab5e;
+    z-index: 1000;
+    gap: 12px;
+    align-items: center;
+  }
+  .nav-menu.open {
+    display: flex;
   }
 }
 @media (max-width: 600px) {
@@ -333,4 +348,14 @@ tr:last-child td {
     gap: 2px;
     font-size: 0.9rem;
   }
+}
+
+.nav-toggle .arrow {
+  display: inline-block;
+  font-size: 2em;
+  color: #f7ab5e;
+  transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.nav-toggle .arrow.open {
+  transform: rotate(180deg);
 }

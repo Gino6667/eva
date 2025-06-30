@@ -1,0 +1,485 @@
+/* Finance 頁面樣式 - 深色主題 */
+.finance-container {
+  padding: 2rem;
+  background: #2e3934;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.finance-header {
+  background: #333d38;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 2px solid #f7ab5e;
+  text-align: center;
+}
+
+.finance-header h1 {
+  color: #f7ab5e;
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.finance-header p {
+  margin: 0;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+/* 財務統計卡片 */
+.finance-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.finance-stat-card {
+  background: #333d38;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #3e4a44;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.finance-stat-card:hover {
+  border-color: #f7ab5e;
+  transform: translateY(-2px);
+}
+
+.finance-stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.finance-stat-number.income {
+  color: #4caf50;
+}
+
+.finance-stat-number.expense {
+  color: #f44336;
+}
+
+.finance-stat-number.profit {
+  color: #f7ab5e;
+}
+
+.finance-stat-number.growth {
+  color: #2196f3;
+}
+
+.finance-stat-label {
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* 標籤頁控制 */
+.finance-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.finance-tab-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #3e4a44;
+  background: #2e3934;
+  color: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.finance-tab-btn:hover {
+  border-color: #f7ab5e;
+  color: #f7ab5e;
+}
+
+.finance-tab-btn.active {
+  background: #f7ab5e;
+  border-color: #f7ab5e;
+  color: #2e3934;
+  font-weight: bold;
+}
+
+/* 內容區域 */
+.finance-content {
+  background: #333d38;
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid #3e4a44;
+  margin-bottom: 2rem;
+}
+
+.finance-content h3 {
+  color: #f7ab5e;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* 篩選器 */
+.finance-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.finance-filters input,
+.finance-filters select {
+  padding: 0.75rem;
+  border: 2px solid #3e4a44;
+  border-radius: 8px;
+  background: #2e3934;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  min-width: 150px;
+}
+
+.finance-filters input:focus,
+.finance-filters select:focus {
+  outline: none;
+  border-color: #f7ab5e;
+}
+
+.finance-filters input::placeholder {
+  color: #888;
+}
+
+/* 表單樣式 */
+.finance-form {
+  background: #2e3934;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #3e4a44;
+  margin-bottom: 1.5rem;
+}
+
+.finance-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.finance-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.finance-form-group label {
+  color: #f7ab5e;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.finance-form-group input,
+.finance-form-group select,
+.finance-form-group textarea {
+  padding: 0.75rem;
+  border: 2px solid #3e4a44;
+  border-radius: 8px;
+  background: #333d38;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.finance-form-group input:focus,
+.finance-form-group select:focus,
+.finance-form-group textarea:focus {
+  outline: none;
+  border-color: #f7ab5e;
+}
+
+.finance-form-group input::placeholder,
+.finance-form-group textarea::placeholder {
+  color: #888;
+}
+
+/* 按鈕樣式 */
+.finance-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.finance-btn-primary {
+  background: #f7ab5e;
+  color: #2e3934;
+  border-color: #f7ab5e;
+}
+
+.finance-btn-primary:hover {
+  background: #e89a4d;
+  border-color: #e89a4d;
+  transform: translateY(-1px);
+}
+
+.finance-btn-secondary {
+  background: #3e4a44;
+  color: #ccc;
+  border-color: #3e4a44;
+}
+
+.finance-btn-secondary:hover {
+  background: #4a5650;
+  border-color: #4a5650;
+  color: #fff;
+}
+
+.finance-btn-success {
+  background: #4caf50;
+  color: #fff;
+  border-color: #4caf50;
+}
+
+.finance-btn-success:hover {
+  background: #45a049;
+  border-color: #45a049;
+}
+
+.finance-btn-warning {
+  background: #ff9800;
+  color: #fff;
+  border-color: #ff9800;
+}
+
+.finance-btn-warning:hover {
+  background: #f57c00;
+  border-color: #f57c00;
+}
+
+.finance-btn-danger {
+  background: #f44336;
+  color: #fff;
+  border-color: #f44336;
+}
+
+.finance-btn-danger:hover {
+  background: #d32f2f;
+  border-color: #d32f2f;
+}
+
+/* 表格樣式 */
+.finance-table {
+  background: #2e3934;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #3e4a44;
+  margin-bottom: 1.5rem;
+}
+
+.finance-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.finance-table th {
+  background: #3e4a44;
+  color: #f7ab5e;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 2px solid #2e3934;
+}
+
+.finance-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #3e4a44;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.finance-table tr:hover {
+  background: #3e4a44;
+}
+
+.finance-table tr:last-child td {
+  border-bottom: none;
+}
+
+.finance-table .transaction-type {
+  font-weight: bold;
+}
+
+.finance-table .transaction-type.income {
+  color: #4caf50;
+}
+
+.finance-table .transaction-type.expense {
+  color: #f44336;
+}
+
+.finance-table .transaction-amount {
+  font-weight: bold;
+  color: #f7ab5e;
+}
+
+/* 分頁 */
+.finance-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.finance-pagination button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #3e4a44;
+  background: #2e3934;
+  color: #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.finance-pagination button:hover {
+  border-color: #f7ab5e;
+  color: #f7ab5e;
+}
+
+.finance-pagination button.active {
+  background: #f7ab5e;
+  border-color: #f7ab5e;
+  color: #2e3934;
+  font-weight: bold;
+}
+
+.finance-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 分析區塊 */
+.finance-analysis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.finance-analysis-item {
+  background: #2e3934;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #3e4a44;
+}
+
+.finance-analysis-item h4 {
+  color: #f7ab5e;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.finance-analysis-content {
+  background: #333d38;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #3e4a44;
+}
+
+.finance-analysis-content p {
+  margin: 0.5rem 0;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .finance-container {
+    padding: 1rem;
+  }
+  
+  .finance-header {
+    padding: 1.5rem;
+  }
+  
+  .finance-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .finance-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .finance-stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .finance-tabs {
+    justify-content: center;
+  }
+  
+  .finance-tab-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .finance-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .finance-filters input,
+  .finance-filters select {
+    min-width: auto;
+  }
+  
+  .finance-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .finance-analysis {
+    grid-template-columns: 1fr;
+  }
+  
+  .finance-table {
+    font-size: 0.8rem;
+  }
+  
+  .finance-table th,
+  .finance-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .finance-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .finance-table table {
+    min-width: 400px;
+  }
+  
+  .finance-tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+} 

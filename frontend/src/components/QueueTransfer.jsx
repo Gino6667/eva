@@ -13,6 +13,12 @@ function QueueTransfer() {
   const [message, setMessage] = useState('');
   const [transferHistory, setTransferHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [worktime, setWorktime] = useState(null);
+  const [queueData, setQueueData] = useState([]);
+  const [selectedDesigner, setSelectedDesigner] = useState('');
+  const [selectedCustomer, setSelectedCustomer] = useState('');
+  const [showDesignerModal, setShowDesignerModal] = useState(false);
+  const [showCustomerModal, setShowCustomerModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +36,21 @@ function QueueTransfer() {
 
   useEffect(() => {
     loadData();
+    loadWorktime();
+    loadQueueData();
+    
+    // 監聽設計師狀態變更事件
+    const handleDesignerStateChange = () => {
+      console.log('QueueTransfer: 收到設計師狀態變更事件，重新載入資料');
+      loadData();
+      loadQueueData();
+    };
+    
+    window.addEventListener('designer-state-changed', handleDesignerStateChange);
+    
+    return () => {
+      window.removeEventListener('designer-state-changed', handleDesignerStateChange);
+    };
   }, []);
 
   const loadData = async () => {
@@ -54,81 +75,163 @@ function QueueTransfer() {
     }
   };
 
-  const handleTransfer = async () => {
-    if (!selectedQueue || !targetDesigner) {
-      setMessage('請選擇客人和目標設計師');
-      return;
-    }
-
-    if (selectedQueue.designerId === Number(targetDesigner)) {
-      setMessage('無法調整給同一位設計師');
-      return;
-    }
-
+  const loadWorktime = async () => {
     try {
-      setLoading(true);
-      const response = await axios.post('/api/queue/transfer', {
-        queueId: selectedQueue.id,
-        fromDesignerId: selectedQueue.designerId,
-        toDesignerId: Number(targetDesigner),
-        reason: reason || '設計師調整'
-      });
+      const res = await axios.get('/api/worktime');
+      setWorktime(res.data);
+    } catch (err) {
+      console.error('載入工作時間失敗:', err);
+    }
+  };
 
-      setMessage('客人調整成功！');
-      setSelectedQueue(null);
-      setTargetDesigner('');
-      setReason('');
+  const loadQueueData = async () => {
+    try {
+      const res = await axios.get('/api/queue/today');
+      setQueueData(res.data);
+    } catch (err) {
+      console.error('載入排隊資料失敗:', err);
+    }
+  };
+
+  // 檢查是否在營業時間內
+  const isWithinBusinessHours = () => {
+    if (!worktime) return true;
+    
+    const now = new Date();
+    const week = now.getDay();
+    
+    // 檢查是否為營業日
+    if (!worktime.openDays?.[week]) {
+      return { valid: false, reason: '今日非營業日' };
+    }
+    
+    // 檢查是否在營業時間內
+    const openTime = worktime.openTimes?.[week];
+    if (openTime?.start && openTime?.end) {
+      const nowStr = now.toTimeString().slice(0, 5);
+      if (nowStr < openTime.start || nowStr >= openTime.end) {
+        return { valid: false, reason: `營業時間為 ${openTime.start} - ${openTime.end}` };
+      }
+    }
+    
+    return { valid: true };
+  };
+
+  // 過濾可用的設計師（排除暫停的設計師）
+  const getAvailableDesigners = () => {
+    return designers.filter(designer => !designer.isPaused);
+  };
+
+  // 過濾可轉移的客人（排除已服務完成的）
+  const getTransferableCustomers = () => {
+    return queueData.filter(customer => 
+      customer.status === 'waiting' || customer.status === 'called'
+    );
+  };
+
+  const handleTransfer = async () => {
+    if (!selectedDesigner) {
+      setMessage('請選擇目標設計師');
+      return;
+    }
+    if (!selectedCustomer) {
+      setMessage('請選擇要轉移的客人');
+      return;
+    }
+
+    // 檢查營業時間
+    const businessHoursCheck = isWithinBusinessHours();
+    if (!businessHoursCheck.valid) {
+      setMessage(businessHoursCheck.reason);
+      return;
+    }
+
+    setLoading(true);
+    setMessage('');
+    try {
+      await axios.post('/api/queue/transfer', {
+        customerId: selectedCustomer,
+        targetDesignerId: selectedDesigner
+      });
+      
+      setMessage('客人轉移成功！');
+      setSelectedDesigner('');
+      setSelectedCustomer('');
       
       // 重新載入資料
-      await loadData();
-    } catch (error) {
-      setMessage(error.response?.data?.error || '調整失敗');
+      loadQueueData();
+      
+      // 發送設計師狀態變更事件
+      window.dispatchEvent(new Event('designer-state-changed'));
+      
+      // 3秒後清除成功訊息
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
+    } catch (err) {
+      setMessage(err.response?.data?.error || '轉移失敗');
     } finally {
       setLoading(false);
     }
   };
 
-  const getDesignerName = (designerId) => {
-    const designer = designers.find(d => d.id === designerId);
-    return designer ? designer.name : '未知設計師';
+  const handleDesignerSelect = (designerId) => {
+    setSelectedDesigner(designerId);
+    setShowDesignerModal(false);
   };
 
-  const getServiceName = (serviceId) => {
-    // 這裡可以從 services 資料中獲取服務名稱
-    const serviceNames = {
-      1: '洗剪吹',
-      2: '染髮',
-      3: '燙髮'
-    };
-    return serviceNames[serviceId] || '未知服務';
+  const handleCustomerSelect = (customerId) => {
+    setSelectedCustomer(customerId);
+    setShowCustomerModal(false);
   };
 
-  const formatTime = (timeString) => {
-    return new Date(timeString).toLocaleTimeString('zh-TW', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const getSelectedDesignerName = () => {
+    const designer = designers.find(d => d.id === selectedDesigner);
+    return designer ? designer.name : '';
   };
 
-  const getStatusText = (status) => {
-    const statusMap = {
-      'waiting': '等待中',
-      'called': '已叫號',
-      'done': '已完成',
-      'absent': '未到'
-    };
-    return statusMap[status] || status;
+  const getSelectedCustomerInfo = () => {
+    const customer = queueData.find(c => c.id === selectedCustomer);
+    if (!customer) return '';
+    
+    const designer = designers.find(d => d.id === customer.designerId);
+    const statusText = customer.status === 'waiting' ? '等待中' : 
+                      customer.status === 'called' ? '已叫號' : 
+                      customer.status === 'serving' ? '服務中' : '已完成';
+    
+    return `${customer.number}號 - ${designer?.name || '未知設計師'} (${statusText})`;
   };
 
-  const getStatusClass = (status) => {
-    const classMap = {
-      'waiting': 'status-waiting',
-      'called': 'status-called',
-      'done': 'status-done',
-      'absent': 'status-absent'
-    };
-    return classMap[status] || '';
+  // 檢查營業狀態並顯示提示
+  const getBusinessStatusMessage = () => {
+    if (!worktime) return null;
+    
+    const businessHoursCheck = isWithinBusinessHours();
+    if (!businessHoursCheck.valid) {
+      return (
+        <div className="business-status-message">
+          <p>⚠️ {businessHoursCheck.reason}</p>
+        </div>
+      );
+    }
+    
+    const now = new Date();
+    const week = now.getDay();
+    const openTime = worktime.openTimes?.[week];
+    if (openTime?.start && openTime?.end) {
+      return (
+        <div className="business-status-message">
+          <p>✅ 營業中 - 今日營業時間：{openTime.start} - {openTime.end}</p>
+        </div>
+      );
+    }
+    
+    return null;
   };
+
+  const availableDesigners = getAvailableDesigners();
+  const transferableCustomers = getTransferableCustomers();
+  const businessStatusMessage = getBusinessStatusMessage();
 
   return (
     <div className="queue-transfer-container">
@@ -136,6 +239,8 @@ function QueueTransfer() {
         <h1>設計師調整客人</h1>
         <p>管理今日排隊客人的設計師分配</p>
       </div>
+
+      {businessStatusMessage}
 
       {message && (
         <div className={`message ${message.includes('成功') ? 'success' : 'error'}`}>
@@ -173,7 +278,7 @@ function QueueTransfer() {
                     <div className="queue-info">
                       <div className="queue-details">
                         <span className="designer-name">
-                          設計師: {getDesignerName(queue.designerId)}
+                          設計師: {getSelectedDesignerName()}
                         </span>
                         <span className="service-name">
                           服務: {getServiceName(queue.serviceId)}
@@ -198,7 +303,7 @@ function QueueTransfer() {
           <div className="transfer-form">
             <h3>調整客人</h3>
             <div className="selected-queue-info">
-              <p><strong>選擇的客人:</strong> #{selectedQueue.number} - {getDesignerName(selectedQueue.designerId)}</p>
+              <p><strong>選擇的客人:</strong> #{selectedQueue.number} - {getSelectedDesignerName()}</p>
               <p><strong>服務:</strong> {getServiceName(selectedQueue.serviceId)}</p>
               <p><strong>狀態:</strong> {getStatusText(selectedQueue.status)}</p>
             </div>
@@ -206,19 +311,16 @@ function QueueTransfer() {
             <div className="form-group">
               <label>調整至設計師:</label>
               <select 
-                value={targetDesigner} 
-                onChange={(e) => setTargetDesigner(e.target.value)}
+                value={selectedDesigner} 
+                onChange={(e) => setSelectedDesigner(e.target.value)}
                 className="form-control"
               >
                 <option value="">請選擇設計師</option>
-                {designers
-                  .filter(d => d.id !== selectedQueue.designerId && !d.isPaused)
-                  .map(designer => (
-                    <option key={designer.id} value={designer.id}>
-                      {designer.name}
-                    </option>
-                  ))
-                }
+                {availableDesigners.map(designer => (
+                  <option key={designer.id} value={designer.id}>
+                    {designer.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -237,15 +339,16 @@ function QueueTransfer() {
               <button 
                 className="btn btn-primary"
                 onClick={handleTransfer}
-                disabled={loading || !targetDesigner}
+                disabled={loading || !selectedDesigner || !selectedCustomer || availableDesigners.length === 0 || transferableCustomers.length === 0}
               >
-                {loading ? '調整中...' : '確認調整'}
+                {loading ? '處理中...' : '確認轉移'}
               </button>
               <button 
                 className="btn btn-secondary"
                 onClick={() => {
                   setSelectedQueue(null);
-                  setTargetDesigner('');
+                  setSelectedDesigner('');
+                  setSelectedCustomer('');
                   setReason('');
                 }}
               >
@@ -268,9 +371,9 @@ function QueueTransfer() {
                     <div className="history-info">
                       <span className="history-queue">#{transfer.queueId}</span>
                       <span className="history-arrow">→</span>
-                      <span className="history-from">{getDesignerName(transfer.fromDesignerId)}</span>
+                      <span className="history-from">{getSelectedDesignerName()}</span>
                       <span className="history-arrow">→</span>
-                      <span className="history-to">{getDesignerName(transfer.toDesignerId)}</span>
+                      <span className="history-to">{getSelectedDesignerName()}</span>
                     </div>
                     <div className="history-details">
                       <span className="history-reason">{transfer.reason}</span>
@@ -283,6 +386,59 @@ function QueueTransfer() {
           </div>
         )}
       </div>
+
+      {/* 設計師選擇彈窗 */}
+      {showDesignerModal && (
+        <div className="modal-overlay" onClick={() => setShowDesignerModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3>選擇目標設計師</h3>
+            <div className="designer-grid">
+              {availableDesigners.map(designer => (
+                <button
+                  key={designer.id}
+                  className="designer-item"
+                  onClick={() => handleDesignerSelect(designer.id)}
+                >
+                  {designer.name}
+                </button>
+              ))}
+            </div>
+            {availableDesigners.length === 0 && (
+              <p>目前沒有可用的設計師</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 客人選擇彈窗 */}
+      {showCustomerModal && (
+        <div className="modal-overlay" onClick={() => setShowCustomerModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3>選擇要轉移的客人</h3>
+            <div className="customer-grid">
+              {transferableCustomers.map(customer => {
+                const designer = designers.find(d => d.id === customer.designerId);
+                const statusText = customer.status === 'waiting' ? '等待中' : 
+                                  customer.status === 'called' ? '已叫號' : '服務中';
+                return (
+                  <button
+                    key={customer.id}
+                    className="customer-item"
+                    onClick={() => handleCustomerSelect(customer.id)}
+                  >
+                    <div className="customer-number">#{customer.number}</div>
+                    <div className="customer-designer">{designer?.name || '未知設計師'}</div>
+                    <div className="customer-status">{statusText}</div>
+                  </button>
+                );
+              })}
+            </div>
+            {transferableCustomers.length === 0 && (
+              <p>目前沒有可轉移的客人</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

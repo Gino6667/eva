@@ -1,1 +1,414 @@
 /* Profile 頁面樣式，待開發 */ 
+.reservation-item .btn-danger {
+  margin-top: 1cm;
+} 
+
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  background: #2e3530;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 32px 24px;
+  color: #fff;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.profile-header h2 {
+  font-size: 2rem;
+  color: #ffd700;
+  margin-bottom: 8px;
+}
+
+.profile-header p {
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.profile-section {
+  background: #363d39;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 24px 16px;
+  margin-bottom: 16px;
+}
+
+.profile-section h3 {
+  color: #ffd700;
+  margin-bottom: 18px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  color: #ffd700;
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #555;
+  background: #444e48;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #ffd700;
+}
+
+button, .admin-btn {
+  background: #ffd700;
+  color: #363d39;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+
+button:hover, .admin-btn:hover {
+  background: #e6c200;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.status.active {
+  background: #28a745;
+  color: #fff;
+}
+
+.status.inactive {
+  background: #6c757d;
+  color: #fff;
+}
+
+/* 整合後的服務紀錄樣式 */
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+.service-item {
+  background: #333d38;
+  border-radius: 12px;
+  border: 1.5px solid #f7ab5e;
+  padding: 1.2em 1em;
+  color: #f7ab5e;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 16px rgba(247,171,94,0.10);
+}
+
+.service-item:hover {
+  border-color: #e89b4e;
+  box-shadow: 0 4px 12px rgba(247,171,94,0.15);
+}
+
+.service-type-badge {
+  position: static;
+  background: #f7ab5e;
+  color: #333d38;
+  padding: 4px 14px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 0 2px;
+}
+
+.service-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin-top: 0.5em;
+}
+
+.service-info div {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.service-info strong {
+  display: inline-block;
+  min-width: 90px;
+  color: #dc3545;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.service-info span {
+  color: #fff;
+  font-weight: 500;
+  text-align: left;
+  flex: 1;
+}
+
+.service-info em, .service-info b {
+  color: #e89b4e;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* 狀態樣式 */
+.status {
+  padding: 4px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+  margin-left: 8px;
+}
+
+.status.booked, .status.waiting {
+  background: #43a047;
+  color: #fff;
+  border: 1px solid #388e3c;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+.status.completed, .status.done {
+  background: #81c784;
+  color: #1b5e20;
+  border: 1px solid #388e3c;
+}
+
+.status.cancelled {
+  background: #e57373;
+  color: #fff;
+  border: 1px solid #c62828;
+}
+
+.status.called {
+  background: #64b5f6;
+  color: #0d47a1;
+  border: 1px solid #1976d2;
+}
+
+/* 已取消項目的整體樣式 */
+.service-item.cancelled-item {
+  border-color: #dc3545;
+  background: linear-gradient(135deg, #333d38 0%, #2a2f2a 100%);
+  opacity: 0.8;
+  position: relative;
+}
+
+.service-item.cancelled-item::before {
+  content: "已取消";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #dc3545;
+  color: white;
+  padding: 4px 16px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.service-item.cancelled-item .service-type-badge {
+  background: #dc3545;
+  color: #fff;
+}
+
+.service-item.cancelled-item .service-info strong {
+  color: #dc3545;
+}
+
+.service-item.cancelled-item:hover {
+  border-color: #c82333;
+  opacity: 0.9;
+}
+
+/* 取消按鈕樣式 */
+.service-item .btn-danger {
+  width: 100%;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 0;
+  margin-top: 1em;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.10);
+}
+
+.service-item .btn-danger:hover {
+  background: #b52a37;
+  box-shadow: 0 4px 16px rgba(220, 53, 69, 0.18);
+}
+
+/* 保留舊的樣式以向後相容 */
+.reservation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+.reservation-item {
+  background: #333d38;
+  border-radius: 10px;
+  border: 1.5px solid #f7ab5e;
+  padding: 1.2em 1em;
+  color: #f7ab5e;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.reservation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+.reservation-item .btn-danger {
+  margin-top: 1cm;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 0;
+  transition: background 0.2s;
+}
+.reservation-item .btn-danger:hover {
+  background: #b52a37;
+}
+
+.empty-records {
+  text-align: center;
+  color: #f7ab5e;
+  opacity: 0.7;
+  padding: 1.5em 0;
+}
+
+.message {
+  padding: 1em;
+  border-radius: 8px;
+  margin-top: 1em;
+  font-weight: 500;
+  text-align: center;
+}
+.message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.service-badge-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 0.5em;
+  min-height: 28px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: #f7ab5e;
+  color: #333d38;
+  margin: 0 2px;
+}
+
+.badge-cancelled {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+@media (max-width: 700px) {
+  .profile-container {
+    padding: 12px 2vw;
+  }
+  .profile-section {
+    padding: 12px 4px;
+  }
+}
+
+/* 設計師帳號密碼表格美化 */
+.profile-section table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+  background: #363d39;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.profile-section th, .profile-section td {
+  padding: 14px 8px;
+  text-align: center;
+  color: #fff;
+  background: #363d39;
+  border: 1px solid #555;
+  min-width: 120px;
+  font-size: 1rem;
+  }
+.profile-section th {
+  font-weight: bold;
+  background: #444e48;
+  color: #ffd700;
+  letter-spacing: 1px;
+  }
+.profile-section tr:hover td {
+  background: #444e48;
+  transition: background 0.2s;
+} 

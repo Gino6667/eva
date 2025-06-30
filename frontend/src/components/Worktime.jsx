@@ -29,6 +29,11 @@ function Worktime() {
       setWorktime(wt);
     } catch (err) {
       console.error('載入工作時間失敗:', err);
+      setWorktime({ 
+        openDays: Array(7).fill(true), 
+        openTimes: Array(7).fill({start: '09:00', end: '18:00'}), 
+        slotConfig: Array(7).fill([]) 
+      });
     } finally {
       setLoading(false);
     }
@@ -37,9 +42,10 @@ function Worktime() {
   const loadServices = async () => {
     try {
       const response = await axios.get('/api/services');
-      setServices(response.data);
+      setServices(response.data || []);
     } catch (err) {
       console.error('載入服務失敗:', err);
+      setServices([]);
     }
   };
 
@@ -115,8 +121,8 @@ function Worktime() {
   if (loading) {
     return (
       <div className="worktime-container">
-        <div className="loading-spinner">
-          <div className="spinner"></div>
+        <div className="loading">
+          <div className="loading-spinner"></div>
           <p>載入中...</p>
         </div>
       </div>
@@ -127,7 +133,7 @@ function Worktime() {
     <div className="worktime-container">
       <div className="worktime-header">
         <h2>工作時間設定</h2>
-        <p>設定營業時間與服務時段</p>
+        <p>設定每日營業時間與服務時段</p>
       </div>
 
       <div className="worktime-content">
@@ -136,7 +142,7 @@ function Worktime() {
             <thead>
               <tr>
                 <th>星期</th>
-                <th>營業</th>
+                <th>營業狀態</th>
                 <th>開始時間</th>
                 <th>結束時間</th>
                 <th>時段設定</th>
@@ -144,81 +150,109 @@ function Worktime() {
             </thead>
             <tbody>
               {weekDays.map((day, i) => (
-                <tr key={i}>
+                <tr key={i} className={!worktime.openDays[i] ? 'closed-day' : ''}>
                   <td className="day-name">{day}</td>
-                  <td>
-                    <input 
-                      type="checkbox" 
-                      checked={worktime.openDays[i]} 
-                      onChange={() => handleDayChange(i)} 
-                    />
+                  <td className="status-cell">
+                    <label className="toggle-switch">
+                      <input 
+                        type="checkbox" 
+                        checked={worktime.openDays[i]} 
+                        onChange={() => handleDayChange(i)} 
+                      />
+                      <span className="toggle-slider"></span>
+                      <span className="status-text">
+                        {worktime.openDays[i] ? '營業中' : '休息日'}
+                      </span>
+                    </label>
                   </td>
-                  <td>
+                  <td className="time-cell">
                     <input 
                       type="time" 
-                      value={worktime.openTimes[i]?.start || ''} 
-                      onChange={e => handleTimeChange(i, 'start', e.target.value)} 
+                      value={worktime.openTimes[i]?.start || '09:00'} 
+                      onChange={e => handleTimeChange(i, 'start', e.target.value)}
+                      disabled={!worktime.openDays[i]}
+                      className="time-input"
                     />
                   </td>
-                  <td>
+                  <td className="time-cell">
                     <input 
                       type="time" 
-                      value={worktime.openTimes[i]?.end || ''} 
-                      onChange={e => handleTimeChange(i, 'end', e.target.value)} 
+                      value={worktime.openTimes[i]?.end || '18:00'} 
+                      onChange={e => handleTimeChange(i, 'end', e.target.value)}
+                      disabled={!worktime.openDays[i]}
+                      className="time-input"
                     />
                   </td>
-                  <td className="slot-config">
-                    <div className="slots-container">
-                      {(worktime.slotConfig[i] || []).map((slot, j) => (
-                        <div key={j} className="slot-item">
-                          <div className="slot-header">
-                            <label>
-                              <input 
-                                type="checkbox" 
-                                checked={slot.enabled} 
-                                onChange={e => handleSlotChange(i, j, 'enabled', e.target.checked)} 
-                              />
-                              啟用
-                            </label>
-                            <label>
-                              座位數
-                              <input 
-                                type="number" 
-                                min={1} 
-                                max={20} 
-                                value={slot.seats} 
-                                onChange={e => handleSlotChange(i, j, 'seats', Number(e.target.value))} 
-                              />
-                            </label>
-                          </div>
-                          <div className="slot-services">
-                            <span>服務項目：</span>
-                            {services.map((s, k) => (
-                              <label key={k} className="service-checkbox">
+                  <td className="slots-cell">
+                    {worktime.openDays[i] ? (
+                      <div className="slots-container">
+                        {(worktime.slotConfig[i] || []).map((slot, j) => (
+                          <div key={j} className="slot-card">
+                            <div className="slot-header">
+                              <div className="slot-title">
                                 <input 
                                   type="checkbox" 
-                                  checked={slot.services?.[k] || false} 
-                                  onChange={() => handleServiceChange(i, j, k)} 
+                                  checked={slot.enabled} 
+                                  onChange={e => handleSlotChange(i, j, 'enabled', e.target.checked)} 
+                                  className="slot-toggle"
                                 />
-                                {s.name}
-                              </label>
-                            ))}
+                                <span>時段 {j + 1}</span>
+                              </div>
+                              <button 
+                                onClick={() => removeSlot(i, j)}
+                                className="remove-btn"
+                                title="刪除時段"
+                              >
+                                ×
+                              </button>
+                            </div>
+                            
+                            {slot.enabled && (
+                              <div className="slot-content">
+                                <div className="seats-setting">
+                                  <label>座位數：</label>
+                                  <input 
+                                    type="number" 
+                                    min={1} 
+                                    max={20} 
+                                    value={slot.seats || 5} 
+                                    onChange={e => handleSlotChange(i, j, 'seats', Number(e.target.value))} 
+                                    className="seats-input"
+                                  />
+                                </div>
+                                
+                                <div className="services-section">
+                                  <label>提供服務：</label>
+                                  <div className="services-grid">
+                                    {services.map((s, k) => (
+                                      <label key={k} className="service-item">
+                                        <input 
+                                          type="checkbox" 
+                                          checked={slot.services?.[k] || false} 
+                                          onChange={() => handleServiceChange(i, j, k)} 
+                                        />
+                                        <span>{s.name}</span>
+                                      </label>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                           </div>
-                          <button 
-                            className="btn btn-danger btn-small"
-                            onClick={() => removeSlot(i, j)}
-                          >
-                            刪除時段
-                          </button>
-                        </div>
-                      ))}
-                      <button 
-                        className="btn btn-secondary btn-small"
-                        onClick={() => addSlot(i)}
-                      >
-                        新增時段
-                      </button>
-                    </div>
+                        ))}
+                        
+                        <button 
+                          onClick={() => addSlot(i)}
+                          className="add-slot-btn"
+                        >
+                          + 新增時段
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="closed-message">
+                        <span>休息日</span>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -228,7 +262,7 @@ function Worktime() {
 
         <div className="worktime-actions">
           <button 
-            className="btn btn-primary" 
+            className="save-button" 
             onClick={saveWorktime} 
             disabled={saving}
           >

@@ -18,9 +18,13 @@ import Admin from './components/Admin';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import DesignersList from './components/DesignersList';
 
 // 設定 axios 預設 baseURL
-axios.defaults.baseURL = 'https://eva-36bg.onrender.com';
+axios.defaults.baseURL = import.meta.env.MODE === 'production' 
+  ? 'https://eva-36bg.onrender.com' 
+  : 'http://localhost:3001';
+axios.defaults.withCredentials = false;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -45,9 +49,20 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    // 強制所有表格、表頭、儲存格套用主背景色
+    const allCells = document.querySelectorAll('table, th, td');
+    allCells.forEach(el => {
+      el.style.background = '#363d39';
+      el.style.color = '#fff';
+      el.style.border = '1px solid #555';
+    });
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUser(null);
+    window.location.reload();
   };
 
   if (loading) {
@@ -60,44 +75,36 @@ function App() {
   }
 
   return (
-    <Router basename="/eva">
+    <Router basename={import.meta.env.MODE === 'production' ? '/eva' : '/'}>
       <div className="App">
         {/* 只有不是 admin 頁面時才顯示 header */}
-        {window.location.pathname !== '/eva/admin' && (
+        {!window.location.pathname.startsWith('/admin') && (
         <header className="header">
-          <div className="header-content" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start',width:'100%',padding:'0 2vw',minHeight:'64px'}}>
-            <div style={{width:'100%',textAlign:'center',marginBottom:'0.2em'}}>
-              <h1 style={{margin:0,padding:'16px 0 0 0',fontSize:'2rem',letterSpacing:'2px',color:'#f7ab5e',minWidth:0}}>美髮沙龍管理系統</h1>
-            </div>
-            <div style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-              <div style={{flex:'0 0 auto',display:'flex',alignItems:'center'}}>
-                <button className="nav-toggle" onClick={() => setNavOpen(v => !v)} aria-label="展開選單">☰</button>
-              </div>
-              <div style={{flex:'1 1 0'}}></div>
-              <div style={{flex:'0 0 auto',display:'flex',alignItems:'center',justifyContent:'flex-end'}}>
-                <nav className={`nav-menu${navOpen ? ' open' : ''}`}
-                  onMouseLeave={() => setNavOpen(false)}
-                >
-                  <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
-                  <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
-                  <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
-                  {/* <Link to="/queue-transfer" className="nav-link">轉移排隊</Link> */}
-                  <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上預約</Link>
-                  {user ? (
-                    <>
-                      {user.role !== 'admin' && (
-                        <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
-                      )}
-                      <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
-                    </>
-                  ) : (
-                    <>
-                      <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>會員登入/註冊</Link>
-                    </>
-                  )}
-                </nav>
-              </div>
-            </div>
+          <div className="header-content">
+            <h1>美髮沙龍管理系統</h1>
+            <button className="nav-toggle" onClick={()=>setNavOpen(!navOpen)} aria-label="展開/收合選單" style={{margin:'0 auto',display:'block'}}>
+              <span className={`arrow${navOpen ? ' open' : ''}`}>{navOpen ? '▲' : '▼'}</span>
+            </button>
+            {navOpen && (
+              <nav className="nav-menu open">
+                <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
+                <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
+                <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
+                <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上抽號</Link>
+                {user ? (
+                  <>
+                    {user.role !== 'admin' && (
+                      <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
+                    )}
+                    <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>登入</Link>
+                  </>
+                )}
+              </nav>
+            )}
           </div>
         </header>
         )}
@@ -122,6 +129,7 @@ function App() {
               <Route path="customers" element={<Customers />} />
               <Route path="finance" element={<Finance />} />
               <Route path="designers" element={<Designers />} />
+              <Route path="designers-list" element={<DesignersList />} />
               <Route path="profile" element={<Profile user={user} setUser={setUser} />} />
             </Route>
           </Routes>

@@ -161,3 +161,10 @@ tr:last-child td {
     font-size: 2rem;
   }
 }
+
+/* 強制全站所有表格主背景色（最高權重） */
+:root table, :root th, :root td, body table, body th, body td, html table, html th, html td {
+  background: #363d39 !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}

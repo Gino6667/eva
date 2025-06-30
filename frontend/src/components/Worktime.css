@@ -1,2 +1,435 @@
-/* Worktime 頁面樣式，待開發 */
-/* 更新時間：2024-06-28 */ 
+/* Worktime 頁面樣式 */
+.worktime-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #232a27;
+  min-height: 100vh;
+}
+
+.worktime-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: #333d38;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.worktime-header h2 {
+  color: #f7ab5e;
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.worktime-header p {
+  color: #bbb;
+  margin: 0;
+  font-size: 16px;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #f7ab5e;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #444;
+  border-top: 3px solid #f7ab5e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.worktime-content {
+  background: #333d38;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.worktime-table-container {
+  overflow-x: auto;
+}
+
+.worktime-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+.worktime-table th {
+  background: #444e48;
+  color: #f7ab5e;
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.worktime-table td {
+  padding: 18px 12px;
+  border-bottom: 1px solid #2a322e;
+  vertical-align: top;
+}
+
+.worktime-table tr:hover {
+  background: #2a322e;
+}
+
+.worktime-table tr.closed-day {
+  background: #232a27;
+  opacity: 0.7;
+}
+
+.day-name {
+  font-weight: 600;
+  color: #f7ab5e;
+  min-width: 80px;
+  white-space: nowrap;
+}
+
+.status-cell {
+  min-width: 120px;
+}
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-slider {
+  width: 44px;
+  height: 24px;
+  background: #444e48;
+  border-radius: 12px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.toggle-slider:before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #232a27;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: #f7ab5e;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.status-text {
+  font-size: 14px;
+  color: #f7ab5e;
+  font-weight: 500;
+}
+
+.time-cell {
+  min-width: 120px;
+}
+
+.time-input {
+  padding: 8px 12px;
+  border: 1.5px solid #444e48;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #232a27;
+  color: #f7ab5e;
+  transition: border-color 0.3s;
+  box-shadow: none;
+}
+
+.time-input:focus {
+  outline: none;
+  border-color: #f7ab5e;
+  box-shadow: 0 0 0 2px #f7ab5e33;
+}
+
+.time-input:disabled {
+  background: #2a322e;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.slots-cell {
+  min-width: 400px;
+}
+
+.slots-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.slot-card {
+  border: 1.5px solid #444e48;
+  border-radius: 12px;
+  padding: 18px 20px;
+  background: #232a27;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.slot-card:hover {
+  border-color: #f7ab5e;
+  box-shadow: 0 4px 16px rgba(247,171,94,0.13);
+}
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.slot-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #f7ab5e;
+}
+
+.slot-toggle {
+  width: 16px;
+  height: 16px;
+  accent-color: #f7ab5e;
+}
+
+.remove-btn {
+  background: #333d38;
+  color: #f7ab5e;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 1px 4px rgba(247,171,94,0.08);
+}
+
+.remove-btn:hover {
+  background: #f7ab5e;
+  color: #232a27;
+}
+
+.slot-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.seats-setting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.seats-setting label {
+  font-weight: 500;
+  color: #f7ab5e;
+  min-width: 80px;
+}
+
+.seats-input {
+  width: 80px;
+  padding: 6px 10px;
+  border: 1.5px solid #444e48;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #f7ab5e;
+  background: #232a27;
+}
+
+.seats-input:focus {
+  outline: none;
+  border-color: #f7ab5e;
+}
+
+.services-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.services-section > label {
+  font-weight: 500;
+  color: #f7ab5e;
+}
+
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #333d38;
+  border: 1.5px solid #444e48;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #f7ab5e;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.service-item:hover {
+  border-color: #f7ab5e;
+  background: #232a27;
+}
+
+.service-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #f7ab5e;
+}
+
+.add-slot-btn {
+  background: #f7ab5e;
+  color: #232a27;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+  align-self: flex-start;
+  box-shadow: 0 1px 4px rgba(247,171,94,0.08);
+}
+
+.add-slot-btn:hover {
+  background: #e57300;
+  color: #fff;
+}
+
+.closed-message {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-style: italic;
+  background: #232a27;
+  border-radius: 8px;
+}
+
+.worktime-actions {
+  padding: 24px;
+  text-align: center;
+  border-top: 1px solid #2a322e;
+}
+
+.save-button {
+  background: #f7ab5e;
+  color: #232a27;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(247,171,94,0.08);
+}
+
+.save-button:hover:not(:disabled) {
+  background: #e57300;
+  color: #fff;
+}
+
+.save-button:disabled {
+  background: #888;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  background: #333d38;
+  color: #f7ab5e;
+  border: 1.5px solid #444e48;
+}
+
+.message.success {
+  background: #2a322e;
+  color: #b6e6a0;
+  border: 1.5px solid #b6e6a0;
+}
+
+.message.error {
+  background: #2a322e;
+  color: #f7ab5e;
+  border: 1.5px solid #f7ab5e;
+}
+
+@media (max-width: 900px) {
+  .worktime-container {
+    padding: 10px;
+  }
+  .worktime-header {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  .worktime-header h2 {
+    font-size: 20px;
+  }
+  .worktime-table {
+    font-size: 13px;
+  }
+  .worktime-table th,
+  .worktime-table td {
+    padding: 10px 4px;
+  }
+  .slots-cell {
+    min-width: 220px;
+  }
+  .services-grid {
+    flex-direction: column;
+  }
+  .service-item {
+    justify-content: flex-start;
+  }
+} 

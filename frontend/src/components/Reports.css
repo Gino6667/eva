@@ -1,1 +1,364 @@
-/* Reports 頁面樣式，待開發 */ 
+/* Reports 頁面樣式 - 深色主題 */
+.reports-container {
+  padding: 2rem;
+  background: #2e3934;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.reports-header {
+  background: #333d38;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 2px solid #f7ab5e;
+  text-align: center;
+}
+
+.reports-header h2 {
+  color: #f7ab5e;
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.reports-header p {
+  margin: 0;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.reports-controls {
+  background: #333d38;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 2px solid #3e4a44;
+}
+
+.date-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+.form-group label {
+  color: #f7ab5e;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 2px solid #3e4a44;
+  border-radius: 8px;
+  background: #2e3934;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #f7ab5e;
+}
+
+.form-group input::placeholder {
+  color: #888;
+}
+
+.tab-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #3e4a44;
+  background: #2e3934;
+  color: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.tab-btn:hover {
+  border-color: #f7ab5e;
+  color: #f7ab5e;
+}
+
+.tab-btn.active {
+  background: #f7ab5e;
+  border-color: #f7ab5e;
+  color: #2e3934;
+  font-weight: bold;
+}
+
+.reports-content {
+  background: #333d38;
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid #3e4a44;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #f7ab5e;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #3e4a44;
+  border-top: 4px solid #f7ab5e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.report-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  background: #2e3934;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #3e4a44;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  border-color: #f7ab5e;
+  transform: translateY(-2px);
+}
+
+.summary-card h4 {
+  color: #ccc;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.summary-value.revenue {
+  color: #f7ab5e;
+}
+
+.summary-value.count {
+  color: #4caf50;
+}
+
+.summary-value.average {
+  color: #2196f3;
+}
+
+.summary-subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.percentage {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+
+.report-details {
+  background: #2e3934;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #3e4a44;
+}
+
+.report-details h4 {
+  color: #f7ab5e;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.data-table {
+  overflow-x: auto;
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #333d38;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.data-table th {
+  background: #3e4a44;
+  color: #f7ab5e;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 2px solid #2e3934;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #3e4a44;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.data-table tr:hover {
+  background: #3e4a44;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table .revenue {
+  color: #f7ab5e;
+  font-weight: 600;
+}
+
+.data-table td.number, .data-table td.highlight-number {
+  color: #ff9800;
+  font-weight: bold;
+  font-size: 2em;
+  background: #fffbe6;
+  border-radius: 8px;
+  padding: 0.2em 0.6em;
+  box-shadow: 0 0 8px #ff980044;
+}
+
+.no-data {
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .reports-container {
+    padding: 1rem;
+  }
+  
+  .reports-header {
+    padding: 1.5rem;
+  }
+  
+  .reports-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .date-controls {
+    flex-direction: column;
+  }
+  
+  .form-group {
+    min-width: auto;
+  }
+  
+  .tab-controls {
+    justify-content: center;
+  }
+  
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .report-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-value {
+    font-size: 1.5rem;
+  }
+  
+  .data-table {
+    font-size: 0.8rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reports-controls {
+    padding: 1rem;
+  }
+  
+  .reports-content {
+    padding: 1rem;
+  }
+  
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+.designer-list {
+  margin-top: 1.5rem;
+}
+.designer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+.designer-table th, .designer-table td {
+  border: 1px solid #3e4a44;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+.designer-table th {
+  background: #333d38;
+  color: #f7ab5e;
+}
+.designer-table td {
+  background: #2e3934;
+  color: #fff;
+} 

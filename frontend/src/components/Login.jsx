@@ -176,7 +176,7 @@ function Login({ setUser }) {
             // 一般會員登入表單
             <>
               <div className="form-group">
-                <label htmlFor="accountInput">信箱</label>
+                <label htmlFor="accountInput">信箱/手機號碼</label>
                 <input
                   type="text"
                   id="accountInput"
@@ -210,13 +210,13 @@ function Login({ setUser }) {
             </>
           )}
           
-          <div className="button-group">
+          <div className="button-group" style={{ display: 'flex', justifyContent: 'center', gap: '3em', marginBottom: '0.5em' }}>
             {redirect && (
               <button 
                 type="button"
                 onClick={handleGoBack}
                 className="btn btn-secondary"
-                style={{marginRight: '1em'}}>
+              >
                 返回
               </button>
             )}
@@ -224,15 +224,9 @@ function Login({ setUser }) {
               type="submit" 
               className="btn btn-primary"
               disabled={loading}
-              style={{marginRight: '1em'}}
             >
               {loading ? '登入中...' : '登入'}
             </button>
-            {!isAdminLogin && (
-              <button className="btn btn-secondary" onClick={() => navigate('/register')}>
-                註冊會員
-              </button>
-            )}
           </div>
           {msg && (
             <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
@@ -242,9 +236,25 @@ function Login({ setUser }) {
         </form>
         
         {!isAdminLogin && (
-          <a href="https://line.me/R/ti/p/@2007657170" target="_blank" rel="noopener noreferrer" style={{marginTop: '1em', display: 'inline-block', background: '#06C755', color: '#f7ab5e', padding: '10px 20px', borderRadius: '4px', textDecoration: 'none', fontWeight: 'bold'}}>
-            使用 LINE 登入
-          </a>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '1.5em' }}>
+            <a
+              href="https://line.me/R/ti/p/@2007657170"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="line-login-btn"
+              style={{ minWidth: 160 }}
+            >
+              使用 LINE 登入
+            </a>
+            <button
+              className="login-register-btn"
+              style={{ minWidth: 160 }}
+              onClick={() => navigate(redirect ? `/register?redirect=${redirect}` : '/register')}
+              type="button"
+            >
+              註冊會員
+            </button>
+          </div>
         )}
       </div>
     </div>

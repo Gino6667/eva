@@ -7,13 +7,24 @@ function Profile({ user, setUser }) {
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const [records, setRecords] = useState([]);
+  const [queueRecords, setQueueRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (user) setName(user.name);
     loadRecords();
+    loadQueueRecords();
   }, [user]);
+
+  useEffect(() => {
+    const reload = () => {
+      loadRecords();
+      loadQueueRecords();
+    };
+    window.addEventListener('queue-updated', reload);
+    return () => window.removeEventListener('queue-updated', reload);
+  }, []);
 
   const loadRecords = async () => {
     const token = localStorage.getItem('token');
@@ -25,6 +36,19 @@ function Profile({ user, setUser }) {
       setRecords(res.data);
     } catch (err) {
       console.error('載入預約紀錄失敗:', err);
+    }
+  };
+
+  const loadQueueRecords = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    try {
+      const res = await axios.get('/api/my-queue', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setQueueRecords(res.data);
+    } catch (err) {
+      setQueueRecords([]);
     }
   };
 
@@ -46,18 +70,91 @@ function Profile({ user, setUser }) {
     }
   };
 
-  const handleCancelReservation = async (reservationId) => {
+  // 統一的取消功能 - 支援預約和現場排隊
+  const handleCancel = async (type, id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.patch(`/api/reservations/${reservationId}/cancel`, {}, { 
-        headers: { Authorization: `Bearer ${token}` } 
-      });
+      if (type === 'reservation') {
+        await axios.patch(`/api/reservations/${id}/cancel`, {}, { 
+          headers: { Authorization: `Bearer ${token}` } 
+        });
+      } else if (type === 'queue') {
+        await axios.patch(`/api/queue/${id}/cancel`, {}, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      }
       setMsg('取消成功！');
       loadRecords();
+      loadQueueRecords();
+      window.dispatchEvent(new Event('queue-updated'));
     } catch (err) {
       setMsg('取消失敗');
     }
   };
+
+  // 獲取狀態顯示文字
+  const getStatusText = (status, type) => {
+    if (type === 'reservation') {
+      return status === 'booked' ? '已預約' : 
+             status === 'completed' ? '已完成' : 
+             status === 'cancelled' ? '已取消' : status;
+    } else {
+      return status === 'waiting' ? '等待中' : 
+             status === 'called' ? '已叫號' : 
+             status === 'done' ? '已完成' : 
+             status === 'cancelled' ? '已取消' : status;
+    }
+  };
+
+  // 獲取狀態 CSS 類別
+  const getStatusClass = (status) => {
+    return `status ${status}`;
+  };
+
+  // 檢查是否可以取消
+  const canCancel = (item, type) => {
+    if (type === 'reservation') {
+      return item.status === 'booked';
+    } else {
+      return item.status === 'waiting';
+    }
+  };
+
+  // 合併並排序所有服務紀錄
+  const getAllRecords = () => {
+    const allRecords = [];
+    const today = new Date().toISOString().split('T')[0]; // 取得今天的日期 YYYY-MM-DD
+    
+    // 添加線上抽號紀錄（只顯示今天的）
+    records.forEach(r => {
+      if (r.date === today) {
+        allRecords.push({
+          ...r,
+          type: 'reservation',
+          sortTime: new Date(`${r.date} ${r.time}`).getTime(),
+          displayTime: `${r.date} ${r.time}`
+        });
+      }
+    });
+    
+    // 添加現場排隊紀錄（只顯示今天的）
+    queueRecords.forEach(q => {
+      const queueDate = new Date(q.createdAt).toISOString().split('T')[0];
+      if (queueDate === today) {
+        allRecords.push({
+          ...q,
+          type: 'queue',
+          sortTime: new Date(q.createdAt).getTime(),
+          displayTime: new Date(q.createdAt).toLocaleString('zh-TW')
+        });
+      }
+    });
+    
+    // 按時間排序（最新的在前）
+    return allRecords.sort((a, b) => b.sortTime - a.sortTime);
+  };
+
+  const sortedRecords = getAllRecords();
 
   if (!user) {
     return (
@@ -74,7 +171,7 @@ function Profile({ user, setUser }) {
     <div className="profile-container">
       <div className="profile-header">
         <h2>會員中心</h2>
-        <p>管理您的個人資料與預約紀錄</p>
+        <p>管理您的個人資料與服務紀錄</p>
       </div>
 
       <div className="profile-content">
@@ -122,34 +219,33 @@ function Profile({ user, setUser }) {
         </div>
 
         <div className="profile-section">
-          <h3>預約紀錄</h3>
-          {records.length === 0 ? (
+          <h3>今日服務紀錄</h3>
+          {sortedRecords.length === 0 ? (
             <div className="empty-records">
-              <p>尚無預約紀錄</p>
+              <p>今日尚無服務紀錄</p>
             </div>
           ) : (
-            <div className="reservation-list">
-              {records.map((r, i) => (
-                <div key={i} className="reservation-item">
-                  <div className="reservation-info">
-                    <div><strong>設計師：</strong>{r.designerName}</div>
-                    <div><strong>服務：</strong>{r.serviceName} (${r.servicePrice})</div>
-                    <div><strong>日期：</strong>{r.date}</div>
-                    <div><strong>時段：</strong>{r.time}</div>
+            <div className="service-list">
+              {sortedRecords.map((r, i) => (
+                <div key={`service-${i}`} className={`service-item ${r.type === 'reservation' ? 'reservation-item' : 'queue-item'} ${r.status === 'cancelled' ? 'cancelled-item' : ''}`}>
+                  <div className="service-type-badge">{r.type === 'reservation' ? '線上抽號' : '現場排隊'}</div>
+                  <div className="service-info">
+                    <div><strong>設計師：</strong><span>{r.designerName}</span></div>
+                    <div><strong>服務：</strong><span>{r.serviceName} {r.servicePrice ? `($${r.servicePrice})` : ''}</span></div>
+                    <div><strong>{r.type === 'reservation' ? '抽號編號' : '號碼牌'}：</strong><span>{r.type === 'reservation' ? r.id : r.number}</span></div>
+                    <div><strong>{r.type === 'reservation' ? '抽號時間' : '抽號時間'}：</strong><span>{r.displayTime}</span></div>
                     <div><strong>狀態：</strong>
-                      <span className={`status ${r.status}`}>
-                        {r.status === 'booked' ? '已預約' : 
-                         r.status === 'completed' ? '已完成' : 
-                         r.status === 'cancelled' ? '已取消' : r.status}
+                      <span className={getStatusClass(r.status)}>
+                        {getStatusText(r.status, r.type)}
                       </span>
                     </div>
                   </div>
-                  {r.status === 'booked' && (
+                  {canCancel(r, r.type) && (
                     <button 
                       className="btn btn-danger"
-                      onClick={() => handleCancelReservation(r.id)}
+                      onClick={() => handleCancel(r.type, r.id)}
                     >
-                      取消預約
+                      {r.type === 'reservation' ? '取消抽號' : '取消排隊'}
                     </button>
                   )}
                 </div>

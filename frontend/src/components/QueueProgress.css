@@ -13,7 +13,7 @@
   border: none;
   box-shadow: none;
   padding: 32px 0 32px 0;
-  margin: 0 auto 32px auto;
+  margin: -1cm auto 32px auto;
   max-width: 960px;
   animation: fadeInUp 0.8s;
 }
@@ -397,7 +397,7 @@
   font-weight: 900 !important;
   color: #f7ab5e !important;
   font-size: 2.1em !important;
-  box-shadow: 0 0 16px #f7ab5e44, 0 2px 8px #f7ab5e33;
+  box-shadow: none !important;
   margin: 0.2em 0.5em;
   transition: transform 0.18s, box-shadow 0.18s, background 0.18s, border-color 0.18s;
   display: flex;
@@ -409,13 +409,12 @@
   color: #333d38 !important;
   border-color: #f7ab5e !important;
   transform: scale(1.08) rotate(-2deg);
-  box-shadow: 0 0 32px #f7ab5eaa, 0 4px 16px #f7ab5e55;
+  box-shadow: none !important;
 }
 .user-queue-number {
   font-size: 1.2em;
   font-weight: 900;
   color: #f7ab5e;
-  text-shadow: 0 2px 12px #2196f3, 0 1px 0 #fffbe6;
   letter-spacing: 2px;
   padding: 0 0.1em;
   user-select: none;
@@ -431,29 +430,26 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 2.5rem 2.5rem;
-  justify-items: center;
+  gap: 2rem 2rem;
+  justify-items: stretch;
   align-items: stretch;
-  width: 100%;
-  max-width: 100%;
+  margin: 2rem 0 1.5rem 0;
 }
 
 .serving-card-progress {
-  background: #fff;
-  border-radius: 18px;
-  border: 2.5px solid #f7ab5e;
-  box-shadow: 0 6px 32px #f7ab5e22, 0 1.5px 0 #f7ab5e33;
-  min-width: 620px;
-  max-width: 800px;
-  flex: 1 1 720px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-  transition: box-shadow 0.18s, border-color 0.18s;
+  background: #363d39;
+  border: 2px solid #f7ab5e;
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
 }
 .serving-card-progress .designer-header {
-  background: #2196f3;
-  color: #fff;
+  background: transparent;
+  color: #f7ab5e;
   font-size: 2.2rem;
   font-weight: 900;
   padding: 1.1rem 2.2rem 0.7rem 2.2rem;
@@ -469,59 +465,72 @@
   letter-spacing: 2px;
 }
 .serving-card-progress .card-main-row {
+  min-height: 240px;
+  height: 240px;
   display: flex;
   flex-direction: row;
   width: 100%;
-  background: #e3f2fd;
+  background: transparent;
   border-radius: 0 0 18px 18px;
   border-top: 2px solid #f7ab5e;
+  align-items: stretch;
 }
 .serving-card-progress .card-col {
-  flex: 1 1 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2.2rem 0.5rem 2.2rem 0.5rem;
   min-width: 0;
+  min-height: 240px;
+  height: 240px;
+  padding: 0;
 }
 .serving-card-progress .card-col-now {
+  background: transparent;
   border-right: 1.5px solid #90caf9;
 }
 .serving-card-progress .col-label {
+  color: #2196f3;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #2196f3;
   margin-bottom: 0.7rem;
   letter-spacing: 1px;
 }
-.serving-card-progress .col-number {
+.serving-card-progress .col-number,
+.serving-card-progress .now-number,
+.serving-card-progress .next-number,
+.serving-card-progress .col-service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #ff9800;
   font-size: 4.2rem;
   font-weight: 900;
-  color: #2196f3;
-  margin-bottom: 0.5rem;
   line-height: 1.1;
+  margin-bottom: 0;
+  min-height: 0;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
+  text-shadow: none !important;
 }
-.serving-card-progress .now-number {
-  background: #81d4fa;
-  border-radius: 12px;
-  padding: 0.5rem 2.5rem;
-  color: #fff;
-  box-shadow: 0 2px 12px #2196f355;
-}
-.serving-card-progress .next-number {
-  background: #e3f2fd;
-  border-radius: 12px;
-  padding: 0.5rem 2.5rem;
-  color: #757575;
-  box-shadow: 0 2px 8px #2196f322;
-}
-.serving-card-progress .col-customer {
-  font-size: 1.1rem;
-  color: #2196f3;
-  font-weight: 600;
-  margin-top: 0.3rem;
-  letter-spacing: 1px;
+.serving-card-progress .col-service {
+  font-size: 1.15rem;
+  color: #ff9800;
+  font-weight: 700;
+  margin-top: 0.2em;
+  width: 100%;
+  text-align: center;
+  white-space: pre-line;
+  word-break: break-all;
+  min-height: 2.2em;
+  flex-shrink: 0;
 }
 .serving-card-progress.rest .card-main-row {
   filter: grayscale(0.7) brightness(0.93);
@@ -539,33 +548,11 @@
   letter-spacing: 4px;
   z-index: 2;
   pointer-events: none;
-  text-shadow: 0 2px 16px #333d38cc;
 }
 @media (max-width: 900px) {
-  .serving-card-progress {
-    min-width: 90vw;
-    max-width: 98vw;
-    flex: 1 1 98vw;
-  }
-  .serving-card-progress .designer-header {
-    font-size: 1.3rem;
-    padding: 0.7rem 1.2rem 0.5rem 1.2rem;
-  }
-  .serving-card-progress .col-label {
-    font-size: 1.1rem;
-  }
-  .serving-card-progress .col-number {
-    font-size: 2.2rem;
-  }
-  .serving-card-progress .col-customer {
-    font-size: 0.95rem;
-  }
-  .serving-card-progress .card-col {
-    padding: 1.1rem 0.2rem 1.1rem 0.2rem;
-  }
   .serving-grid-progress {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
+    grid-template-rows: auto;
     gap: 1.2rem 0.5rem;
   }
 }

@@ -14,8 +14,11 @@
 }
 
 .reservation-header h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
   color: #f7ab5e;
-  margin-bottom: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.5em;
 }
 
 .reservation-header p {
@@ -49,31 +52,36 @@
 }
 
 .btn-primary {
-  background: #007bff;
-  color: #f7ab5e;
+  background: transparent !important;
+  color: #f7ab5e !important;
+  border: 2px solid #f7ab5e !important;
+  box-shadow: none !important;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #0056b3;
-  transform: translateY(-1px);
-  color: #f7ab5e;
+  background: #f7ab5e22 !important;
+  color: #f7ab5e !important;
+  border-color: #f7ab5e !important;
 }
 
 .btn-primary:disabled {
-  background: #ccc;
+  opacity: 0.7;
   cursor: not-allowed;
   color: #f7ab5e;
+  background: transparent !important;
 }
 
 .btn-secondary {
-  background: #6c757d;
-  color: #f7ab5e;
+  background: transparent !important;
+  color: #f7ab5e !important;
+  border: 2px solid #f7ab5e !important;
+  box-shadow: none !important;
 }
 
 .btn-secondary:hover {
-  background: #545b62;
-  transform: translateY(-1px);
-  color: #f7ab5e;
+  background: #f7ab5e22 !important;
+  color: #f7ab5e !important;
+  border-color: #f7ab5e !important;
 }
 
 .btn-outline {
@@ -122,6 +130,7 @@
   box-shadow: none;
   animation: modalPop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
   border: 4px solid #007bff;
+  font-size: 1.15rem;
 }
 
 /* 步驟3服務項目彈窗特殊樣式 */
@@ -317,3 +326,48 @@
     grid-template-columns: 1fr;
     gap: 0.4cm;
   }
+}
+
+.btn.member-logged-in {
+  background-color: #44ab32 !important;
+  color: #fff !important;
+  border: 2px solid #f7ab5e;
+  font-weight: bold;
+  font-size: 1.2em;
+  opacity: 1 !important;
+}
+
+.btn.member-logged-in:disabled, .btn.member-logged-in[disabled] {
+  background-color: #44ab32 !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  border: 2px solid #f7ab5e;
+}
+
+.btn.selected,
+.btn.btn-secondary.selected,
+.btn.service-item.selected {
+  background-color: #44ab32 !important;
+  color: #fff !important;
+  border: 2px solid #f7ab5e !important;
+  font-weight: bold;
+  opacity: 1 !important;
+}
+.btn.selected:disabled,
+.btn.btn-secondary.selected:disabled,
+.btn.service-item.selected:disabled {
+  background-color: #44ab32 !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  border: 2px solid #f7ab5e;
+}
+
+/* 移除 .queue-step:nth-child(3) .designer-selection 橘色外框樣式 */
+
+.business-status-message {
+  font-size: 1.3rem;
+  color: #d32f2f;
+  text-align: center;
+  margin: 1.2em 0 1.5em 0;
+  font-weight: bold;
+}
