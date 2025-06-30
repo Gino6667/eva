@@ -1937,6 +1937,12 @@
       "password": "123",
       "name": "測試會員",
       "role": "customer"
+    },
+    {
+      "id": 5,
+      "password": "1234",
+      "name": "qwe@gmail.com",
+      "role": "designer"
     }
   ],
   "worktime": {
