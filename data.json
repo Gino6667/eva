@@ -1948,6 +1948,13 @@
       "password": "1234",
       "name": "qwe@gmail.com",
       "role": "designer"
+    },
+    {
+      "id": 6,
+      "phone": "0912666555",
+      "password": "1234",
+      "name": "我是測試",
+      "role": "user"
     }
   ],
   "worktime": {
