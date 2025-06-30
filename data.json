@@ -1939,7 +1939,8 @@
       "phone": "0912312312",
       "password": "123",
       "name": "測試會員",
-      "role": "customer"
+      "role": "customer",
+      "totalSpent": 200
     },
     {
       "id": 5,
