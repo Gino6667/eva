@@ -1939,14 +1939,6 @@
       "role": "customer"
     },
     {
-      "id": 5,
-      "email": "",
-      "phone": "",
-      "password": "123",
-      "name": "設計師test",
-      "role": "designer"
-    },
-    {
       "id": 6,
       "email": "",
       "phone": "",
