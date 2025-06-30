@@ -1990,6 +1990,13 @@
       "password": "1234",
       "name": "是測試",
       "role": "customer"
+    },
+    {
+      "id": 12,
+      "phone": "0911888999",
+      "password": "1234",
+      "name": "hair-queue",
+      "role": "customer"
     }
   ],
   "worktime": {
