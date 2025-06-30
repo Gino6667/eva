@@ -2032,7 +2032,7 @@
       "id": 2,
       "type": "expense",
       "amount": 5000,
-      "description": "500",
+      "description": "600",
       "category": "服務收入",
       "date": "2025-06-30",
       "customer": ""
