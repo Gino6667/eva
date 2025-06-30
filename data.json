@@ -45,7 +45,8 @@
         9,
         2,
         3
-      ]
+      ],
+      "isPaused": true
     }
   ],
   "services": [
