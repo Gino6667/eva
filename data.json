@@ -80,12 +80,6 @@
       "name": "洗吹剪",
       "price": 300,
       "duration": 20
-    },
-    {
-      "id": 11,
-      "name": "平頭國小嚇嚇嚇嚇嚇嚇嚇嚇嚇嚇嚇嚇",
-      "price": 200,
-      "duration": 20
     }
   ],
   "queue": [
