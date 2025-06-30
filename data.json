@@ -1418,10 +1418,11 @@
       "designerId": 11,
       "serviceId": 8,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 39,
       "createdAt": "2025-06-30T12:55:19.914Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-30T16:12:51.764Z"
     },
     {
       "id": 9053,
