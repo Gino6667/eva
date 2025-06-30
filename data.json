@@ -1937,14 +1937,6 @@
       "password": "123",
       "name": "測試會員",
       "role": "customer"
-    },
-    {
-      "id": 8,
-      "email": "",
-      "phone": "",
-      "password": "123",
-      "name": "123",
-      "role": "designer"
     }
   ],
   "worktime": {
