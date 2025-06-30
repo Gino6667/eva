@@ -1940,6 +1940,7 @@
     },
     {
       "id": 5,
+      "email": "qwe@gmail.com",
       "password": "1234",
       "name": "qwe@gmail.com",
       "role": "designer"
