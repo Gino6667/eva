@@ -2027,5 +2027,15 @@
       []
     ]
   },
-  "transactions": []
+  "transactions": [
+    {
+      "id": 1,
+      "type": "expense",
+      "amount": 5000,
+      "description": "水",
+      "category": "服務收入",
+      "date": "2025-06-30",
+      "customer": ""
+    }
+  ]
 }
