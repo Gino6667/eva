@@ -1964,13 +1964,6 @@
       "role": "user"
     },
     {
-      "id": 8,
-      "phone": "0988111555",
-      "password": "1234",
-      "name": "是測試",
-      "role": "customer"
-    },
-    {
       "id": 9,
       "phone": "0988566541",
       "password": "1234",
