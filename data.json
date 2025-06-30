@@ -78,26 +78,6 @@
   ],
   "queue": [
     {
-      "id": 101,
-      "designerId": 1,
-      "serviceId": 1,
-      "type": "onsite",
-      "status": "done",
-      "createdAt": "2024-06-26T02:30:00Z",
-      "userId": null,
-      "number": 1
-    },
-    {
-      "id": 102,
-      "designerId": 2,
-      "serviceId": 2,
-      "type": "online",
-      "status": "done",
-      "createdAt": "2024-06-26T02:32:00Z",
-      "userId": 1,
-      "number": 2
-    },
-    {
       "id": 105,
       "designerId": 1,
       "serviceId": 1,
@@ -1980,6 +1960,14 @@
       "phone": "",
       "password": "123",
       "name": "設test",
+      "role": "designer"
+    },
+    {
+      "id": 8,
+      "email": "",
+      "phone": "",
+      "password": "123",
+      "name": "123",
       "role": "designer"
     }
   ],
