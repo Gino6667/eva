@@ -1955,6 +1955,13 @@
       "password": "1234",
       "name": "我是測試",
       "role": "user"
+    },
+    {
+      "id": 7,
+      "phone": "0911111111",
+      "password": "1234",
+      "name": "我是測試",
+      "role": "user"
     }
   ],
   "worktime": {
