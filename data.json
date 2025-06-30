@@ -1921,7 +1921,10 @@
       "email": "test@example.com",
       "password": "hashedpassword",
       "name": "王小明",
-      "role": "customer"
+      "role": "customer",
+      "phone": "0912333444",
+      "status": "inactive",
+      "totalSpent": 200
     },
     {
       "id": 3,
