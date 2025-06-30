@@ -1542,6 +1542,16 @@
       "number": 1,
       "createdAt": "2025-06-30T16:08:38.800Z",
       "userId": 3
+    },
+    {
+      "id": 9064,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 2,
+      "createdAt": "2025-06-30T16:13:17.989Z",
+      "userId": null
     }
   ],
   "reservations": [
