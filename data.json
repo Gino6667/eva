@@ -1405,10 +1405,11 @@
       "designerId": 11,
       "serviceId": 8,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 38,
       "createdAt": "2025-06-30T12:54:56.308Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-06-30T16:05:52.551Z"
     },
     {
       "id": 9052,
