@@ -24,7 +24,8 @@
       "id": 10,
       "name": "我有五個字",
       "services": [
-        5
+        5,
+        3
       ],
       "isPaused": false
     },
