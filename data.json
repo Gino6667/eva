@@ -1716,10 +1716,11 @@
       "designerId": 10,
       "serviceId": 5,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 24,
       "createdAt": "2025-07-01T11:13:47.032Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-01T11:14:23.285Z"
     }
   ],
   "reservations": [
