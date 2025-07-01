@@ -1631,13 +1631,15 @@
     },
     {
       "id": 9079,
-      "designerId": 5,
+      "designerId": 7,
       "serviceId": 3,
       "type": "online",
       "status": "waiting",
       "number": 17,
       "createdAt": "2025-07-01T08:35:02.607Z",
-      "userId": 3
+      "userId": 3,
+      "transferredAt": "2025-07-01T10:37:29.345Z",
+      "transferReason": "設計師調整"
     },
     {
       "id": 9080,
@@ -2175,6 +2177,17 @@
       "category": "服務收入",
       "date": "2025-06-30",
       "customer": ""
+    }
+  ],
+  "queueTransfers": [
+    {
+      "id": 1,
+      "queueId": 9079,
+      "fromDesignerId": 5,
+      "toDesignerId": 7,
+      "reason": "設計師調整",
+      "transferredAt": "2025-07-01T10:37:29.345Z",
+      "status": "transferred"
     }
   ]
 }
