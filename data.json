@@ -1619,10 +1619,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 16,
       "createdAt": "2025-07-01T08:34:56.177Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T09:08:32.107Z"
     },
     {
       "id": 9079,
