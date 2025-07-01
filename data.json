@@ -1682,10 +1682,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 21,
       "createdAt": "2025-07-01T09:09:28.620Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-01T10:39:30.957Z"
     },
     {
       "id": 9084,
