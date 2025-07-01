@@ -1634,12 +1634,13 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 17,
       "createdAt": "2025-07-01T08:35:02.607Z",
       "userId": 3,
       "transferredAt": "2025-07-01T10:37:29.345Z",
-      "transferReason": "設計師調整"
+      "transferReason": "設計師調整",
+      "checkinAt": "2025-07-01T10:37:37.486Z"
     },
     {
       "id": 9080,
