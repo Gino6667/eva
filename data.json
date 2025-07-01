@@ -2322,6 +2322,15 @@
       "category": "product",
       "date": "2025-07-01",
       "customer": ""
+    },
+    {
+      "id": 5,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：阿強）",
+      "category": "product",
+      "date": "2025-07-01",
+      "customer": ""
     }
   ],
   "queueTransfers": [
