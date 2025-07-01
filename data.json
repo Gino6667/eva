@@ -1812,11 +1812,12 @@
       "designerId": 7,
       "serviceId": 10,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 31,
       "createdAt": "2025-07-01T15:49:14.265Z",
       "userId": 3,
-      "checkinAt": "2025-07-01T15:49:44.507Z"
+      "checkinAt": "2025-07-01T15:49:44.507Z",
+      "completedAt": "2025-07-01T15:49:45.635Z"
     }
   ],
   "reservations": [
@@ -2316,6 +2317,17 @@
       "status": "completed",
       "createdAt": "2025-07-01T15:47:02.673Z",
       "completedAt": "2025-07-01T15:47:02.673Z"
+    },
+    {
+      "id": 250,
+      "designerId": 7,
+      "serviceId": 10,
+      "userId": 3,
+      "date": "2025-07-01",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-01T15:49:45.635Z",
+      "completedAt": "2025-07-01T15:49:45.635Z"
     }
   ],
   "users": [
