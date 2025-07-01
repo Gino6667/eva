@@ -1812,10 +1812,11 @@
       "designerId": 7,
       "serviceId": 10,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 31,
       "createdAt": "2025-07-01T15:49:14.265Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T15:49:44.507Z"
     }
   ],
   "reservations": [
