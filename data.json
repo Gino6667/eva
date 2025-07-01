@@ -1664,10 +1664,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 19,
       "createdAt": "2025-07-01T08:35:15.431Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T13:15:48.684Z"
     },
     {
       "id": 9082,
