@@ -1800,11 +1800,12 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 30,
       "createdAt": "2025-07-01T15:45:21.199Z",
       "userId": 3,
-      "checkinAt": "2025-07-01T15:45:28.382Z"
+      "checkinAt": "2025-07-01T15:45:28.382Z",
+      "completedAt": "2025-07-01T15:47:02.673Z"
     }
   ],
   "reservations": [
@@ -2293,6 +2294,17 @@
       "status": "completed",
       "createdAt": "2025-07-01T15:32:06.464Z",
       "completedAt": "2025-07-01T15:32:06.464Z"
+    },
+    {
+      "id": 249,
+      "designerId": 5,
+      "serviceId": 5,
+      "userId": 3,
+      "date": "2025-07-01",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-01T15:47:02.673Z",
+      "completedAt": "2025-07-01T15:47:02.673Z"
     }
   ],
   "users": [
@@ -2785,6 +2797,16 @@
       "category": "product",
       "date": "2025-07-01",
       "designerId": 7,
+      "productId": 1751381187351
+    },
+    {
+      "id": 1751384793193,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：阿花）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 5,
       "productId": 1751381187351
     }
   ],
