@@ -1710,6 +1710,16 @@
       "userId": 3,
       "checkinAt": "2025-07-01T10:37:53.601Z",
       "completedAt": "2025-07-01T10:37:54.828Z"
+    },
+    {
+      "id": 9086,
+      "designerId": 10,
+      "serviceId": 5,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 24,
+      "createdAt": "2025-07-01T11:13:47.032Z",
+      "userId": null
     }
   ],
   "reservations": [
