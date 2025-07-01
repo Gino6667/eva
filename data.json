@@ -1800,10 +1800,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 30,
       "createdAt": "2025-07-01T15:45:21.199Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T15:45:28.382Z"
     }
   ],
   "reservations": [
