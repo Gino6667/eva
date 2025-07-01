@@ -1641,13 +1641,14 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 17,
       "createdAt": "2025-07-01T08:35:02.607Z",
       "userId": 3,
       "transferredAt": "2025-07-01T10:37:29.345Z",
       "transferReason": "設計師調整",
-      "checkinAt": "2025-07-01T10:37:37.486Z"
+      "checkinAt": "2025-07-01T10:37:37.486Z",
+      "completedAt": "2025-07-01T15:17:47.083Z"
     },
     {
       "id": 9080,
@@ -2193,6 +2194,17 @@
       "status": "completed",
       "createdAt": "2025-07-01T15:12:02.285Z",
       "completedAt": "2025-07-01T15:12:02.285Z"
+    },
+    {
+      "id": 242,
+      "designerId": 7,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-01",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-01T15:17:47.083Z",
+      "completedAt": "2025-07-01T15:17:47.083Z"
     }
   ],
   "users": [
