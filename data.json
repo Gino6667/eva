@@ -1598,10 +1598,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 14,
       "createdAt": "2025-07-01T08:34:25.971Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T09:08:28.918Z"
     },
     {
       "id": 9077,
