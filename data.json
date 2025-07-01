@@ -1645,13 +1645,15 @@
     },
     {
       "id": 9080,
-      "designerId": 5,
+      "designerId": 10,
       "serviceId": 3,
       "type": "online",
       "status": "waiting",
       "number": 18,
       "createdAt": "2025-07-01T08:35:09.924Z",
-      "userId": 3
+      "userId": 3,
+      "transferredAt": "2025-07-01T10:38:29.990Z",
+      "transferReason": "設計師調整"
     },
     {
       "id": 9081,
@@ -2213,6 +2215,15 @@
       "toDesignerId": 7,
       "reason": "設計師調整",
       "transferredAt": "2025-07-01T10:37:29.345Z",
+      "status": "transferred"
+    },
+    {
+      "id": 2,
+      "queueId": 9080,
+      "fromDesignerId": 5,
+      "toDesignerId": 10,
+      "reason": "設計師調整",
+      "transferredAt": "2025-07-01T10:38:29.990Z",
       "status": "transferred"
     }
   ]
