@@ -2313,6 +2313,15 @@
       "category": "服務收入",
       "date": "2025-06-30",
       "customer": ""
+    },
+    {
+      "id": 4,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "customer": ""
     }
   ],
   "queueTransfers": [
@@ -2333,6 +2342,14 @@
       "reason": "設計師調整",
       "transferredAt": "2025-07-01T10:38:29.990Z",
       "status": "transferred"
+    }
+  ],
+  "products": [
+    {
+      "id": 1751381187351,
+      "name": "洗頭水",
+      "price": "200",
+      "stock": "10"
     }
   ]
 }
