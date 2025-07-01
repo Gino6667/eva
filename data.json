@@ -1762,10 +1762,11 @@
       "designerId": 11,
       "serviceId": 10,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 28,
       "createdAt": "2025-07-01T13:16:36.790Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T13:16:46.704Z"
     }
   ],
   "reservations": [
