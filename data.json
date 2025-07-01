@@ -1717,11 +1717,12 @@
       "designerId": 10,
       "serviceId": 5,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 24,
       "createdAt": "2025-07-01T11:13:47.032Z",
       "userId": null,
-      "checkinAt": "2025-07-01T11:14:23.285Z"
+      "checkinAt": "2025-07-01T11:14:23.285Z",
+      "completedAt": "2025-07-01T12:41:28.413Z"
     },
     {
       "id": 9087,
