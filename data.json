@@ -1681,10 +1681,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 20,
       "createdAt": "2025-07-01T09:09:17.896Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T15:24:39.781Z"
     },
     {
       "id": 9083,
@@ -2370,7 +2371,9 @@
       "description": "產品銷售：洗頭水（設計師：小美）",
       "category": "product",
       "date": "2025-07-01",
-      "customer": ""
+      "customer": "",
+      "designerId": 11,
+      "productId": 1751381187351
     },
     {
       "id": 5,
@@ -2379,7 +2382,9 @@
       "description": "產品銷售：洗頭水（設計師：阿強）",
       "category": "product",
       "date": "2025-07-01",
-      "customer": ""
+      "customer": "",
+      "designerId": 7,
+      "productId": 1751381187351
     },
     {
       "id": 1751383070396,
