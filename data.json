@@ -1743,6 +1743,16 @@
       "number": 26,
       "createdAt": "2025-07-01T12:46:02.631Z",
       "userId": 3
+    },
+    {
+      "id": 9089,
+      "designerId": 7,
+      "serviceId": 10,
+      "type": "online",
+      "status": "waiting",
+      "number": 27,
+      "createdAt": "2025-07-01T13:13:32.888Z",
+      "userId": 3
     }
   ],
   "reservations": [
