@@ -4,15 +4,9 @@
       "id": 5,
       "name": "阿花",
       "services": [
-        1,
         2,
         3,
-        5,
-        4,
-        6,
-        9,
-        8,
-        7
+        5
       ],
       "isPaused": false
     },
@@ -20,7 +14,6 @@
       "id": 7,
       "name": "阿強",
       "services": [
-        1,
         2,
         3,
         10,
@@ -31,10 +24,7 @@
       "id": 10,
       "name": "我有五個字",
       "services": [
-        1,
-        4,
-        5,
-        11
+        5
       ],
       "isPaused": false
     },
@@ -43,8 +33,6 @@
       "name": "小美",
       "services": [
         5,
-        8,
-        9,
         2,
         3
       ],
@@ -1599,10 +1587,11 @@
       "designerId": 10,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 13,
       "createdAt": "2025-07-01T08:13:38.338Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-01T09:07:50.051Z"
     },
     {
       "id": 9076,
