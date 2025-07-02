@@ -1985,10 +1985,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 15,
       "createdAt": "2025-07-02T08:22:22.944Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T16:29:15.889Z"
     },
     {
       "id": 9109,
