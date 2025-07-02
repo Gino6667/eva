@@ -2140,10 +2140,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 11,
       "createdAt": "2025-07-02T17:56:00.495Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T17:59:07.643Z"
     },
     {
       "id": 9123,
