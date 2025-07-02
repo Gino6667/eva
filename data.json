@@ -2184,10 +2184,11 @@
       "designerId": 5,
       "serviceId": 10,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 15,
       "createdAt": "2025-07-02T18:04:30.612Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T18:05:08.973Z"
     },
     {
       "id": 9127,
