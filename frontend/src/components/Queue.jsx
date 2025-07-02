@@ -30,6 +30,8 @@ function Queue() {
   const [absentList, setAbsentList] = useState([]);
   const [absentLoading, setAbsentLoading] = useState(false);
   const [absentMsg, setAbsentMsg] = useState('');
+  const [confirmAbsentId, setConfirmAbsentId] = useState(null);
+  const [confirmAbsentInfo, setConfirmAbsentInfo] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -301,9 +303,15 @@ function Queue() {
     setAbsentLoading(true);
     setShowAbsentModal(true);
     try {
-      const today = new Date().toISOString().slice(0, 10);
-      const res = await axios.get(`/api/queue?date=${today}`);
-      setAbsentList(res.data.filter(q => q.status === 'absent'));
+      // 用台灣時區取得今天日期
+      const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' });
+      const res = await axios.get(`/api/queue`);
+      setAbsentList(res.data.filter(q => {
+        if (q.status !== 'absent') return false;
+        const created = new Date(q.createdAt).toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' });
+        const absent = q.absentAt ? new Date(q.absentAt).toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' }) : null;
+        return created === today || absent === today;
+      }));
     } catch (err) {
       setAbsentMsg('取得過號名單失敗');
     } finally {
@@ -317,6 +325,8 @@ function Queue() {
       await axios.post(`/api/queue/${queueId}/checkin`);
       setShowAbsentModal(false);
       setAbsentList([]);
+      setConfirmAbsentId(null);
+      setConfirmAbsentInfo(null);
       setAbsentMsg('');
       loadCurrentServing();
     } catch (err) {
@@ -325,6 +335,16 @@ function Queue() {
       setAbsentLoading(false);
     }
   };
+
+  // 以設計師名字為唯一，只顯示第一筆 currentServing
+  const servingByDesignerName = {};
+  currentServing.forEach(s => {
+    const designer = designers.find(d => d.id === s.designerId);
+    if (designer && !servingByDesignerName[designer.name]) {
+      servingByDesignerName[designer.name] = { serving: s, designer };
+    }
+  });
+  const servingList = Object.values(servingByDesignerName);
 
   if (queueResult) {
     return (
@@ -364,74 +384,80 @@ function Queue() {
       </header>
       {showAbsentModal && (
         <div className="modal-overlay" onClick={() => setShowAbsentModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()} style={{maxWidth:'340px'}}>
-            <h3>過號報到</h3>
-            {absentLoading ? (
-              <div style={{margin:'1.5em 0',textAlign:'center'}}>載入中...</div>
-            ) : absentList.length === 0 ? (
-              <div style={{color:'#ff9800',margin:'1em 0'}}>今日沒有過號可報到</div>
-            ) : (
-              <div className="absent-list">
-                {absentList.map(q => (
-                  <button
-                    key={q.id}
-                    className="absent-list-item"
-                    onClick={() => handleAbsentSubmit(q.id)}
-                    disabled={absentLoading}
-                  >
-                    號碼：{q.number}　設計師：{designers.find(d=>d.id===q.designerId)?.name || '未知'}
-                  </button>
-                ))}
+          <div
+            className="modal-content absent-modal confirm-bg-all"
+            style={{ maxWidth: '700px', background: '#333d38', color: '#fff' }}
+          >
+            <div className="absent-modal-header" style={{ background: '#333d38', color: '#fff' }}>
+              {/* <span className="absent-modal-icon">⏰</span> */}
+              <h3 style={{ color: '#fff', textAlign: 'center', fontSize: '2em', width: '100%', margin: 0 }}>過號報到</h3>
+            </div>
+            <div className="absent-modal-body" style={{ background: '#333d38', color: '#fff' }}>
+              {absentLoading ? (
+                <div className="absent-loading">載入中...</div>
+              ) : absentList.length === 0 ? (
+                <div className="absent-empty">今日沒有過號可報到</div>
+              ) : (
+                <div className="absent-list">
+                  {absentList.map((q, idx) => (
+                    <button
+                      key={`absent-${q.id}-${idx}`}
+                      className="absent-list-item"
+                      onClick={() => {
+                        setConfirmAbsentId(q.id);
+                        setConfirmAbsentInfo({
+                          number: q.number,
+                          designer: designers.find(d=>d.id===q.designerId)?.name || '未知'
+                        });
+                      }}
+                      disabled={absentLoading}
+                      style={{ background: '#ffe082', color: '#333d38', fontWeight: 'bold' }}
+                    >
+                      <div className="absent-number" style={{ color: '#333d38' }}>{q.number} 號</div>
+                      <div className="absent-designer" style={{ color: '#333d38' }}>設計師：{designers.find(d=>d.id===q.designerId)?.name || '未知'}</div>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {absentMsg && <div className="absent-msg" style={{ color: '#ff5252' }}>{absentMsg}</div>}
+            </div>
+            <div className="absent-modal-footer" style={{ background: '#333d38', color: '#fff', display: 'flex', justifyContent: 'center' }}>
+              <button className="btn btn-secondary" onClick={()=>setShowAbsentModal(false)} disabled={absentLoading} style={{background:'#fff',color:'#333d38',borderRadius:'8px',fontWeight:'bold', minWidth: '120px'}}>關閉</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* 二次確認彈窗 */}
+      {confirmAbsentId && (
+        <div className="modal-overlay" onClick={() => { setConfirmAbsentId(null); setConfirmAbsentInfo(null); }}>
+          <div
+            className="modal-content absent-modal confirm-bg-all"
+            style={{ maxWidth: '340px', background: '#333d38', color: '#fff' }}
+          >
+            <div className="absent-modal-header confirm-bg" style={{ background: '#333d38', color: '#fff', justifyContent:'center', textAlign:'center' }}>
+              <h3 style={{width:'100%',textAlign:'center',margin:'0 auto', color: '#fff'}}>過號報到</h3>
+            </div>
+            <div className="absent-modal-body" style={{ background: '#333d38', color: '#fff', textAlign:'center' }}>
+              <div style={{fontSize:'1.2em',margin:'1.5em 0', color: '#fff'}}>
+                號碼：<span style={{color:'#fff',fontWeight:'bold',fontSize:'2.2em'}}>{confirmAbsentInfo?.number}</span><br/>
+                設計師：<span style={{color:'#fff'}}>{confirmAbsentInfo?.designer}</span>
               </div>
-            )}
-            {absentMsg && <div style={{color:'#ff9800',marginTop:'1em'}}>{absentMsg}</div>}
-            <div style={{display:'flex',gap:'1em',justifyContent:'flex-end',marginTop:'1.2em'}}>
-              <button className="btn btn-secondary" onClick={()=>setShowAbsentModal(false)} disabled={absentLoading}>關閉</button>
+              <div className="absent-msg" style={{color:'#ff5252',fontSize:'1.4em'}}>此操作無法復原，請確定是否完成該號碼過號報到!!!</div>
+            </div>
+            <div className="absent-modal-footer" style={{ background: '#333d38', color: '#fff' }}>
+              <button className="btn btn-secondary" onClick={()=>{ setConfirmAbsentId(null); setConfirmAbsentInfo(null); }} disabled={absentLoading}>取消</button>
+              <button className="btn btn-primary" style={{background:'#fff',color:'#333d38',borderRadius:'8px',fontWeight:'bold'}} onClick={()=>handleAbsentSubmit(confirmAbsentId)} disabled={absentLoading}>確定</button>
             </div>
           </div>
         </div>
       )}
       <div className="queue-content">
         <section className="queue-status-panel">
-          <div className="business-status-row">
-            <span className="status-icon">✅</span>
-            <span className="status-text">營業中 - 今日營業</span>
-            <span className="status-time">00:00 - 23:59</span>
-          </div>
-          <div className="service-status-cards">
-            {currentServing
-              .filter(serving => serving.serviceId !== undefined && serving.serviceId !== null && serving.serviceId !== 0)
-              .map(serving => {
-                const designer = designers.find(d => d.id === serving.designerId);
-                const service = services.find(s => String(s.id) === String(serving.serviceId));
-                let estWait = null;
-                if (todayStats && designer) {
-                  const waitingCount = todayStats[designer.id]?.waiting || 0;
-                  const serviceIds = designer.services || [];
-                  const durations = serviceIds.map(sid => services.find(s => s.id === sid)?.duration || 60);
-                  const avgDuration = durations.length ? (durations.reduce((a,b)=>a+b,0)/durations.length) : 60;
-                  estWait = waitingCount * avgDuration;
-                }
-                return (
-                  <div key={serving.designerId} className="service-card">
-                    <div className="modern-designer">{designer?.name || '未知設計師'}</div>
-                    <div className="modern-number">{serving.number} 號</div>
-                    <div className="modern-service">
-                      {serving.serviceName
-                        || (service ? service.name : getServiceName(serving.serviceId))
-                        || '未知服務'}
-                    </div>
-                    {estWait !== null && (
-                      <div className="modern-wait">預估等待：約 {Math.round(estWait)} 分鐘</div>
-                    )}
-                  </div>
-                );
-              })}
-          </div>
+          {businessStatusMessage}
           <div className="kanban-board">
             <h3 style={{margin:'1em 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
             <div className="kanban-list">
-              {designers.map(designer => {
+              {designers.map((designer, idx) => {
                 const serving = currentServing.find(s => s.designerId === designer.id);
                 const service = serving ? services.find(sv => String(sv.id) === String(serving.serviceId)) : null;
                 let estWait = null;
@@ -440,14 +466,21 @@ function Queue() {
                   const serviceIds = designer.services || [];
                   const durations = serviceIds.map(sid => services.find(s => s.id === sid)?.duration || 60);
                   const avgDuration = durations.length ? (durations.reduce((a,b)=>a+b,0)/durations.length) : 60;
-                  estWait = waitingCount * avgDuration;
+                  // 加 1，包含正在服務的客人
+                  estWait = (waitingCount + 1) * avgDuration;
                 }
                 return (
-                  <div key={designer.id} className="kanban-card">
+                  <div key={`kanban-${designer.id}`} className="kanban-card">
                     <div className="kanban-designer">{designer.name}</div>
                     <div className="kanban-number">{serving ? `${serving.number} 號` : '暫無'}</div>
                     <div className="kanban-service">{serving && service ? service.name : '—'}</div>
-                    <div className="kanban-wait">預估等待：{estWait !== null ? `${Math.round(estWait)} 分鐘` : '—'}</div>
+                    <div className="kanban-wait">
+                      預估等待：{
+                        serving || (todayStats && todayStats[designer.id]?.waiting > 0)
+                          ? (serving && estWait !== null ? `${Math.round(estWait)} 分鐘` : '—')
+                          : '立刻'
+                      }
+                    </div>
                   </div>
                 );
               })}
@@ -500,15 +533,15 @@ function Queue() {
             <h3>選擇設計師</h3>
             <div className="designer-grid">
               <button
-                key={0}
+                key="designer-0"
                 className={`designer-item${selectedDesigner === 0 ? ' selected' : ''}`}
                 onClick={() => handleDesignerSelect(0)}
               >
                 不指定
               </button>
-              {availableDesigners.map(designer => (
+              {availableDesigners.map((designer, idx) => (
                 <button
-                  key={designer.id}
+                  key={`designer-${designer.id}`}
                   className={`designer-item${selectedDesigner === designer.id ? ' selected' : ''}`}
                   onClick={() => handleDesignerSelect(designer.id)}
                 >
@@ -516,31 +549,24 @@ function Queue() {
                 </button>
               ))}
             </div>
-            {availableDesigners.length === 0 && (
-              <p>目前沒有可用的設計師</p>
-            )}
           </div>
         </div>
       )}
       {showServiceModal && (
         <div className="modal-overlay" onClick={() => setShowServiceModal(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3>選擇服務項目{selectedDesigner === 0 ? '（不指定設計師）' : selectedDesigner !== '' ? ' - ' + getSelectedDesignerName() : ''}</h3>
-            <div className="designer-grid">
-              {availableServices.map(service => (
+            <h3>選擇服務項目</h3>
+            <div className="service-grid">
+              {availableServices.map((service, idx) => (
                 <button
-                  key={service.id}
-                  className={`designer-item${selectedService === service.id ? ' selected' : ''}`}
+                  key={`service-${service.id}`}
+                  className={`service-item${selectedService === service.id ? ' selected' : ''}`}
                   onClick={() => handleServiceSelect(service.id)}
                 >
-                  <div>{service.name}</div>
-                  <div>${service.price}</div>
+                  {service.name}
                 </button>
               ))}
             </div>
-            {availableServices.length === 0 && (
-              <p>此設計師暫無可選服務</p>
-            )}
           </div>
         </div>
       )}

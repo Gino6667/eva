@@ -149,13 +149,11 @@ app.get('/api/queue', (req, res) => {
   const data = getData();
   let result = data.queue.filter(q => isWithin3Months(q.createdAt));
   if (req.query.date) {
-    const [y, m, d] = req.query.date.split('-').map(Number)
-    const queryDate = new Date(req.query.date);
-    const now = new Date();
-    if (queryDate > now) {
-      return res.json([]);
-    }
-    result = result.filter(q => isSameDay(q.createdAt, y, m, d))
+    // 用台灣時區比對 createdAt 日期（正確寫法）
+    result = result.filter(q => {
+      const twDateStr = new Date(q.createdAt).toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' });
+      return twDateStr === req.query.date;
+    });
   }
   res.json(result);
 });
@@ -222,16 +220,21 @@ app.post('/api/queue', async (req, res) => {
     const todayQueue = data.queue.filter(q => isToday(q.createdAt));
     const newId = data.queue.length ? Math.max(...data.queue.map(q => q.id)) + 1 : 1;
     const newNumber = todayQueue.length ? Math.max(...todayQueue.map(q => q.number)) + 1 : 1;
+    const todayStr = new Date().toISOString().slice(0, 10);
     const newQueue = {
       id: newId,
       designerId,
       serviceId,
-      type,
+      type, // 'onsite' or 'online'
       status: 'waiting',
       number: newNumber,
       createdAt: new Date().toISOString(),
       userId: userId || null
     };
+    // 防呆：如果 createdAt 不是今天，強制改為現在
+    if (!newQueue.createdAt || typeof newQueue.createdAt !== 'string' || newQueue.createdAt.slice(0, 10) !== todayStr) {
+      newQueue.createdAt = new Date().toISOString();
+    }
     data.queue.push(newQueue);
     saveData(data);
     res.json({ success: true, data: newQueue });
@@ -2560,7 +2563,13 @@ app.patch('/api/queue/:id/absent', (req, res) => {
     return res.status(404).json({ error: '找不到該排隊項目' });
   }
   queueItem.status = 'absent';
-  queueItem.absentAt = new Date().toISOString();
+  // 強制寫入台灣今天日期
+  const now = new Date();
+  const tw = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
+  const todayISOString = tw.toISOString();
+  console.log('[DEBUG] absentAt 寫入:', todayISOString);
+  queueItem.absentAt = todayISOString;
+  queueItem.createdAt = todayISOString;
   saveData(data);
   res.json({ success: true, queueItem });
 });

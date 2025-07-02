@@ -1,11 +1,10 @@
 /* Reservation 頁面樣式 */
 .reservation-container {
-  max-width: 800px;
-  padding-top: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-  row-gap: 0.5em;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100vw;
+  padding: 8px 2px 32px 2px;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .reservation-main, .reservation-list, .reservation-header, .reservation-form {
@@ -20,7 +19,7 @@
 }
 
 .reservation-header h2 {
-  font-size: 2.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: #f7ab5e;
   text-align: center;
@@ -33,12 +32,9 @@
 }
 
 .reservation-step {
-  background: #333d38;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: none;
-  margin-bottom: 2rem;
-  border: 2px solid #f7ab5e !important;
+  padding: 1em 0.7em;
+  margin-bottom: 1em;
+  border-radius: 10px;
 }
 
 .reservation-step h3 {
@@ -135,13 +131,13 @@
   overflow: hidden;
   box-shadow: none;
   animation: modalPop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
-  border: 4px solid #007bff;
+  border: 4px solid #f7ab5e !important;
   font-size: 1.15rem;
 }
 
 /* 步驟3服務項目彈窗特殊樣式 */
 .modal-content.service-modal {
-  border: 4px solid #28a745;
+  border: 4px solid #f7ab5e !important;
   box-shadow: none;
 }
 
@@ -402,4 +398,256 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+/* === Mobile First: 先設計手機，桌機再覆蓋 === */
+.reservation-container {
+  width: 100vw;
+  max-width: 100vw;
+  padding: 8px 2px 32px 2px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.reservation-header h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5em;
+}
+
+.reservation-step {
+  padding: 1em 0.7em;
+  margin-bottom: 1em;
+  border-radius: 10px;
+}
+
+.queue-status-panel, .kanban-board {
+  margin-bottom: 1em;
+  padding: 0.7em 0.5em;
+  border-radius: 10px;
+}
+
+.kanban-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+}
+.kanban-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #333d38;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(51,61,56,0.10);
+  padding: 0.7em 0.7em 0.6em 0.7em;
+  margin: 0.1em 0;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #f7ab5e22;
+  max-width: 140px;
+  text-align: center;
+  align-items: center;
+}
+.kanban-designer {
+  font-weight: bold;
+  font-size: 1.05em;
+  color: #f7ab5e;
+  margin-bottom: 0.1em;
+}
+.kanban-number {
+  font-size: 1.18em;
+  color: #ff9800;
+  font-weight: bold;
+  margin-bottom: 0.1em;
+}
+.kanban-service {
+  font-size: 0.98em;
+  color: #fffbe9;
+  margin-bottom: 0.1em;
+}
+.kanban-wait {
+  font-size: 0.95em;
+  color: #44ab32;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.queue-step {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+.queue-step h3 {
+  font-size: 1em;
+  margin-bottom: 0.3em;
+}
+.member-selection, .designer-selection, .service-selection {
+  gap: 0.3em;
+}
+.btn, .btn-primary, .btn-secondary {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  min-height: 36px;
+  font-size: 0.98em;
+  border-radius: 6px;
+}
+
+/* Modal 手機優化 */
+.modal-content, .modal-content.service-modal {
+  max-width: 98vw;
+  min-width: 0;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding: 0.7em 0.5em;
+}
+.modal-header, .modal-body {
+  padding: 1em 0.5em;
+}
+.modal-header h3 {
+  font-size: 1.1em;
+}
+.designer-grid, .service-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.designer-item, .service-item {
+  width: 100%;
+  min-height: 44px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin-bottom: 0.3em;
+}
+
+/* 錯誤訊息彈窗 */
+.modal-content[style*='max-width:350px'] {
+  min-width: 0;
+  width: 95vw;
+  padding: 1em 0.5em;
+}
+
+/* 600px 以上才加大字體與間距 */
+@media (min-width: 600px) {
+  .reservation-container {
+    max-width: 800px;
+    padding: 0 8px 32px 8px;
+  }
+  .reservation-header h2 {
+    font-size: 2.2rem;
+  }
+  .reservation-step, .queue-step {
+    padding: 2rem;
+    border-radius: 16px;
+  }
+  .kanban-card {
+    font-size: 1.15em;
+    border-radius: 16px;
+    padding: 1.2em 2em;
+  }
+  .btn, .btn-primary, .btn-secondary {
+    font-size: 1.15em;
+    min-width: 180px;
+    max-width: 320px;
+    margin: 0 auto 0.7em auto;
+  }
+  .modal-content, .modal-content.service-modal {
+    max-width: 420px;
+    border-radius: 18px;
+    padding: 1.5em 1em;
+  }
+  .modal-header, .modal-body {
+    padding: 1.5em 1em;
+  }
+  .designer-item, .service-item {
+    font-size: 1.1em;
+    border-radius: 12px;
+    min-height: 48px;
+  }
+}
+
+/* 480px 以下再縮小字體與間距 */
+@media (max-width: 480px) {
+  .reservation-header h2 {
+    font-size: 1.1rem;
+  }
+  .kanban-card {
+    font-size: 0.98em;
+    padding: 0.5em 0.5em;
+  }
+  .btn, .btn-primary, .btn-secondary {
+    font-size: 1em;
+    min-height: 40px;
+  }
+  .modal-content, .modal-content.service-modal {
+    padding: 0.5em 0.2em;
+  }
+}
+
+/* === 即時看板卡片緊密排列 === */
+.kanban-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+}
+.kanban-card {
+  max-width: 140px;
+  width: 100%;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .kanban-card {
+    max-width: 120px;
+  }
+}
+
+/* 再縮小步驟卡片區塊與內容間距 */
+.queue-col-right {
+  max-width: 220px;
+  width: 100%;
+  margin: 0 auto 0.7em auto;
+  padding: 0.4em 0.2em;
+  box-sizing: border-box;
+  display: block;
+  background: #222e28;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(51,61,56,0.10);
+}
+.btn, .btn-primary, .btn-secondary {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 100%;
+  display: block;
+}
+
+.kanban-board h3 {
+  text-align: center;
+  width: 100%;
+}
+
+/* 服務選擇彈窗選項背景加深 */
+.modal-content.service-modal .service-item {
+  background: #222e28 !important;
+  color: #fff !important;
+}
+.modal-content.service-modal .service-item.selected,
+.modal-content.service-modal .service-item:active,
+.modal-content.service-modal .service-item:focus,
+.modal-content.service-modal .service-item:hover {
+  background: #333d38 !important;
+  color: #fff !important;
+}
+
+/* 服務選擇彈窗選項按鈕高度變矮 */
+.modal-content.service-modal .service-item {
+  min-height: 32px !important;
+  padding: 6px 12px !important;
+  font-size: 1em;
+}
+
+/* 復原確認抽號按鈕下移設定 */
+.queue-col-right .btn:last-child {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }

@@ -233,7 +233,7 @@ function DesignersList() {
   };
 
   // 處理按鈕動作
-  const handleAction = async (designer, action) => {
+  const handleAction = async (designer, action, number) => {
     console.log(`${action} - 設計師: ${designer.name}`);
     
     if (action === '調整客人') {
@@ -374,31 +374,21 @@ function DesignersList() {
     }
     
     if (action === '報到') {
-      console.log(`設計師 ${designer.name} 的客人報到`);
-      // 從今日排隊中找到該設計師的 waiting 狀態客人
-      const waitingCustomer = todayQueue.find(q => 
-        q.designerId === designer.id && 
-        q.status === 'waiting'
-      );
-      
-      if (waitingCustomer) {
-        // 呼叫後端 API 處理報到
+      // 直接用傳入的 number 號碼進行報到
+      if (number && number !== '-') {
         try {
           const response = await axios.post('/api/queue/checkin', {
             designerId: designer.id,
-            number: waitingCustomer.number
+            number: number
           });
-          
           if (response.data.success) {
             console.log('報到成功:', response.data);
-            // 重新載入資料
             loadAll();
             loadTodayQueue();
-            // 發送狀態變更事件
             window.dispatchEvent(new CustomEvent('queue-updated'));
             setTimeout(() => {
               scrollToDesignerCard(designer.id);
-            }, 300); // 等待資料刷新後再捲動
+            }, 300);
           } else {
             console.error('報到失敗:', response.data);
           }
@@ -410,8 +400,9 @@ function DesignersList() {
           }
         }
       } else {
-        console.log('該設計師沒有等待中的客人');
+        console.log('沒有下一位客人可報到');
       }
+      return;
     }
     
     if (action === '過號') {
@@ -597,7 +588,7 @@ function DesignersList() {
                   <div className="col-number next-number" style={{fontSize:'2em',fontWeight:700,color:'#ff9800'}}>{card.nextNumber}</div>
                   <div className="col-service" style={{fontSize:'1em',color:'#f7ab5e',marginTop:'0.3em'}}>{card.nextService}</div>
                   <div style={{marginTop:'0.7em', display:'flex', gap:'0.5em', justifyContent:'center'}}>
-                    <button className="btn btn-primary" onClick={()=>handleAction(designer,'報到')}>報到</button>
+                    <button className="btn btn-primary" onClick={()=>handleAction(designer,'報到', card.nextNumber)} disabled={card.nextNumber === '-' || !card.nextNumber}>報到</button>
                     <button className="btn btn-primary" onClick={()=>handleAction(designer,'過號')}>過號</button>
                   </div>
                 </div>

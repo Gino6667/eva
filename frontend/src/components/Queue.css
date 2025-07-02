@@ -1240,12 +1240,12 @@ html, body, #root {
   max-width: 420px;
   width: 100%;
   display: flex;
-  flex-direction: column;
+    flex-direction: column;
   gap: 1.5em;
   align-items: center;
-}
+  }
 .queue-step {
-  width: 100%;
+    width: 100%;
   background: #232b27;
   border-radius: 14px;
   box-shadow: 0 1px 6px #0002;
@@ -1266,19 +1266,19 @@ html, body, #root {
 }
 @media (max-width: 900px) {
   .queue-content {
-    flex-direction: column;
+  flex-direction: column;
     gap: 24px;
     padding: 1em 0;
-  }
+}
   .queue-status-panel, .queue-form-panel {
     min-width: 0;
     max-width: 100vw;
     padding: 1.2em 0.5em;
-  }
+}
 }
 
 .kanban-board {
-  width: 100%;
+    width: 100%;
   margin-top: 2em;
   background: none;
 }
@@ -1392,7 +1392,7 @@ html, body, #root {
 .queue-header-flex {
   display: flex;
   flex-direction: row;
-  align-items: center;
+    align-items: center;
   justify-content: center;
   padding: 0 1.5em;
   position: relative;
@@ -1416,7 +1416,7 @@ html, body, #root {
 }
 @media (max-width: 600px) {
   .queue-header-flex {
-    flex-direction: column;
+  flex-direction: column;
     align-items: stretch;
     padding: 0 0.5em;
   }
@@ -1435,11 +1435,189 @@ html, body, #root {
   width: 100% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-}
+  }
 
 .kanban-board h3 {
   text-align: center !important;
   width: 100% !important;
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+/* 過號報到彈窗樣式（進階優化） */
+.absent-modal {
+  max-width: 700px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(51,61,56,0.13);
+  padding: 0;
+  overflow: hidden;
+  animation: fadeIn 0.22s cubic-bezier(.4,0,.2,1);
+  border: 2px solid #333d38;
+}
+.absent-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  background: #f4f6f5;
+  padding: 1.2em 1.5em 0.9em 1.5em;
+  border-bottom: 1.5px solid #e0e3e1;
+}
+.absent-modal-icon {
+  font-size: 1.3em;
+  margin-right: 0.3em;
+}
+.absent-modal-header h3 {
+  color: #333d38;
+  font-weight: 700;
+  font-size: 1.22em;
+  letter-spacing: 0.03em;
+}
+.absent-modal-body {
+  padding: 1.3em 1.5em 0.7em 1.5em;
+  background: #f8f9f8;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+.absent-loading {
+  text-align: center;
+  color: #bdbdbd;
+  margin: 2.2em 0;
+  font-size: 1.1em;
+}
+.absent-empty {
+  text-align: center;
+  color: #333d38;
+  margin: 2.2em 0 1.7em 0;
+  font-size: 1.13em;
+  letter-spacing: 0.01em;
+}
+.absent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-bottom: 0.7em;
+  justify-content: flex-start;
+}
+.absent-list-item {
+  width: calc(25% - 0.75em);
+  margin: 0;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .absent-list-item { width: calc(33.333% - 0.75em); }
+}
+@media (max-width: 700px) {
+  .absent-list-item { width: calc(50% - 0.75em); }
+}
+@media (max-width: 480px) {
+  .absent-list-item { width: 100%; }
+}
+.absent-list-item:hover:not(:disabled) {
+  border-color: #333d38;
+}
+.absent-number {
+  font-size: 1.12em;
+}
+.absent-designer {
+  font-size: 1em;
+  color: #666;
+  margin-top: 0.18em;
+}
+.absent-msg {
+  color: #333d38;
+  margin-top: 1.1em;
+  text-align: center;
+  font-size: 1.08em;
+  letter-spacing: 0.01em;
+}
+.absent-modal-footer {
+  display: flex;
+  gap: 1.2em;
+  justify-content: flex-end;
+  padding: 1.1em 1.5em 1.3em 1.5em;
+  border-top: 1.5px solid #e0e3e1;
+  background: #f4f6f5;
+}
+.absent-modal-footer .btn {
+  min-width: 80px;
+  font-size: 1.05em;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #e0e3e1;
+  background: #333d38;
+  color: #fff;
+  border: none;
+  transition: background 0.15s;
+}
+.absent-modal-footer .btn:hover:not(:disabled) {
+  background: #222824;
+  border: 2px solid #333d38;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 二次確認彈窗 header 主色背景 */
+.absent-modal-header.confirm-bg {
+  background: #333d38 !important;
+}
+.absent-modal-header.confirm-bg h3 {
+  color: #fff !important;
+}
+.absent-modal-header.confirm-bg .absent-modal-icon {
+  color: #fff !important;
+  filter: none;
+}
+
+.confirm-bg-all .absent-modal-header,
+.confirm-bg-all .absent-modal-body,
+.confirm-bg-all .absent-modal-footer {
+  background: #333d38 !important;
+  color: #fff !important;
+}
+.confirm-bg-all h3,
+.confirm-bg-all .absent-number,
+.confirm-bg-all .absent-designer {
+  color: #fff !important;
+}
+.confirm-bg-all .btn {
+  background: #ff9800 !important;
+  color: #fff !important;
+}
+.confirm-bg-all .btn:hover:not(:disabled) {
+  background: #e65100 !important;
+  color: #fff !important;
+}
+.confirm-bg-all .absent-msg {
+  color: #ff5252 !important;
+}
+.confirm-bg-all .absent-list-item {
+  background: #ff9800 !important;
+  color: #fff !important;
+  font-size: 1em;
+  padding: 0.6em 0.2em !important;
+  border-radius: 8px !important;
+}
+.confirm-bg-all .absent-list-item:hover:not(:disabled) {
+  background: #e65100 !important;
+  color: #fff !important;
+}
+
+.absent-checkin-btn button {
+  font-size: 1.3em;
+  padding: 0.7em 2.2em;
+  border-radius: 12px;
+  font-weight: bold;
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px #ff980033;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.absent-checkin-btn button:hover:not(:disabled) {
+  background: #e65100;
+  box-shadow: 0 4px 16px #ff980055;
 } 

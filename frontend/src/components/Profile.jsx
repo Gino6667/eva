@@ -179,17 +179,25 @@ function Profile({ user, setUser }) {
           <h3 style={{marginBottom: '1.5rem', color: '#f7ab5e'}}>個人資料</h3>
           <form onSubmit={handleSave} style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
             <div className="form-group" style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-              <label htmlFor="account" style={{fontWeight: 600, color: '#f7ab5e'}}>帳號</label>
+              <label htmlFor="name" style={{fontWeight: 600, color: '#f7ab5e'}}>姓名</label>
               <input
                 type="text"
-                id="account"
+                id="name"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 required
-                placeholder="請輸入帳號"
+                placeholder="請輸入姓名"
                 style={{padding: '0.75em', borderRadius: '6px', border: '1px solid #ccc', fontSize: '1.1em'}}
               />
             </div>
+            <button 
+              type="submit" 
+              className="btn btn-primary"
+              disabled={loading}
+              style={{padding: '0.9em', fontSize: '1.1em', fontWeight: 600, marginTop: '1em'}}
+            >
+              {loading ? '儲存中...' : '儲存修改'}
+            </button>
             {showPassword ? (
               <div className="form-group" style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
                 <label htmlFor="password" style={{fontWeight: 600, color: '#f7ab5e'}}>新密碼</label>
@@ -206,14 +214,6 @@ function Profile({ user, setUser }) {
             ) : (
               <button type="button" className="btn btn-secondary" style={{marginBottom: '1em', alignSelf: 'flex-start'}} onClick={() => setShowPassword(true)}>修改密碼</button>
             )}
-            <button 
-              type="submit" 
-              className="btn btn-primary"
-              disabled={loading}
-              style={{padding: '0.9em', fontSize: '1.1em', fontWeight: 600, marginTop: '1em'}}
-            >
-              {loading ? '儲存中...' : '儲存修改'}
-            </button>
             {msg && (
               <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`} style={{marginTop: '1em', fontWeight: 600, color: msg.includes('成功') ? '#4caf50' : '#f44336', background: '#fff3', padding: '0.75em', borderRadius: '6px', textAlign: 'center'}}>
                 {msg}

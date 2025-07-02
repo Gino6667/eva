@@ -248,70 +248,40 @@ function Reservation() {
       <div className="reservation-header">
         <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>線上抽號(僅限當日抽號)</h2>
       </div>
-
-      {/* 當前服務狀態區塊 */}
-      <div className="current-serving">
-        {businessStatusMessage}
-        <h3>當前服務狀態</h3>
-        <div className="serving-grid">
-          {designers.filter(designer => !designer.isPaused && !designer.isDayoff).map(designer => {
+      <div className="kanban-board">
+        {getBusinessStatusMessage()}
+        <h3 style={{margin:'1em 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
+        <div className="kanban-list">
+          {designers.map((designer, idx) => {
             const serving = currentServing.find(s => s.designerId === designer.id);
-            const service = serving ? services.find(s => String(s.id) === String(serving.serviceId)) : null;
+            const service = serving ? services.find(sv => String(sv.id) === String(serving.serviceId)) : null;
             let estWait = null;
-            let waitingCount = 0;
             if (todayStats && designer) {
-              const designerStats = todayStats[designer.id];
-              let totalWait = 0;
-              if (designerStats && Array.isArray(designerStats.queueList)) {
-                waitingCount = designerStats.queueList.length;
-                totalWait = designerStats.queueList.reduce((sum, q) => {
-                  const s = services.find(sv => String(sv.id) === String(q.serviceId));
-                  return sum + (s && s.duration ? s.duration : 60);
-                }, 0);
-              } else if (designerStats && Array.isArray(designerStats.queueIds) && designerStats.queueIds.length > 0) {
-                waitingCount = designerStats.queueIds.length;
-                totalWait = designerStats.queueIds.reduce((sum, sid) => {
-                  const s = services.find(sv => String(sv.id) === String(sid));
-                  return sum + (s && s.duration ? s.duration : 60);
-                }, 0);
-              } else {
-                waitingCount = designerStats?.waiting || 0;
-                let avgDuration = 60;
-                if (designer && designer.services && designer.services.length > 0) {
-                  const durations = designer.services.map(sid => {
-                    const s = services.find(sv => String(sv.id) === String(sid));
-                    return s && s.duration ? s.duration : 60;
-                  });
-                  avgDuration = durations.reduce((a, b) => a + b, 0) / durations.length;
-                }
-                totalWait = waitingCount > 0 ? waitingCount * avgDuration : 0;
-              }
-              estWait = totalWait;
+              const waitingCount = todayStats[designer.id]?.waiting || 0;
+              const serviceIds = designer.services || [];
+              const durations = serviceIds.map(sid => services.find(s => s.id === sid)?.duration || 60);
+              const avgDuration = durations.length ? (durations.reduce((a,b)=>a+b,0)/durations.length) : 60;
+              estWait = (waitingCount + 1) * avgDuration;
             }
             return (
-              <div key={designer.id} className="serving-item">
-                <div className="designer-name">{designer.name}</div>
-                <div className="current-number">{serving ? `${serving.number} 號` : '-'}</div>
-                <div className="service-name">{serving ? (serving.serviceName || (service ? service.name : '未知服務')) : '—'}</div>
-                {estWait !== null && waitingCount > 0 && (
-                  <div className="est-wait-time" style={{color:'#f7ab5e',marginTop:'0.5em',fontWeight:500}}>
-                    預估等待時間：約 {Math.round(estWait)} 分鐘
-                  </div>
-                )}
-                {estWait !== null && waitingCount === 0 && (
-                  <div className="est-wait-time" style={{color:'#f7ab5e',marginTop:'0.5em',fontWeight:500}}>
-                    無需等待
-                  </div>
-                )}
+              <div key={`kanban-${designer.id}`} className="kanban-card">
+                <div className="kanban-designer">{designer.name}</div>
+                <div className="kanban-number">{serving ? `${serving.number} 號` : '暫無'}</div>
+                <div className="kanban-service">{serving && service ? service.name : '—'}</div>
+                <div className="kanban-wait">
+                  預估等待：{
+                    serving || (todayStats && todayStats[designer.id]?.waiting > 0)
+                      ? (serving && estWait !== null ? `${Math.round(estWait)} 分鐘` : '—')
+                      : '立刻'
+                  }
+                </div>
               </div>
             );
           })}
         </div>
-        <div className="last-update">最後更新：{lastUpdate.toLocaleTimeString()}</div>
       </div>
 
       <div className="queue-col queue-col-right">
-        <div className="queue-desc">請選擇您的身份並選擇設計師與服務項目</div>
         <div className="queue-step">
           <h3>步驟 1：會員登入</h3>
           <div className="member-selection">
