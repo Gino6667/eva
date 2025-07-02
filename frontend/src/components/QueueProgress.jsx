@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import './QueueProgress.css';
 
@@ -18,6 +18,10 @@ function QueueProgress() {
   const [currentServing, setCurrentServing] = useState([]);
   const [nextInQueue, setNextInQueue] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const filteredUserQueue = useMemo(() => user ? userQueue.filter(q => q.createdAt.slice(0, 10) === todayStr && q.status !== 'done') : [], [userQueue, user, todayStr]);
+  const sortedDesigners = [...designers].sort((a, b) => a.id - b.id);
 
   useEffect(() => {
     loadTodayStats();
@@ -94,13 +98,10 @@ function QueueProgress() {
   const loadUserQueue = async () => {
     try {
       console.log('載入會員號碼，用戶ID:', user.id);
-      const res = await axios.get(`/api/queue/user/${user.id}`);
-      console.log('會員號碼API回應:', res.data);
-      // 只顯示今日且未取消的號碼
       const today = date;
-      const todayQueues = res.data.filter(q => q.createdAt.slice(0,10) === today && q.status !== 'cancelled');
-      console.log('今日號碼:', todayQueues);
-      setUserQueue(todayQueues);
+      const res = await axios.get(`/api/queue/user/${user.id}?date=${today}`);
+      console.log('會員號碼API回應:', res.data);
+      setUserQueue(res.data);
     } catch (err) {
       console.error('載入會員號碼失敗:', err);
       setUserQueue([]);
@@ -166,37 +167,20 @@ function QueueProgress() {
   return (
     <div className="queue-progress-container">
       <div className="queue-progress-card">
-        <h2>即時看板</h2>
-        {/* 除錯資訊 */}
-        {user && (
-          <div style={{marginBottom: '1rem', padding: '0.5rem', background: 'transparent', borderRadius: '8px', fontSize: '0.9rem'}}>
-            <div>會員狀態: {user.name}（已登入）</div>
-            <div>今日日期: {date}</div>
-          </div>
-        )}
-        
+        <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>即時看板</h2>
         {/* 會員今日抽號自動顯示 */}
-        {user && userQueue.length > 0 && (
-          <div className="user-queue-list" style={{marginBottom: '2rem', padding: '1rem', background: 'rgba(33, 150, 243, 0.07)', borderRadius: '12px', border: '2px solid #f7ab5e'}}>
-            <div style={{marginBottom: '0.5em', fontWeight: 500, color: '#f7ab5e', fontSize: '1.1rem'}}>您今日抽到的號碼：</div>
-            <div style={{display: 'flex', gap: '0.5em', flexWrap: 'wrap'}}>
-              {userQueue.map(q => (
+        {user && filteredUserQueue.length > 0 && (
+          <div className="user-queue-list new-user-queue-list">
+            <div className="user-queue-title">您今日抽到的號碼：</div>
+            <div className="user-queue-btns" style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0.5em',justifyItems:'center'}}>
+              {filteredUserQueue.map(q => (
                 <button
                   key={q.id}
-                  className="user-queue-btn"
+                  className="user-queue-btn new-user-queue-btn"
+                  style={{borderRadius:'50%',width:'2.5em',height:'2.5em',fontSize:'1.1em',border:'2px solid #f7ab5e',background:'#fff',color:'#f7ab5e',fontWeight:700,overflow:'hidden'}}
                   onClick={() => { setNumber(q.number); setDate(q.createdAt.slice(0,10)); setProgress(null); setError(''); }}
-                  style={{
-                    background: '#333d38',
-                    border: '2px solid #2196f3',
-                    borderRadius: '8px',
-                    padding: '0.5em 1em',
-                    fontWeight: 600,
-                    color: '#2196f3',
-                    cursor: 'pointer',
-                    fontSize: '1.1em',
-                  }}
                 >
-                  <span className="user-queue-number">{q.number} 號</span>
+                  <span className="user-queue-number">{q.number}</span>
                 </button>
               ))}
             </div>
@@ -213,11 +197,13 @@ function QueueProgress() {
         {/* 即時看板卡片區塊 */}
         <div className="serving-header">
           <div className="update-info">
-            <span>最後更新: {lastUpdate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
+            <span>
+              最後更新: {date} {lastUpdate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            </span>
           </div>
         </div>
         <div className="serving-grid serving-grid-progress">
-          {designers.filter(designer => designer.name !== '不指定').map(designer => {
+          {sortedDesigners.map(designer => {
             const serving = currentServing.find(s => s.designerId === designer.id);
             const next = nextInQueue.find(n => n.designerId === designer.id);
             return (

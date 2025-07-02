@@ -57,19 +57,13 @@ function Login({ setUser }) {
         setLoading(false);
         return;
       }
-      
       try {
-        const loginData = { 
-          phone: account, // 管理員/設計師帳號使用phone欄位
-          password 
-        };
-
+        // 只傳 phone + password
+        const loginData = { phone: account, password };
         const res = await axios.post('/api/login', loginData);
         localStorage.setItem('token', res.data.token);
-        
         setUser(res.data.user);
         setMsg('登入成功！');
-        
         setTimeout(() => {
           if (res.data.user.role === 'admin' || res.data.user.role === 'designer') {
             navigate('/admin');
@@ -92,27 +86,20 @@ function Login({ setUser }) {
       setLoading(false);
       return;
     }
-
     try {
+      // 只傳 email+password 或 phone+password
       const loginData = { password };
       if (accountInput.includes('@')) {
         loginData.email = accountInput;
       } else {
         loginData.phone = accountInput;
       }
-
       const res = await axios.post('/api/login', loginData);
       localStorage.setItem('token', res.data.token);
-      
       setUser(res.data.user);
       setMsg('登入成功！');
-      
       setTimeout(() => {
-        if (redirect === 'queue') {
-          navigate('/queue');
-        } else if (redirect === 'reservation') {
-          navigate('/reservation');
-        } else if (res.data.user.role === 'admin' || res.data.user.role === 'designer') {
+        if (res.data.user.role === 'admin' || res.data.user.role === 'designer') {
           navigate('/admin');
         } else {
           navigate('/profile');
@@ -120,7 +107,6 @@ function Login({ setUser }) {
       }, 800);
     } catch (err) {
       setMsg('登入失敗，請檢查帳號密碼');
-    } finally {
       setLoading(false);
     }
   };

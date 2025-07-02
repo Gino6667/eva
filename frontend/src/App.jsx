@@ -1,24 +1,27 @@
 import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import axios from 'axios';
 import './App.css';
 
 // 直接引入所有組件
 import Home from './components/Home';
-import Queue from './components/Queue';
 import QueueProgress from './components/QueueProgress';
 import QueueTransfer from './components/QueueTransfer';
-import Reservation from './components/Reservation';
 import Worktime from './components/Worktime';
 import Reports from './components/Reports';
 import Customers from './components/Customers';
-import Finance from './components/Finance';
 import Designers from './components/Designers';
 import Admin from './components/Admin';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
-import DesignersList from './components/DesignersList';
+import Control from './components/Control';
+import Performance from './components/Performance';
+
+// 懶加載元件
+const Queue = lazy(() => import('./components/Queue'));
+const Reservation = lazy(() => import('./components/Reservation'));
+const DesignersList = lazy(() => import('./components/DesignersList'));
 
 // 設定 axios 預設 baseURL
 axios.defaults.baseURL = import.meta.env.MODE === 'production' 
@@ -81,11 +84,6 @@ function App() {
         {!window.location.pathname.startsWith('/admin') && (
         <header className="header">
           <div className="header-content">
-            <h1>美髮沙龍管理系統</h1>
-            <button className="nav-toggle" onClick={()=>setNavOpen(!navOpen)} aria-label="展開/收合選單" style={{margin:'0 auto',display:'block'}}>
-              <span className={`arrow${navOpen ? ' open' : ''}`}>{navOpen ? '▲' : '▼'}</span>
-            </button>
-            {navOpen && (
               <nav className="nav-menu open">
                 <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
                 <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
@@ -104,45 +102,56 @@ function App() {
                   </>
                 )}
               </nav>
-            )}
           </div>
         </header>
         )}
-        
-        <main className="main">
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
+          <main className="main" style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/queue" element={<Queue />} />
+              <Route path="/queue" element={<Suspense fallback={<div>載入中...</div>}>
+                <Queue />
+              </Suspense>} />
             <Route path="/queue-progress" element={<QueueProgress />} />
-            <Route path="/reservation" element={<Reservation />} />
+              <Route path="/reservation" element={<Suspense fallback={<div>載入中...</div>}>
+                <Reservation />
+              </Suspense>} />
             <Route path="/login" element={<Login setUser={setUser} />} />
             <Route path="/register" element={<Register setUser={setUser} />} />
             <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
             <Route path="/admin" element={<Admin />}>
               <Route index element={<Home />} />
               <Route path="queue-progress" element={<QueueProgress />} />
-              <Route path="queue" element={<Queue />} />
-              <Route path="reservation" element={<Reservation />} />
+                <Route path="queue" element={<Suspense fallback={<div>載入中...</div>}>
+                  <Queue />
+                </Suspense>} />
+                <Route path="reservation" element={<Suspense fallback={<div>載入中...</div>}>
+                  <Reservation />
+                </Suspense>} />
               <Route path="queue-transfer" element={<QueueTransfer />} />
               <Route path="worktime" element={<Worktime />} />
-              <Route path="reports" element={<Reports />} />
+                <Route path="reports" element={<Suspense fallback={<div>載入中...</div>}>
+                  <Reports />
+                </Suspense>} />
               <Route path="customers" element={<Customers />} />
-              <Route path="finance" element={<Finance />} />
               <Route path="designers" element={<Designers />} />
-              <Route path="designers-list" element={<DesignersList />} />
+                <Route path="designers-list" element={<Suspense fallback={<div>載入中...</div>}><DesignersList /></Suspense>} />
               <Route path="profile" element={<Profile user={user} setUser={setUser} />} />
+                <Route path="control" element={<Control />} />
+                <Route path="performance" element={<Performance />} />
             </Route>
           </Routes>
         </main>
-        
+        </div>
         <footer className="footer">
           <div className="footer-content">
-            <p>&copy; 2025 美髮沙龍管理系統</p>
-            <div className="footer-links">
+            {/* <p>&copy; 2025 美髮沙龍管理系統</p> */}
+            {/* <div className="footer-links">
               <a href="/privacy">隱私政策</a>
               <a href="/terms">使用條款</a>
               <a href="/contact">聯絡我們</a>
-            </div>
+            </div> */}
+            {/* <h1 style={{marginTop: '1em', textAlign: 'center'}}>美髮沙龍管理系統</h1> */}
           </div>
         </footer>
       </div>

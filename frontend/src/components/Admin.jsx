@@ -13,17 +13,6 @@ function Admin() {
     totalRevenue: 0
   });
   
-  // 新增後台帳號狀態
-  const [showAccountForm, setShowAccountForm] = useState(false);
-  const [newAccount, setNewAccount] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    role: 'designer' // 預設為設計師角色
-  });
-  const [accountMessage, setAccountMessage] = useState('');
-  
   // 帳號列表狀態
   const [accounts, setAccounts] = useState([]);
   const [loadingAccounts, setLoadingAccounts] = useState(false);
@@ -87,32 +76,6 @@ function Admin() {
     }
   };
 
-  // 新增後台帳號處理函數
-  const handleAddAccount = async (e) => {
-    e.preventDefault();
-    setAccountMessage('');
-    
-    if (!newAccount.name || !newAccount.password) {
-      setAccountMessage('請填寫姓名和密碼');
-      return;
-    }
-    
-    try {
-      // 使用註冊 API 新增後台帳號
-      await axios.post('/api/register', newAccount, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
-      setAccountMessage('新增後台帳號成功！');
-      setNewAccount({ name: '', email: '', phone: '', password: '', role: 'designer' });
-      
-      // 重新載入帳號列表
-      loadAccounts();
-    } catch (error) {
-      setAccountMessage(error.response?.data?.error || '新增失敗');
-    }
-  };
-
   // 刪除帳號
   const handleDeleteAccount = async (id) => {
     if (!window.confirm('確定要刪除此帳號嗎？此操作無法復原。')) {
@@ -124,10 +87,9 @@ function Admin() {
         headers: { Authorization: `Bearer ${token}` }
       });
       
-      setAccountMessage('刪除帳號成功！');
       loadAccounts(); // 重新載入帳號列表
     } catch (error) {
-      setAccountMessage(error.response?.data?.error || '刪除失敗');
+      console.error('刪除帳號失敗:', error);
     }
   };
 
@@ -144,7 +106,6 @@ function Admin() {
   const getSidebarItems = () => {
     const baseItems = [
       // { path: '', icon: '🏠', label: '儀表板', active: location.pathname === '/admin' },
-      { path: 'queue-progress', icon: '📋', label: '即時看板', active: location.pathname === '/admin/queue-progress' },
       { path: 'queue', icon: '🎯', label: '現場排隊', active: location.pathname === '/admin/queue' },
     ];
 
@@ -156,14 +117,13 @@ function Admin() {
     // 只有管理員才顯示管理功能
     if (user?.role === 'admin') {
       baseItems.push(
-        { path: 'worktime', icon: '⏰', label: '工作時間設定', active: location.pathname === '/admin/worktime' },
-        { path: 'reports', icon: '📊', label: '報表統計', active: location.pathname === '/admin/reports' },
-        { path: 'customers', icon: '👥', label: '客戶管理', active: location.pathname === '/admin/customers' },
-        { path: 'finance', icon: '💰', label: '財務管理', active: location.pathname === '/admin/finance' },
         { path: 'designers-list', icon: '👤', label: '設計師管理', active: location.pathname === '/admin/designers-list' },
-        { path: 'designers', icon: '✂️', label: '新增/刪除設計師及服務項目', active: location.pathname === '/admin/designers' },
-        { path: 'profile', icon: '⚙️', label: '系統設定', active: location.pathname === '/admin/profile' },
-        { path: 'add-account', icon: '👤➕', label: '新增後台帳號', active: false, special: true }
+        { path: 'reports', icon: '📊', label: '報表統計', active: location.pathname === '/admin/reports' },
+        { path: 'performance', icon: '📈', label: '業績表', active: location.pathname === '/admin/performance' },
+        { path: 'customers', icon: '👥', label: '客戶管理', active: location.pathname === '/admin/customers' },
+        { path: 'worktime', icon: '⏰', label: '工作時間設定', active: location.pathname === '/admin/worktime' },
+        { path: 'designers', icon: '✂️', label: '新增/刪除設計師及服務產品', active: location.pathname === '/admin/designers' },
+        { path: 'control', icon: '👤➕', label: '帳號控管', active: false, special: true }
       );
     } else if (user?.role === 'designer') {
       // 設計師專用功能
@@ -186,18 +146,18 @@ function Admin() {
           <p style={{display: sidebarCollapsed ? 'none' : 'block'}}>歡迎，{user?.name || (user?.role === 'admin' ? '管理員' : '設計師')}</p>
         </div>
         <nav className="sidebar-nav">
-          {sidebarItems.map((item) => (
+          {sidebarItems.map((item, idx) => {
+            // 其餘主選單
+            return (
             <div
               key={item.path}
               className={`sidebar-item ${item.active ? 'active' : ''}`}
               onClick={() => {
                 if (item.special) {
-                  // 特殊按鈕處理
-                  if (item.path === 'add-account') {
-                    setShowAccountForm(true);
+                    if (item.path === 'control') {
+                      handleNavigation(item.path);
                   }
                 } else {
-                  // 一般導航處理
                   handleNavigation(item.path);
                 }
               }}
@@ -206,7 +166,8 @@ function Admin() {
               <span className="sidebar-icon">{item.icon}</span>
               {!sidebarCollapsed && <span className="sidebar-label">{item.label}</span>}
             </div>
-          ))}
+            );
+          })}
         </nav>
         <div className="sidebar-footer" style={sidebarCollapsed ? {justifyContent: 'center'} : {}}>
           <button className="logout-btn" onClick={handleLogout} style={sidebarCollapsed ? {justifyContent: 'center'} : {}}>
@@ -226,7 +187,7 @@ function Admin() {
             width: '24px',
             height: '24px',
             border: 'none',
-            background: '#f7ab5e',
+            background: 'transparent',
             borderRadius: '50%',
             display: 'flex',
             alignItems: 'center',
@@ -237,65 +198,14 @@ function Admin() {
           }}
           aria-label={sidebarCollapsed ? "展開側邊欄" : "收合側邊欄"}
         >
-          <span style={{fontSize: '12px', color: '#fff', fontWeight: 'bold'}}>
-            {sidebarCollapsed ? '>' : '<'}
+          <span style={{fontSize: '1.2rem', color: '#fff', fontWeight: 'bold', lineHeight: 1, display: 'inline-block'}}>
+            {sidebarCollapsed ? '►' : '◄'}
           </span>
         </button>
       </aside>
       {/* 主要內容區域 */}
       <main className="admin-main">
-        {showAccountForm ? (
-          <div className="admin-container">
-            <div className="admin-header">
-              <h1>新增後台帳號</h1>
-              <p>新增管理員或設計師帳號</p>
-            </div>
-            {accountMessage && (
-              <div className={`message ${accountMessage.includes('成功') ? 'success' : 'error'}`}>{accountMessage}</div>
-            )}
-            <div className="admin-form">
-              <form onSubmit={handleAddAccount}>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>姓名 *</label>
-                    <input type="text" value={newAccount.name} onChange={e => setNewAccount({...newAccount, name: e.target.value})} required placeholder="請輸入姓名" />
-                  </div>
-                  <div className="form-group">
-                    <label>密碼 *</label>
-                    <input type="password" value={newAccount.password} onChange={e => setNewAccount({...newAccount, password: e.target.value})} required placeholder="請輸入密碼" />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>信箱（選填）</label>
-                    <input type="email" value={newAccount.email} onChange={e => setNewAccount({...newAccount, email: e.target.value})} placeholder="請輸入信箱" />
-                  </div>
-                  <div className="form-group">
-                    <label>手機號碼（選填）</label>
-                    <input type="tel" value={newAccount.phone} onChange={e => setNewAccount({...newAccount, phone: e.target.value})} placeholder="請輸入手機號碼" />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label>角色 *</label>
-                  <select value={newAccount.role} onChange={e => setNewAccount({...newAccount, role: e.target.value})} required>
-                    <option value="designer">設計師</option>
-                    <option value="admin">管理員</option>
-                  </select>
-                </div>
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
-                  <button type="submit" className="admin-btn admin-btn-primary">新增帳號</button>
-                  <button type="button" className="admin-btn admin-btn-secondary" onClick={() => {
-                    setShowAccountForm(false);
-                    setAccountMessage('');
-                    setNewAccount({ name: '', email: '', phone: '', password: '', role: 'designer' });
-                  }}>取消</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        ) : (
           <Outlet />
-        )}
       </main>
     </div>
   );

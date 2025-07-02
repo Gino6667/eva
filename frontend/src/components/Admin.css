@@ -171,13 +171,7 @@
   color: #fff !important;
 }
 
-.admin-header h1 {
-  color: #f7ab5e;
-  margin: 0;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #fff !important;
-}
+/* .admin-header h1 樣式移除，改由行內 style 控制 */
 
 .admin-header p {
   margin: 0;
@@ -618,10 +612,6 @@
     padding: 1.5rem;
   }
   
-  .admin-header h1 {
-    font-size: 1.5rem;
-  }
-  
   .admin-nav {
     grid-template-columns: 1fr;
   }
@@ -935,7 +925,6 @@
   font-size: 1.2em;
   font-weight: 700;
   padding: 1.1em 1.2em 1em 1.2em;
-  border-bottom: 1.5px solid #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -944,7 +933,6 @@
 .card-main-row {
   display: flex;
   gap: 0;
-  border-top: 1px solid #e0e0e0;
   margin-top: 0.5em;
 }
 .card-col-now {
@@ -1137,4 +1125,17 @@ table, th, td {
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+.sidebar-arrow {
+  margin-left: auto;
+  margin-right: 0;
+  font-size: 1rem;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.admin-sidebar button:focus, .admin-sidebar button:active {
+  outline: none;
+  box-shadow: none;
 }

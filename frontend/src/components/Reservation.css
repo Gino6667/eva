@@ -1,16 +1,22 @@
 /* Reservation 頁面樣式 */
 .reservation-container {
   max-width: 800px;
+  padding-top: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+  row-gap: 0.5em;
   margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.reservation-main, .reservation-list, .reservation-header, .reservation-form {
+  gap: 0.5em !important;
+  margin-bottom: 0.5em !important;
+  padding: 0.5em 0.5em !important;
 }
 
 .reservation-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .reservation-header h2 {
@@ -365,9 +371,35 @@
 /* 移除 .queue-step:nth-child(3) .designer-selection 橘色外框樣式 */
 
 .business-status-message {
-  font-size: 1.3rem;
+  font-size: 0.8rem;
   color: #d32f2f;
   text-align: center;
   margin: 1.2em 0 1.5em 0;
   font-weight: bold;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.current-serving {
+  margin-top: 0.5em;
+}
+
+.serving-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.serving-item {
+  min-width: 220px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }

@@ -1,7 +1,7 @@
 .queue-progress-container {
   min-height: 100vh;
   background: #333d38;
-  padding: 32px 8px 48px 8px;
+  padding: 0 8px 48px 8px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -414,7 +414,7 @@
 .user-queue-number {
   font-size: 1.2em;
   font-weight: 900;
-  color: #f7ab5e;
+  color: #fff;
   letter-spacing: 2px;
   padding: 0 0.1em;
   user-select: none;
@@ -555,4 +555,88 @@
     grid-template-rows: auto;
     gap: 1.2rem 0.5rem;
   }
+}
+
+.new-user-queue-list {
+  /* background: rgba(33, 150, 243, 0.10); */
+  border-radius: 20px;
+  padding: 1.5em 1em 1.2em 1em;
+  margin-bottom: 2em;
+  /* box-shadow: 0 2px 12px rgba(33,150,243,0.08); */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-queue-title {
+  font-size: 1em;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1em;
+  letter-spacing: 1px;
+  text-align: center;
+  width: 100%;
+}
+
+.user-queue-btns {
+  display: grid;
+  grid-template-columns: repeat(13, 2.8em);
+  gap: 1em 1.2em;
+  justify-items: center;
+  width: 100%;
+}
+
+.new-user-queue-btn {
+  background: #222e28 !important;
+  border: 2.5px solid #f7ab5e !important;
+  border-radius: 50% !important;
+  width: 2.8em;
+  height: 2.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900 !important;
+  color: #fff !important;
+  font-size: 1.3em !important;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.10);
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s, border-color 0.18s;
+  margin: 0;
+}
+.new-user-queue-btn:hover {
+  background: #f7ab5e !important;
+  color: #222e28 !important;
+  border-color: #f7ab5e !important;
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 4px 16px rgba(33,150,243,0.18);
+}
+
+.user-queue-number {
+  font-size: 1.1em;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .user-queue-btns {
+    grid-template-columns: repeat(5, 2.2em);
+    gap: 0.7em 0.7em;
+  }
+}
+@media (max-width: 600px) {
+  .user-queue-btns {
+    grid-template-columns: repeat(3, 2.2em);
+    gap: 0.7em 0.7em;
+  }
+  .new-user-queue-btn {
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1em !important;
+  }
+}
+
+.user-queue-list.new-user-queue-list {
+  margin-left: auto;
+  margin-right: auto;
 }

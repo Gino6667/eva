@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import axios from 'axios';
 import './Admin.css';
 
@@ -15,6 +15,13 @@ function DesignersList() {
   const [transferLoading, setTransferLoading] = useState(false);
   const [transferMessage, setTransferMessage] = useState('');
   const [designerStates, setDesignerStates] = useState({});
+  const today = new Date().toISOString().slice(0, 10);
+  const [queueSearch, setQueueSearch] = useState('');
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [productModalDesigner, setProductModalDesigner] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [selectedProductId, setSelectedProductId] = useState('');
+  const [confirmProduct, setConfirmProduct] = useState(null);
 
   // 載入資料
   useEffect(() => {
@@ -97,13 +104,10 @@ function DesignersList() {
   // 載入今日排隊資料
   const loadTodayQueue = async () => {
     try {
-      const res = await fetch('/api/queue');
+      const today = new Date().toISOString().slice(0, 10);
+      const res = await fetch(`/api/queue?date=${today}`);
       const data = await res.json();
-      const today = new Date().toISOString().split('T')[0];
-      const todayQueues = data.filter(q => 
-        q.createdAt.startsWith(today) && 
-        (q.status === 'waiting' || q.status === 'called')
-      );
+      const todayQueues = data.filter(q => (q.status === 'waiting' || q.status === 'called'));
       setTodayQueue(todayQueues);
     } catch (error) {
       console.error('載入今日排隊失敗:', error);
@@ -219,6 +223,13 @@ function DesignersList() {
       'absent': '過號'
     };
     return statusMap[status] || status;
+  };
+
+  const scrollToDesignerCard = (designerId) => {
+    const el = document.getElementById(`designer-card-${designerId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   // 處理按鈕動作
@@ -385,6 +396,9 @@ function DesignersList() {
             loadTodayQueue();
             // 發送狀態變更事件
             window.dispatchEvent(new CustomEvent('queue-updated'));
+            setTimeout(() => {
+              scrollToDesignerCard(designer.id);
+            }, 300); // 等待資料刷新後再捲動
           } else {
             console.error('報到失敗:', response.data);
           }
@@ -459,14 +473,69 @@ function DesignersList() {
     }
   };
 
+  // todayQueue、currentServing、nextInQueue、設計師排序等重複運算加上 useMemo
+  const filteredTodayQueue = useMemo(() => todayQueue.filter(q => (q.status === 'waiting' || q.status === 'called') && q.createdAt.slice(0, 10) === today && (`${q.number}${getDesignerName(q.designerId)}${getServiceName(q.serviceId)}`.includes(queueSearch))), [todayQueue, today, queueSearch]);
+  const sortedDesigners = [...designers].sort((a, b) => a.id - b.id);
+
+  // 載入產品
+  const loadProducts = async () => {
+    const res = await axios.get('/api/products');
+    setProducts(res.data);
+  };
+
+  // 開啟產品彈窗
+  const openProductModal = (designer) => {
+    setProductModalDesigner(designer);
+    setShowProductModal(true);
+    loadProducts();
+    setSelectedProductId('');
+  };
+
+  // 銷售產品
+  const handleSellProduct = async (productId) => {
+    const product = products.find(p => p.id === Number(productId));
+    if (!product) return alert('產品不存在');
+    try {
+      await axios.post('/api/transactions', {
+        type: 'income',
+        amount: parseFloat(product.price),
+        description: `產品銷售：${product.name}（設計師：${productModalDesigner.name}）`,
+        category: 'product',
+        designerId: productModalDesigner.id,
+        productId: product.id,
+        date: new Date().toISOString().split('T')[0]
+      });
+      setShowProductModal(false);
+    } catch (err) {
+      alert('寫入財務失敗');
+    }
+  };
+
+  // 新增 handleSellProductBtn
+  const handleSellProductBtn = async (productId) => {
+    await handleSellProduct(productId);
+  };
+
   return (
     <div className="admin-container">
-      <div className="admin-header">
-        <h1>設計師管理</h1>
-        <p>可直接操作設計師狀態與客人流程</p>
-      </div>
-      <div className="serving-grid serving-grid-progress">
-        {designers.filter(designer => designer.name !== '不指定').map(designer => {
+      {/* <div className="admin-header">
+        <h1>設計師現場狀態</h1>
+      </div> */}
+      <div className="serving-grid serving-grid-progress" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateRows: 'repeat(2, 1fr)',
+        gap: '2rem',
+        justifyItems: 'center',
+        alignItems: 'stretch',
+        width: '100%',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        paddingTop: 0,
+        position: 'relative',
+        zIndex: 2000
+      }}>
+        {sortedDesigners.filter(designer => designer.name !== '不指定').map(designer => {
           const card = getCardData(designer);
           const isPaused = designer.isPaused;
           const designerState = designerStates[designer.id] || {};
@@ -474,38 +543,40 @@ function DesignersList() {
           const isPausedOrder = designerState.isPaused;
           
           return (
-            <div key={designer.id} className="serving-card-progress" style={{minWidth:900, maxWidth:1200, width:'100%', position:'relative'}}>
-              <div className="designer-header" style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                <span className="designer-title">設計師 <b>{designer.name}</b></span>
-                <div style={{display:'flex',gap:'0.5em'}}>
-                  <button className="admin-btn" style={{color:'#333',fontWeight:600,fontSize:'1em'}} onClick={()=>handleAction(designer,'調整客人')} title="調整客人">📖</button>
-                  <button className="admin-btn" style={{color:'#ff9800',fontWeight:600,fontSize:'1em'}} onClick={()=>handleAction(designer, isPausedOrder ? '恢復接單' : '暫停接單')} title={isPausedOrder ? '恢復接單' : '暫停接單'}>⏸️</button>
+            <div key={designer.id} id={`designer-card-${designer.id}`} className="serving-card-progress" style={{minWidth:'0', maxWidth:'540px', width:'95%', height:'70%', position:'relative', display:'flex', flexDirection:'column', justifyContent:'flex-start', padding:'0', paddingBottom:'1.7cm'}}>
+              {/* 卡片上緣：名稱與 emoji 按鈕 */}
+              <div className="designer-header" style={{display:'flex',alignItems:'center',width:'100%',padding:'1.1em 1.2em 0.5em 1.2em',boxSizing:'border-box',borderBottom:'1px solid rgba(247,171,94,0.12)'}}>
+                <span className="designer-title" style={{flex: '0 0 auto', alignSelf:'center', fontSize:'0.85em', fontWeight:700, color:'#f7ab5e', textAlign:'left', marginRight:'auto'}}>
+                  設計師 <b style={{fontSize:'0.95em'}}>{designer.name}</b>
+                </span>
+                <div style={{display:'flex',gap:'0.2em',flex:1,justifyContent:'flex-end',alignItems:'center'}}>
+                  <button className="btn btn-primary" style={{color:'#333',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer,'調整客人')} title="調整客人">📖</button>
+                  <button className="btn btn-primary" style={{color:'#ff9800',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer, isPausedOrder ? '恢復接單' : '暫停接單')} title={isPausedOrder ? '恢復接單' : '暫停接單'}>⏸️</button>
                   {isOnVacation ? (
-                    <button className="admin-btn" style={{color:'#2196f3',fontWeight:600,fontSize:'1em'}} onClick={()=>handleAction(designer,'恢復上線')} title="恢復上線">🏖️</button>
+                    <button className="btn btn-primary" style={{color:'#2196f3',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer,'恢復上線')} title="恢復上線">🏖️</button>
                   ) : (
-                    <button className="admin-btn" style={{color:'#2196f3',fontWeight:600,fontSize:'1em'}} onClick={()=>handleAction(designer,'休假中')} title="休假中">🏖️</button>
+                    <button className="btn btn-primary" style={{color:'#2196f3',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer,'休假中')} title="休假中">🏖️</button>
                   )}
+                  <button className="btn btn-primary" style={{color:'#8bc34a',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>openProductModal(designer)} title="產品">🛍️</button>
                 </div>
               </div>
-              <div className="card-main-row" style={{display:'flex',gap:'0',borderTop:'1px solid #e0e0e0',marginTop:'1em'}}>
-                <div className="card-col card-col-now" style={{flex:1,padding:'1em',borderRight:'1px solid #e0e0e0',textAlign:'center',background:'transparent',minHeight:'160px'}}>
+              {/* 卡片內容區塊 */}
+              <div className="card-main-row" style={{display:'flex',gap:'0',marginTop:'1em'}}>
+                <div className="card-col card-col-now" style={{flex:1,padding:'1em',textAlign:'center',background:'transparent',minHeight:'160px'}}>
                   <div className="col-label" style={{fontWeight:600,marginBottom:'0.5em'}}>目前號碼</div>
                   <div className="col-number now-number" style={{fontSize:'2em',fontWeight:700,background:'transparent',boxShadow:'none',color:'#ff9800'}}>{card.currentNumber}</div>
                   <div className="col-service" style={{fontSize:'1em',color:'#ff9800',marginTop:'0.3em'}}>{card.currentService}</div>
-                  <button className="admin-btn" style={{marginTop:'0.7em'}} onClick={()=>handleAction(designer,'結束')}>結束</button>
+                  <button className="btn btn-primary" style={{marginTop:'0.7em'}} onClick={()=>handleAction(designer,'結束')}>結束</button>
                 </div>
                 <div className="card-col card-col-next" style={{flex:1,padding:'1em',textAlign:'center',background:'transparent',minHeight:'160px'}}>
                   <div className="col-label" style={{fontWeight:600,marginBottom:'0.5em'}}>下一位</div>
                   <div className="col-number next-number" style={{fontSize:'2em',fontWeight:700,color:'#ff9800'}}>{card.nextNumber}</div>
                   <div className="col-service" style={{fontSize:'1em',color:'#f7ab5e',marginTop:'0.3em'}}>{card.nextService}</div>
                   <div style={{marginTop:'0.7em', display:'flex', gap:'0.5em', justifyContent:'center'}}>
-                    <button className="admin-btn" onClick={()=>handleAction(designer,'報到')}>報到</button>
-                    <button className="admin-btn" onClick={()=>handleAction(designer,'過號')}>過號</button>
+                    <button className="btn btn-primary" onClick={()=>handleAction(designer,'報到')}>報到</button>
+                    <button className="btn btn-primary" onClick={()=>handleAction(designer,'過號')}>過號</button>
                   </div>
                 </div>
-              </div>
-              <div style={{marginTop:'1.2em', display:'flex', flexWrap:'wrap', gap:'0.5em', justifyContent:'center'}}>
-                {/* 報到、過號按鈕已移至下一位區塊 */}
               </div>
               {isOnVacation && (
                 <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:'rgba(255,152,0,0.45)',zIndex:10,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'2em',fontWeight:900,color:'#fff',letterSpacing:'4px',pointerEvents:'none',borderRadius:'18px',textShadow:'0 2px 16px #333d38cc'}}>
@@ -530,149 +601,158 @@ function DesignersList() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0, 0, 0, 0.7)',
-          zIndex: 1000,
+          background: 'rgba(10, 10, 10, 0.88)',
+          zIndex: 3000,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           padding: '20px'
         }}>
           <div style={{
-            background: '#333d38',
-            borderRadius: '12px',
-            padding: '2rem',
-            maxWidth: '800px',
+            background: '#232a2b',
+            borderRadius: '18px',
+            padding: '2.5rem 2rem',
+            maxWidth: '950px',
             width: '100%',
-            maxHeight: '90vh',
+            maxHeight: '92vh',
             overflow: 'auto',
-            border: '2px solid #f7ab5e',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+            border: '3px solid #fff',
+            boxShadow: '0 12px 48px 0 rgba(0,0,0,0.45)',
+            display: 'flex',
+            flexDirection: window.innerWidth < 700 ? 'column' : 'row',
+            gap: '2.5rem',
+            transition: 'all 0.2s',
           }}>
+            {/* 左側：客人列表 */}
             <div style={{
+              flex: 1,
+              minWidth: '260px',
+              background: '#2e3638',
+              borderRadius: '12px',
+              padding: '1.2rem 1rem',
+              boxShadow: '0 2px 12px #0002',
               display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '1.5rem',
-              paddingBottom: '1rem',
-              borderBottom: '2px solid #f7ab5e'
+              flexDirection: 'column',
+              height: '100%'
             }}>
-              <h3 style={{margin: 0, color: '#f7ab5e', fontSize: '1.5rem'}}>
-                調整客人 - {selectedDesignerForTransfer?.name}
-              </h3>
-              <button 
-                onClick={() => {
-                  setShowTransferModal(false);
-                  setSelectedDesignerForTransfer(null);
-                  setSelectedQueue(null);
-                  setTargetDesigner('');
-                  setReason('');
-                  setTransferMessage('');
-                }}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '1.5rem',
-                  color: '#f7ab5e',
-                  cursor: 'pointer',
-                  padding: '0.5rem'
-                }}
-              >
-                ×
-              </button>
-            </div>
-
-            {transferMessage && (
-              <div style={{
-                padding: '1rem',
-                borderRadius: '8px',
-                marginBottom: '1rem',
-                background: '#4a5a4f',
-                color: '#f7ab5e',
-                border: '1px solid #f7ab5e'
-              }}>
-                {transferMessage}
-              </div>
-            )}
-
-            <div style={{display: 'grid', gap: '2rem'}}>
-              {/* 今日排隊列表 */}
-              <div>
-                <h4 style={{color: '#f7ab5e', marginBottom: '1rem'}}>今日排隊客人</h4>
-                <div style={{maxHeight: '300px', overflow: 'auto'}}>
-                  {todayQueue.length === 0 ? (
-                    <p style={{color: '#f7ab5e', textAlign: 'center', fontStyle: 'italic'}}>
-                      目前沒有等待中的客人
-                    </p>
-                  ) : (
-                    <div style={{display: 'grid', gap: '0.5rem'}}>
-                      {todayQueue.map(queue => (
-                        <div 
-                          key={queue.id} 
-                          onClick={() => setSelectedQueue(queue)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '1rem',
-                            border: `2px solid ${selectedQueue?.id === queue.id ? '#f7ab5e' : '#e9ecef'}`,
-                            borderRadius: '8px',
-                            cursor: 'pointer',
-                            transition: 'all 0.3s ease',
-                            background: selectedQueue?.id === queue.id ? '#4a5a4f' : '#333d38'
-                          }}
-                        >
-                          <div style={{
-                            background: '#007bff',
-                            color: '#f7ab5e',
-                            padding: '0.5rem 1rem',
-                            borderRadius: '6px',
-                            fontWeight: '600',
-                            marginRight: '1rem',
-                            minWidth: '60px',
-                            textAlign: 'center'
-                          }}>
-                            #{queue.number}
+              <h4 style={{color: '#f7ab5e', marginBottom: '1rem'}}>今日排隊客人</h4>
+              <input
+                type="text"
+                placeholder="搜尋號碼/設計師/服務..."
+                value={queueSearch}
+                onChange={e => setQueueSearch(e.target.value)}
+                style={{width:'100%',marginBottom:'1rem',padding:'0.5rem',borderRadius:'6px',border:'1px solid #e9ecef',background:'#222',color:'#f7ab5e'}}
+              />
+              <div style={{maxHeight: '350px', overflow: 'auto'}}>
+                {filteredTodayQueue.length === 0 ? (
+                  <p style={{color: '#f7ab5e', textAlign: 'center', fontStyle: 'italic'}}>
+                    目前沒有等待中的客人
+                  </p>
+                ) : (
+                  <div style={{display: 'grid', gap: '0.5rem'}}>
+                    {filteredTodayQueue.map(queue => (
+                      <div
+                        key={queue.id}
+                        onClick={() => setSelectedQueue(queue)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          padding: '1rem',
+                          border: `2px solid ${selectedQueue?.id === queue.id ? '#f7ab5e' : '#e9ecef'}`,
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          background: selectedQueue?.id === queue.id ? '#4a5a4f' : '#333d38',
+                          boxShadow: selectedQueue?.id === queue.id ? '0 0 0 2px #f7ab5e55' : 'none'
+                        }}
+                      >
+                        <div style={{
+                          background: '#007bff',
+                          color: '#f7ab5e',
+                          padding: '0.5rem 1rem',
+                          borderRadius: '6px',
+                          fontWeight: '600',
+                          marginRight: '1rem',
+                          minWidth: '60px',
+                          textAlign: 'center'
+                        }}>
+                          #{queue.number}
+                        </div>
+                        <div style={{flex: 1}}>
+                          <div style={{color: '#f7ab5e', fontSize: '0.9rem'}}>
+                            設計師: {getDesignerName(queue.designerId)}
                           </div>
-                          <div style={{flex: 1}}>
-                            <div style={{color: '#f7ab5e', fontSize: '0.9rem'}}>
-                              設計師: {getDesignerName(queue.designerId)}
-                            </div>
-                            <div style={{color: '#f7ab5e', fontSize: '0.9rem'}}>
-                              服務: {getServiceName(queue.serviceId)}
-                            </div>
-                            <div style={{color: '#f7ab5e', fontSize: '0.9rem'}}>
-                              時間: {formatTime(queue.createdAt)}
-                            </div>
+                          <div style={{color: '#f7ab5e', fontSize: '0.9rem'}}>
+                            服務: {getServiceName(queue.serviceId)}
                           </div>
-                          <div style={{
-                            padding: '0.25rem 0.75rem',
-                            borderRadius: '20px',
-                            fontSize: '0.8rem',
-                            fontWeight: '500',
-                            background: '#4a5a4f',
-                            color: '#f7ab5e',
-                            border: '1px solid #f7ab5e'
-                          }}>
-                            {getStatusText(queue.status)}
+                          <div style={{color: '#f7ab5e', fontSize: '0.9rem'}}>
+                            狀態: {getStatusText(queue.status)}
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-
-              {/* 調整表單 */}
-              {selectedQueue && (
+            </div>
+            {/* 右側：調整表單 */}
+            <div style={{
+              flex: 1,
+              minWidth: '320px',
+              background: '#232a2b',
+              borderRadius: '12px',
+              padding: '1.5rem 1.2rem',
+              boxShadow: '0 2px 12px #0002',
+              display:'flex',
+              flexDirection:'column',
+              justifyContent:'flex-start',
+              borderLeft: window.innerWidth < 700 ? 'none' : '2px solid #444',
+              borderTop: window.innerWidth < 700 ? '2px solid #444' : 'none',
+              marginLeft: window.innerWidth < 700 ? 0 : '1.2rem',
+              marginTop: window.innerWidth < 700 ? '1.2rem' : 0
+            }}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem'}}>
+                <h3 style={{margin: 0, color: '#f7ab5e', fontSize: '1.5rem'}}>
+                  {selectedQueue ? `調整 #${selectedQueue.number}` : '請先選擇要調整的客人'}
+                </h3>
+                <button 
+                  onClick={() => {
+                    setShowTransferModal(false);
+                    setSelectedDesignerForTransfer(null);
+                    setSelectedQueue(null);
+                    setTargetDesigner('');
+                    setReason('');
+                    setTransferMessage('');
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    fontSize: '1.5rem',
+                    color: '#f7ab5e',
+                    cursor: 'pointer',
+                    padding: '0.5rem'
+                  }}
+                >×</button>
+              </div>
+              {transferMessage && (
                 <div style={{
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  marginBottom: '1rem',
                   background: '#4a5a4f',
-                  borderRadius: '12px',
-                  padding: '1.5rem',
-                  border: '1px solid #f7ab5e'
+                  color: '#f7ab5e',
                 }}>
-                  <h4 style={{color: '#f7ab5e', marginBottom: '1rem'}}>調整客人</h4>
+                  {transferMessage}
+                </div>
+              )}
+              {selectedQueue && (
+                <>
                   <div style={{marginBottom: '1rem', padding: '1rem', background: '#333d38', borderRadius: '8px'}}>
                     <p style={{margin: '0', color: '#f7ab5e'}}>
-                      <strong>選擇的客人:</strong> #{selectedQueue.number} - {getDesignerName(selectedQueue.designerId)}
+                      <strong>號碼:</strong> #{selectedQueue.number}
+                    </p>
+                    <p style={{margin: '0', color: '#f7ab5e'}}>
+                      <strong>原設計師:</strong> {getDesignerName(selectedQueue.designerId)}
                     </p>
                     <p style={{margin: '0', color: '#f7ab5e'}}>
                       <strong>服務:</strong> {getServiceName(selectedQueue.serviceId)}
@@ -681,7 +761,6 @@ function DesignersList() {
                       <strong>狀態:</strong> {getStatusText(selectedQueue.status)}
                     </p>
                   </div>
-
                   <div style={{marginBottom: '1rem'}}>
                     <label style={{display: 'block', marginBottom: '0.5rem', color: '#f7ab5e', fontWeight: '500'}}>
                       調整至設計師:
@@ -710,7 +789,6 @@ function DesignersList() {
                       }
                     </select>
                   </div>
-
                   <div style={{marginBottom: '1rem'}}>
                     <label style={{display: 'block', marginBottom: '0.5rem', color: '#f7ab5e', fontWeight: '500'}}>
                       調整原因 (選填):
@@ -732,7 +810,6 @@ function DesignersList() {
                       }}
                     />
                   </div>
-
                   <div style={{display: 'flex', gap: '1rem'}}>
                     <button 
                       onClick={handleTransfer}
@@ -770,12 +847,102 @@ function DesignersList() {
                       取消
                     </button>
                   </div>
-                </div>
+                </>
               )}
             </div>
           </div>
         </div>
       )}
+
+      {/* 產品彈窗 */}
+      {showProductModal && productModalDesigner && (
+        <div style={{
+          position:'fixed',top:0,left:0,right:0,bottom:0,
+          background:'rgba(10,10,10,0.88)',zIndex:3000,
+          display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'
+        }}>
+          <div style={{
+            background:'#232a2b',
+            borderRadius:'28px',
+            padding:'3.5rem 2.5rem',
+            maxWidth:'700px',
+            width:'100%',
+            boxShadow:'0 16px 64px 0 rgba(0,0,0,0.55)',
+            display:'flex',
+            flexDirection:'column',
+            alignItems:'center',
+            justifyContent:'center'
+          }}>
+            <h3 style={{color:'#f7ab5e',marginBottom:'2.2rem',fontSize:'2.1em',fontWeight:900,textAlign:'center',letterSpacing:'0.04em'}}>產品銷售 - {productModalDesigner.name}</h3>
+            <div className="product-btn-grid" style={{
+              display:'grid',
+              gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))',
+              gap:'2.2em 2.2em',
+              margin:'2.5em 0',
+              justifyItems:'center',
+              alignItems:'center',
+              width:'100%'
+            }}>
+              {products.map(p => (
+                <button
+                  key={p.id}
+                  className="product-btn"
+                  onClick={() => setConfirmProduct(p)}
+                  title={p.name}
+                >
+                  {p.name}（${p.price}）
+                </button>
+              ))}
+            </div>
+            <button className="btn btn-secondary" onClick={()=>setShowProductModal(false)} style={{
+              marginTop:'1.5em',
+              padding:'1em 2.5em',
+              borderRadius:'999px',
+              fontSize:'1.1em',
+              background:'#f7ab5e',
+              color:'#232a2b',
+              fontWeight:700,
+              border:'none',
+              boxShadow:'0 2px 8px #0002',
+              cursor:'pointer',
+              letterSpacing:'0.04em'
+            }}>取消</button>
+          </div>
+        </div>
+      )}
+      {confirmProduct && (
+        confirmProduct.name ? (
+          <div className="product-modal-bg" style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            background: 'rgba(10,10,10,0.88)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}>
+            <div className="product-modal-content" style={{maxWidth:'400px',padding:'2.5rem 1.5rem',background:'#232a2b',borderRadius:'28px',boxShadow:'0 16px 64px 0 rgba(0,0,0,0.55)',width:'100%',textAlign:'center'}}>
+              <div style={{color:'#f7ab5e',fontSize:'1.3em',fontWeight:700,marginBottom:'2em'}}>確定要完成銷售「{confirmProduct.name}」嗎？</div>
+              <div style={{display:'flex',justifyContent:'center',gap:'2em'}}>
+                <button className="product-btn" style={{background:'#f7ab5e',color:'#232a2b',fontWeight:800}} onClick={()=>{handleSellProduct(confirmProduct.id);setConfirmProduct(null);}}>確認</button>
+                <button className="product-btn" style={{background:'#444',color:'#f7ab5e',fontWeight:800}} onClick={()=>setConfirmProduct(null)}>取消</button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="product-modal-bg" style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(10,10,10,0.88)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+            <div className="product-modal-content" style={{maxWidth:'400px',padding:'2.5rem 1.5rem',color:'red',textAlign:'center',background:'#fff',borderRadius:'28px'}}>彈窗資料異常</div>
+          </div>
+        )
+      )}
+      <style>{`
+@media (min-width: 600px) and (max-width: 900px) {
+  .product-btn-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+`}</style>
     </div>
   );
 }

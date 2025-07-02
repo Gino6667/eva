@@ -13,25 +13,13 @@ function Customers() {
   const [editingCustomer, setEditingCustomer] = useState(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('users');
-    if (saved && JSON.parse(saved).length > 0) {
-      setCustomers(filterOnlyCustomers(JSON.parse(saved)));
-    } else {
-      // localStorage 沒有資料，自動同步 API
       axios.get('/api/users')
         .then(res => {
           const onlyCustomers = filterOnlyCustomers(res.data);
           setCustomers(onlyCustomers);
-          localStorage.setItem('users', JSON.stringify(onlyCustomers));
         })
         .catch(() => setCustomers([]));
-    }
   }, []);
-
-  // 每次 customers 變動時自動儲存到 localStorage:users
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(customers));
-  }, [customers]);
 
   const handleAddCustomer = () => {
     if (!newCustomer.name || (!newCustomer.phone && !newCustomer.email)) {
@@ -63,16 +51,26 @@ function Customers() {
     setShowAddForm(false);
   };
 
-  const handleEditCustomer = () => {
+  const handleEditCustomer = async () => {
     if (!editingCustomer.name || !editingCustomer.phone) {
       alert('請填寫姓名和電話');
       return;
     }
-
-    setCustomers(customers.map(customer => 
+    try {
+      // 判斷是否為正式會員（id 為 10 位數以下的數字）
+      if (typeof editingCustomer.id === 'number' && editingCustomer.id.toString().length < 10) {
+        const token = localStorage.getItem('token');
+        await axios.patch(`/api/users/${editingCustomer.id}`, editingCustomer, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      }
+      const updatedCustomers = customers.map(customer => 
       customer.id === editingCustomer.id ? editingCustomer : customer
-    ));
-    setEditingCustomer(null);
+      );
+      setCustomers(updatedCustomers);
+    } catch (err) {
+      alert('更新失敗，請稍後再試');
+    }
   };
 
   const handleDeleteCustomer = async (id) => {
@@ -81,7 +79,6 @@ function Customers() {
       if (typeof id === 'number' && id.toString().length >= 10) {
         const updated = customers.filter(customer => customer.id !== id);
         setCustomers(updated);
-        localStorage.setItem('users', JSON.stringify(updated));
         return;
       }
       try {
@@ -91,7 +88,6 @@ function Customers() {
         });
         const updated = customers.filter(customer => customer.id !== id);
         setCustomers(updated);
-        localStorage.setItem('users', JSON.stringify(updated));
       } catch (err) {
         alert('刪除失敗，請稍後再試');
       }
@@ -161,7 +157,6 @@ function Customers() {
     const toAdd = defaultMembers.filter(m => !existPhones.includes(m.phone) && !existEmails.includes(m.email));
     const merged = [...customers, ...toAdd];
     setCustomers(merged);
-    localStorage.setItem('users', JSON.stringify(merged));
   };
 
   // 過濾只顯示客戶（非設計師/管理員）
@@ -170,10 +165,7 @@ function Customers() {
 
   return (
     <div className="admin-container">
-      <div className="admin-header">
-        <h1>客戶管理</h1>
-        <p>管理客戶資料、查看客戶歷史記錄、分析客戶行為</p>
-      </div>
+      <h2 className="reports-title">顧客管理</h2>
 
       {/* 客戶統計 */}
       <div className="stats-grid">
@@ -226,7 +218,7 @@ function Customers() {
               <label>姓名 *</label>
               <input
                 type="text"
-                value={newCustomer.name}
+                value={newCustomer.name || ''}
                 onChange={(e) => setNewCustomer({...newCustomer, name: e.target.value})}
                 placeholder="請輸入姓名"
               />
@@ -235,7 +227,7 @@ function Customers() {
               <label>電話 *</label>
               <input
                 type="tel"
-                value={newCustomer.phone}
+                value={newCustomer.phone || ''}
                 onChange={(e) => setNewCustomer({...newCustomer, phone: e.target.value})}
                 placeholder="請輸入電話"
               />
@@ -244,7 +236,7 @@ function Customers() {
               <label>信箱</label>
               <input
                 type="email"
-                value={newCustomer.email}
+                value={newCustomer.email || ''}
                 onChange={(e) => setNewCustomer({...newCustomer, email: e.target.value})}
                 placeholder="請輸入信箱"
               />
@@ -252,7 +244,7 @@ function Customers() {
             <div className="form-group">
               <label>會員等級</label>
               <select 
-                value={newCustomer.membershipLevel} 
+                value={newCustomer.membershipLevel || ''} 
                 onChange={(e) => setNewCustomer({...newCustomer, membershipLevel: e.target.value})}
               >
                 <option value="regular">一般會員</option>
@@ -264,7 +256,7 @@ function Customers() {
           <div className="form-group">
             <label>備註</label>
             <textarea
-              value={newCustomer.notes}
+              value={newCustomer.notes || ''}
               onChange={(e) => setNewCustomer({...newCustomer, notes: e.target.value})}
               placeholder="請輸入備註"
               rows="3"
@@ -290,7 +282,7 @@ function Customers() {
               <label>姓名 *</label>
               <input
                 type="text"
-                value={editingCustomer.name}
+                value={editingCustomer.name || ''}
                 onChange={(e) => setEditingCustomer({...editingCustomer, name: e.target.value})}
               />
             </div>
@@ -298,7 +290,7 @@ function Customers() {
               <label>電話 *</label>
               <input
                 type="tel"
-                value={editingCustomer.phone}
+                value={editingCustomer.phone || ''}
                 onChange={(e) => setEditingCustomer({...editingCustomer, phone: e.target.value})}
               />
             </div>
@@ -306,14 +298,14 @@ function Customers() {
               <label>信箱</label>
               <input
                 type="email"
-                value={editingCustomer.email}
+                value={editingCustomer.email || ''}
                 onChange={(e) => setEditingCustomer({...editingCustomer, email: e.target.value})}
               />
             </div>
             <div className="form-group">
               <label>狀態</label>
               <select 
-                value={editingCustomer.status} 
+                value={editingCustomer.status || ''} 
                 onChange={(e) => setEditingCustomer({...editingCustomer, status: e.target.value})}
               >
                 <option value="active">活躍</option>
@@ -324,7 +316,7 @@ function Customers() {
               <label>總消費金額</label>
               <input
                 type="number"
-                value={editingCustomer.totalSpent}
+                value={editingCustomer.totalSpent || ''}
                 onChange={(e) => setEditingCustomer({...editingCustomer, totalSpent: parseFloat(e.target.value) || 0})}
               />
             </div>
@@ -332,7 +324,7 @@ function Customers() {
           <div className="form-group">
             <label>備註</label>
             <textarea
-              value={editingCustomer.notes}
+              value={editingCustomer.notes || ''}
               onChange={(e) => setEditingCustomer({...editingCustomer, notes: e.target.value})}
               rows="3"
             />

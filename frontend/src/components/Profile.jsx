@@ -170,66 +170,70 @@ function Profile({ user, setUser }) {
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <h2>會員中心</h2>
+        <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>會員中心</h2>
         <p>管理您的個人資料與服務紀錄</p>
       </div>
 
-      <div className="profile-content">
-        <div className="profile-section">
-          <h3>個人資料</h3>
-          <form onSubmit={handleSave}>
-            <div className="form-group">
-              <label htmlFor="name">姓名</label>
+      <div className="profile-content" style={{display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap'}}>
+        <div className="profile-section" style={{flex: '1 1 320px', minWidth: 320, maxWidth: 400, background: '#38413c', borderRadius: '12px', padding: '2rem', boxShadow: '0 2px 8px #0002'}}>
+          <h3 style={{marginBottom: '1.5rem', color: '#f7ab5e'}}>個人資料</h3>
+          <form onSubmit={handleSave} style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+            <div className="form-group" style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+              <label htmlFor="account" style={{fontWeight: 600, color: '#f7ab5e'}}>帳號</label>
               <input
                 type="text"
-                id="name"
+                id="account"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 required
+                placeholder="請輸入帳號"
+                style={{padding: '0.75em', borderRadius: '6px', border: '1px solid #ccc', fontSize: '1.1em'}}
               />
             </div>
             {showPassword ? (
-              <div className="form-group">
-                <label htmlFor="password">新密碼</label>
+              <div className="form-group" style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+                <label htmlFor="password" style={{fontWeight: 600, color: '#f7ab5e'}}>新密碼</label>
                 <input
                   type="password"
                   id="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="請輸入新密碼"
+                  style={{padding: '0.75em', borderRadius: '6px', border: '1px solid #ccc', fontSize: '1.1em'}}
                 />
-                <button type="button" className="btn btn-secondary" style={{marginTop: '0.5em'}} onClick={() => { setShowPassword(false); setPassword(''); }}>取消</button>
+                <button type="button" className="btn btn-secondary" style={{marginTop: '0.5em', alignSelf: 'flex-end'}} onClick={() => { setShowPassword(false); setPassword(''); }}>取消</button>
               </div>
             ) : (
-              <button type="button" className="btn btn-secondary" style={{marginBottom: '1em'}} onClick={() => setShowPassword(true)}>修改密碼</button>
+              <button type="button" className="btn btn-secondary" style={{marginBottom: '1em', alignSelf: 'flex-start'}} onClick={() => setShowPassword(true)}>修改密碼</button>
             )}
             <button 
               type="submit" 
               className="btn btn-primary"
               disabled={loading}
+              style={{padding: '0.9em', fontSize: '1.1em', fontWeight: 600, marginTop: '1em'}}
             >
               {loading ? '儲存中...' : '儲存修改'}
             </button>
             {msg && (
-              <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`}>
+              <div className={`message ${msg.includes('成功') ? 'success' : 'error'}`} style={{marginTop: '1em', fontWeight: 600, color: msg.includes('成功') ? '#4caf50' : '#f44336', background: '#fff3', padding: '0.75em', borderRadius: '6px', textAlign: 'center'}}>
                 {msg}
               </div>
             )}
           </form>
         </div>
 
-        <div className="profile-section">
-          <h3>今日服務紀錄</h3>
+        <div className="profile-section" style={{flex: '2 1 480px', minWidth: 320, background: '#2e3531', borderRadius: '12px', padding: '2rem', boxShadow: '0 2px 8px #0002'}}>
+          <h3 style={{marginBottom: '1.5rem', color: '#f7ab5e'}}>今日服務紀錄</h3>
           {sortedRecords.length === 0 ? (
-            <div className="empty-records">
+            <div className="empty-records" style={{color: '#f7ab5e', textAlign: 'center', fontStyle: 'italic'}}>
               <p>今日尚無服務紀錄</p>
             </div>
           ) : (
-            <div className="service-list">
+            <div className="service-list" style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
               {sortedRecords.map((r, i) => (
-                <div key={`service-${i}`} className={`service-item ${r.type === 'reservation' ? 'reservation-item' : 'queue-item'} ${r.status === 'cancelled' ? 'cancelled-item' : ''}`}>
-                  <div className="service-type-badge">{r.type === 'reservation' ? '線上抽號' : '現場排隊'}</div>
-                  <div className="service-info">
+                <div key={`service-${i}`} className={`service-item ${r.type === 'reservation' ? 'reservation-item' : 'queue-item'} ${r.status === 'cancelled' ? 'cancelled-item' : ''}`} style={{background: '#fff1', borderRadius: '8px', padding: '1.2em', boxShadow: '0 1px 4px #0001'}}>
+                  <div className="service-type-badge" style={{fontWeight: 600, color: '#fff', background: r.type === 'reservation' ? '#2196f3' : '#ff9800', borderRadius: '4px', padding: '0.2em 0.8em', display: 'inline-block', marginBottom: '0.5em'}}>{r.type === 'reservation' ? '線上抽號' : '現場排隊'}</div>
+                  <div className="service-info" style={{display: 'flex', flexWrap: 'wrap', gap: '1.2em'}}>
                     <div><strong>設計師：</strong><span>{r.designerName}</span></div>
                     <div><strong>服務：</strong><span>{r.serviceName} {r.servicePrice ? `($${r.servicePrice})` : ''}</span></div>
                     <div><strong>{r.type === 'reservation' ? '抽號編號' : '號碼牌'}：</strong><span>{r.type === 'reservation' ? r.id : r.number}</span></div>
@@ -244,6 +248,7 @@ function Profile({ user, setUser }) {
                     <button 
                       className="btn btn-danger"
                       onClick={() => handleCancel(r.type, r.id)}
+                      style={{marginTop: '1em'}}
                     >
                       {r.type === 'reservation' ? '取消抽號' : '取消排隊'}
                     </button>

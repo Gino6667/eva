@@ -38,6 +38,13 @@ function Designers() {
     status: 'active'
   });
 
+  // 新增產品
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({ name: '', price: '', stock: '' });
+
+  // 銷售產品時選擇設計師
+  const [selectedSeller, setSelectedSeller] = useState('');
+
   // 載入設計師資料
   useEffect(() => {
     loadDesigners();
@@ -96,25 +103,21 @@ function Designers() {
       alert('請填寫姓名');
       return;
     }
-
     if (!editingDesigner.services || editingDesigner.services.length === 0) {
       alert('請至少選擇一個服務項目');
       return;
     }
-
     try {
       await axios.patch(`/api/designers/${editingDesigner.id}/profile`, {
         name: editingDesigner.name,
         services: editingDesigner.services
       });
-      
       // 如果狀態有變更，呼叫暫停 API
       if (editingDesigner.isPaused !== undefined) {
         await axios.patch(`/api/designers/${editingDesigner.id}/pause`, {
           isPaused: editingDesigner.isPaused
         });
       }
-      
       // 重新載入設計師資料
       loadDesigners();
       setEditingDesigner(null);
@@ -217,12 +220,56 @@ function Designers() {
     currentPage * itemsPerPage
   );
 
+  // 產品管理：從 API 讀取
+  useEffect(() => {
+    if (activeTab === 'products') loadProducts();
+  }, [activeTab]);
+  const loadProducts = async () => {
+    const res = await axios.get('/api/products');
+    setProducts(res.data);
+  };
+  // 新增產品
+  const handleAddProduct = async () => {
+    if (!newProduct.name || !newProduct.price) {
+      alert('請填寫產品名稱與價格');
+      return;
+    }
+    await axios.post('/api/products', newProduct);
+    setNewProduct({ name: '', price: '', stock: '' });
+    loadProducts();
+  };
+  // 刪除產品
+  const handleDeleteProduct = async (id) => {
+    await axios.delete(`/api/products/${id}`);
+    loadProducts();
+  };
+
+  // 銷售產品，寫入財務管理
+  const handleSellProduct = async (product) => {
+    if (!selectedSeller) {
+      alert('請選擇銷售設計師');
+      return;
+    }
+    const seller = designers.find(d => d.id === selectedSeller);
+    try {
+      await axios.post('/api/transactions', {
+        type: 'income',
+        amount: parseFloat(product.price),
+        description: `產品銷售：${product.name}（設計師：${seller ? seller.name : ''}）`,
+        category: 'product',
+        designerId: selectedSeller,
+        productId: product.id,
+        date: new Date().toISOString().split('T')[0]
+      });
+      alert('已記錄產品銷售到財務管理！');
+    } catch (err) {
+      alert('寫入財務失敗');
+    }
+  };
+
   return (
     <div className="admin-container">
-      <div className="admin-header">
-        <h1>新增/刪除設計師及服務項目</h1>
-        <p>管理設計師帳號、服務項目設定、權限控制</p>
-      </div>
+      <h2 className="reports-title">設計師管理</h2>
 
       {/* 設計師統計 */}
       <div className="stats-grid">
@@ -264,16 +311,10 @@ function Designers() {
           服務項目管理
         </button>
         <button 
-          className={`admin-btn ${activeTab === 'schedule' ? 'admin-btn-primary' : 'admin-btn-secondary'}`}
-          onClick={() => setActiveTab('schedule')}
+          className={`admin-btn ${activeTab === 'products' ? 'admin-btn-primary' : 'admin-btn-secondary'}`}
+          onClick={() => setActiveTab('products')}
         >
-          排班管理
-        </button>
-        <button 
-          className={`admin-btn ${activeTab === 'performance' ? 'admin-btn-primary' : 'admin-btn-secondary'}`}
-          onClick={() => setActiveTab('performance')}
-        >
-          績效統計
+          產品管理
         </button>
       </div>
 
@@ -355,66 +396,68 @@ function Designers() {
             </div>
           )}
 
-          {/* 編輯設計師表單 */}
+          {/* 編輯設計師表單（彈窗） */}
           {editingDesigner && (
-            <div className="admin-form">
-              <h3>編輯設計師</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                <div className="form-group">
-                  <label>姓名 *</label>
-                  <input
-                    type="text"
-                    value={editingDesigner.name}
-                    onChange={(e) => setEditingDesigner({...editingDesigner, name: e.target.value})}
-                    placeholder="請輸入設計師姓名"
-                  />
+            <div className="modal-overlay" onClick={() => setEditingDesigner(null)}>
+              <div className="modal-content" onClick={e => e.stopPropagation()} style={{maxWidth:'600px',margin:'2rem auto'}}>
+                <h3>編輯設計師</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                  <div className="form-group">
+                    <label>姓名 *</label>
+                    <input
+                      type="text"
+                      value={editingDesigner.name}
+                      onChange={(e) => setEditingDesigner({...editingDesigner, name: e.target.value})}
+                      placeholder="請輸入設計師姓名"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>狀態</label>
+                    <select
+                      value={editingDesigner.isPaused ? 'paused' : 'active'}
+                      onChange={(e) => setEditingDesigner({...editingDesigner, isPaused: e.target.value === 'paused'})}
+                    >
+                      <option value="active">正常</option>
+                      <option value="paused">暫停</option>
+                    </select>
+                  </div>
                 </div>
                 <div className="form-group">
-                  <label>狀態</label>
-                  <select 
-                    value={editingDesigner.isPaused ? 'paused' : 'active'} 
-                    onChange={(e) => setEditingDesigner({...editingDesigner, isPaused: e.target.value === 'paused'})}
-                  >
-                    <option value="active">正常</option>
-                    <option value="paused">暫停</option>
-                  </select>
+                  <label>可提供的服務 *</label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem', marginTop: '0.5rem' }}>
+                    {services.map(service => (
+                      <label key={service.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <input
+                          type="checkbox"
+                          checked={editingDesigner.services ? editingDesigner.services.includes(service.id) : false}
+                          onChange={(e) => {
+                            const currentServices = editingDesigner.services || [];
+                            if (e.target.checked) {
+                              setEditingDesigner({
+                                ...editingDesigner,
+                                services: [...currentServices, service.id]
+                              });
+                            } else {
+                              setEditingDesigner({
+                                ...editingDesigner,
+                                services: currentServices.filter(id => id !== service.id)
+                              });
+                            }
+                          }}
+                        />
+                        {service.name} (${service.price})
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label>可提供的服務 *</label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  {services.map(service => (
-                    <label key={service.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <input
-                        type="checkbox"
-                        checked={editingDesigner.services ? editingDesigner.services.includes(service.id) : false}
-                        onChange={(e) => {
-                          const currentServices = editingDesigner.services || [];
-                          if (e.target.checked) {
-                            setEditingDesigner({
-                              ...editingDesigner,
-                              services: [...currentServices, service.id]
-                            });
-                          } else {
-                            setEditingDesigner({
-                              ...editingDesigner,
-                              services: currentServices.filter(id => id !== service.id)
-                            });
-                          }
-                        }}
-                      />
-                      {service.name} (${service.price})
-                    </label>
-                  ))}
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                  <button className="admin-btn admin-btn-success" onClick={handleEditDesigner}>
+                    儲存
+                  </button>
+                  <button className="admin-btn admin-btn-secondary" onClick={() => setEditingDesigner(null)}>
+                    取消
+                  </button>
                 </div>
-              </div>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button className="admin-btn admin-btn-success" onClick={handleEditDesigner}>
-                  儲存
-                </button>
-                <button className="admin-btn admin-btn-secondary" onClick={() => setEditingDesigner(null)}>
-                  取消
-                </button>
               </div>
             </div>
           )}
@@ -436,10 +479,10 @@ function Designers() {
                     <td style={{ fontWeight: 'bold' }}>{designer.name}</td>
                     <td>
                       {designer.services ? 
-                        designer.services.map(serviceId => {
-                          const service = services.find(s => s.id === serviceId);
-                          return service ? service.name : '未知服務';
-                        }).join(', ') 
+                        services
+                          .filter(s => designer.services.includes(s.id))
+                          .map(s => s.name)
+                          .join(', ')
                         : '無指定服務'
                       }
                     </td>
@@ -499,22 +542,6 @@ function Designers() {
               </button>
             </div>
           )}
-        </div>
-      )}
-
-      {/* 排班管理 */}
-      {activeTab === 'schedule' && (
-        <div className="admin-form">
-          <h3>排班管理</h3>
-          <p>排班管理功能正在開發中...</p>
-        </div>
-      )}
-
-      {/* 績效統計 */}
-      {activeTab === 'performance' && (
-        <div className="admin-form">
-          <h3>績效統計</h3>
-          <p>績效統計功能正在開發中...</p>
         </div>
       )}
 
@@ -661,6 +688,44 @@ function Designers() {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* 產品管理 */}
+      {activeTab === 'products' && (
+        <div className="products-tab" style={{padding:'2em'}}>
+          <h2>產品管理</h2>
+          <div style={{display:'flex',gap:'1em',marginBottom:'1.5em'}}>
+            <input type="text" placeholder="產品名稱" value={newProduct.name} onChange={e=>setNewProduct({...newProduct, name: e.target.value})} />
+            <input type="number" placeholder="價格" value={newProduct.price} onChange={e=>setNewProduct({...newProduct, price: e.target.value})} />
+            <input type="number" placeholder="庫存" value={newProduct.stock} onChange={e=>setNewProduct({...newProduct, stock: e.target.value})} />
+            <button className="btn btn-primary" onClick={handleAddProduct}>新增產品</button>
+          </div>
+          <div style={{marginBottom:'1em'}}>
+            <label>選擇銷售設計師：</label>
+            <select value={selectedSeller} onChange={e=>setSelectedSeller(e.target.value)}>
+              <option value="">請選擇</option>
+              {designers.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+            </select>
+          </div>
+          <table style={{width:'100%',background:'#232a2b',color:'#f7ab5e',borderRadius:'10px',overflow:'hidden'}}>
+            <thead>
+              <tr><th>產品名稱</th><th>價格</th><th>庫存</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+              {products.map(product => (
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>${product.price}</td>
+                  <td>{product.stock}</td>
+                  <td>
+                    <button className="btn btn-primary" onClick={()=>handleSellProduct(product)}>銷售</button>
+                    <button className="btn btn-danger" onClick={()=>handleDeleteProduct(product.id)} style={{marginLeft:'0.5em'}}>刪除</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
 

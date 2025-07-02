@@ -361,4 +361,16 @@
 .designer-table td {
   background: #2e3934;
   color: #fff;
+}
+
+/* DEBUG: 強制 tabs-row 及其 button 在最上層且可點擊 */
+.tabs-row {
+  position: relative !important;
+  z-index: 9999 !important;
+}
+.tabs-row button {
+  position: relative !important;
+  z-index: 10000 !important;
+  pointer-events: auto !important;
+  outline: 2px solid red !important;
 } 

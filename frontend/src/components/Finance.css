@@ -30,84 +30,77 @@
 
 /* 財務統計卡片 */
 .finance-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2rem 0 2.5rem 0;
 }
 
 .finance-stat-card {
-  background: #333d38;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 2px solid #3e4a44;
+  background: #232d28;
+  border: 2px solid #ffb366;
+  border-radius: 16px;
+  width: 220px;
+  min-width: 180px;
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
   text-align: center;
-  transition: all 0.3s ease;
-}
-
-.finance-stat-card:hover {
-  border-color: #f7ab5e;
-  transform: translateY(-2px);
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .finance-stat-number {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .finance-stat-number.income {
-  color: #4caf50;
+  color: #28a745;
 }
 
 .finance-stat-number.expense {
-  color: #f44336;
+  color: #e74c3c;
 }
 
 .finance-stat-number.profit {
-  color: #f7ab5e;
+  color: #ffb366;
 }
 
 .finance-stat-number.growth {
-  color: #2196f3;
+  color: #3498db;
 }
 
 .finance-stat-label {
-  color: #ccc;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  color: #ffb366;
+  margin-top: 0.2rem;
 }
 
 /* 標籤頁控制 */
 .finance-tabs {
   display: flex;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 1.5rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap;
 }
 
 .finance-tab-btn {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid #3e4a44;
-  background: #2e3934;
-  color: #ccc;
-  border-radius: 8px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #ffb366;
+  padding: 0.7rem 2.2rem;
+  border-radius: 8px 8px 0 0;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.finance-tab-btn:hover {
-  border-color: #f7ab5e;
-  color: #f7ab5e;
+  transition: background 0.2s, color 0.2s;
 }
 
 .finance-tab-btn.active {
-  background: #f7ab5e;
-  border-color: #f7ab5e;
-  color: #2e3934;
+  background: #232d28;
+  color: #fff;
   font-weight: bold;
+  border-bottom: 2px solid #ffb366;
 }
 
 /* 內容區域 */
@@ -159,11 +152,12 @@
 
 /* 表單樣式 */
 .finance-form {
-  background: #2e3934;
+  background: #232d28;
   border-radius: 12px;
-  padding: 1.5rem;
-  border: 2px solid #3e4a44;
-  margin-bottom: 1.5rem;
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 .finance-form-grid {
@@ -174,34 +168,33 @@
 }
 
 .finance-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .finance-form-group label {
-  color: #f7ab5e;
-  font-weight: 500;
-  font-size: 0.9rem;
+  color: #ffb366;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  display: block;
 }
 
 .finance-form-group input,
 .finance-form-group select,
 .finance-form-group textarea {
-  padding: 0.75rem;
-  border: 2px solid #3e4a44;
-  border-radius: 8px;
-  background: #333d38;
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #2e3a34;
   color: #fff;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  margin-top: 0.2rem;
 }
 
 .finance-form-group input:focus,
 .finance-form-group select:focus,
 .finance-form-group textarea:focus {
-  outline: none;
-  border-color: #f7ab5e;
+  outline: 2px solid #ffb366;
 }
 
 .finance-form-group input::placeholder,
@@ -211,110 +204,90 @@
 
 /* 按鈕樣式 */
 .finance-btn {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid transparent;
-  border-radius: 8px;
+  padding: 0.4rem 1.1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  margin: 0 0.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  transition: background 0.2s;
 }
 
 .finance-btn-primary {
-  background: #f7ab5e;
-  color: #2e3934;
-  border-color: #f7ab5e;
+  background: #3498db;
+  color: #fff;
 }
 
 .finance-btn-primary:hover {
-  background: #e89a4d;
-  border-color: #e89a4d;
-  transform: translateY(-1px);
+  background: #2980b9;
 }
 
 .finance-btn-secondary {
-  background: #3e4a44;
-  color: #ccc;
-  border-color: #3e4a44;
+  background: #444;
+  color: #fff;
 }
 
 .finance-btn-secondary:hover {
-  background: #4a5650;
-  border-color: #4a5650;
-  color: #fff;
+  background: #555;
 }
 
 .finance-btn-success {
-  background: #4caf50;
+  background: #28a745;
   color: #fff;
-  border-color: #4caf50;
 }
 
 .finance-btn-success:hover {
-  background: #45a049;
-  border-color: #45a049;
+  background: #218c3c;
 }
 
 .finance-btn-warning {
-  background: #ff9800;
-  color: #fff;
-  border-color: #ff9800;
+  background: #ffb366;
+  color: #232d28;
 }
 
 .finance-btn-warning:hover {
-  background: #f57c00;
-  border-color: #f57c00;
+  background: #e6a04d;
 }
 
 .finance-btn-danger {
-  background: #f44336;
+  background: #e74c3c;
   color: #fff;
-  border-color: #f44336;
 }
 
 .finance-btn-danger:hover {
-  background: #d32f2f;
-  border-color: #d32f2f;
+  background: #c0392b;
 }
 
 /* 表格樣式 */
 .finance-table {
-  background: #2e3934;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 2px solid #3e4a44;
-  margin-bottom: 1.5rem;
+  margin: 0 auto 2rem auto;
+  width: 98%;
+  overflow-x: auto;
 }
 
 .finance-table table {
   width: 100%;
   border-collapse: collapse;
+  background: #232d28;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.finance-table th, .finance-table td {
+  padding: 0.9rem 0.7rem;
+  text-align: center;
 }
 
 .finance-table th {
-  background: #3e4a44;
-  color: #f7ab5e;
-  padding: 1rem;
-  text-align: left;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-bottom: 2px solid #2e3934;
+  background: #2e3a34;
+  color: #ffb366;
+  font-size: 1.05rem;
+  font-weight: bold;
 }
 
 .finance-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #3e4a44;
-  color: #ccc;
-  font-size: 0.9rem;
-}
-
-.finance-table tr:hover {
-  background: #3e4a44;
+  color: #fff;
+  border-bottom: 1px solid #333;
 }
 
 .finance-table tr:last-child td {
@@ -342,31 +315,24 @@
 .finance-pagination {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 0.5rem;
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 2rem 0;
 }
 
 .finance-pagination button {
-  padding: 0.5rem 1rem;
-  border: 2px solid #3e4a44;
-  background: #2e3934;
-  color: #ccc;
+  background: #232d28;
+  color: #ffb366;
+  border: 1px solid #ffb366;
   border-radius: 6px;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
 }
 
-.finance-pagination button:hover {
-  border-color: #f7ab5e;
-  color: #f7ab5e;
-}
-
-.finance-pagination button.active {
-  background: #f7ab5e;
-  border-color: #f7ab5e;
-  color: #2e3934;
+.finance-pagination button.active, .finance-pagination button:focus {
+  background: #ffb366;
+  color: #232d28;
   font-weight: bold;
 }
 
@@ -411,6 +377,17 @@
 }
 
 /* 響應式設計 */
+@media (max-width: 900px) {
+  .finance-stats { flex-direction: column; align-items: center; }
+  .finance-stat-card { width: 95%; min-width: 0; }
+}
+
+@media (max-width: 600px) {
+  .finance-form { padding: 1rem; }
+  .finance-table th, .finance-table td { padding: 0.5rem 0.2rem; font-size: 0.95rem; }
+  .finance-stat-card { padding: 1.2rem 0.5rem; }
+}
+
 @media (max-width: 768px) {
   .finance-container {
     padding: 1rem;
@@ -421,14 +398,6 @@
   }
   
   .finance-header h1 {
-    font-size: 1.5rem;
-  }
-  
-  .finance-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .finance-stat-number {
     font-size: 1.5rem;
   }
   

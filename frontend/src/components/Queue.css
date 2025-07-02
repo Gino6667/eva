@@ -571,7 +571,7 @@
 .queue-container .serving-grid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
 }
 
 .serving-card {
@@ -1054,7 +1054,7 @@ html, body, #root {
 .serving-grid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
 }
 .serving-header + .serving-grid {
   margin-bottom: 0;
@@ -1114,16 +1114,43 @@ html, body, #root {
   border: 4px solid #f0f0f0;
 }
 .queue-col-left {
-  min-height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  max-width: 240px;
+  padding: 0.3em 0.05em 0.3em 0.05em;
+  margin: 0 auto;
 }
 .current-serving {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  max-width: 210px;
+  margin: 0 auto;
+  padding: 0.4em 0.1em 0.3em 0.1em;
+  font-size: 0.92rem;
+}
+.serving-grid {
+  gap: 0;
+}
+.serving-item {
+  font-size: 0.92rem;
+  padding: 0.7em 0.4em;
+  min-width: 0;
+  max-width: 260px;
+  margin: 0 auto;
+}
+.serving-item .designer-name {
+  font-size: 1em;
+}
+.serving-item .current-number {
+  font-size: 1.4em;
+}
+.serving-item .service-name {
+  font-size: 1em;
+}
+.serving-item .est-wait-time {
+  font-size: 0.95em;
+}
+.current-serving h3 {
+  font-size: 1.1rem;
+}
+.last-update {
+  font-size: 0.9em;
 }
 .queue-col-right {
   margin-left: 0;

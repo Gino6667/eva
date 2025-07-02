@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './Queue.css';
+import useAvailableServices from '../hooks/useAvailableServices';
+import useAvailableDesigners from '../hooks/useAvailableDesigners';
 
 function Queue() {
   const [isMember, setIsMember] = useState(null);
@@ -129,18 +131,8 @@ function Queue() {
     return { valid: true };
   };
 
-  // 過濾可用的設計師
-  const getAvailableDesigners = () => {
-    return designers.filter(designer => !designer.isPaused);
-  };
-
-  // 取得可選擇的服務（依設計師）
-  const getAvailableServices = () => {
-    if (!selectedDesigner) return [];
-    const designer = designers.find(d => d.id === Number(selectedDesigner));
-    if (!designer || !designer.services) return services.filter(s => s.status !== 'inactive');
-    return services.filter(s => designer.services.includes(s.id) && s.status !== 'inactive');
-  };
+  const availableDesigners = useAvailableDesigners(designers);
+  const availableServices = useAvailableServices(services, designers, selectedDesigner);
 
   const handleMemberSelect = () => {
     setIsMember(true);
@@ -162,7 +154,7 @@ function Queue() {
       setMsg('請先登入會員');
       return;
     }
-    if (!selectedDesigner) {
+    if (selectedDesigner === '') {
       setMsg('請選擇設計師');
       return;
     }
@@ -196,7 +188,7 @@ function Queue() {
         type: 'onsite',
         userId
       });
-      setQueueResult(res.data);
+      setQueueResult(res.data.data);
       
       // 立即更新服務狀態
       loadCurrentServing();
@@ -233,17 +225,18 @@ function Queue() {
   };
 
   const handleDesignerSelect = (designerId) => {
-    setSelectedDesigner(designerId);
+    setSelectedDesigner(Number(designerId));
     setSelectedService('');
     setShowDesignerModal(false);
   };
 
   const handleServiceSelect = (serviceId) => {
-    setSelectedService(serviceId);
+    setSelectedService(Number(serviceId));
     setShowServiceModal(false);
   };
 
   const getSelectedDesignerName = () => {
+    if (selectedDesigner === 0) return '不指定';
     const designer = designers.find(d => d.id === Number(selectedDesigner));
     return designer ? designer.name : '';
   };
@@ -260,7 +253,7 @@ function Queue() {
     const businessHoursCheck = isWithinBusinessHours();
     if (!businessHoursCheck.valid) {
       return (
-        <div className="business-status-message">
+        <div className="business-status-message" style={{ fontSize: '1rem', padding: '0.3em 1em' }}>
           <p>⚠️ {businessHoursCheck.reason}</p>
         </div>
       );
@@ -271,7 +264,7 @@ function Queue() {
     const openTime = worktime.openTimes?.[week];
     if (openTime?.start && openTime?.end) {
       return (
-        <div className="business-status-message">
+        <div className="business-status-message" style={{ fontSize: '1rem', padding: '0.3em 1em' }}>
           <p>✅ 營業中 - 今日營業時間：{openTime.start} - {openTime.end}</p>
         </div>
       );
@@ -280,7 +273,6 @@ function Queue() {
     return null;
   };
 
-  const availableDesigners = getAvailableDesigners();
   const businessStatusMessage = getBusinessStatusMessage();
 
   const getServiceName = (serviceId) => {
@@ -312,8 +304,16 @@ function Queue() {
           <p>設計師：{getSelectedDesignerName() || queueResult.designerName || '—'}</p>
           <p>服務項目：{getSelectedServiceName() || queueResult.serviceName || '—'}</p>
           <p style={{fontSize:'1.2em'}}>請留意叫號，謝謝！</p>
-          <p style={{fontSize:'1.2em', marginTop:'1em'}}>{countdown} 秒後自動返回現場排隊並登出會員</p>
-          <Link to="/" className="btn btn-primary">回首頁</Link>
+          <p style={{fontSize:'1.2em', marginTop:'1em'}}>{countdown} 秒後自動返回現場排隊並且登出會員</p>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              localStorage.removeItem('token');
+              setUser(null);
+              navigate('/queue');
+              window.location.reload();
+            }}
+          >返回現場排隊並且登出會員</button>
         </div>
       </div>
     );
@@ -322,47 +322,52 @@ function Queue() {
   return (
     <div className="queue-page-2col">
       <div className="queue-title-area">
-        <h2>現場排隊</h2>
-        {businessStatusMessage}
+        <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>現場排隊</h2>
       </div>
       <div className="queue-2col-main">
         {/* 左欄：服務狀態 */}
         <div className="queue-col queue-col-left">
           <div className="current-serving">
+            {businessStatusMessage && (
+              <div className="business-status-message" style={{ fontSize: '0.8rem', padding: '0.15em 0.6em' }}>
+                {businessStatusMessage.props.children}
+              </div>
+            )}
             <h3>當前服務狀態</h3>
             <div className="serving-grid">
-              {currentServing.filter(serving => serving.serviceId !== undefined && serving.serviceId !== null && serving.serviceId !== 0).map(serving => {
-                const designer = designers.find(d => d.id === serving.designerId);
-                const service = services.find(s => String(s.id) === String(serving.serviceId));
-                let estWait = null;
-                if (todayStats && designer) {
-                  const waitingCount = todayStats[designer.id]?.waiting || 0;
-                  const serviceIds = designer.services || [];
-                  const durations = serviceIds.map(sid => services.find(s => s.id === sid)?.duration || 60);
-                  const avgDuration = durations.length ? (durations.reduce((a,b)=>a+b,0)/durations.length) : 60;
-                  estWait = waitingCount * avgDuration;
-                }
-                // 方案2: debug log
-                if (!service && getServiceName(serving.serviceId) === '未知服務') {
-                  console.warn('找不到服務名稱，serviceId:', serving.serviceId, '所有 services:', services);
-                }
-                return (
-                  <div key={serving.designerId} className="serving-item">
-                    <div className="designer-name">{designer?.name || '未知設計師'}</div>
-                    <div className="current-number">{serving.number} 號</div>
-                    <div className="service-name">
-                      {serving.serviceName
-                        || (service ? service.name : getServiceName(serving.serviceId))
-                        || '未知服務'}
-                    </div>
-                    {estWait !== null && (
-                      <div className="est-wait-time" style={{color:'#f7ab5e',marginTop:'0.5em',fontWeight:500}}>
-                        預估等待時間：約 {Math.round(estWait)} 分鐘
+              {currentServing
+                .filter(serving => serving.serviceId !== undefined && serving.serviceId !== null && serving.serviceId !== 0)
+                .map(serving => {
+                  const designer = designers.find(d => d.id === serving.designerId);
+                  const service = services.find(s => String(s.id) === String(serving.serviceId));
+                  let estWait = null;
+                  if (todayStats && designer) {
+                    const waitingCount = todayStats[designer.id]?.waiting || 0;
+                    const serviceIds = designer.services || [];
+                    const durations = serviceIds.map(sid => services.find(s => s.id === sid)?.duration || 60);
+                    const avgDuration = durations.length ? (durations.reduce((a,b)=>a+b,0)/durations.length) : 60;
+                    estWait = waitingCount * avgDuration;
+                  }
+                  if (!service && getServiceName(serving.serviceId) === '未知服務') {
+                    console.warn('找不到服務名稱，serviceId:', serving.serviceId, '所有 services:', services);
+                  }
+                  return (
+                    <div key={serving.designerId} className="serving-item">
+                      <div className="designer-name">{designer?.name || '未知設計師'}</div>
+                      <div className="current-number">{serving.number} 號</div>
+                      <div className="service-name">
+                        {serving.serviceName
+                          || (service ? service.name : getServiceName(serving.serviceId))
+                          || '未知服務'}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
+                      {estWait !== null && (
+                        <div className="est-wait-time" style={{color:'#f7ab5e',marginTop:'0.5em',fontWeight:500}}>
+                          預估等待時間：約 {Math.round(estWait)} 分鐘
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
             </div>
             <div className="last-update">最後更新：{lastUpdate.toLocaleTimeString()}</div>
           </div>
@@ -382,10 +387,10 @@ function Queue() {
             <h3>步驟 2：選擇設計師</h3>
             <div className="designer-selection">
               <button
-                className={`btn btn-secondary${selectedDesigner ? ' selected' : ''}`}
+                className={`btn btn-secondary${selectedDesigner !== '' ? ' selected' : ''}`}
                 onClick={() => setShowDesignerModal(true)}
               >
-                {selectedDesigner ? getSelectedDesignerName() : '請選擇設計師'}
+                {selectedDesigner !== '' ? getSelectedDesignerName() : '請選擇設計師'}
               </button>
               {availableDesigners.length === 0 && (
                 <p className="no-available-designers">⚠️ 目前沒有可用的設計師（可能為非營業日或所有設計師暫停接單）</p>
@@ -395,16 +400,16 @@ function Queue() {
           <div className="queue-step">
             <h3>步驟 3：選擇服務項目</h3>
             <div className="service-selection">
-              <button className={`btn btn-secondary${selectedService ? ' selected' : ''}`} onClick={() => setShowServiceModal(true)} disabled={!selectedDesigner}>
-                {selectedService ? getSelectedServiceName() : selectedDesigner ? '請選擇服務項目' : '請先選擇設計師'}
+              <button className={`btn btn-secondary${selectedService ? ' selected' : ''}`} onClick={() => setShowServiceModal(true)} disabled={selectedDesigner === ''}>
+                {selectedService ? getSelectedServiceName() : selectedDesigner !== '' ? '請選擇服務項目' : '請先選擇設計師'}
               </button>
-              {!selectedDesigner && (
+              {selectedDesigner === '' && (
                 <p className="service-hint">⚠️ 請先選擇設計師，才能選擇對應的服務項目</p>
               )}
             </div>
           </div>
           <div className="queue-step">
-            <button className="btn btn-primary" onClick={handleQueue} disabled={loading || !selectedDesigner || !selectedService || availableDesigners.length === 0}>
+            <button className="btn btn-primary" onClick={handleQueue} disabled={loading || selectedDesigner === '' || !selectedService || availableDesigners.length === 0}>
               {loading ? '處理中...' : '抽號'}
             </button>
           </div>
@@ -416,7 +421,14 @@ function Queue() {
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h3>選擇設計師</h3>
             <div className="designer-grid">
-              {getAvailableDesigners().map(designer => (
+              <button
+                key={0}
+                className={`designer-item${selectedDesigner === 0 ? ' selected' : ''}`}
+                onClick={() => handleDesignerSelect(0)}
+              >
+                不指定
+              </button>
+              {availableDesigners.map(designer => (
                 <button
                   key={designer.id}
                   className={`designer-item${selectedDesigner === designer.id ? ' selected' : ''}`}
@@ -426,19 +438,18 @@ function Queue() {
                 </button>
               ))}
             </div>
-            {getAvailableDesigners().length === 0 && (
+            {availableDesigners.length === 0 && (
               <p>目前沒有可用的設計師</p>
             )}
           </div>
         </div>
       )}
-      {/* 服務選擇彈窗 */}
       {showServiceModal && (
         <div className="modal-overlay" onClick={() => setShowServiceModal(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3>選擇服務項目 - {getSelectedDesignerName()}</h3>
+            <h3>選擇服務項目{selectedDesigner === 0 ? '（不指定設計師）' : selectedDesigner !== '' ? ' - ' + getSelectedDesignerName() : ''}</h3>
             <div className="designer-grid">
-              {getAvailableServices().map(service => (
+              {availableServices.map(service => (
                 <button
                   key={service.id}
                   className={`designer-item${selectedService === service.id ? ' selected' : ''}`}
@@ -449,25 +460,9 @@ function Queue() {
                 </button>
               ))}
             </div>
-            {getAvailableServices().length === 0 && (
+            {availableServices.length === 0 && (
               <p>此設計師暫無可選服務</p>
             )}
-          </div>
-        </div>
-      )}
-      {showErrorModal && (
-        <div className="modal-overlay" onClick={() => setShowErrorModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()} style={{maxWidth:'350px',textAlign:'center'}}>
-            <h3 style={{marginBottom:'1em'}}>抽號失敗</h3>
-            <div style={{textAlign:'center', marginBottom:'0.5em'}}>
-              <span style={{fontSize:'2.5em', color:'#d32f2f'}}>❌</span>
-            </div>
-            {msg && msg !== '抽號失敗' && (
-              <div style={{marginBottom:'1em', fontSize:'1.3em', color:'#d32f2f', fontWeight:'bold'}}>
-                {msg}
-              </div>
-            )}
-            <button className="btn btn-primary" onClick={() => setShowErrorModal(false)}>關閉</button>
           </div>
         </div>
       )}
@@ -475,4 +470,4 @@ function Queue() {
   );
 }
 
-export default Queue; 
+export default Queue;

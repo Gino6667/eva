@@ -56,16 +56,15 @@ function QueueTransfer() {
   const loadData = async () => {
     try {
       setLoading(true);
+      const today = new Date().toISOString().slice(0, 10);
       const [designersRes, queueRes, transfersRes] = await Promise.all([
         axios.get('/api/designers'),
-        axios.get('/api/queue'),
+        axios.get(`/api/queue?date=${today}`),
         axios.get('/api/queue/transfers')
       ]);
       
       setDesigners(designersRes.data);
-      setTodayQueue(queueRes.data.filter(q => 
-        q.status === 'waiting' || q.status === 'called'
-      ));
+      setTodayQueue(queueRes.data.filter(q => q.status === 'waiting' || q.status === 'called'));
       setTransferHistory(transfersRes.data);
     } catch (error) {
       console.error('載入資料失敗:', error);
@@ -265,35 +264,31 @@ function QueueTransfer() {
             <div className="loading">載入中...</div>
           ) : (
             <div className="queue-list">
-              {todayQueue.length === 0 ? (
-                <p className="no-data">目前沒有等待中的客人</p>
-              ) : (
-                todayQueue.map(queue => (
-                  <div 
-                    key={queue.id} 
-                    className={`queue-item ${selectedQueue?.id === queue.id ? 'selected' : ''}`}
-                    onClick={() => setSelectedQueue(queue)}
-                  >
-                    <div className="queue-number">#{queue.number}</div>
-                    <div className="queue-info">
-                      <div className="queue-details">
-                        <span className="designer-name">
-                          設計師: {getSelectedDesignerName()}
-                        </span>
-                        <span className="service-name">
-                          服務: {getServiceName(queue.serviceId)}
-                        </span>
-                        <span className="queue-time">
-                          時間: {formatTime(queue.createdAt)}
-                        </span>
-                      </div>
-                      <div className={`queue-status ${getStatusClass(queue.status)}`}>
-                        {getStatusText(queue.status)}
-                      </div>
+              {todayQueue.filter(q => (q.status === 'waiting' || q.status === 'called') && q.createdAt.slice(0, 10) === new Date().toISOString().slice(0, 10)).map(queue => (
+                <div 
+                  key={queue.id} 
+                  className={`queue-item ${selectedQueue?.id === queue.id ? 'selected' : ''}`}
+                  onClick={() => setSelectedQueue(queue)}
+                >
+                  <div className="queue-number">#{queue.number}</div>
+                  <div className="queue-info">
+                    <div className="queue-details">
+                      <span className="designer-name">
+                        設計師: {getSelectedDesignerName()}
+                      </span>
+                      <span className="service-name">
+                        服務: {getServiceName(queue.serviceId)}
+                      </span>
+                      <span className="queue-time">
+                        時間: {formatTime(queue.createdAt)}
+                      </span>
+                    </div>
+                    <div className={`queue-status ${getStatusClass(queue.status)}`}>
+                      {getStatusText(queue.status)}
                     </div>
                   </div>
-                ))
-              )}
+                </div>
+              ))}
             </div>
           )}
         </div>

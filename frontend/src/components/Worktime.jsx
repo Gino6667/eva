@@ -132,7 +132,7 @@ function Worktime() {
   return (
     <div className="worktime-container">
       <div className="worktime-header">
-        <h2>工作時間設定</h2>
+        <h2 className="reports-title">出勤管理</h2>
         <p>設定每日營業時間與服務時段</p>
       </div>
 
