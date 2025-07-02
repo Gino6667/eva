@@ -1876,10 +1876,11 @@
       "designerId": 11,
       "serviceId": 10,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 6,
       "createdAt": "2025-07-02T06:53:11.029Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T07:07:50.216Z"
     }
   ],
   "reservations": [
