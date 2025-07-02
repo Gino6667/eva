@@ -2348,6 +2348,16 @@
       "createdAt": "2025-07-02T19:32:48.000Z",
       "userId": 3,
       "absentAt": "2025-07-02T19:32:48.000Z"
+    },
+    {
+      "id": 9141,
+      "designerId": 5,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 30,
+      "createdAt": "2025-07-02T19:35:17.618Z",
+      "userId": 3
     }
   ],
   "reservations": [
