@@ -1894,12 +1894,12 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 7,
       "createdAt": "2025-07-02T08:07:09.101Z",
       "userId": null,
       "absentAt": "2025-07-02T11:02:37.888Z",
-      "checkinAt": "2025-07-02T11:02:49.308Z"
+      "checkinAt": "2025-07-02T16:29:02.414Z"
     },
     {
       "id": 9101,
