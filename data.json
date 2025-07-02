@@ -2239,10 +2239,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 20,
       "createdAt": "2025-07-02T18:20:30.048Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T18:26:10.413Z"
     }
   ],
   "reservations": [
