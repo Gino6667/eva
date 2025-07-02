@@ -2103,6 +2103,16 @@
       "number": 8,
       "createdAt": "2025-07-02T16:58:19.796Z",
       "userId": null
+    },
+    {
+      "id": 9120,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 9,
+      "createdAt": "2025-07-02T17:30:33.165Z",
+      "userId": null
     }
   ],
   "reservations": [
