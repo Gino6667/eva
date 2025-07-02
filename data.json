@@ -2099,10 +2099,11 @@
       "designerId": 10,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 7,
       "createdAt": "2025-07-02T16:58:13.547Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T19:03:30.544Z"
     },
     {
       "id": 9119,
