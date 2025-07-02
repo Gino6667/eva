@@ -2299,10 +2299,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 25,
-      "createdAt": "2025-07-02T19:19:10.378Z",
-      "userId": 3
+      "createdAt": "2025-07-02T19:25:04.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T19:25:04.000Z"
     },
     {
       "id": 9137,
