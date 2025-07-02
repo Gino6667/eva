@@ -2385,10 +2385,11 @@
       "designerId": 10,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 33,
-      "createdAt": "2025-07-02T19:55:03.714Z",
-      "userId": 3
+      "createdAt": "2025-07-02T19:55:51.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T19:55:51.000Z"
     },
     {
       "id": 9145,
