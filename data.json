@@ -2078,10 +2078,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 5,
       "createdAt": "2025-07-02T16:28:00.765Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T17:55:32.168Z"
     },
     {
       "id": 9117,
