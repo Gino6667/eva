@@ -1990,12 +1990,12 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 16,
       "createdAt": "2025-07-02T08:22:37.607Z",
       "userId": null,
       "absentAt": "2025-07-02T10:55:31.391Z",
-      "checkinAt": "2025-07-02T12:27:35.893Z"
+      "checkinAt": "2025-07-02T16:28:58.231Z"
     },
     {
       "id": 9110,
