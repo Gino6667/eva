@@ -3,7 +3,7 @@
   width: 100vw;
   max-width: 100vw;
   margin: 0;
-  padding-top: 32px;
+  padding-top: 72px;
   padding-bottom: 32px;
   box-sizing: border-box;
   background: none;
@@ -945,7 +945,8 @@
   html, body, #root {
     height: auto;
     min-height: 100vh;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .queue-container {
     min-height: auto;
@@ -955,45 +956,56 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 32px 8px 40px 8px;
   }
-  .queue-main {
-    max-height: 80vh;
-    overflow-y: auto;
+  .queue-2col-main {
+    flex-direction: row;
+    gap: 24px;
+    width: 100%;
+    max-width: 900px;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    overflow-x: auto;
   }
-  .modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
+  .queue-col {
+    min-width: 220px;
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 4px;
+    padding: 24px 8px 24px 8px;
   }
-  .queue-container {
-    max-width: 700px;
-    margin: 32px auto 0 auto;
-    padding: 32px 24px 40px 24px;
-    border-radius: 18px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    background: #2e3934;
+  .queue-col-left {
+    max-width: 220px;
+    padding: 0.3em 0.05em 0.3em 0.05em;
+    margin: 0 auto;
   }
-  .queue-main, .queue-sidebar {
-    padding: 0 12px;
+  .current-serving {
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 0.4em 0.1em 0.3em 0.1em;
+    font-size: 1rem;
   }
-  .queue-header h2, .queue-step h3 {
-    font-size: 2.1rem;
+  .serving-grid {
+    gap: 0.5em;
   }
-  .queue-step {
-    gap: 2.2em;
+  .serving-item {
+    font-size: 1rem;
+    padding: 0.8em 0.5em;
+    min-width: 0;
+    max-width: 220px;
+    margin: 0 auto;
   }
-  .queue-step button, .modal-option {
-    font-size: 1.15rem;
-    min-height: 48px;
-    margin-bottom: 18px;
+  .serving-item .designer-name {
+    font-size: 1.1em;
   }
-  .modal-content {
-    max-width: 90vw;
-    min-width: 340px;
-    padding: 32px 18px 24px 18px;
-  }
-  .modal-header h3 {
-    font-size: 1.5rem;
+  .serving-item .current-number {
+    font-size: 1.5em;
   }
 }
 
@@ -1007,15 +1019,89 @@
 }
 
 html, body, #root {
-  height: auto;
+  min-width: 100vw;
   min-height: 100vh;
-  overflow: auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.queue-container, .main {
+  padding-top: 72px;
 }
 .queue-container {
-  min-height: auto;
-  height: auto;
-  max-height: none;
-  overflow: visible;
+  width: 100vw;
+  max-width: 100vw;
+  min-width: 320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 24px 4vw 32px 4vw;
+  overflow-x: hidden;
+}
+.queue-2col-main {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+.queue-col {
+  min-width: 220px;
+  max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 4px;
+  padding: 24px 8px 24px 8px;
+}
+@media (max-width: 1200px) {
+  .queue-2col-main {
+    max-width: 900px;
+    gap: 20px;
+  }
+  .queue-col {
+    max-width: 400px;
+  }
+}
+@media (max-width: 900px) {
+  .queue-2col-main {
+    flex-direction: column;
+    max-width: 98vw;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .queue-col {
+    max-width: 98vw;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 768px) {
+  .queue-container {
+    padding: 12px 2vw 18px 2vw;
+  }
+  .queue-2col-main {
+    max-width: 99vw;
+    gap: 8px;
+  }
+  .queue-col {
+    max-width: 99vw;
+    padding: 12px 2vw 12px 2vw;
+  }
+}
+@media (max-width: 480px) {
+  .queue-container {
+    padding: 4px 1vw 8px 1vw;
+  }
+  .queue-2col-main {
+    flex-direction: column;
+    max-width: 100vw;
+    gap: 4px;
+  }
+  .queue-col {
+    max-width: 100vw;
+    padding: 8px 1vw 8px 1vw;
+  }
 }
 .queue-main {
   max-height: none !important;
