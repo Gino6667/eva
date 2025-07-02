@@ -2217,10 +2217,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 18,
       "createdAt": "2025-07-02T18:14:08.920Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T18:14:31.522Z"
     }
   ],
   "reservations": [
