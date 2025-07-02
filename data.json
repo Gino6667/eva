@@ -1836,6 +1836,16 @@
       "userId": 3,
       "checkinAt": "2025-07-02T06:42:14.845Z",
       "completedAt": "2025-07-02T06:42:18.933Z"
+    },
+    {
+      "id": 9095,
+      "designerId": 5,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 2,
+      "createdAt": "2025-07-02T06:45:56.468Z",
+      "userId": 3
     }
   ],
   "reservations": [
