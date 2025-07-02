@@ -1847,10 +1847,11 @@
       "designerId": 7,
       "serviceId": 10,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 3,
       "createdAt": "2025-07-02T06:47:15.634Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-02T08:09:35.769Z"
     },
     {
       "id": 9097,
