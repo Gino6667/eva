@@ -1963,10 +1963,11 @@
       "designerId": 5,
       "serviceId": 10,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 13,
       "createdAt": "2025-07-02T08:14:18.017Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T16:29:15.520Z"
     },
     {
       "id": 9107,
