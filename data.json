@@ -2008,10 +2008,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 17,
       "createdAt": "2025-07-02T08:24:39.502Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T16:29:16.057Z"
     },
     {
       "id": 9111,
