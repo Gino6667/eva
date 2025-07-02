@@ -516,6 +516,30 @@ function DesignersList() {
     await handleSellProduct(productId);
   };
 
+  // 排隊交錯排序：每順號一位插一位過號報到
+  const getSortedQueue = (designerId) => {
+    // 取得該設計師所有 waiting 狀態（依號碼升冪）
+    const waiting = todayQueue.filter(q => q.designerId === designerId && q.status === 'waiting' && !q.checkinAt)
+      .sort((a, b) => a.number - b.number);
+    // 取得該設計師所有過號已報到（status: waiting, 有 checkinAt，依 checkinAt 升冪）
+    const absentCheckedIn = todayQueue.filter(q => q.designerId === designerId && q.status === 'waiting' && q.checkinAt)
+      .sort((a, b) => new Date(a.checkinAt) - new Date(b.checkinAt));
+    // 交錯合併
+    const result = [];
+    let i = 0, j = 0;
+    while (i < waiting.length || j < absentCheckedIn.length) {
+      if (i < waiting.length) {
+        result.push(waiting[i]);
+        i++;
+      }
+      if (j < absentCheckedIn.length) {
+        result.push(absentCheckedIn[j]);
+        j++;
+      }
+    }
+    return result;
+  };
+
   return (
     <div className="admin-container">
       {/* <div className="admin-header">

@@ -44,49 +44,49 @@ function Reports() {
   // 計算區間起訖日
   useEffect(() => {
     if (customRange) return; // 若為自訂區間則不自動計算
-    const today = new Date();
-    let start, end;
-    end = today.toISOString().split('T')[0];
-    switch (period) {
-      case 'day':
-        start = end;
-        break;
-      case 'week': {
-        const first = new Date(today);
-        first.setDate(today.getDate() - today.getDay() + 1); // 週一
-        start = first.toISOString().split('T')[0];
-        break;
-      }
-      case 'month': {
-        const first = new Date(today.getFullYear(), today.getMonth(), 1);
-        start = first.toISOString().split('T')[0];
-        break;
-      }
+      const today = new Date();
+      let start, end;
+      end = today.toISOString().split('T')[0];
+      switch (period) {
+        case 'day':
+          start = end;
+          break;
+        case 'week': {
+          const first = new Date(today);
+          first.setDate(today.getDate() - today.getDay() + 1); // 週一
+          start = first.toISOString().split('T')[0];
+          break;
+        }
+        case 'month': {
+          const first = new Date(today.getFullYear(), today.getMonth(), 1);
+          start = first.toISOString().split('T')[0];
+          break;
+        }
       case '3months': {
         const first = new Date(today);
         first.setMonth(today.getMonth() - 2);
         first.setDate(1);
-        start = first.toISOString().split('T')[0];
-        break;
+          start = first.toISOString().split('T')[0];
+          break;
+        }
+        case 'halfyear': {
+          const first = new Date(today);
+          first.setMonth(today.getMonth() - 5);
+          first.setDate(1);
+          start = first.toISOString().split('T')[0];
+          break;
+        }
+        default:
+          start = end;
       }
-      case 'halfyear': {
-        const first = new Date(today);
-        first.setMonth(today.getMonth() - 5);
-        first.setDate(1);
-        start = first.toISOString().split('T')[0];
-        break;
-      }
-      default:
-        start = end;
-    }
-    setStartDate(start);
-    setEndDate(end);
+      setStartDate(start);
+      setEndDate(end);
   }, [period, customRange]);
 
   useEffect(() => {
     async function fetchAll() {
-      setLoading(true);
-      try {
+    setLoading(true);
+    try {
         const [q, t, d, s, r] = await Promise.all([
           axios.get('/api/queue'),
           axios.get('/api/transactions'),
@@ -99,9 +99,9 @@ function Reports() {
         setDesigners(Array.isArray(d.data) ? d.data : []);
         setServices(Array.isArray(s.data) ? s.data : []);
         setReservations(Array.isArray(r.data) ? r.data : []);
-      } finally {
-        setLoading(false);
-      }
+    } finally {
+      setLoading(false);
+    }
     }
     fetchAll();
   }, []);
@@ -174,7 +174,7 @@ function Reports() {
     const service = services.find(s => s.id === r.serviceId);
     const name = service ? service.name : `ID:${r.serviceId}`;
     serviceCount[name] = (serviceCount[name] || 0) + 1;
-  });
+    });
 
   const formatCurrency = (amount) => new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD' }).format(amount);
 
@@ -211,26 +211,26 @@ function Reports() {
                 <li key={name}>{name}：{count} 次</li>
               ))}
             </ul>
-          </div>
+        </div>
           <div className="summary-card" style={cardStyle}>
             <div className="summary-title">總營業額</div>
             <div className="summary-value">{formatCurrency(totalRevenue)}</div>
-          </div>
+        </div>
           <div className="summary-card" style={cardStyle}>
             <div className="summary-title">產品總銷售額</div>
             <div className="summary-value">{formatCurrency(totalProductAmount)}</div>
-          </div>
+        </div>
           <div className="summary-card" style={cardStyle}>
             <div className="summary-title">總客流</div>
             <div className="summary-value">{totalCustomers} 人</div>
-          </div>
+      </div>
           <div className="summary-card" style={{...cardStyle,background:'#232a2b',color:'#f7ab5e'}}>
             <div className="summary-title">完成服務的客人來源</div>
             <div className="summary-value" style={{fontSize:'1.3em',margin:'0.7em 0'}}>
               <span style={{marginRight:'1.2em'}}>線上 <b style={{color:'#ffb74d'}}>{onlineDone}</b> 人</span>
               <span>現場 <b style={{color:'#4dd0e1'}}>{onsiteDone}</b> 人</span>
-            </div>
-          </div>
+        </div>
+      </div>
           <div className="summary-card" style={{...cardStyle}}>
             <div className="summary-title">指定設計師</div>
             {!hasSpecified ? <div style={{color:'#f7ab5e'}}>無指定設計師紀錄</div> : (
@@ -241,7 +241,7 @@ function Reports() {
               </ul>
             )}
             <div style={{marginTop:'0.7em',color:'#fff',fontWeight:600}}>未指定設計師：{unspecifiedCount} 次</div>
-          </div>
+      </div>
         </div>
       )}
     </div>

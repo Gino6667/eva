@@ -2199,16 +2199,17 @@ app.get('/api/queue/today-stats', (req, res) => {
       };
     });
     
-    // 當前正在服務的號碼
+    // 當前正在服務的號碼 + 過號名單
     const currentServing = todayQueue
-      .filter(q => q.status === 'called' || q.status === 'serving')
+      .filter(q => ['called', 'serving', 'absent'].includes(q.status))
       .map(q => ({
         id: q.id, // 加入 queueId
         number: q.number,
         designerId: q.designerId,
         designerName: data.designers.find(d => d.id === q.designerId)?.name || '未知設計師',
         serviceId: q.serviceId, // 新增這一行
-        serviceName: data.services.find(s => s.id === q.serviceId)?.name || '未知服務'
+        serviceName: data.services.find(s => s.id === q.serviceId)?.name || '未知服務',
+        status: q.status // 新增 status 方便前端判斷
       }));
     
     res.json({
@@ -2669,3 +2670,22 @@ app.get('/api/reports/date-range', (req, res) => {
     maxDate: maxDate.toISOString().split('T')[0]
   });
 });
+
+// 過號報到（absent checkin）API
+app.post('/api/queue/:id/checkin', (req, res) => {
+  const data = getData();
+  const queueId = Number(req.params.id);
+  const queueItem = data.queue.find(q => q.id === queueId);
+  if (!queueItem) {
+    return res.status(404).json({ error: '找不到該排隊項目' });
+  }
+  if (queueItem.status !== 'absent') {
+    return res.status(400).json({ error: '僅能對過號狀態進行報到' });
+  }
+  queueItem.status = 'waiting';
+  queueItem.checkinAt = new Date().toISOString();
+  saveData(data);
+  res.json({ success: true, queueItem });
+});
+
+console.log('[DEBUG] 目前後端實際讀取的 data.json 路徑:', DATA_PATH);
