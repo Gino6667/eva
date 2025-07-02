@@ -1881,6 +1881,16 @@
       "createdAt": "2025-07-02T06:53:11.029Z",
       "userId": null,
       "checkinAt": "2025-07-02T07:07:50.216Z"
+    },
+    {
+      "id": 9100,
+      "designerId": 11,
+      "serviceId": 3,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 7,
+      "createdAt": "2025-07-02T08:07:09.101Z",
+      "userId": null
     }
   ],
   "reservations": [
