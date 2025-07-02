@@ -2162,10 +2162,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 13,
       "createdAt": "2025-07-02T17:56:10.730Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T18:04:35.758Z"
     },
     {
       "id": 9125,
