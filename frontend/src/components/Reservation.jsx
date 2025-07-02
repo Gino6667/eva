@@ -250,7 +250,7 @@ function Reservation() {
       </div>
       <div className="kanban-board">
         {getBusinessStatusMessage()}
-        <h3 style={{margin:'1em 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
+        <h3 style={{margin:'0.2em 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
         <div className="kanban-list">
           {designers.map((designer, idx) => {
             const serving = currentServing.find(s => s.designerId === designer.id);

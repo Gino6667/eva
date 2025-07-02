@@ -101,6 +101,10 @@ function Login({ setUser }) {
       setTimeout(() => {
         if (res.data.user.role === 'admin' || res.data.user.role === 'designer') {
           navigate('/admin');
+        } else if (redirect === 'queue') {
+          navigate('/queue');
+        } else if (redirect === 'reservation') {
+          navigate('/reservation');
         } else {
           navigate('/profile');
         }

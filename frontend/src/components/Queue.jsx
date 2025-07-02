@@ -350,7 +350,7 @@ function Queue() {
     return (
       <div className="queue-container">
         <div className="queue-header">
-          <h2>現場排隊</h2>
+          <h2 style={{fontSize: '0.8em'}}>現場排隊</h2>
           <p>抽號成功！</p>
         </div>
         <div className="queue-step" style={{textAlign:'center'}}>
@@ -377,7 +377,7 @@ function Queue() {
   return (
     <div className="queue-page">
       <header className="queue-header queue-header-flex">
-        <h1>現場排隊</h1>
+        <h1 style={{fontSize: '0.8em'}}>現場排隊</h1>
         <div className="absent-checkin-btn">
           <button onClick={handleAbsentCheckin}>過號報到</button>
         </div>
@@ -455,7 +455,7 @@ function Queue() {
         <section className="queue-status-panel">
           {businessStatusMessage}
           <div className="kanban-board">
-            <h3 style={{margin:'1em 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
+            <h3 style={{margin:'0 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
             <div className="kanban-list">
               {designers.map((designer, idx) => {
                 const serving = currentServing.find(s => s.designerId === designer.id);

@@ -624,6 +624,7 @@
 .kanban-board h3 {
   text-align: center;
   width: 100%;
+  margin-top: 0.2em !important;
 }
 
 /* 服務選擇彈窗選項背景加深 */
@@ -650,4 +651,8 @@
 .queue-col-right .btn:last-child {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+}
+
+.kanban-board {
+  margin-top: 0.2em;
 }
