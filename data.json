@@ -1986,10 +1986,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 16,
       "createdAt": "2025-07-02T08:22:37.607Z",
-      "userId": null
+      "userId": null,
+      "absentAt": "2025-07-02T10:55:31.391Z"
     },
     {
       "id": 9110,
