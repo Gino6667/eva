@@ -1941,10 +1941,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 11,
       "createdAt": "2025-07-02T08:13:34.362Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T16:29:13.589Z"
     },
     {
       "id": 9105,
