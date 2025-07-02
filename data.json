@@ -47,6 +47,12 @@
   ],
   "services": [
     {
+      "id": 1,
+      "name": "臨時服務",
+      "price": 300,
+      "duration": 30
+    },
+    {
       "id": 2,
       "name": "染髮",
       "price": 200,
@@ -1818,6 +1824,16 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:49:44.507Z",
       "completedAt": "2025-07-01T15:49:45.635Z"
+    },
+    {
+      "id": 9094,
+      "designerId": 5,
+      "serviceId": 5,
+      "type": "online",
+      "status": "waiting",
+      "number": 1,
+      "createdAt": "2025-07-02T06:41:51.634Z",
+      "userId": 3
     }
   ],
   "reservations": [
@@ -2831,6 +2847,86 @@
       "date": "2025-07-01",
       "designerId": 5,
       "productId": 1751381187351
+    },
+    {
+      "id": 1751395312861,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751381187351
+    },
+    {
+      "id": 1751395396005,
+      "type": "income",
+      "amount": 500,
+      "description": "產品銷售：洗腳水（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751395379934
+    },
+    {
+      "id": 1751395956715,
+      "type": "income",
+      "amount": 500,
+      "description": "產品銷售：洗腳水（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751395379934
+    },
+    {
+      "id": 1751396851669,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751381187351
+    },
+    {
+      "id": 1751396862794,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：我肯定有非常非常多的字（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751396623087
+    },
+    {
+      "id": 1751397910287,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751381187351
+    },
+    {
+      "id": 1751397946152,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：很多（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751396836664
+    },
+    {
+      "id": 1751398110942,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：很多（設計師：小美）",
+      "category": "product",
+      "date": "2025-07-01",
+      "designerId": 11,
+      "productId": 1751396836664
     }
   ],
   "queueTransfers": [
@@ -2859,6 +2955,30 @@
       "name": "洗頭水",
       "price": "200",
       "stock": "10"
+    },
+    {
+      "id": 1751395379934,
+      "name": "洗腳水",
+      "price": "500",
+      "stock": "55"
+    },
+    {
+      "id": 1751396623087,
+      "name": "我肯定有非常非常多的字",
+      "price": "200",
+      "stock": "50"
+    },
+    {
+      "id": 1751396822843,
+      "name": "555",
+      "price": "555",
+      "stock": "55"
+    },
+    {
+      "id": 1751396836664,
+      "name": "很多",
+      "price": "200",
+      "stock": "50"
     }
   ]
 }
