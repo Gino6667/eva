@@ -2019,10 +2019,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 18,
       "createdAt": "2025-07-02T08:25:49.229Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T17:44:49.067Z"
     },
     {
       "id": 9112,
