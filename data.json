@@ -1918,10 +1918,11 @@
       "designerId": 10,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 9,
       "createdAt": "2025-07-02T08:10:50.204Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T16:29:01.235Z"
     },
     {
       "id": 9103,
