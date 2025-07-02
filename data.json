@@ -2146,11 +2146,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "absent",
+      "status": "waiting",
       "number": 11,
       "createdAt": "2025-07-02T17:56:00.495Z",
       "userId": 3,
-      "absentAt": "2025-07-02T17:59:07.643Z"
+      "absentAt": "2025-07-02T17:59:07.643Z",
+      "checkinAt": "2025-07-02T20:16:04.830Z"
     },
     {
       "id": 9123,
