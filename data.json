@@ -1952,10 +1952,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 12,
       "createdAt": "2025-07-02T08:13:58.139Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T16:29:14.711Z"
     },
     {
       "id": 9106,
