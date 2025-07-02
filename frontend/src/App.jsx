@@ -33,6 +33,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [navOpen, setNavOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     // 嘗試自動登入
@@ -80,33 +81,38 @@ function App() {
   return (
     <Router basename={import.meta.env.MODE === 'production' ? '/eva' : '/'}>
       <div className="App">
-        {/* 只有不是 admin 頁面時才顯示 header */}
+        {/* 只有不是 admin 頁面時才顯示側邊欄 */}
         {!window.location.pathname.startsWith('/admin') && (
-        <header className="header">
-          <div className="header-content">
-              <nav className="nav-menu open">
-                <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
-                <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
-                <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
-                <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上抽號</Link>
-                {user ? (
-                  <>
-                    {user.role !== 'admin' && (
-                      <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
-                    )}
-                    <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>登入</Link>
-                  </>
-                )}
-              </nav>
-          </div>
-        </header>
+          <aside className={`sidebar-nav${sidebarCollapsed ? ' collapsed' : ''}`}>
+            <button
+              className="sidebar-toggle"
+              onClick={() => setSidebarCollapsed(v => !v)}
+              aria-label={sidebarCollapsed ? '展開選單' : '收合選單'}
+            >
+              {sidebarCollapsed ? '▶' : '◀'}
+            </button>
+            <nav className="nav-menu open">
+              <Link to="/" className="nav-link" onClick={()=>setNavOpen(false)}>首頁</Link>
+              <Link to="/queue" className="nav-link" onClick={()=>setNavOpen(false)}>現場排隊</Link>
+              <Link to="/queue-progress" className="nav-link" onClick={()=>setNavOpen(false)}>即時看板</Link>
+              <Link to="/reservation" className="nav-link" onClick={()=>setNavOpen(false)}>線上抽號</Link>
+              {user ? (
+                <>
+                  {user.role !== 'admin' && (
+                    <Link to="/profile" className="nav-link" onClick={()=>setNavOpen(false)}>會員中心</Link>
+                  )}
+                  <button className="btn btn-logout" onClick={()=>{handleLogout();setNavOpen(false);}}>登出</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="nav-link" onClick={()=>setNavOpen(false)}>登入</Link>
+                </>
+              )}
+            </nav>
+          </aside>
         )}
         <div style={{ display: 'flex', minHeight: '100vh' }}>
-          <main className="main" style={{ flex: 1 }}>
+          <main className="main" style={{ flex: 1, marginLeft: sidebarCollapsed ? 48 : 180 }}>
           <Routes>
             <Route path="/" element={<Home />} />
               <Route path="/queue" element={<Suspense fallback={<div>載入中...</div>}>
