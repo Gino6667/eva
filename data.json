@@ -2429,10 +2429,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 37,
-      "createdAt": "2025-07-02T20:07:26.341Z",
-      "userId": 3
+      "createdAt": "2025-07-02T20:09:04.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T20:09:04.000Z"
     }
   ],
   "reservations": [
