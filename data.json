@@ -1871,11 +1871,12 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "onsite",
-      "status": "absent",
+      "status": "waiting",
       "number": 5,
       "createdAt": "2025-07-02T06:52:20.030Z",
       "userId": null,
-      "absentAt": "2025-07-02T10:36:33.867Z"
+      "absentAt": "2025-07-02T10:36:33.867Z",
+      "checkinAt": "2025-07-02T15:54:53.965Z"
     },
     {
       "id": 9099,
