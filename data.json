@@ -2173,10 +2173,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 14,
       "createdAt": "2025-07-02T17:56:17.309Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T18:04:37.316Z"
     },
     {
       "id": 9126,
