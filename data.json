@@ -1893,10 +1893,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 7,
       "createdAt": "2025-07-02T08:07:09.101Z",
-      "userId": null
+      "userId": null,
+      "absentAt": "2025-07-02T11:02:37.888Z"
     },
     {
       "id": 9101,
