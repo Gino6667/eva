@@ -1903,11 +1903,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 8,
       "createdAt": "2025-07-02T08:10:31.681Z",
       "userId": null,
-      "checkinAt": "2025-07-02T08:15:15.431Z"
+      "checkinAt": "2025-07-02T08:15:15.431Z",
+      "completedAt": "2025-07-02T10:41:18.418Z"
     },
     {
       "id": 9102,
