@@ -2054,10 +2054,11 @@
       "designerId": 5,
       "serviceId": 10,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 3,
       "createdAt": "2025-07-02T16:27:47.802Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T17:55:28.652Z"
     },
     {
       "id": 9115,
