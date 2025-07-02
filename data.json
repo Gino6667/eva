@@ -2332,10 +2332,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 28,
-      "createdAt": "2025-07-02T19:27:51.532Z",
-      "userId": 3
+      "createdAt": "2025-07-02T19:28:02.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T19:28:02.000Z"
     }
   ],
   "reservations": [
