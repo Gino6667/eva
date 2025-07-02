@@ -2134,11 +2134,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "absent",
+      "status": "waiting",
       "number": 10,
       "createdAt": "2025-07-02T17:55:53.700Z",
       "userId": 3,
-      "absentAt": "2025-07-02T17:56:46.280Z"
+      "absentAt": "2025-07-02T17:56:46.280Z",
+      "checkinAt": "2025-07-02T20:12:21.196Z"
     },
     {
       "id": 9122,
