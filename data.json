@@ -1830,10 +1830,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 1,
       "createdAt": "2025-07-02T06:41:51.634Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-02T06:42:14.845Z"
     }
   ],
   "reservations": [
