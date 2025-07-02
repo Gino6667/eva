@@ -1925,11 +1925,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "absent",
+      "status": "waiting",
       "number": 10,
       "createdAt": "2025-07-02T08:11:15.920Z",
       "userId": 3,
-      "absentAt": "2025-07-02T10:41:21.798Z"
+      "absentAt": "2025-07-02T10:41:21.798Z",
+      "checkinAt": "2025-07-02T11:02:19.104Z"
     },
     {
       "id": 9104,
