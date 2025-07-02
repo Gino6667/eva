@@ -47,12 +47,6 @@
   ],
   "services": [
     {
-      "id": 1,
-      "name": "臨時服務",
-      "price": 300,
-      "duration": 30
-    },
-    {
       "id": 2,
       "name": "染髮",
       "price": 200,
