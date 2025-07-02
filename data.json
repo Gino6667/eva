@@ -2358,6 +2358,16 @@
       "number": 30,
       "createdAt": "2025-07-02T19:35:17.618Z",
       "userId": 3
+    },
+    {
+      "id": 9142,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 31,
+      "createdAt": "2025-07-02T19:36:34.384Z",
+      "userId": 3
     }
   ],
   "reservations": [
