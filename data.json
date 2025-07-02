@@ -2320,10 +2320,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 27,
-      "createdAt": "2025-07-02T19:23:32.259Z",
-      "userId": 3
+      "createdAt": "2025-07-02T19:23:46.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T19:23:46.000Z"
     }
   ],
   "reservations": [
