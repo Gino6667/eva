@@ -2030,10 +2030,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 1,
       "createdAt": "2025-07-02T16:27:31.252Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T17:45:28.986Z"
     },
     {
       "id": 9113,
