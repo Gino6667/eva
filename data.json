@@ -2111,11 +2111,12 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 8,
       "createdAt": "2025-07-02T16:58:19.796Z",
       "userId": null,
-      "checkinAt": "2025-07-02T19:03:31.472Z"
+      "checkinAt": "2025-07-02T19:03:31.472Z",
+      "completedAt": "2025-07-02T19:08:49.185Z"
     },
     {
       "id": 9120,
