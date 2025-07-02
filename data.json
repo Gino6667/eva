@@ -2042,10 +2042,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 2,
       "createdAt": "2025-07-02T16:27:37.215Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T17:55:20.055Z"
     },
     {
       "id": 9114,
