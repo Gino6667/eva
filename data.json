@@ -2407,10 +2407,11 @@
       "designerId": 10,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 35,
-      "createdAt": "2025-07-02T19:59:17.065Z",
-      "userId": 3
+      "createdAt": "2025-07-02T20:00:16.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T20:00:16.000Z"
     }
   ],
   "reservations": [
