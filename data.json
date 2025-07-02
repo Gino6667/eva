@@ -2396,10 +2396,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 34,
-      "createdAt": "2025-07-02T19:55:11.679Z",
-      "userId": 3
+      "createdAt": "2025-07-02T19:59:02.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-02T19:59:02.000Z"
     }
   ],
   "reservations": [
