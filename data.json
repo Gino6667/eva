@@ -2228,10 +2228,11 @@
       "designerId": 5,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 19,
       "createdAt": "2025-07-02T18:17:11.260Z",
-      "userId": 3
+      "userId": 3,
+      "absentAt": "2025-07-02T18:25:47.300Z"
     },
     {
       "id": 9131,
