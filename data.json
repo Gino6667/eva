@@ -2066,10 +2066,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 4,
       "createdAt": "2025-07-02T16:27:54.192Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T17:55:30.224Z"
     },
     {
       "id": 9116,
