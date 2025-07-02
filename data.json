@@ -3076,6 +3076,13 @@
       "password": "1234",
       "name": "hair-queue",
       "role": "customer"
+    },
+    {
+      "id": 13,
+      "phone": "0933444555",
+      "password": "1234",
+      "name": "是測試",
+      "role": "customer"
     }
   ],
   "worktime": {
