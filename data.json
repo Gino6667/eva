@@ -1901,10 +1901,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 8,
       "createdAt": "2025-07-02T08:10:31.681Z",
-      "userId": null
+      "userId": null,
+      "checkinAt": "2025-07-02T08:15:15.431Z"
     },
     {
       "id": 9102,
