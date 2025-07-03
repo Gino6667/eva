@@ -2745,10 +2745,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 60,
       "createdAt": "2025-07-03T17:02:20.106Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T17:02:31.390Z"
     }
   ],
   "reservations": [
