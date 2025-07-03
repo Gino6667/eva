@@ -2482,10 +2482,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 41,
       "createdAt": "2025-07-03T11:13:36.804Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T14:01:08.900Z"
     },
     {
       "id": 9153,
