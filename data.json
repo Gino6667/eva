@@ -2805,10 +2805,11 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 65,
       "createdAt": "2025-07-03T17:12:11.683Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T17:22:31.854Z"
     },
     {
       "id": 9178,
