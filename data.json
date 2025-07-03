@@ -2541,10 +2541,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 44,
       "createdAt": "2025-07-03T11:14:06.823Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T14:14:16.414Z"
     },
     {
       "id": 9156,
