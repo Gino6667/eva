@@ -2722,10 +2722,11 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 58,
       "createdAt": "2025-07-03T16:51:18.746Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T17:00:49.290Z"
     },
     {
       "id": 9171,
