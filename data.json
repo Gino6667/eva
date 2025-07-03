@@ -2625,11 +2625,12 @@
       "designerId": 12,
       "serviceId": 3,
       "type": "online",
-      "status": "absent",
+      "status": "waiting",
       "number": 51,
       "createdAt": "2025-07-03T16:23:52.000Z",
       "userId": 3,
-      "absentAt": "2025-07-03T16:23:52.000Z"
+      "absentAt": "2025-07-03T16:23:52.000Z",
+      "checkinAt": "2025-07-03T16:45:51.385Z"
     },
     {
       "id": 9163,
