@@ -2648,10 +2648,11 @@
       "designerId": 7,
       "serviceId": 10,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 52,
-      "createdAt": "2025-07-03T16:32:35.774Z",
-      "userId": 3
+      "createdAt": "2025-07-03T16:32:57.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-03T16:32:57.000Z"
     },
     {
       "id": 9165,
