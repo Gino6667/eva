@@ -2522,6 +2522,16 @@
       "createdAt": "2025-07-03T11:19:38.695Z",
       "userId": 3,
       "checkinAt": "2025-07-03T11:19:49.692Z"
+    },
+    {
+      "id": 9157,
+      "designerId": 11,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 46,
+      "createdAt": "2025-07-03T11:19:57.672Z",
+      "userId": 3
     }
   ],
   "reservations": [
