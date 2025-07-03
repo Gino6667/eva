@@ -2676,6 +2676,16 @@
       "createdAt": "2025-07-03T16:34:37.000Z",
       "userId": 3,
       "absentAt": "2025-07-03T16:34:37.000Z"
+    },
+    {
+      "id": 9167,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 55,
+      "createdAt": "2025-07-03T16:35:00.937Z",
+      "userId": 3
     }
   ],
   "reservations": [
