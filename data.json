@@ -2734,10 +2734,11 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 59,
-      "createdAt": "2025-07-03T16:51:24.589Z",
-      "userId": 3
+      "createdAt": "2025-07-03T17:01:50.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-03T17:01:50.000Z"
     }
   ],
   "reservations": [
