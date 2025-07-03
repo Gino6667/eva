@@ -13,9 +13,9 @@ import { useCallback, useMemo } from 'react';
  */
 export default function usePerformanceStats({ designers = [], transactions = [], products = [], services = [] }) {
   // 取得服務名稱
-  const getServiceName = (id) => services.find(s => s.id == id)?.name || '未知服務';
+  const getServiceName = useCallback(() => services.find(s => s.id == id)?.name || '未知服務', [services]);
   // 取得產品名稱
-  const getProductName = (id) => products.find(p => p.id == id)?.name || '未知產品';
+  const getProductName = useCallback(() => products.find(p => p.id == id)?.name || '未知產品', [products]);
 
   // 取得設計師服務明細
   const getServiceDetails = useCallback((designerId, filterFn) => {
@@ -35,7 +35,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
       amount: t.amount,
       serviceId: t.serviceId
     }));
-  }, []);
+  }, [transactions]);
 
   // 依服務類別分組
   const getServiceStatsByType = useCallback((designerId, filterFn) => {
@@ -47,7 +47,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
       stats[d.name].total += Number(d.amount);
     });
     return stats;
-  }, []);
+  }, [getServiceDetails]);
 
   // 取得產品銷售明細
   const getProductDetails = useCallback((designerId, filterFn) => {
@@ -58,7 +58,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
         name: t.productId ? getProductName(t.productId) : (t.description ? t.description.replace(/產品銷售：|（設計師：.*?）/g, '') : ''),
         amount: t.amount
       }));
-  }, []);
+  }, [transactions]);
 
   // 產品銷售統計
   const getProductStats = useCallback(() => {
