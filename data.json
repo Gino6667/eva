@@ -2602,11 +2602,12 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "absent",
+      "status": "done",
       "number": 49,
       "createdAt": "2025-07-03T16:23:57.000Z",
       "userId": 3,
-      "absentAt": "2025-07-03T16:23:57.000Z"
+      "absentAt": "2025-07-03T16:23:57.000Z",
+      "completedAt": "2025-07-03T16:32:56.074Z"
     },
     {
       "id": 9161,
@@ -3599,6 +3600,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T14:16:43.114Z",
       "completedAt": "2025-07-03T14:16:43.114Z"
+    },
+    {
+      "id": 289,
+      "designerId": 7,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-03",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T16:32:56.074Z",
+      "completedAt": "2025-07-03T16:32:56.074Z"
     }
   ],
   "users": [
