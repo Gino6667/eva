@@ -21,8 +21,8 @@
         10,
         5
       ],
-      "isPaused": true,
-      "isOnVacation": true
+      "isPaused": false,
+      "isOnVacation": false
     },
     {
       "id": 11,
