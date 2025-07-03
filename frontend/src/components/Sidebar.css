@@ -57,4 +57,60 @@
 .sidebar-submenu li:hover {
   background: #444;
   color: #fff;
+}
+.sidebar-bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  background: #232323;
+  color: #fff;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.12);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 0 0.2em 0;
+}
+.sidebar-menu-bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 2.2em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-menu-bottom li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-logout-btn {
+  background: none;
+  color: #fff;
+  border: 2px solid #f7ab5e;
+  border-radius: 12px;
+  padding: 0.6em 2.2em;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-left: 1.2em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.sidebar-logout-btn:hover {
+  background: #f7ab5e;
+  color: #232323;
+}
+@media (max-width: 600px) {
+  .sidebar-bottom-bar {
+    padding: 0.2em 0 0.2em 0;
+  }
+  .sidebar-menu-bottom {
+    gap: 1.1em;
+    font-size: 1em;
+  }
 } 

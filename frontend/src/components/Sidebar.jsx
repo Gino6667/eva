@@ -7,20 +7,18 @@ function Sidebar() {
   const [openMenu, setOpenMenu] = useState({ finance: false });
 
   return (
-    <div className="sidebar">
-      <ul className="sidebar-menu">
+    <div className="sidebar-bottom-bar">
+      <ul className="sidebar-menu-bottom">
+        <li onClick={() => navigate('/')}>首頁</li>
+        <li onClick={() => navigate('/queue')}>現場排隊</li>
+        <li onClick={() => navigate('/queue-progress')}>即時看板</li>
+        <li onClick={() => navigate('/reservation')}>線上抽號</li>
+        <li onClick={() => navigate('/profile')}>會員中心</li>
         <li>
-          <div className="sidebar-menu-title" onClick={() => setOpenMenu(m => ({ ...m, finance: !m.finance }))}>
-            <span>💰 財務管理</span>
-            <span className="sidebar-arrow">{openMenu.finance ? '▼' : '▶'}</span>
-          </div>
-          {openMenu.finance && (
-            <ul className="sidebar-submenu">
-              {/* 這裡可擴充其他主選單 */}
-            </ul>
-          )}
+          <button className="sidebar-logout-btn" onClick={() => { localStorage.removeItem('token'); window.location.reload(); }}>
+            登出
+          </button>
         </li>
-        {/* 這裡可擴充其他主選單 */}
       </ul>
     </div>
   );

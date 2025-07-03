@@ -89,7 +89,8 @@ function DesignersList() {
 
   // 整合資料
   const getCardData = (designer) => {
-    const serving = currentServing.find(s => s.designerId === designer.id);
+    // 只顯示不是過號的客人
+    const serving = currentServing.find(s => s.designerId === designer.id && s.status !== 'absent');
     const next = nextInQueue.find(n => n.designerId === designer.id);
     return {
       currentNumber: serving?.number ?? '-',
@@ -316,40 +317,34 @@ function DesignersList() {
     
     if (action === '結束') {
       console.log(`設計師 ${designer.name} 結束當前服務`);
-      
       // 找到該設計師目前正在服務的客人
       const servingCustomer = currentServing.find(s => s.designerId === designer.id);
-      
       if (servingCustomer) {
         try {
-          // 呼叫後端 API 完成服務
+          // 呼叫後端 API，帶上正確的 designerId
           const response = await axios.patch(`/api/queue/${servingCustomer.id}/complete`, {
-            designerId: designer.id,
+            designerId: designer.id, // 確保這裡是實際服務設計師的 id
             number: servingCustomer.number
           });
-          
           if (response.data.success) {
             console.log('服務完成成功:', response.data);
-            // 重新載入資料
             loadAll();
             loadTodayQueue();
-            // 發送狀態變更事件
             window.dispatchEvent(new CustomEvent('queue-updated'));
           } else {
             console.error('服務完成失敗:', response.data);
           }
         } catch (err) {
           console.error('完成服務 API 失敗', err);
-          // 如果 API 失敗，至少更新前端狀態
           setCurrentServing(prev => prev.filter(s => s.designerId !== designer.id));
           window.dispatchEvent(new CustomEvent('queue-updated'));
         }
       } else {
         console.log('該設計師沒有正在服務的客人');
-        // 清除目前服務狀態
         setCurrentServing(prev => prev.filter(s => s.designerId !== designer.id));
         window.dispatchEvent(new CustomEvent('queue-updated'));
       }
+      return;
     }
   };
 

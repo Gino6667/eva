@@ -247,15 +247,18 @@ function Reservation() {
         </div>
         <div className="reservation-step">
           <h3>抽號成功！</h3>
-          <p>您已成功抽到號碼</p>
-          <p>號碼：<span style={{fontWeight: 'bold', fontSize: '2em', color: '#ff9800'}}>{queueResult.number}</span></p>
-          <p>設計師：{getSelectedDesignerName() || queueResult.designerName || '—'}</p>
-          <p>服務項目：{getSelectedServiceName() || queueResult.serviceName || '—'}</p>
-          <p>抽號日期：{formatToday()}</p>
-          <p>請留意叫號，或前往「即時看板」查看即時狀態。</p>
-          <div style={{marginTop: '1rem', display: 'flex', gap: '1rem', justifyContent: 'center'}}>
-            <Link to="/queue-progress" className="btn btn-primary">查看進度</Link>
-            <button className="btn btn-secondary" onClick={() => window.location.reload()}>返回</button>
+          <div style={{ textAlign: 'center', padding: '2em 0' }}>
+            <h2 style={{ fontWeight: 900, color: '#f7ab5e', marginBottom: '1em' }}>您已成功抽到號碼</h2>
+            <div style={{ fontSize: '2.2em', fontWeight: 900, color: '#ff9800', marginBottom: '0.7em' }}>號碼：{queueResult.number}</div>
+            <div style={{ fontSize: '1.2em', color: '#fff', marginBottom: '0.5em' }}>設計師：{getSelectedDesignerName() || queueResult.designerName || '—'}</div>
+            <div style={{ fontSize: '1.2em', color: '#fff', marginBottom: '0.5em' }}>服務項目：{getSelectedServiceName() || queueResult.serviceName || '—'}</div>
+            <div style={{ fontSize: '1.1em', color: '#fff', marginBottom: '0.5em' }}>抽號日期：{formatToday()}</div>
+            <p style={{ fontSize: '1.1em', color: '#f7ab5e', margin: '1.2em 0 1.5em 0' }}>請留意叫號，或返回查看「即時看板」。</p>
+            <div style={{marginTop: '1rem', display: 'flex', gap: '1rem', justifyContent: 'center', width: '100%'}}>
+              <button className="btn btn-secondary" onClick={() => window.location.reload()} style={{textAlign: 'center', width: 'fit-content', marginLeft: 'auto', marginRight: 'auto', display: 'block'}}>
+                返回
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -325,6 +328,7 @@ function Reservation() {
         </div>
       </div>
 
+      {/* 步驟欄回復為右側欄位 */}
       <div className="queue-col queue-col-right">
         <div className="queue-step">
           <h3>步驟 1：會員登入</h3>

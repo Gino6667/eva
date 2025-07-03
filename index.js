@@ -2506,14 +2506,19 @@ app.patch('/api/queue/:id/complete', (req, res) => {
   const queueId = Number(req.params.id);
   const { designerId, number } = req.body;
   
-  // 找到對應的排隊項目
+  // 找到對應的 queue 項目
   const queueItem = data.queue.find(q => q.id === queueId);
   
   if (!queueItem) {
     return res.status(404).json({ error: '找不到該排隊項目' });
   }
   
-  // 驗證設計師和號碼是否匹配
+  // 若傳入的 designerId 與 queueItem.designerId 不同，則自動更新
+  if (designerId && queueItem.designerId !== Number(designerId)) {
+    queueItem.designerId = Number(designerId);
+  }
+  
+  // 驗證設計師與號碼是否匹配
   if (queueItem.designerId !== Number(designerId) || queueItem.number !== Number(number)) {
     return res.status(400).json({ error: '設計師或號碼不匹配' });
   }
@@ -2521,8 +2526,8 @@ app.patch('/api/queue/:id/complete', (req, res) => {
   // 將狀態改為完成
   queueItem.status = 'done';
   queueItem.completedAt = new Date().toISOString();
-
-  // 方案一：自動新增 reservation 並設為 completed
+  
+  // 方案一：自動新增 reservation 並設為 completed（如需保留）
   if (queueItem.userId) {
     const dateObj = new Date(queueItem.createdAt);
     const date = dateObj.toISOString().split('T')[0];
@@ -2541,7 +2546,7 @@ app.patch('/api/queue/:id/complete', (req, res) => {
     };
     data.reservations.push(newReservation);
   }
-
+  
   saveData(data);
   
   res.json({ 
