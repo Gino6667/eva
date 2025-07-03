@@ -2796,6 +2796,16 @@
       "number": 64,
       "createdAt": "2025-07-03T17:10:27.526Z",
       "userId": 3
+    },
+    {
+      "id": 9177,
+      "designerId": 7,
+      "serviceId": 5,
+      "type": "online",
+      "status": "waiting",
+      "number": 65,
+      "createdAt": "2025-07-03T17:12:11.683Z",
+      "userId": 3
     }
   ],
   "reservations": [
