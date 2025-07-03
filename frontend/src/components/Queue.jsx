@@ -35,6 +35,8 @@ function Queue() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     loadDesigners();
     loadServices();
     loadWorktime();
@@ -57,6 +59,8 @@ function Queue() {
     return () => {
       clearInterval(interval);
       window.removeEventListener('designer-state-changed', handleDesignerStateChange);
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, []);
 

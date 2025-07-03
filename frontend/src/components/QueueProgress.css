@@ -12,19 +12,28 @@
   border-radius: 18px;
   border: none;
   box-shadow: none;
-  padding: 32px 0 32px 0;
-  margin: -1cm auto 32px auto;
+  padding: 8px 0 8px 0;
+  margin: 0 auto 0 auto;
   max-width: 960px;
   animation: fadeInUp 0.8s;
 }
 
 .queue-progress-card h2 {
+  margin-top: 0;
+  margin-bottom: 0;
   text-align: center;
   color: #f7ab5e;
-  margin-bottom: 32px;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1px;
+}
+
+.update-info {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* 今日統計 */
@@ -346,6 +355,12 @@
   font-weight: 600;
 }
 
+.serving-card,
+.serving-card-progress {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .serving-card {
   background: #333d38;
   border-radius: 8px;
@@ -426,14 +441,8 @@
   gap: 0.5em;
 }
 
-.serving-grid-progress {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 2rem 2rem;
-  justify-items: stretch;
-  align-items: stretch;
-  margin: 2rem 0 1.5rem 0;
+.serving-grid.serving-grid-progress {
+  margin-top: -24px;
 }
 
 .serving-card-progress {
@@ -639,4 +648,17 @@
 .user-queue-list.new-user-queue-list {
   margin-left: auto;
   margin-right: auto;
+}
+
+.serving-header {
+  margin-top: 0;
+}
+
+.serving-header,
+.today-stats,
+.stats-grid,
+.search-form,
+.progress-result {
+  margin: 0 !important;
+  padding: 0 !important;
 }

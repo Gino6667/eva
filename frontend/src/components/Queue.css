@@ -1216,7 +1216,7 @@ html, body, #root {
 
 .queue-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #232b25 60%, #2e3c33 100%);
+  background: linear-gradient(135deg, #232b25 40%, #2e3c33 100%);
   padding: 0;
   overflow: hidden !important;
   margin-top: -40px;
