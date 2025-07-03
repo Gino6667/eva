@@ -45,8 +45,8 @@
         3,
         5
       ],
-      "isPaused": false,
-      "isOnVacation": false
+      "isPaused": true,
+      "isOnVacation": true
     }
   ],
   "services": [
