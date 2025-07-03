@@ -2684,12 +2684,13 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 55,
       "createdAt": "2025-07-03T16:44:43.000Z",
       "userId": 3,
       "absentAt": "2025-07-03T16:44:43.000Z",
-      "checkinAt": "2025-07-03T16:44:59.093Z"
+      "checkinAt": "2025-07-03T16:44:59.093Z",
+      "completedAt": "2025-07-03T16:45:25.740Z"
     }
   ],
   "reservations": [
@@ -3662,6 +3663,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T16:35:23.260Z",
       "completedAt": "2025-07-03T16:35:23.260Z"
+    },
+    {
+      "id": 293,
+      "designerId": 7,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-03",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T16:45:25.740Z",
+      "completedAt": "2025-07-03T16:45:25.740Z"
     }
   ],
   "users": [
