@@ -2612,10 +2612,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 50,
       "createdAt": "2025-07-03T14:15:54.399Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T14:40:34.044Z"
     },
     {
       "id": 9162,
