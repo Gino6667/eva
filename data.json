@@ -2528,11 +2528,12 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 46,
       "createdAt": "2025-07-03T11:19:57.672Z",
       "userId": 3,
-      "checkinAt": "2025-07-03T11:20:14.552Z"
+      "checkinAt": "2025-07-03T11:20:14.552Z",
+      "completedAt": "2025-07-03T13:01:15.539Z"
     }
   ],
   "reservations": [
@@ -3120,6 +3121,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T11:20:12.211Z",
       "completedAt": "2025-07-03T11:20:12.211Z"
+    },
+    {
+      "id": 258,
+      "designerId": 11,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-03",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T13:01:15.540Z",
+      "completedAt": "2025-07-03T13:01:15.540Z"
     }
   ],
   "users": [
