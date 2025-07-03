@@ -2632,10 +2632,11 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 52,
       "createdAt": "2025-07-03T14:16:32.557Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T14:16:41.209Z"
     }
   ],
   "reservations": [
