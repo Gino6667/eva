@@ -2213,11 +2213,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "absent",
+      "status": "done",
       "number": 16,
       "createdAt": "2025-07-02T18:04:44.272Z",
       "userId": 3,
-      "absentAt": "2025-07-02T18:06:11.948Z"
+      "absentAt": "2025-07-02T18:06:11.948Z",
+      "completedAt": "2025-07-03T14:01:18.602Z"
     },
     {
       "id": 9128,
@@ -3211,6 +3212,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T14:01:18.161Z",
       "completedAt": "2025-07-03T14:01:18.161Z"
+    },
+    {
+      "id": 265,
+      "designerId": 5,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-02",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T14:01:18.602Z",
+      "completedAt": "2025-07-03T14:01:18.602Z"
     }
   ],
   "users": [
