@@ -11,6 +11,15 @@ function Customers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCustomer, setEditingCustomer] = useState(null);
+  const [newCustomer, setNewCustomer] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    membershipLevel: '',
+    notes: '',
+    totalVisits: 0,
+    totalSpent: 0
+  });
 
   useEffect(() => {
       axios.get('/api/users')

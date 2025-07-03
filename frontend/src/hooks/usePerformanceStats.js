@@ -86,6 +86,9 @@ export default function usePerformanceStats({ designers = [], transactions = [],
     };
   }), [designers, transactions, products, services]);
 
+  const productStats = useMemo(() => getProductStats(), [getProductStats]);
+  const serviceStats = useMemo(() => getServiceStatsByType(), [getServiceStatsByType]);
+
   return {
     getServiceDetails,
     getServiceStatsByType,

@@ -53,6 +53,10 @@ function Admin() {
     }
   }, [navigate, user]);
 
+  useEffect(() => {
+    loadAccounts();
+  }, [loadAccounts]);
+
   // 載入所有後台帳號（設計師和管理員）
   const loadAccounts = async () => {
     console.log('開始載入帳號...');

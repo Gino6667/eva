@@ -47,7 +47,7 @@ function DesignersList() {
       window.removeEventListener('designer-state-changed', handleDesignerStateChange);
       window.removeEventListener('queue-updated', handleQueueUpdate);
     };
-  }, []);
+  }, [loadAll]);
 
   const loadAll = async () => {
     try {
@@ -349,7 +349,7 @@ function DesignersList() {
   };
 
   // todayQueue、currentServing、nextInQueue、設計師排序等重複運算加上 useMemo
-  const filteredTodayQueue = useMemo(() => todayQueue.filter(q => (q.status === 'waiting' || q.status === 'called') && q.createdAt.slice(0, 10) === today && (`${q.number}${getDesignerName(q.designerId)}${getServiceName(q.serviceId)}`.includes(queueSearch))), [todayQueue, today, queueSearch]);
+  const filteredTodayQueue = useMemo(() => todayQueue.filter(q => (q.status === 'waiting' || q.status === 'called') && q.createdAt.slice(0, 10) === today && (`${q.number}${getDesignerName(q.designerId)}${getServiceName(q.serviceId)}`.includes(queueSearch))), [todayQueue, today, queueSearch, getDesignerName, getServiceName]);
   const sortedDesigners = [...designers].sort((a, b) => a.id - b.id);
 
   // 載入產品

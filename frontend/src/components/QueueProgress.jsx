@@ -55,7 +55,7 @@ function QueueProgress() {
       window.removeEventListener('queue-updated', reload);
       window.removeEventListener('designer-state-changed', handleDesignerStateChange);
     };
-  }, [user, date]);
+  }, [user, date, loadUserQueue]);
 
   const loadTodayStats = async () => {
     try {
