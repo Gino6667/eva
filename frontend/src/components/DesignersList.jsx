@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import './Admin.css';
 
@@ -23,6 +23,31 @@ function DesignersList() {
   const [confirmProduct, setConfirmProduct] = useState(null);
 
   // 載入資料
+  const loadAll = useCallback(async () => {
+    try {
+      const [dRes, cRes, nRes] = await Promise.all([
+        axios.get('/api/designers'),
+        axios.get('/api/queue/today-stats'),
+        axios.get('/api/queue/next-in-queue'),
+      ]);
+      setDesigners(dRes.data);
+      setCurrentServing(cRes.data.currentServing || []);
+      setNextInQueue(nRes.data || []);
+      
+      // 載入今日排隊資料
+      loadTodayQueue();
+    } catch (e) {
+      // 假資料
+      setDesigners([
+        { id: 1, name: '小美', isPaused: false, isOnVacation: false },
+        { id: 2, name: '阿強', isPaused: false, isOnVacation: false },
+        { id: 3, name: '小華', isPaused: false, isOnVacation: false },
+      ]);
+      setCurrentServing([]);
+      setNextInQueue([]);
+    }
+  }, []);
+
   useEffect(() => {
     loadAll();
     const interval = setInterval(loadAll, 60000); // 每分鐘自動刷新
@@ -48,31 +73,6 @@ function DesignersList() {
       window.removeEventListener('queue-updated', handleQueueUpdate);
     };
   }, [loadAll]);
-
-  const loadAll = async () => {
-    try {
-      const [dRes, cRes, nRes] = await Promise.all([
-        axios.get('/api/designers'),
-        axios.get('/api/queue/today-stats'),
-        axios.get('/api/queue/next-in-queue'),
-      ]);
-      setDesigners(dRes.data);
-      setCurrentServing(cRes.data.currentServing || []);
-      setNextInQueue(nRes.data || []);
-      
-      // 載入今日排隊資料
-      loadTodayQueue();
-    } catch (e) {
-      // 假資料
-      setDesigners([
-        { id: 1, name: '小美', isPaused: false, isOnVacation: false },
-        { id: 2, name: '阿強', isPaused: false, isOnVacation: false },
-        { id: 3, name: '小華', isPaused: false, isOnVacation: false },
-      ]);
-      setCurrentServing([]);
-      setNextInQueue([]);
-    }
-  };
 
   // 載入今日排隊資料
   const loadTodayQueue = async () => {
@@ -165,20 +165,20 @@ function DesignersList() {
   };
 
   // 獲取設計師名稱
-  const getDesignerName = (designerId) => {
-    const designer = designers.find(d => d.id === designerId);
+  const getDesignerName = useCallback((id) => {
+    const designer = designers.find(d => d.id === id);
     return designer ? designer.name : '未知設計師';
-  };
+  }, [designers]);
 
   // 獲取服務名稱
-  const getServiceName = (serviceId) => {
+  const getServiceName = useCallback((id) => {
     const serviceNames = {
       1: '洗剪吹',
       2: '染髮',
       3: '燙髮'
     };
-    return serviceNames[serviceId] || '未知服務';
-  };
+    return serviceNames[id] || '未知服務';
+  }, []);
 
   // 格式化時間
   const formatTime = (timeString) => {

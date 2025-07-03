@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import './Admin.css';
@@ -53,12 +53,7 @@ function Admin() {
     }
   }, [navigate, user]);
 
-  useEffect(() => {
-    loadAccounts();
-  }, [loadAccounts]);
-
-  // 載入所有後台帳號（設計師和管理員）
-  const loadAccounts = async () => {
+  const loadAccounts = useCallback(async () => {
     console.log('開始載入帳號...');
     setLoadingAccounts(true);
     try {
@@ -78,7 +73,11 @@ function Admin() {
     } finally {
       setLoadingAccounts(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    loadAccounts();
+  }, [loadAccounts]);
 
   // 刪除帳號
   const handleDeleteAccount = async (id) => {

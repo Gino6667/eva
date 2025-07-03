@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import './QueueProgress.css';
 
@@ -22,6 +22,19 @@ function QueueProgress() {
   const todayStr = new Date().toISOString().slice(0, 10);
   const filteredUserQueue = useMemo(() => user ? userQueue.filter(q => q.createdAt.slice(0, 10) === todayStr && q.status !== 'done') : [], [userQueue, user, todayStr]);
   const sortedDesigners = [...designers].sort((a, b) => a.id - b.id);
+
+  const loadUserQueue = useCallback(() => {
+    try {
+      console.log('載入會員號碼，用戶ID:', user.id);
+      const today = date;
+      const res = await axios.get(`/api/queue/user/${user.id}?date=${today}`);
+      console.log('會員號碼API回應:', res.data);
+      setUserQueue(res.data);
+    } catch (err) {
+      console.error('載入會員號碼失敗:', err);
+      setUserQueue([]);
+    }
+  }, [user, date]);
 
   useEffect(() => {
     loadTodayStats();
@@ -92,19 +105,6 @@ function QueueProgress() {
     } catch (err) {
       console.error('載入下一位客人資訊失敗:', err);
       setNextInQueue([]);
-    }
-  };
-
-  const loadUserQueue = async () => {
-    try {
-      console.log('載入會員號碼，用戶ID:', user.id);
-      const today = date;
-      const res = await axios.get(`/api/queue/user/${user.id}?date=${today}`);
-      console.log('會員號碼API回應:', res.data);
-      setUserQueue(res.data);
-    } catch (err) {
-      console.error('載入會員號碼失敗:', err);
-      setUserQueue([]);
     }
   };
 

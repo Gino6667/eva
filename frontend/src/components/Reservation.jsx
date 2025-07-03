@@ -231,6 +231,12 @@ function Reservation() {
     }
   }, [selectedDesigner, services]);
 
+  useEffect(() => {
+    if (availableServices && selectedService && !availableServices.some(s => String(s.id) === String(selectedService))) {
+      setSelectedService('');
+    }
+  }, [availableServices, selectedService]);
+
   const handleMemberSelect = () => {
     setIsMember(true);
     if (!user) {

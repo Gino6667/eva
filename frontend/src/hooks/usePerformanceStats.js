@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 /**
  * @param {Object[]} designers 設計師陣列
@@ -38,7 +38,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
   };
 
   // 依服務類別分組
-  const getServiceStatsByType = (designerId, filterFn) => {
+  const getServiceStatsByType = useCallback((designerId, filterFn) => {
     const details = getServiceDetails(designerId, filterFn);
     const stats = {};
     details.forEach(d => {
@@ -47,7 +47,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
       stats[d.name].total += Number(d.amount);
     });
     return stats;
-  };
+  }, []);
 
   // 取得產品銷售明細
   const getProductDetails = (designerId, filterFn) => {
@@ -61,21 +61,21 @@ export default function usePerformanceStats({ designers = [], transactions = [],
   };
 
   // 產品銷售統計
-  const getProductStats = (designerId, filterFn) => {
+  const getProductStats = useCallback(() => {
     const details = getProductDetails(designerId, filterFn);
     return {
       count: details.length,
       total: details.reduce((sum, t) => sum + Number(t.amount), 0),
       kinds: [...new Set(details.map(t=>t.name))].length
     };
-  };
+  }, []);
 
   // 總表：所有設計師的服務與產品統計
   const summary = useMemo(() => designers.map(designer => {
     const serviceStats = getServiceStatsByType(designer.id);
     const finishedServiceCount = Object.values(serviceStats).reduce((sum,s)=>sum+s.count,0);
     const finishedServiceAmount = Object.values(serviceStats).reduce((sum,s)=>sum+s.total,0);
-    const productStats = getProductStats(designer.id);
+    const productStats = getProductStats();
     return {
       designerId: designer.id,
       designerName: designer.name,
