@@ -2823,6 +2823,16 @@
       "createdAt": "2025-07-03T17:16:19.062Z",
       "userId": 3,
       "checkinAt": "2025-07-03T17:22:37.154Z"
+    },
+    {
+      "id": 9179,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 67,
+      "createdAt": "2025-07-03T17:23:30.283Z",
+      "userId": 3
     }
   ],
   "reservations": [
