@@ -2806,11 +2806,12 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 65,
       "createdAt": "2025-07-03T17:12:11.683Z",
       "userId": 3,
-      "checkinAt": "2025-07-03T17:22:31.854Z"
+      "checkinAt": "2025-07-03T17:22:31.854Z",
+      "completedAt": "2025-07-03T17:22:35.522Z"
     },
     {
       "id": 9178,
@@ -3892,6 +3893,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T17:22:33.783Z",
       "completedAt": "2025-07-03T17:22:33.783Z"
+    },
+    {
+      "id": 302,
+      "designerId": 7,
+      "serviceId": 5,
+      "userId": 3,
+      "date": "2025-07-03",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T17:22:35.522Z",
+      "completedAt": "2025-07-03T17:22:35.522Z"
     }
   ],
   "users": [
