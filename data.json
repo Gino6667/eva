@@ -2514,10 +2514,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 42,
       "createdAt": "2025-07-03T11:13:48.133Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T14:02:09.482Z"
     },
     {
       "id": 9154,
