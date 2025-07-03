@@ -2529,10 +2529,11 @@
       "designerId": 11,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 46,
       "createdAt": "2025-07-03T11:19:57.672Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T11:20:14.552Z"
     }
   ],
   "reservations": [
