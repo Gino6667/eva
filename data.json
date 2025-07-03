@@ -2139,12 +2139,13 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "absent",
+      "status": "done",
       "number": 10,
       "createdAt": "2025-07-02T17:55:53.700Z",
       "userId": 3,
       "absentAt": "2025-07-02T17:56:46.280Z",
-      "checkinAt": "2025-07-02T20:12:21.196Z"
+      "checkinAt": "2025-07-02T20:12:21.196Z",
+      "completedAt": "2025-07-03T14:01:11.311Z"
     },
     {
       "id": 9122,
@@ -3139,6 +3140,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T13:01:15.540Z",
       "completedAt": "2025-07-03T13:01:15.540Z"
+    },
+    {
+      "id": 259,
+      "designerId": 5,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-02",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T14:01:11.311Z",
+      "completedAt": "2025-07-03T14:01:11.311Z"
     }
   ],
   "users": [
