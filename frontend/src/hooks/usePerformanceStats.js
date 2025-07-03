@@ -68,7 +68,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
       total: details.reduce((sum, t) => sum + Number(t.amount), 0),
       kinds: [...new Set(details.map(t=>t.name))].length
     };
-  }, []);
+  }, [getProductDetails]);
 
   // 總表：所有設計師的服務與產品統計
   const summary = useMemo(() => designers.map(designer => {
