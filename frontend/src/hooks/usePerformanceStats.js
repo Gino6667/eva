@@ -18,7 +18,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
   const getProductName = (id) => products.find(p => p.id == id)?.name || '未知產品';
 
   // 取得設計師服務明細
-  const getServiceDetails = (designerId, filterFn) => {
+  const getServiceDetails = useCallback((designerId, filterFn) => {
     return transactions.filter(t =>
       t.type === 'income' &&
       t.designerId == designerId &&
@@ -35,7 +35,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
       amount: t.amount,
       serviceId: t.serviceId
     }));
-  };
+  }, []);
 
   // 依服務類別分組
   const getServiceStatsByType = useCallback((designerId, filterFn) => {
@@ -50,7 +50,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
   }, []);
 
   // 取得產品銷售明細
-  const getProductDetails = (designerId, filterFn) => {
+  const getProductDetails = useCallback((designerId, filterFn) => {
     return transactions.filter(t => t.category==='product' && t.designerId==designerId)
       .filter(t => (typeof filterFn === 'function' ? filterFn(t.date) : true))
       .map(t => ({
@@ -58,7 +58,7 @@ export default function usePerformanceStats({ designers = [], transactions = [],
         name: t.productId ? getProductName(t.productId) : (t.description ? t.description.replace(/產品銷售：|（設計師：.*?）/g, '') : ''),
         amount: t.amount
       }));
-  };
+  }, []);
 
   // 產品銷售統計
   const getProductStats = useCallback(() => {
