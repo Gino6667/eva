@@ -2704,6 +2704,16 @@
       "userId": 3,
       "checkinAt": "2025-07-03T16:46:31.134Z",
       "completedAt": "2025-07-03T16:46:52.522Z"
+    },
+    {
+      "id": 9169,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 57,
+      "createdAt": "2025-07-03T16:51:13.415Z",
+      "userId": 3
     }
   ],
   "reservations": [
@@ -4298,6 +4308,16 @@
       "date": "2025-07-03",
       "designerId": 7,
       "productId": 1751396836664
+    },
+    {
+      "id": 1751561405039,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：阿強）",
+      "category": "product",
+      "date": "2025-07-03",
+      "designerId": 7,
+      "productId": 1751381187351
     }
   ],
   "queueTransfers": [
