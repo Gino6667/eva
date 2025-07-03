@@ -2082,11 +2082,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "onsite",
-      "status": "absent",
+      "status": "done",
       "number": 5,
       "createdAt": "2025-07-02T16:28:00.765Z",
       "userId": null,
-      "checkinAt": "2025-07-02T17:55:32.168Z"
+      "checkinAt": "2025-07-02T17:55:32.168Z",
+      "completedAt": "2025-07-03T14:00:08.534Z"
     },
     {
       "id": 9117,
