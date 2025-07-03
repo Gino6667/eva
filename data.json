@@ -2613,6 +2613,16 @@
       "number": 50,
       "createdAt": "2025-07-03T14:15:54.399Z",
       "userId": 3
+    },
+    {
+      "id": 9162,
+      "designerId": 12,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 51,
+      "createdAt": "2025-07-03T14:16:08.165Z",
+      "userId": 3
     }
   ],
   "reservations": [
