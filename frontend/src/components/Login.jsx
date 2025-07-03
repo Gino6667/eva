@@ -228,9 +228,7 @@ function Login({ setUser }) {
         {!isAdminLogin && (
           <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '1.5em' }}>
             <a
-              href="https://line.me/R/ti/p/@2007657170"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=2007657170&redirect_uri=https%3A%2F%2Feva-36bg.onrender.com%2Fapi%2Fline%2Fcallback&state=${redirect === 'queue' ? 'eva_login_queue' : redirect === 'reservation' ? 'eva_login_reservation' : 'eva_login'}&scope=profile%20openid%20email`}
               className="line-login-btn"
               style={{ minWidth: 160 }}
             >
