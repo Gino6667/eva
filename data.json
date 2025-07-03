@@ -2684,10 +2684,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 55,
-      "createdAt": "2025-07-03T16:35:00.937Z",
-      "userId": 3
+      "createdAt": "2025-07-03T16:35:46.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-03T16:35:46.000Z"
     }
   ],
   "reservations": [
