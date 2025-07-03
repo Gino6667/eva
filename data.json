@@ -2671,10 +2671,11 @@
       "designerId": 7,
       "serviceId": 10,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 54,
-      "createdAt": "2025-07-03T16:32:48.658Z",
-      "userId": 3
+      "createdAt": "2025-07-03T16:34:37.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-03T16:34:37.000Z"
     }
   ],
   "reservations": [
