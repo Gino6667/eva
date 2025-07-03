@@ -2818,10 +2818,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 66,
       "createdAt": "2025-07-03T17:16:19.062Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-03T17:22:37.154Z"
     }
   ],
   "reservations": [
