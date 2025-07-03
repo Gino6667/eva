@@ -2632,11 +2632,12 @@
       "designerId": 5,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 52,
       "createdAt": "2025-07-03T14:16:32.557Z",
       "userId": 3,
-      "checkinAt": "2025-07-03T14:16:41.209Z"
+      "checkinAt": "2025-07-03T14:16:41.209Z",
+      "completedAt": "2025-07-03T14:16:43.114Z"
     }
   ],
   "reservations": [
@@ -3554,6 +3555,17 @@
       "status": "completed",
       "createdAt": "2025-07-03T14:16:39.494Z",
       "completedAt": "2025-07-03T14:16:39.494Z"
+    },
+    {
+      "id": 288,
+      "designerId": 5,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-03",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-03T14:16:43.114Z",
+      "completedAt": "2025-07-03T14:16:43.114Z"
     }
   ],
   "users": [
