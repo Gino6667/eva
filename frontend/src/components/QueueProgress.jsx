@@ -169,23 +169,7 @@ function QueueProgress() {
       <div className="queue-progress-card">
         <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>即時看板</h2>
         {/* 會員今日抽號自動顯示 */}
-        {user && filteredUserQueue.length > 0 && (
-          <div className="user-queue-list new-user-queue-list">
-            <div className="user-queue-title">您今日抽到的號碼：</div>
-            <div className="user-queue-btns" style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0.5em',justifyItems:'center'}}>
-              {filteredUserQueue.map(q => (
-                <button
-                  key={q.id}
-                  className="user-queue-btn new-user-queue-btn"
-                  style={{borderRadius:'50%',width:'2.5em',height:'2.5em',fontSize:'1.1em',border:'2px solid #f7ab5e',background:'#fff',color:'#f7ab5e',fontWeight:700,overflow:'hidden'}}
-                  onClick={() => { setNumber(q.number); setDate(q.createdAt.slice(0,10)); setProgress(null); setError(''); }}
-                >
-                  <span className="user-queue-number">{q.number}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* 會員今日抽號自動顯示 */}
         
         {/* 會員但沒有號碼的提示 */}
         {user && userQueue.length === 0 && (
@@ -204,10 +188,11 @@ function QueueProgress() {
         </div>
         <div className="serving-grid serving-grid-progress">
           {sortedDesigners.map(designer => {
+            if (designer.isOnVacation) return null; // 休假中卡片不顯示
             const serving = currentServing.find(s => s.designerId === designer.id);
             const next = nextInQueue.find(n => n.designerId === designer.id);
             return (
-              <div key={designer.id} className="serving-card-progress">
+              <div key={designer.id} className="serving-card-progress" style={{position:'relative'}}>
                 <div className="designer-header">
                   <span className="designer-title">設計師 <b>{designer.name}</b></span>
                 </div>
@@ -245,6 +230,31 @@ function QueueProgress() {
                     </div>
                   </div>
                 </div>
+                {designer.isPaused && (
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'rgba(120,120,120,0.45)',
+                    zIndex: 10,
+                    pointerEvents: 'none',
+                    borderRadius: '18px',
+                  }}>
+                    <div style={{
+                      position: 'absolute',
+                      top: '18%',
+                      left: 0,
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: '2em',
+                      fontWeight: 900,
+                      color: '#fff',
+                      letterSpacing: '4px',
+                      textShadow: '0 2px 16px #333d38cc'
+                    }}>
+                      暫時停止服務
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}

@@ -14,7 +14,6 @@ function DesignersList() {
   const [reason, setReason] = useState('');
   const [transferLoading, setTransferLoading] = useState(false);
   const [transferMessage, setTransferMessage] = useState('');
-  const [designerStates, setDesignerStates] = useState({});
   const today = new Date().toISOString().slice(0, 10);
   const [queueSearch, setQueueSearch] = useState('');
   const [showProductModal, setShowProductModal] = useState(false);
@@ -61,40 +60,14 @@ function DesignersList() {
       setCurrentServing(cRes.data.currentServing || []);
       setNextInQueue(nRes.data || []);
       
-      // 同步後端設計師狀態到本地狀態
-      const backendDesigners = dRes.data;
-      setDesignerStates(prev => {
-        const newStates = { ...prev };
-        backendDesigners.forEach(designer => {
-          if (designer.isPaused) {
-            // 如果後端顯示暫停，檢查是否為休假狀態
-            // 這裡可以根據實際需求調整邏輯
-            if (!newStates[designer.id]) {
-              newStates[designer.id] = {};
-            }
-            // 預設為暫停接單狀態，除非明確標記為休假
-            if (!newStates[designer.id].isOnVacation) {
-              newStates[designer.id].isPaused = true;
-            }
-          } else {
-            // 如果後端顯示未暫停，清除所有暫停狀態
-            if (newStates[designer.id]) {
-              newStates[designer.id].isPaused = false;
-              newStates[designer.id].isOnVacation = false;
-            }
-          }
-        });
-        return newStates;
-      });
-      
       // 載入今日排隊資料
       loadTodayQueue();
     } catch (e) {
       // 假資料
       setDesigners([
-        { id: 1, name: '小美' },
-        { id: 2, name: '阿強' },
-        { id: 3, name: '小華' },
+        { id: 1, name: '小美', isPaused: false, isOnVacation: false },
+        { id: 2, name: '阿強', isPaused: false, isOnVacation: false },
+        { id: 3, name: '小華', isPaused: false, isOnVacation: false },
       ]);
       setCurrentServing([]);
       setNextInQueue([]);
@@ -245,32 +218,11 @@ function DesignersList() {
       try {
         const response = await fetch(`/api/designers/${designer.id}/pause`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ isPaused: true })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isPaused: true, isOnVacation: true })
         });
-        
-        if (response.ok) {
-          const result = await response.json();
-          console.log('設計師休假狀態已更新:', result);
-          // 更新本地狀態
-          setDesignerStates(prev => ({
-            ...prev,
-            [designer.id]: { ...prev[designer.id], isOnVacation: true }
-          }));
-          // 重新載入設計師資料以同步狀態
-          loadAll();
-          // 發送設計師狀態變更事件
-          window.dispatchEvent(new CustomEvent('designer-state-changed', {
-            detail: { designerId: designer.id, action: 'vacation', isPaused: true }
-          }));
-        } else {
-          console.error('更新設計師休假狀態失敗');
-        }
-      } catch (error) {
-        console.error('API 呼叫錯誤:', error);
-      }
+        if (response.ok) loadAll();
+      } catch (error) { console.error('API 呼叫錯誤:', error); }
       return;
     }
     
@@ -278,32 +230,11 @@ function DesignersList() {
       try {
         const response = await fetch(`/api/designers/${designer.id}/pause`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ isPaused: false })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isPaused: false, isOnVacation: false })
         });
-        
-        if (response.ok) {
-          const result = await response.json();
-          console.log('設計師休假狀態已更新:', result);
-          // 更新本地狀態
-          setDesignerStates(prev => ({
-            ...prev,
-            [designer.id]: { ...prev[designer.id], isOnVacation: false }
-          }));
-          // 重新載入設計師資料以同步狀態
-          loadAll();
-          // 發送設計師狀態變更事件
-          window.dispatchEvent(new CustomEvent('designer-state-changed', {
-            detail: { designerId: designer.id, action: 'unvacation', isPaused: false }
-          }));
-        } else {
-          console.error('更新設計師休假狀態失敗');
-        }
-      } catch (error) {
-        console.error('API 呼叫錯誤:', error);
-      }
+        if (response.ok) loadAll();
+      } catch (error) { console.error('API 呼叫錯誤:', error); }
       return;
     }
     
@@ -311,32 +242,11 @@ function DesignersList() {
       try {
         const response = await fetch(`/api/designers/${designer.id}/pause`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ isPaused: true })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isPaused: true, isOnVacation: false })
         });
-        
-        if (response.ok) {
-          const result = await response.json();
-          console.log('設計師暫停接單狀態已更新:', result);
-          // 更新本地狀態
-          setDesignerStates(prev => ({
-            ...prev,
-            [designer.id]: { ...prev[designer.id], isPaused: true }
-          }));
-          // 重新載入設計師資料以同步狀態
-          loadAll();
-          // 發送設計師狀態變更事件
-          window.dispatchEvent(new CustomEvent('designer-state-changed', {
-            detail: { designerId: designer.id, action: 'pause', isPaused: true }
-          }));
-        } else {
-          console.error('更新設計師暫停接單狀態失敗');
-        }
-      } catch (error) {
-        console.error('API 呼叫錯誤:', error);
-      }
+        if (response.ok) loadAll();
+      } catch (error) { console.error('API 呼叫錯誤:', error); }
       return;
     }
     
@@ -344,32 +254,11 @@ function DesignersList() {
       try {
         const response = await fetch(`/api/designers/${designer.id}/pause`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ isPaused: false })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isPaused: false, isOnVacation: false })
         });
-        
-        if (response.ok) {
-          const result = await response.json();
-          console.log('設計師恢復接單狀態已更新:', result);
-          // 更新本地狀態
-          setDesignerStates(prev => ({
-            ...prev,
-            [designer.id]: { ...prev[designer.id], isPaused: false }
-          }));
-          // 重新載入設計師資料以同步狀態
-          loadAll();
-          // 發送設計師狀態變更事件
-          window.dispatchEvent(new CustomEvent('designer-state-changed', {
-            detail: { designerId: designer.id, action: 'unpause', isPaused: false }
-          }));
-        } else {
-          console.error('更新設計師恢復接單狀態失敗');
-        }
-      } catch (error) {
-        console.error('API 呼叫錯誤:', error);
-      }
+        if (response.ok) loadAll();
+      } catch (error) { console.error('API 呼叫錯誤:', error); }
       return;
     }
     
@@ -553,12 +442,10 @@ function DesignersList() {
         {sortedDesigners.filter(designer => designer.name !== '不指定').map(designer => {
           const card = getCardData(designer);
           const isPaused = designer.isPaused;
-          const designerState = designerStates[designer.id] || {};
-          const isOnVacation = designerState.isOnVacation;
-          const isPausedOrder = designerState.isPaused;
+          const isOnVacation = designer.isOnVacation;
           
           return (
-            <div key={designer.id} id={`designer-card-${designer.id}`} className="serving-card-progress" style={{minWidth:'0', maxWidth:'540px', width:'95%', height:'70%', position:'relative', display:'flex', flexDirection:'column', justifyContent:'flex-start', padding:'0', paddingBottom:'1.7cm'}}>
+            <div key={designer.id} id={`designer-card-${designer.id}`} className="serving-card-progress" style={{minWidth:'0', maxWidth:'540px', width:'95%', position:'relative', display:'flex', flexDirection:'column', justifyContent:'flex-start', padding:'0', paddingBottom:'1.7cm'}}>
               {/* 卡片上緣：名稱與 emoji 按鈕 */}
               <div className="designer-header" style={{display:'flex',alignItems:'center',width:'100%',padding:'1.1em 1.2em 0.5em 1.2em',boxSizing:'border-box',borderBottom:'1px solid rgba(247,171,94,0.12)'}}>
                 <span className="designer-title" style={{flex: '0 0 auto', alignSelf:'center', fontSize:'0.85em', fontWeight:700, color:'#f7ab5e', textAlign:'left', marginRight:'auto'}}>
@@ -566,7 +453,7 @@ function DesignersList() {
                 </span>
                 <div style={{display:'flex',gap:'0.2em',flex:1,justifyContent:'flex-end',alignItems:'center'}}>
                   <button className="btn btn-primary" style={{color:'#333',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer,'調整客人')} title="調整客人">📖</button>
-                  <button className="btn btn-primary" style={{color:'#ff9800',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer, isPausedOrder ? '恢復接單' : '暫停接單')} title={isPausedOrder ? '恢復接單' : '暫停接單'}>⏸️</button>
+                  <button className="btn btn-primary" style={{color:'#ff9800',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer, isPaused ? '恢復接單' : '暫停接單')} title={isPaused ? '恢復接單' : '暫停接單'}>⏸️</button>
                   {isOnVacation ? (
                     <button className="btn btn-primary" style={{color:'#2196f3',fontWeight:600,fontSize:'0.65em',margin:0,padding:'0.1em',minWidth:0,minHeight:0}} onClick={()=>handleAction(designer,'恢復上線')} title="恢復上線">🏖️</button>
                   ) : (
@@ -581,26 +468,59 @@ function DesignersList() {
                   <div className="col-label" style={{fontWeight:600,marginBottom:'0.5em'}}>目前號碼</div>
                   <div className="col-number now-number" style={{fontSize:'2em',fontWeight:700,background:'transparent',boxShadow:'none',color:'#ff9800'}}>{card.currentNumber}</div>
                   <div className="col-service" style={{fontSize:'1em',color:'#ff9800',marginTop:'0.3em'}}>{card.currentService}</div>
-                  <button className="btn btn-primary" style={{marginTop:'0.7em'}} onClick={()=>handleAction(designer,'結束')}>結束</button>
+                  <button
+                    className="orange-big-btn"
+                    onClick={() => handleAction(designer, '結束')}
+                  >
+                    結束
+                  </button>
                 </div>
                 <div className="card-col card-col-next" style={{flex:1,padding:'1em',textAlign:'center',background:'transparent',minHeight:'160px'}}>
                   <div className="col-label" style={{fontWeight:600,marginBottom:'0.5em'}}>下一位</div>
                   <div className="col-number next-number" style={{fontSize:'2em',fontWeight:700,color:'#ff9800'}}>{card.nextNumber}</div>
                   <div className="col-service" style={{fontSize:'1em',color:'#f7ab5e',marginTop:'0.3em'}}>{card.nextService}</div>
                   <div style={{marginTop:'0.7em', display:'flex', gap:'0.5em', justifyContent:'center'}}>
-                    <button className="btn btn-primary" onClick={()=>handleAction(designer,'報到', card.nextNumber)} disabled={card.nextNumber === '-' || !card.nextNumber}>報到</button>
-                    <button className="btn btn-primary" onClick={()=>handleAction(designer,'過號')}>過號</button>
+                    <button
+                      className="orange-big-btn"
+                      onClick={() => handleAction(designer, '報到', card.nextNumber)}
+                      disabled={card.nextNumber === '-' || !card.nextNumber}
+                      style={{ opacity: (card.nextNumber === '-' || !card.nextNumber) ? 0.5 : 1 }}
+                    >
+                      報到
+                    </button>
+                    <button
+                      className="orange-big-btn"
+                      onClick={() => handleAction(designer, '過號')}
+                    >
+                      過號
+                    </button>
                   </div>
                 </div>
               </div>
-              {isOnVacation && (
-                <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:'rgba(255,152,0,0.45)',zIndex:10,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'2em',fontWeight:900,color:'#fff',letterSpacing:'4px',pointerEvents:'none',borderRadius:'18px',textShadow:'0 2px 16px #333d38cc'}}>
-                  休假中
+              {designer.isOnVacation && !showProductModal && !showTransferModal && (
+                <div className="vacation-mask">
+                  <span style={{
+                    fontSize: '2em',
+                    fontWeight: 900,
+                    color: '#fff',
+                    letterSpacing: '4px',
+                    textShadow: '0 2px 16px #333d38cc'
+                  }}>
+                    休假中
+                  </span>
                 </div>
               )}
-              {isPausedOrder && !isOnVacation && (
-                <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:'rgba(120,120,120,0.45)',zIndex:10,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'2em',fontWeight:900,color:'#fff',letterSpacing:'4px',pointerEvents:'none',borderRadius:'18px',textShadow:'0 2px 16px #333d38cc'}}>
-                  暫時停止服務
+              {designer.isPaused && !designer.isOnVacation && !showProductModal && !showTransferModal && (
+                <div className="paused-mask">
+                  <span style={{
+                    fontSize: '2em',
+                    fontWeight: 900,
+                    color: '#fff',
+                    letterSpacing: '4px',
+                    textShadow: '0 2px 16px #333d38cc'
+                  }}>
+                    暫時停止服務
+                  </span>
                 </div>
               )}
             </div>
@@ -873,11 +793,12 @@ function DesignersList() {
       {showProductModal && productModalDesigner && (
         <div style={{
           position:'fixed',top:0,left:0,right:0,bottom:0,
-          background:'rgba(10,10,10,0.88)',zIndex:3000,
-          display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'
+          background:'rgba(10,10,10,0.88)',zIndex:10000,
+          display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',
+          pointerEvents:'auto'
         }}>
           <div style={{
-            background:'#232a2b',
+            background:'#333d38',
             borderRadius:'28px',
             padding:'3.5rem 2.5rem',
             maxWidth:'700px',
@@ -931,13 +852,14 @@ function DesignersList() {
             position: 'fixed',
             top: 0, left: 0, right: 0, bottom: 0,
             background: 'rgba(10,10,10,0.88)',
-            zIndex: 9999,
+            zIndex: 10000,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '20px'
+            padding: '20px',
+            pointerEvents: 'auto'
           }}>
-            <div className="product-modal-content" style={{maxWidth:'400px',padding:'2.5rem 1.5rem',background:'#232a2b',borderRadius:'28px',boxShadow:'0 16px 64px 0 rgba(0,0,0,0.55)',width:'100%',textAlign:'center'}}>
+            <div className="product-modal-content" style={{maxWidth:'400px',padding:'2.5rem 1.5rem',background:'#333d38',borderRadius:'28px',boxShadow:'0 16px 64px 0 rgba(0,0,0,0.55)',width:'100%',textAlign:'center'}}>
               <div style={{color:'#f7ab5e',fontSize:'1.3em',fontWeight:700,marginBottom:'2em'}}>確定要完成銷售「{confirmProduct.name}」嗎？</div>
               <div style={{display:'flex',justifyContent:'center',gap:'2em'}}>
                 <button className="product-btn" style={{background:'#f7ab5e',color:'#232a2b',fontWeight:800}} onClick={()=>{handleSellProduct(confirmProduct.id);setConfirmProduct(null);}}>確認</button>
@@ -946,7 +868,7 @@ function DesignersList() {
             </div>
           </div>
         ) : (
-          <div className="product-modal-bg" style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(10,10,10,0.88)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+          <div className="product-modal-bg" style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(10,10,10,0.88)',zIndex:10000,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',pointerEvents:'auto'}}>
             <div className="product-modal-content" style={{maxWidth:'400px',padding:'2.5rem 1.5rem',color:'red',textAlign:'center',background:'#fff',borderRadius:'28px'}}>彈窗資料異常</div>
           </div>
         )

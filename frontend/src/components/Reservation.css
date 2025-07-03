@@ -430,27 +430,25 @@
 }
 
 .kanban-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 0.2em;
+  justify-items: center;
+  align-items: stretch;
 }
 .kanban-card {
+  min-width: 120px;
+  width: 100%;
+  max-width: 99vw;
+  padding: 0.5em;
+  box-sizing: border-box;
+  overflow: visible !important;
+  word-break: break-all;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  background: #333d38;
-  border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(51,61,56,0.10);
-  padding: 0.7em 0.7em 0.6em 0.7em;
-  margin: 0.1em 0;
-  min-width: 0;
-  width: 100%;
-  box-sizing: border-box;
-  border: 2px solid #f7ab5e22;
-  max-width: 140px;
-  text-align: center;
+  justify-content: center;
   align-items: center;
 }
 .kanban-designer {
@@ -590,9 +588,10 @@
 /* === 即時看板卡片緊密排列 === */
 .kanban-list {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  gap: 0.2em;
   justify-content: center;
-  gap: 0.5em;
 }
 .kanban-card {
   max-width: 140px;
@@ -600,8 +599,54 @@
   margin: 0;
 }
 @media (max-width: 600px) {
+  .reservation-container {
+    padding: 0 2vw 24px 2vw;
+    max-width: 100vw;
+  }
+  .user-queue-list.new-user-queue-list {
+    padding: 0.7em 0.2em;
+    margin-bottom: 1em;
+  }
+  .user-queue-btns {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.3em !important;
+  }
+  .new-user-queue-btn {
+    width: 2.2em !important;
+    height: 2.2em !important;
+    font-size: 1em !important;
+  }
+  .kanban-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.7em !important;
+    align-items: center !important;
+  }
   .kanban-card {
-    max-width: 120px;
+    width: 95vw !important;
+    max-width: 99vw !important;
+    padding: 0.7em 0.5em !important;
+    font-size: 0.98em !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+  .queue-col-right, .reservation-step {
+    max-width: 100vw !important;
+    width: 100% !important;
+    margin: 0.5em 0 !important;
+    padding: 0.7em 0.2em !important;
+    border-radius: 10px !important;
+  }
+  .btn, .btn-primary, .btn-secondary {
+    width: 100% !important;
+    font-size: 1.1em !important;
+    min-height: 44px !important;
+    margin: 0.3em 0 !important;
+  }
+  .modal-content, .modal-content.service-modal {
+    max-width: 98vw !important;
+    min-width: 0 !important;
+    padding: 0.7em 0.2em !important;
   }
 }
 
@@ -664,4 +709,10 @@
 
 body, .reservation-container, .reservation-header, .business-status-message, .kanban-board {
   background: none !important;
+}
+
+.user-queue-btns {
+  gap: 1em !important;
+  grid-template-columns: repeat(5, 2.8em) !important;
+  justify-content: center !important;
 }

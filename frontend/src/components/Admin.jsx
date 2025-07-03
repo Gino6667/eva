@@ -139,73 +139,41 @@ function Admin() {
 
   return (
     <div className="admin-layout">
-      {/* 側邊欄 */}
       <aside className={`admin-sidebar${sidebarCollapsed ? ' collapsed' : ''}`}>
         <div className="sidebar-header">
-          <h2 style={{display: sidebarCollapsed ? 'none' : 'block'}}>{user?.role === 'admin' ? '後台管理' : '設計師後台'}</h2>
-          <p style={{display: sidebarCollapsed ? 'none' : 'block'}}>歡迎，{user?.name || (user?.role === 'admin' ? '管理員' : '設計師')}</p>
+          <h2>{user?.role === 'admin' ? '後台管理' : '設計師後台'}</h2>
         </div>
         <nav className="sidebar-nav">
-          {sidebarItems.map((item, idx) => {
-            // 其餘主選單
-            return (
+          {sidebarItems.map((item, idx) => (
             <div
               key={item.path}
               className={`sidebar-item ${item.active ? 'active' : ''}`}
-              onClick={() => {
-                if (item.special) {
-                    if (item.path === 'control') {
-                      handleNavigation(item.path);
-                  }
-                } else {
-                  handleNavigation(item.path);
-                }
-              }}
-              style={sidebarCollapsed ? {justifyContent: 'center'} : {}}
+              onClick={() => handleNavigation(item.path)}
             >
               <span className="sidebar-icon">{item.icon}</span>
               {!sidebarCollapsed && <span className="sidebar-label">{item.label}</span>}
             </div>
-            );
-          })}
+          ))}
         </nav>
-        <div className="sidebar-footer" style={sidebarCollapsed ? {justifyContent: 'center'} : {}}>
-          <button className="logout-btn" onClick={handleLogout} style={sidebarCollapsed ? {justifyContent: 'center'} : {}}>
+        <div className="sidebar-footer">
+          <button className="logout-btn" onClick={handleLogout}>
             <span className="sidebar-icon">🚪</span>
             {!sidebarCollapsed && <span className="sidebar-label">登出</span>}
           </button>
         </div>
-        {/* 方向鍵摺疊按鈕 */}
         <button
           className="sidebar-toggle-btn"
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-          style={{
-            position: 'absolute',
-            right: '-12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '24px',
-            height: '24px',
-            border: 'none',
-            background: 'transparent',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-            zIndex: 10
-          }}
           aria-label={sidebarCollapsed ? "展開側邊欄" : "收合側邊欄"}
         >
-          <span style={{fontSize: '1.2rem', color: '#fff', fontWeight: 'bold', lineHeight: 1, display: 'inline-block'}}>
-            {sidebarCollapsed ? '►' : '◄'}
-          </span>
+          {sidebarCollapsed
+            ? <span style={{fontSize: '1.5em', color: '#fff', fontWeight: 'bold'}}>▶</span>
+            : <span style={{fontSize: '1.5em', color: '#fff', fontWeight: 'bold'}}>◀</span>
+          }
         </button>
       </aside>
-      {/* 主要內容區域 */}
       <main className="admin-main">
-          <Outlet />
+        <Outlet />
       </main>
     </div>
   );

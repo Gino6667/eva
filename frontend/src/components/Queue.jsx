@@ -462,6 +462,7 @@ function Queue() {
             <h3 style={{margin:'0 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
             <div className="kanban-list">
               {designers.map((designer, idx) => {
+                if (designer.isOnVacation) return null; // 休假中卡片不顯示
                 const serving = currentServing.find(s => s.designerId === designer.id);
                 const service = serving ? services.find(sv => String(sv.id) === String(serving.serviceId)) : null;
                 let estWait = null;
@@ -470,7 +471,6 @@ function Queue() {
                   const serviceIds = designer.services || [];
                   const durations = serviceIds.map(sid => services.find(s => s.id === sid)?.duration || 60);
                   const avgDuration = durations.length ? (durations.reduce((a,b)=>a+b,0)/durations.length) : 60;
-                  // 加 1，包含正在服務的客人
                   estWait = (waitingCount + 1) * avgDuration;
                 }
                 return (
@@ -480,9 +480,12 @@ function Queue() {
                     <div className="kanban-service">{serving && service ? service.name : '—'}</div>
                     <div className="kanban-wait">
                       預估等待：{
-                        serving || (todayStats && todayStats[designer.id]?.waiting > 0)
-                          ? (serving && estWait !== null ? `${Math.round(estWait)} 分鐘` : '—')
-                          : '立刻'
+                        designer.isPaused
+                          ? '暫停服務'
+                          : (serving || (todayStats && todayStats[designer.id]?.waiting > 0)
+                              ? (serving && estWait !== null ? `${Math.round(estWait)} 分鐘` : '—')
+                              : '立刻'
+                            )
                       }
                     </div>
                   </div>

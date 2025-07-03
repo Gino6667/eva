@@ -4157,6 +4157,16 @@
       "date": "2025-07-01",
       "designerId": 11,
       "productId": 1751396836664
+    },
+    {
+      "id": 1751556129679,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：很多（設計師：阿強）",
+      "category": "product",
+      "date": "2025-07-03",
+      "designerId": 7,
+      "productId": 1751396836664
     }
   ],
   "queueTransfers": [

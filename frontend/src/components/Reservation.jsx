@@ -26,9 +26,9 @@ function Reservation() {
   const [isMember, setIsMember] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
-
-  // 自動設定為今天的日期
-  const today = new Date().toISOString().split('T')[0];
+  const [userQueue, setUserQueue] = useState([]);
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const filteredUserQueue = user ? userQueue.filter(q => q.createdAt.slice(0, 10) === todayStr && q.status !== 'done') : [];
 
   useEffect(() => {
     loadDesigners();
@@ -48,6 +48,25 @@ function Reservation() {
       window.removeEventListener('designer-state-changed', handleDesignerStateChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    const loadUserQueue = async () => {
+      try {
+        const res = await axios.get(`/api/queue/user/${user.id}?date=${todayStr}`);
+        setUserQueue(res.data);
+      } catch (err) {
+        setUserQueue([]);
+      }
+    };
+    loadUserQueue();
+    // 監聽 queue-updated 事件
+    const reload = () => { loadUserQueue(); };
+    window.addEventListener('queue-updated', reload);
+    return () => {
+      window.removeEventListener('queue-updated', reload);
+    };
+  }, [user, todayStr]);
 
   const loadDesigners = async () => {
     try {
@@ -221,7 +240,7 @@ function Reservation() {
 
   if (queueResult) {
     return (
-      <div className="reservation-container">
+      <div id="reservation" className="reservation-container">
         <div className="reservation-header">
           <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>線上抽號</h2>
           <p>抽號成功！</p>
@@ -244,15 +263,39 @@ function Reservation() {
   }
 
   return (
-    <div className="reservation-container">
+    <div id="reservation" className="reservation-container">
       <div className="reservation-header">
         <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.5em 0', fontWeight: 700 }}>線上抽號(僅限當日抽號)</h2>
       </div>
+      {user && filteredUserQueue.length > 0 && (
+        <div className="user-queue-list new-user-queue-list" style={{marginBottom:'1em'}}>
+          <div className="user-queue-title">您今日抽到的號碼：</div>
+          <div className="user-queue-btns" style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0.2em',justifyItems:'center'}}>
+            {filteredUserQueue.map(q => (
+              <button
+                key={q.id}
+                className="user-queue-btn new-user-queue-btn"
+                style={{borderRadius:'50%',width:'2.5em',height:'2.5em',fontSize:'1.1em',border:'2px solid #f7ab5e',background:'#fff',color:'#f7ab5e',fontWeight:700,overflow:'hidden'}}
+                disabled
+              >
+                <span className="user-queue-number">{q.number}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+      {user && userQueue.length === 0 && (
+        <div style={{marginBottom: '1em', padding: '1rem', background: 'rgba(33, 150, 243, 0.07)', borderRadius: '12px', border: '2px solid #ffc107', textAlign: 'center'}}>
+          <div style={{color: '#f7ab5e', fontWeight: 500}}>您今日還沒有抽號</div>
+          <div style={{color: '#f7ab5e', fontSize: '0.9rem', marginTop: '0.5rem'}}>請前往現場排隊或線上預約抽號</div>
+        </div>
+      )}
       <div className="kanban-board">
         {getBusinessStatusMessage()}
         <h3 style={{margin:'0.2em 0 0.5em 0',fontWeight:'bold',fontSize:'1.1em'}}>即時看板</h3>
         <div className="kanban-list">
           {designers.map((designer, idx) => {
+            if (designer.isOnVacation) return null;
             const serving = currentServing.find(s => s.designerId === designer.id);
             const service = serving ? services.find(sv => String(sv.id) === String(serving.serviceId)) : null;
             let estWait = null;
@@ -267,12 +310,13 @@ function Reservation() {
               <div key={`kanban-${designer.id}`} className="kanban-card">
                 <div className="kanban-designer">{designer.name}</div>
                 <div className="kanban-number">{serving ? `${serving.number} 號` : '暫無'}</div>
-                <div className="kanban-service">{serving && service ? service.name : '—'}</div>
                 <div className="kanban-wait">
                   預估等待：{
-                    serving || (todayStats && todayStats[designer.id]?.waiting > 0)
-                      ? (serving && estWait !== null ? `${Math.round(estWait)} 分鐘` : '—')
-                      : '立刻'
+                    designer.isPaused
+                      ? '暫停服務'
+                      : (serving || (todayStats && todayStats[designer.id]?.waiting > 0)
+                          ? (serving && estWait !== null ? `${Math.round(estWait)} 分鐘` : '—')
+                          : '立刻')
                   }
                 </div>
               </div>

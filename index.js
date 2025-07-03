@@ -682,23 +682,21 @@ app.post('/api/queue/call', (req, res) => {
   res.status(404).json({ error: '無等待中號碼' });
 });
 
-// 完成（將指定設計師第一位 called 狀態改為 done，並自動叫下一位）
+// 完成（將指定設計師第一位 called 狀態改為 done，不自動叫下一位）
 app.post('/api/queue/done', (req, res) => {
   const data = getData();
   const { designerId } = req.body;
   const first = data.queue.find(q => q.designerId === designerId && q.status === 'called');
   if (first) {
     first.status = 'done';
-    // 自動叫下一位
-    const next = data.queue.find(q => q.designerId === designerId && q.status === 'waiting');
-    if (next) next.status = 'called';
+    // 不自動叫下一位
     saveData(data);
     return res.json(first);
   }
   res.status(404).json({ error: '無已叫號號碼' });
 });
 
-// 標記未到（absent，並自動叫下一位）
+// 標記未到（absent，不自動叫下一位）
 app.post('/api/queue/absent', (req, res) => {
   const data = getData();
   const { designerId } = req.body;
@@ -706,9 +704,7 @@ app.post('/api/queue/absent', (req, res) => {
   const first = data.queue.find(q => q.designerId === designerId && (q.status === 'called' || q.status === 'waiting'));
   if (first) {
     first.status = 'absent';
-    // 自動叫下一位
-    const next = data.queue.find(q => q.designerId === designerId && q.status === 'waiting');
-    if (next) next.status = 'called';
+    // 不自動叫下一位
     saveData(data);
     return res.json(first);
   }
@@ -792,12 +788,13 @@ app.patch('/api/designers/:id/resting', (req, res) => {
 app.patch('/api/designers/:id/pause', (req, res) => {
   const data = getData();
   const id = Number(req.params.id);
-  const { isPaused } = req.body;
+  const { isPaused, isOnVacation } = req.body;
   const designer = data.designers.find(d => d.id === id);
   if (!designer) return res.status(404).json({ error: '找不到設計師' });
-  designer.isPaused = !!isPaused;
+  if (isPaused !== undefined) designer.isPaused = !!isPaused;
+  if (isOnVacation !== undefined) designer.isOnVacation = !!isOnVacation;
   saveData(data);
-  res.json({ success: true, isPaused: designer.isPaused });
+  res.json({ success: true, isPaused: designer.isPaused, isOnVacation: designer.isOnVacation });
 });
 
 // 修改 queue 的設計師

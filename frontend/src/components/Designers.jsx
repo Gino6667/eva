@@ -342,56 +342,58 @@ function Designers() {
             </button>
           </div>
 
-          {/* 新增設計師表單 */}
+          {/* 新增設計師表單（彈窗） */}
           {showAddForm && (
-            <div className="admin-form">
-              <h3>新增設計師</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+            <div className="modal-overlay" onClick={() => setShowAddForm(false)}>
+              <div className="modal-content" onClick={e => e.stopPropagation()} style={{maxWidth:'600px',margin:'2rem auto'}}>
+                <h3>新增設計師</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                  <div className="form-group">
+                    <label>姓名 *</label>
+                    <input
+                      type="text"
+                      value={newDesigner.name}
+                      onChange={(e) => setNewDesigner({...newDesigner, name: e.target.value})}
+                      placeholder="請輸入設計師姓名"
+                    />
+                  </div>
+                </div>
                 <div className="form-group">
-                  <label>姓名 *</label>
-                  <input
-                    type="text"
-                    value={newDesigner.name}
-                    onChange={(e) => setNewDesigner({...newDesigner, name: e.target.value})}
-                    placeholder="請輸入設計師姓名"
-                  />
+                  <label>可提供的服務 *</label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem', marginTop: '0.5rem' }}>
+                    {services.map(service => (
+                      <label key={service.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <input
+                          type="checkbox"
+                          checked={newDesigner.services ? newDesigner.services.includes(service.id) : false}
+                          onChange={(e) => {
+                            const currentServices = newDesigner.services || [];
+                            if (e.target.checked) {
+                              setNewDesigner({
+                                ...newDesigner,
+                                services: [...currentServices, service.id]
+                              });
+                            } else {
+                              setNewDesigner({
+                                ...newDesigner,
+                                services: currentServices.filter(id => id !== service.id)
+                              });
+                            }
+                          }}
+                        />
+                        {service.name} (${service.price})
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label>可提供的服務 *</label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  {services.map(service => (
-                    <label key={service.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <input
-                        type="checkbox"
-                        checked={newDesigner.services ? newDesigner.services.includes(service.id) : false}
-                        onChange={(e) => {
-                          const currentServices = newDesigner.services || [];
-                          if (e.target.checked) {
-                            setNewDesigner({
-                              ...newDesigner,
-                              services: [...currentServices, service.id]
-                            });
-                          } else {
-                            setNewDesigner({
-                              ...newDesigner,
-                              services: currentServices.filter(id => id !== service.id)
-                            });
-                          }
-                        }}
-                      />
-                      {service.name} (${service.price})
-                    </label>
-                  ))}
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <button className="admin-btn admin-btn-success" onClick={handleAddDesigner}>
+                    新增
+                  </button>
+                  <button className="admin-btn admin-btn-secondary" onClick={() => setShowAddForm(false)}>
+                    取消
+                  </button>
                 </div>
-              </div>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button className="admin-btn admin-btn-success" onClick={handleAddDesigner}>
-                  新增
-                </button>
-                <button className="admin-btn admin-btn-secondary" onClick={() => setShowAddForm(false)}>
-                  取消
-                </button>
               </div>
             </div>
           )}
@@ -609,17 +611,18 @@ function Designers() {
               </div>
             </div>
           )}
-          {/* 編輯服務項目表單 */}
+          {/* 編輯服務項目表單（彈窗） */}
           {editingService && (
-            <div className="admin-form">
-              <h3>編輯服務項目</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+            <div className="modal-overlay" onClick={() => setEditingService(null)}>
+              <div className="modal-content" onClick={e => e.stopPropagation()} style={{maxWidth:'600px',margin:'2rem auto'}}>
+                <h3>編輯服務項目</h3>
                 <div className="form-group">
                   <label>服務名稱 *</label>
                   <input
                     type="text"
                     value={editingService?.name ?? ''}
                     onChange={(e) => setEditingService({...editingService, name: e.target.value})}
+                    placeholder="請輸入服務名稱"
                   />
                 </div>
                 <div className="form-group">
@@ -628,34 +631,36 @@ function Designers() {
                     type="number"
                     value={editingService?.price ?? ''}
                     onChange={e => setEditingService({...editingService, price: e.target.value})}
+                    placeholder="請輸入價格"
                   />
                 </div>
                 <div className="form-group">
-                  <label>時長(分鐘) *</label>
+                  <label>時長（分鐘）*</label>
                   <input
                     type="number"
                     value={editingService?.duration ?? ''}
                     onChange={(e) => setEditingService({...editingService, duration: e.target.value})}
+                    placeholder="請輸入時長"
                   />
                 </div>
                 <div className="form-group">
                   <label>狀態</label>
-                  <select 
-                    value={editingService?.status ?? 'active'} 
+                  <select
+                    value={editingService?.status ?? 'active'}
                     onChange={(e) => setEditingService({...editingService, status: e.target.value})}
                   >
                     <option value="active">啟用</option>
                     <option value="inactive">停用</option>
                   </select>
                 </div>
-              </div>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button className="admin-btn admin-btn-success" onClick={handleEditService}>
-                  儲存
-                </button>
-                <button className="admin-btn admin-btn-secondary" onClick={() => setEditingService(null)}>
-                  取消
-                </button>
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                  <button className="admin-btn admin-btn-success" onClick={handleEditService}>
+                    儲存
+                  </button>
+                  <button className="admin-btn admin-btn-secondary" onClick={() => setEditingService(null)}>
+                    取消
+                  </button>
+                </div>
               </div>
             </div>
           )}

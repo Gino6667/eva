@@ -12,6 +12,7 @@
   margin: 0;
 }
 .sidebar-menu-title {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,7 +26,20 @@
   background: #333d38;
 }
 .sidebar-arrow {
-  font-size: 0.9em;
+  position: static;
+  font-size: 1.1em;
+  background: none;
+  color: #232323;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  z-index: 10;
+  cursor: pointer;
+  border: none;
   margin-left: 0.5em;
 }
 .sidebar-submenu {

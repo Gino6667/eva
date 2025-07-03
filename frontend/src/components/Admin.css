@@ -6,9 +6,9 @@
 
 /* 黑色 YouTube 風格側邊欄 */
 .admin-sidebar {
-  width: 280px;
-  background: #0f0f0f;
-  color: #ffffff;
+  width: 240px;
+  background: inherit;
+  color: #fff;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -16,18 +16,20 @@
   left: 0;
   top: 0;
   z-index: 1000;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-  transition: width 0.3s ease;
+  transition: width 0.3s;
 }
 
 /* 收合狀態 */
 .admin-sidebar.collapsed {
-  width: 80px;
+  width: 72px;
 }
 
 .admin-sidebar.collapsed .sidebar-header {
-  padding: 2rem 0.5rem 1.5rem;
-  text-align: center;
+  padding: 1.5rem 1.2rem 1rem 1.2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #fff;
 }
 
 .admin-sidebar.collapsed .sidebar-item {
@@ -53,9 +55,28 @@
   margin-right: 0;
 }
 
+.admin-sidebar.collapsed .sidebar-label {
+  display: none !important;
+}
+
+.admin-sidebar.collapsed .sidebar-header {
+  display: none !important;
+}
+
+.admin-sidebar.collapsed .sidebar-footer {
+  display: none !important;
+}
+
+.admin-sidebar.collapsed > *:not(.sidebar-toggle-btn) {
+  display: none !important;
+}
+
 .sidebar-header {
-  padding: 2rem 1.5rem 1.5rem;
-  border-bottom: 1px solid #272727;
+  padding: 1.5rem 1.2rem 1rem 1.2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #fff;
 }
 
 .sidebar-header h2 {
@@ -73,27 +94,27 @@
 
 .sidebar-nav {
   flex: 1;
-  padding: 1rem 0;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
 }
 
 .sidebar-item {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.7rem 1.2rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
+  transition: background 0.18s, border-color 0.18s;
+  font-size: 1rem;
+  color: #fff;
 }
 
-.sidebar-item:hover {
-  background: #272727;
-  border-left-color: #ff0000;
-}
-
-.sidebar-item.active {
-  background: #272727;
-  border-left-color: #ff0000;
+.sidebar-item:hover, .sidebar-item.active {
+  background: #292929;
+  border-left: 4px solid #ff0000;
+  color: #fff;
 }
 
 .sidebar-item.active .sidebar-label {
@@ -102,38 +123,42 @@
 }
 
 .sidebar-icon {
-  font-size: 1.2rem;
-  margin-right: 1rem;
-  width: 24px;
+  font-size: 1.3rem;
+  width: 32px;
   text-align: center;
+  margin-right: 1rem;
 }
 
 .sidebar-label {
-  font-size: 0.95rem;
-  color: #cccccc;
-  transition: color 0.2s ease;
+  font-size: 1rem;
+  color: #fff;
+  white-space: normal;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  line-height: 1.4;
 }
 
 .sidebar-footer {
-  padding: 1rem 1.5rem;
-  border-top: 1px solid #272727;
+  padding: 1rem 1.2rem;
+  border-top: 1px solid #333;
 }
 
 .logout-btn {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.75rem 0;
+  padding: 0.7rem 0;
   background: none;
   border: none;
-  color: #cccccc;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 8px;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: background 0.18s;
 }
 
 .logout-btn:hover {
-  background: #272727;
+  background: #292929;
   color: #ff0000;
 }
 
@@ -144,23 +169,25 @@
 /* 主要內容區域 */
 .admin-main {
   flex: 1;
-  margin-left: 280px;
+  margin-left: 240px;
   min-height: 100vh;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s;
+  background: none;
 }
 
 .admin-sidebar.collapsed + .admin-main {
-  margin-left: 80px;
+  margin-left: 72px;
 }
 
 .admin-container {
-  background: #333d38;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #fff !important;
+  background: none !important;
 }
+/*
+.admin-container * {
+  background: none !important;
+  background-image: none !important;
+}
+*/
 
 .admin-header {
   background: #333d38;
@@ -316,26 +343,19 @@
   font-size: 1rem;
 }
 
-.admin-btn {
-  margin: 0 4px;
-  min-width: 48px;
-}
-
-/* 按鈕樣式 */
-.admin-btn {
-  background: #f7ab5e;
-  color: #333d38;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
+.admin-btn, .btn, .btn-primary {
+  color: #fff !important;
+  background: #333d38 !important;
+  border: 1.5px solid #f7ab5e !important;
+  border-radius: 6px !important;
   font-weight: bold;
-  transition: all 0.3s ease;
+  box-shadow: none;
+  transition: background 0.18s, color 0.18s, border 0.18s;
 }
-
-.admin-btn:hover {
-  background: #e89b4e;
-  transform: translateY(-1px);
+.admin-btn:hover, .btn:hover, .btn-primary:hover {
+  background: #ff9800 !important;
+  color: #232323 !important;
+  border-color: #ff9800 !important;
 }
 
 .admin-btn.danger {
@@ -906,10 +926,10 @@
 
 /* 設計師管理卡片美化 */
 .serving-card-progress {
+  margin-top: 2.5rem;
   background: transparent;
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10), 0 1.5px 6px rgba(0,0,0,0.08);
-  margin: 32px 18px 0 0;
   transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
   border: 2px solid #f7ab5e;
   overflow: hidden;
@@ -984,10 +1004,11 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(540px, 1fr));
   grid-template-rows: repeat(2, auto);
-  gap: 40px 32px;
+  gap: 0 !important;
   justify-content: center;
   align-items: stretch;
-  padding: 24px 0 40px 0;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 @media (max-width: 1200px) {
   .serving-grid-progress {
@@ -1138,4 +1159,102 @@ table, th, td {
 .admin-sidebar button:focus, .admin-sidebar button:active {
   outline: none;
   box-shadow: none;
+}
+
+.sidebar-toggle-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #181818;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  z-index: 1100;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.sidebar-toggle-btn:hover {
+  background: #ff0000;
+  color: #fff;
+}
+
+.modal-content {
+  background: #232b28 !important;
+  color: #fff !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 2rem 2.5rem;
+}
+
+.orange-big-btn {
+  background-color: #ff9800 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 1em !important;
+  padding: 0.35em 1.2em !important;
+  min-width: 72px !important;
+  min-height: 32px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px #ff980033 !important;
+  cursor: pointer !important;
+  margin: 0.2em 0.4em !important;
+  transition: background 0.2s;
+  display: inline-block !important;
+}
+.orange-big-btn:active,
+.orange-big-btn:hover {
+  background-color: #ffb74d !important;
+}
+
+.vacation-mask {
+  background: #ff9800e6 !important;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.paused-mask {
+  background: rgba(120,120,120,0.65) !important;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.product-modal-bg {
+  background: rgba(10,10,10,0.88) !important;
+  z-index: 10000 !important;
+  opacity: 1 !important;
+}
+
+.product-modal-content, .product-btn-grid, .product-btn {
+  background: #333d38 !important;
+  color: #fff !important;
+  z-index: 10001 !important;
+  opacity: 1 !important;
+  border-radius: 28px !important;
+}
+
+.product-btn {
+  border: 2px solid #ff9800 !important;
+  border-radius: 12px !important;
+}
+.product-btn:active, .product-btn:hover {
+  border: 2.5px solid #ff9800 !important;
 }
