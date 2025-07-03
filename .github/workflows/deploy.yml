@@ -6,12 +6,13 @@ on:
       - main
 
 jobs:
-  deploy-frontend:
+  deploy-and-sync:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 前端 build & deploy
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -34,15 +35,7 @@ jobs:
           publish_dir: ./frontend/dist
           force_orphan: true
 
-  sync-backend-data:
-    runs-on: ubuntu-latest
-    needs: deploy-frontend
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+      # backend 資料同步
       - name: Setup Git user
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -52,13 +45,11 @@ jobs:
         run: |
           echo "檢查 backend/data.sample.json 是否存在..."
           ls -la backend/
-          
           if [ -f backend/data.sample.json ]; then
             echo "複製 data.sample.json 到 data.json..."
             cp backend/data.sample.json backend/data.json
             echo "檢查 data.json 內容..."
             grep -A 5 -B 5 "rowyha" backend/data.json || echo "找不到 rowyha 帳號"
-            
             echo "提交 data.json 到 git..."
             git add backend/data.json
             git commit -m "Sync backend data from sample" || echo "No changes to commit"
@@ -68,10 +59,10 @@ jobs:
             echo "backend/data.sample.json 不存在，跳過同步"
           fi
 
+      # 觸發 Render webhook
       - name: Trigger Render deployment
         run: |
           echo "觸發 Render 重新部署..."
-          # 如果有 Render webhook，可以觸發重新部署
           if [ -n "${{ secrets.RENDER_WEBHOOK_URL }}" ]; then
             curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
             echo "已觸發 Render webhook"
@@ -79,8 +70,5 @@ jobs:
             echo "沒有設定 RENDER_WEBHOOK_URL，請手動觸發 Render 重新部署"
             echo "請到 Render 後台點擊 'Manual Deploy' 或 'Redeploy'"
           fi
-          
-          # 等待一下讓部署開始
           sleep 10
-          
           echo "部署觸發完成，請等待 2-3 分鐘讓 Render 完成部署" 
