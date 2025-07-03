@@ -2793,10 +2793,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 64,
-      "createdAt": "2025-07-03T17:10:27.526Z",
-      "userId": 3
+      "createdAt": "2025-07-03T17:22:02.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-03T17:22:02.000Z"
     },
     {
       "id": 9177,
