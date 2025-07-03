@@ -2602,10 +2602,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 49,
-      "createdAt": "2025-07-03T14:15:49.363Z",
-      "userId": 3
+      "createdAt": "2025-07-03T16:23:57.000Z",
+      "userId": 3,
+      "absentAt": "2025-07-03T16:23:57.000Z"
     },
     {
       "id": 9161,
