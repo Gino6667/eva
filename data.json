@@ -3713,10 +3713,10 @@
     },
     {
       "id": 9209,
-      "designerId": 7,
+      "designerId": 12,
       "serviceId": 3,
       "type": "online",
-      "status": "absent",
+      "status": "waiting",
       "number": 30,
       "createdAt": "2025-07-05T12:46:25.186Z",
       "userId": 3,
@@ -3741,10 +3741,15 @@
           "status": "absent",
           "timestamp": "2025-07-05T13:04:25.120Z",
           "note": "客人未到，標記過號"
+        },
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T13:20:18.327Z",
+          "note": "過號客人重新報到"
         }
       ],
       "absentAt": "2025-07-05T13:04:25.120Z",
-      "absentCheckinAt": "2025-07-05T13:03:03.574Z"
+      "absentCheckinAt": "2025-07-05T13:20:18.327Z"
     },
     {
       "id": 9210,
