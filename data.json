@@ -5051,7 +5051,7 @@
     {
       "id": 1,
       "email": "test@example.com",
-      "password": "hashedpassword",
+      "password": "$2b$10$CQG4RWGy64ZYiLLA0PmCGOt8kXbwwVESMx8mDWYCNzleo3ED9wGM.",
       "name": "王小明",
       "role": "customer",
       "phone": "0912333444",
@@ -5069,7 +5069,7 @@
     {
       "id": 4,
       "phone": "0912312312",
-      "password": "123",
+      "password": "$2b$10$xjcAI3yHLiKHGqcCjPG7tedffl95N.FSyuTAPIiboOc825gDpB6X6",
       "name": "測試會員",
       "role": "customer",
       "totalSpent": 200
@@ -5077,49 +5077,55 @@
     {
       "id": 5,
       "email": "qwe@gmail.com",
-      "password": "1234",
+      "password": "$2b$10$1rEFA96e.yiDtmlZcRdrFOXbwBJ4nYG7qAeymgsqyAFQHCSsXZlFi",
       "name": "qwe@gmail.com",
       "role": "designer"
     },
     {
       "id": 6,
       "phone": "0912666555",
-      "password": "1234",
+      "password": "$2b$10$3gK0elnhS.bPGHGIjDegpeL19B3okXXlytjJxw2eaXfSKLE0Bshz2",
       "name": "我是測試",
-      "role": "user"
+      "role": "customer"
     },
     {
       "id": 7,
       "phone": "0911111111",
-      "password": "1234",
+      "password": "$2b$10$iU/uPoYFcYovtMEhPXzKuels6XIoFZfVcVEYTtIOnBvJv3.etOfla",
       "name": "我是測試",
-      "role": "user"
+      "role": "customer"
     },
     {
       "id": 11,
       "phone": "0944555666",
-      "password": "1234",
+      "password": "$2b$10$8xvWEj5/szFFS5J0T.k.pObl9UKreYsB5OcU5YLSoKN3XiIHUsb1e",
       "name": "是測試",
       "role": "customer"
     },
     {
       "id": 12,
       "phone": "0911888999",
-      "password": "1234",
+      "password": "$2b$10$FQhdfL4kWXqzAxqWOTQSVuicdBoIfWD/vh5SB6rl9EE9RKcLtaG.q",
       "name": "hair-queue",
       "role": "customer"
     },
     {
       "id": 13,
       "phone": "0933444555",
-      "password": "1234",
+      "password": "$2b$10$dpaQgJMkqMshHQVt/GpBVeXCH5EmHWo1vBTooZ1KamvLDM769Gf9u",
       "name": "是測試",
       "role": "customer"
     },
     {
       "id": 14,
-      "password": "123",
+      "password": "$2b$10$J7MgKD0AZ0Qz1cQ/JiZel.wjI1riulKi7RJmHMzjvbRuHfrrcrrxW",
       "name": "0933123123",
+      "role": "customer"
+    },
+    {
+      "id": 15,
+      "password": "123456",
+      "name": "?????",
       "role": "customer"
     }
   ],
