@@ -5127,6 +5127,12 @@
       "password": "123456",
       "name": "?????",
       "role": "customer"
+    },
+    {
+      "id": 16,
+      "password": "$2b$10$0IXu6HuhuKSvr./J5bSriuEhCev1yXFCYmvHEpEo3YtYS88CI89ha",
+      "name": "?????",
+      "role": "designer"
     }
   ],
   "worktime": {
