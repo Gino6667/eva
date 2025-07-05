@@ -3145,11 +3145,12 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 5,
-      "createdAt": "2025-07-05T11:57:34.070Z",
+      "createdAt": "2025-07-05T12:01:52.000Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "absentAt": "2025-07-05T12:01:52.000Z"
     },
     {
       "id": 9185,
