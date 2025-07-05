@@ -5124,14 +5124,21 @@
     {
       "id": 17,
       "password": "$2b$10$KnfqJh3PzAJZ.ddrX0PnSOdkgrgc3Hxgm7lNx3/c983stNH2102x.",
-      "name": "0912444555",
-      "role": "designer"
+      "name": "設計師17",
+      "role": "designer",
+      "phone": "0912444555"
     },
     {
       "id": 18,
       "phone": "0912345678",
       "password": "$2b$10$ZYPq9uAsdtnC0KrEwOMGJe/3e6o9wGF76kH/.jJac0d2ami6/oJKa",
       "name": "?????",
+      "role": "designer"
+    },
+    {
+      "id": 19,
+      "password": "$2b$10$qPDZfh5kmpnTICxHSQFKtuXb7/hHJFC/09Y.L8U0wgsa/UvoDjkTC",
+      "name": "0913444555",
       "role": "designer"
     }
   ],
