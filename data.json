@@ -3638,7 +3638,7 @@
       "designerId": 12,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 28,
       "createdAt": "2025-07-05T12:46:01.986Z",
       "userId": 3,
@@ -3648,8 +3648,20 @@
           "status": "waiting",
           "timestamp": "2025-07-05T12:46:01.986Z",
           "note": "新增排隊"
+        },
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:46:18.073Z",
+          "note": "已叫號"
+        },
+        {
+          "status": "serving",
+          "timestamp": "2025-07-05T12:46:18.079Z",
+          "note": "客人報到，開始服務"
         }
-      ]
+      ],
+      "calledAt": "2025-07-05T12:46:18.073Z",
+      "checkinAt": "2025-07-05T12:46:18.079Z"
     },
     {
       "id": 9208,
