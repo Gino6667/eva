@@ -3704,7 +3704,7 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 30,
       "createdAt": "2025-07-05T12:46:25.186Z",
       "userId": 3,
@@ -3724,9 +3724,14 @@
           "status": "waiting",
           "timestamp": "2025-07-05T13:03:03.574Z",
           "note": "過號客人重新報到"
+        },
+        {
+          "status": "absent",
+          "timestamp": "2025-07-05T13:04:25.120Z",
+          "note": "客人未到，標記過號"
         }
       ],
-      "absentAt": "2025-07-05T12:51:03.645Z",
+      "absentAt": "2025-07-05T13:04:25.120Z",
       "absentCheckinAt": "2025-07-05T13:03:03.574Z"
     },
     {
