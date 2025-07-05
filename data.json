@@ -5115,6 +5115,12 @@
       "password": "1234",
       "name": "是測試",
       "role": "customer"
+    },
+    {
+      "id": 14,
+      "password": "123",
+      "name": "0933123123",
+      "role": "customer"
     }
   ],
   "worktime": {
@@ -5742,6 +5748,12 @@
       "name": "測試",
       "price": "200",
       "stock": "10"
+    },
+    {
+      "id": 1751722477525,
+      "name": "測使水",
+      "price": "200",
+      "stock": "100"
     }
   ]
 }
