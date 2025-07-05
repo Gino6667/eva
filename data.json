@@ -3608,7 +3608,7 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 27,
       "createdAt": "2025-07-05T12:45:56.251Z",
       "userId": 3,
@@ -3628,10 +3628,16 @@
           "status": "serving",
           "timestamp": "2025-07-05T12:46:16.790Z",
           "note": "客人報到，開始服務"
+        },
+        {
+          "status": "done",
+          "timestamp": "2025-07-05T12:48:20.269Z",
+          "note": "服務完成"
         }
       ],
       "calledAt": "2025-07-05T12:46:16.773Z",
-      "checkinAt": "2025-07-05T12:46:16.790Z"
+      "checkinAt": "2025-07-05T12:46:16.790Z",
+      "completedAt": "2025-07-05T12:48:20.269Z"
     },
     {
       "id": 9207,
@@ -3668,7 +3674,7 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 29,
       "createdAt": "2025-07-05T12:46:10.691Z",
       "userId": 3,
@@ -3678,8 +3684,20 @@
           "status": "waiting",
           "timestamp": "2025-07-05T12:46:10.691Z",
           "note": "新增排隊"
+        },
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:48:20.243Z",
+          "note": "已叫號"
+        },
+        {
+          "status": "serving",
+          "timestamp": "2025-07-05T12:48:20.254Z",
+          "note": "客人報到，開始服務"
         }
-      ]
+      ],
+      "calledAt": "2025-07-05T12:48:20.243Z",
+      "checkinAt": "2025-07-05T12:48:20.254Z"
     },
     {
       "id": 9209,
@@ -3695,6 +3713,24 @@
         {
           "status": "waiting",
           "timestamp": "2025-07-05T12:46:25.186Z",
+          "note": "新增排隊"
+        }
+      ]
+    },
+    {
+      "id": 9210,
+      "designerId": 7,
+      "serviceId": 5,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 31,
+      "createdAt": "2025-07-05T12:48:20.231Z",
+      "userId": 10001,
+      "originallyUnspecified": false,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:48:20.231Z",
           "note": "新增排隊"
         }
       ]
@@ -4830,6 +4866,19 @@
       "completedAt": "2025-07-05T12:44:01.711Z",
       "originallyUnspecified": false,
       "queueId": 9204
+    },
+    {
+      "id": 307,
+      "designerId": 7,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-05",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-05T12:48:20.269Z",
+      "completedAt": "2025-07-05T12:48:20.269Z",
+      "originallyUnspecified": true,
+      "queueId": 9206
     }
   ],
   "users": [
