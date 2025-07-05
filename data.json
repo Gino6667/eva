@@ -3154,12 +3154,20 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 7,
       "createdAt": "2025-07-05T11:57:36.434Z",
       "userId": null,
       "originallyUnspecified": false,
-      "checkinAt": "2025-07-05T12:12:34.089Z"
+      "checkinAt": "2025-07-05T12:12:34.089Z",
+      "completedAt": "2025-07-05T12:34:43.199Z",
+      "statusHistory": [
+        {
+          "status": "done",
+          "timestamp": "2025-07-05T12:34:43.199Z",
+          "note": "服務完成"
+        }
+      ]
     },
     {
       "id": 9187,
