@@ -5542,7 +5542,7 @@
   ],
   "worktime": {
     "openDays": [
-      true,
+      false,
       false,
       true,
       true,
