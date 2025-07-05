@@ -3255,7 +3255,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 14,
       "createdAt": "2025-07-05T12:28:49.492Z",
       "userId": 1,
@@ -3264,6 +3264,54 @@
         {
           "status": "waiting",
           "timestamp": "2025-07-05T12:28:49.492Z",
+          "note": "新增排隊"
+        },
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:29:04.316Z",
+          "note": "已叫號"
+        },
+        {
+          "status": "serving",
+          "timestamp": "2025-07-05T12:29:04.326Z",
+          "note": "客人報到，開始服務"
+        }
+      ],
+      "calledAt": "2025-07-05T12:29:04.316Z",
+      "checkinAt": "2025-07-05T12:29:04.326Z"
+    },
+    {
+      "id": 9194,
+      "designerId": 1001,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 15,
+      "createdAt": "2025-07-05T12:29:04.295Z",
+      "userId": 1,
+      "originallyUnspecified": true,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:29:04.295Z",
+          "note": "新增排隊"
+        }
+      ]
+    },
+    {
+      "id": 9195,
+      "designerId": 1001,
+      "serviceId": 2,
+      "type": "online",
+      "status": "waiting",
+      "number": 16,
+      "createdAt": "2025-07-05T12:29:04.308Z",
+      "userId": 2,
+      "originallyUnspecified": false,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:29:04.308Z",
           "note": "新增排隊"
         }
       ]
