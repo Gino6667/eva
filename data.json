@@ -5542,7 +5542,7 @@
   ],
   "worktime": {
     "openDays": [
-      true,
+      false,
       false,
       true,
       true,
@@ -5588,7 +5588,7 @@
       [],
       []
     ],
-    "branchId": 2
+    "branchId": 1
   },
   "transactions": [
     {
@@ -6186,6 +6186,55 @@
         "timezone": "Asia/Taipei",
         "currency": "TWD",
         "taxRate": 0.05
+      },
+      "worktime": {
+        "openDays": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "openTimes": [
+          {
+            "start": "09:00",
+            "end": "18:00"
+          },
+          {
+            "start": "09:00",
+            "end": "18:00"
+          },
+          {
+            "start": "09:00",
+            "end": "18:00"
+          },
+          {
+            "start": "09:00",
+            "end": "18:00"
+          },
+          {
+            "start": "09:00",
+            "end": "18:00"
+          },
+          {
+            "start": "09:00",
+            "end": "18:00"
+          },
+          {
+            "start": "09:00",
+            "end": "18:00"
+          }
+        ],
+        "slotConfig": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
       }
     },
     {
@@ -6199,6 +6248,55 @@
         "timezone": "Asia/Taipei",
         "currency": "TWD",
         "taxRate": 0.05
+      },
+      "worktime": {
+        "openDays": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "openTimes": [
+          {
+            "start": "10:00",
+            "end": "20:00"
+          },
+          {
+            "start": "10:00",
+            "end": "20:00"
+          },
+          {
+            "start": "10:00",
+            "end": "20:00"
+          },
+          {
+            "start": "10:00",
+            "end": "20:00"
+          },
+          {
+            "start": "10:00",
+            "end": "20:00"
+          },
+          {
+            "start": "10:00",
+            "end": "20:00"
+          },
+          {
+            "start": "10:00",
+            "end": "20:00"
+          }
+        ],
+        "slotConfig": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
       }
     }
   ]
