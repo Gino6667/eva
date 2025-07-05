@@ -3232,25 +3232,6 @@
       "completedAt": "2025-07-05T12:38:35.773Z"
     },
     {
-      "id": 9189,
-      "designerId": 7,
-      "serviceId": 3,
-      "type": "onsite",
-      "status": "called",
-      "number": 10,
-      "createdAt": "2025-07-05T11:59:54.924Z",
-      "userId": null,
-      "originallyUnspecified": false,
-      "calledAt": "2025-07-05T12:43:03.159Z",
-      "statusHistory": [
-        {
-          "status": "called",
-          "timestamp": "2025-07-05T12:43:03.159Z",
-          "note": "已叫號"
-        }
-      ]
-    },
-    {
       "id": 9190,
       "designerId": 12,
       "serviceId": 2,
@@ -3561,36 +3542,66 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "onsite",
-      "status": "waiting",
+      "status": "done",
       "number": 25,
-      "createdAt": "2025-07-05T12:43:03.134Z",
+      "createdAt": "2025-07-05T12:44:01.673Z",
       "userId": 10001,
       "originallyUnspecified": false,
       "statusHistory": [
         {
           "status": "waiting",
-          "timestamp": "2025-07-05T12:43:03.134Z",
+          "timestamp": "2025-07-05T12:44:01.673Z",
           "note": "新增排隊"
+        },
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:44:01.692Z",
+          "note": "已叫號"
+        },
+        {
+          "status": "serving",
+          "timestamp": "2025-07-05T12:44:01.700Z",
+          "note": "客人報到，開始服務"
+        },
+        {
+          "status": "done",
+          "timestamp": "2025-07-05T12:44:01.711Z",
+          "note": "服務完成"
         }
-      ]
+      ],
+      "calledAt": "2025-07-05T12:44:01.692Z",
+      "checkinAt": "2025-07-05T12:44:01.700Z",
+      "completedAt": "2025-07-05T12:44:01.711Z"
     },
     {
       "id": 9205,
       "designerId": 7,
       "serviceId": 5,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 26,
-      "createdAt": "2025-07-05T12:43:03.149Z",
+      "createdAt": "2025-07-05T12:44:01.684Z",
       "userId": 10002,
       "originallyUnspecified": false,
       "statusHistory": [
         {
           "status": "waiting",
-          "timestamp": "2025-07-05T12:43:03.149Z",
+          "timestamp": "2025-07-05T12:44:01.684Z",
           "note": "新增排隊"
+        },
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:44:01.724Z",
+          "note": "已叫號"
+        },
+        {
+          "status": "absent",
+          "timestamp": "2025-07-05T12:44:01.736Z",
+          "note": "客人未到，標記過號"
         }
-      ]
+      ],
+      "calledAt": "2025-07-05T12:44:01.724Z",
+      "absentAt": "2025-07-05T12:44:01.736Z"
     }
   ],
   "reservations": [
@@ -4710,6 +4721,19 @@
       "completedAt": "2025-07-05T12:29:32.020Z",
       "originallyUnspecified": true,
       "queueId": 9196
+    },
+    {
+      "id": 306,
+      "designerId": 7,
+      "serviceId": 5,
+      "userId": 10001,
+      "date": "2025-07-05",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-05T12:44:01.711Z",
+      "completedAt": "2025-07-05T12:44:01.711Z",
+      "originallyUnspecified": false,
+      "queueId": 9204
     }
   ],
   "users": [
