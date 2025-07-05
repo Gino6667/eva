@@ -47,19 +47,6 @@
       ],
       "isPaused": false,
       "isOnVacation": false
-    },
-    {
-      "id": 1001,
-      "name": "測試設計師",
-      "services": [
-        1,
-        2,
-        3,
-        5,
-        10
-      ],
-      "isPaused": false,
-      "isOnVacation": false
     }
   ],
   "services": [
