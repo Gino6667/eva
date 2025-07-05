@@ -5120,6 +5120,13 @@
       "password": "123456",
       "name": "?????",
       "role": "customer"
+    },
+    {
+      "id": 16,
+      "phone": "0922333444",
+      "password": "$2b$10$r0iM3XM5cDLZW3Lg2Y0mUunfLy50xppAt64PGY3mn5UwzsySOB7OC",
+      "name": "123",
+      "role": "designer"
     }
   ],
   "worktime": {
