@@ -72,7 +72,8 @@
       "name": "平頭/國小下/後面推平",
       "price": 200,
       "duration": 20,
-      "status": "active"
+      "status": "active",
+      "branchId": 1
     },
     {
       "id": 10,
