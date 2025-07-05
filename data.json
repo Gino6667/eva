@@ -6,8 +6,7 @@
       "services": [
         2,
         3,
-        5,
-        10
+        5
       ],
       "isPaused": true,
       "isOnVacation": true
