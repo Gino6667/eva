@@ -3120,12 +3120,13 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 3,
       "createdAt": "2025-07-05T11:56:32.256Z",
       "userId": null,
       "originallyUnspecified": false,
-      "checkinAt": "2025-07-05T12:00:12.292Z"
+      "checkinAt": "2025-07-05T12:00:12.292Z",
+      "completedAt": "2025-07-05T12:00:13.424Z"
     },
     {
       "id": 9183,
