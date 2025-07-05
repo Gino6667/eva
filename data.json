@@ -3501,6 +3501,24 @@
           "note": "新增排隊"
         }
       ]
+    },
+    {
+      "id": 9203,
+      "designerId": 1001,
+      "serviceId": 1,
+      "type": "online",
+      "status": "waiting",
+      "number": 24,
+      "createdAt": "2025-07-05T12:32:44.972Z",
+      "userId": 3,
+      "originallyUnspecified": true,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:32:44.972Z",
+          "note": "新增排隊"
+        }
+      ]
     }
   ],
   "reservations": [
