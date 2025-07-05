@@ -3773,6 +3773,24 @@
       ],
       "absentAt": "2025-07-05T13:04:26.199Z",
       "absentCheckinAt": "2025-07-05T13:04:37.198Z"
+    },
+    {
+      "id": 9211,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 32,
+      "createdAt": "2025-07-05T13:05:38.091Z",
+      "userId": 3,
+      "originallyUnspecified": true,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T13:05:38.091Z",
+          "note": "新增排隊"
+        }
+      ]
     }
   ],
   "reservations": [
