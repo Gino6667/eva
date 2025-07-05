@@ -3736,7 +3736,7 @@
     },
     {
       "id": 9210,
-      "designerId": 7,
+      "designerId": 12,
       "serviceId": 5,
       "type": "onsite",
       "status": "waiting",
@@ -3772,7 +3772,9 @@
         }
       ],
       "absentAt": "2025-07-05T13:04:26.199Z",
-      "absentCheckinAt": "2025-07-05T13:04:37.198Z"
+      "absentCheckinAt": "2025-07-05T13:04:37.198Z",
+      "transferredAt": "2025-07-05T13:08:14.891Z",
+      "transferReason": "設計師調整"
     },
     {
       "id": 9211,
@@ -5564,6 +5566,16 @@
       "date": "2025-07-03",
       "designerId": 7,
       "productId": 1751381187351
+    },
+    {
+      "id": 1751720865411,
+      "type": "income",
+      "amount": 200,
+      "description": "產品銷售：洗頭水（設計師：阿強）",
+      "category": "product",
+      "date": "2025-07-05",
+      "designerId": 7,
+      "productId": 1751381187351
     }
   ],
   "queueTransfers": [
@@ -5583,6 +5595,15 @@
       "toDesignerId": 10,
       "reason": "設計師調整",
       "transferredAt": "2025-07-01T10:38:29.990Z",
+      "status": "transferred"
+    },
+    {
+      "id": 3,
+      "queueId": 9210,
+      "fromDesignerId": 7,
+      "toDesignerId": 12,
+      "reason": "設計師調整",
+      "transferredAt": "2025-07-05T13:08:14.891Z",
       "status": "transferred"
     }
   ],
