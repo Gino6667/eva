@@ -3236,11 +3236,19 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "onsite",
-      "status": "waiting",
+      "status": "called",
       "number": 10,
       "createdAt": "2025-07-05T11:59:54.924Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "calledAt": "2025-07-05T12:43:03.159Z",
+      "statusHistory": [
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:43:03.159Z",
+          "note": "已叫號"
+        }
+      ]
     },
     {
       "id": 9190,
@@ -3544,6 +3552,42 @@
         {
           "status": "waiting",
           "timestamp": "2025-07-05T12:32:44.972Z",
+          "note": "新增排隊"
+        }
+      ]
+    },
+    {
+      "id": 9204,
+      "designerId": 7,
+      "serviceId": 5,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 25,
+      "createdAt": "2025-07-05T12:43:03.134Z",
+      "userId": 10001,
+      "originallyUnspecified": false,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:43:03.134Z",
+          "note": "新增排隊"
+        }
+      ]
+    },
+    {
+      "id": 9205,
+      "designerId": 7,
+      "serviceId": 5,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 26,
+      "createdAt": "2025-07-05T12:43:03.149Z",
+      "userId": 10002,
+      "originallyUnspecified": false,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:43:03.149Z",
           "note": "新增排隊"
         }
       ]
