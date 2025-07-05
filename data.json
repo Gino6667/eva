@@ -5122,13 +5122,6 @@
       "role": "customer"
     },
     {
-      "id": 17,
-      "password": "$2b$10$Nwk8a51c66Uepu1PKx9lF.DIDrWt4FVxxBGpWmjrSJXa6yCJID8be",
-      "name": "測試設計師2",
-      "role": "designer",
-      "invalid": true
-    },
-    {
       "id": 18,
       "phone": "12345678",
       "password": "$2b$10$slZdPO9deNCZ9AlfMnIf3.OyKdvWJp77MqIAOP6.L1dq6QMVrRtqW",
