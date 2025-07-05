@@ -10,7 +10,8 @@
         10
       ],
       "isPaused": true,
-      "isOnVacation": true
+      "isOnVacation": true,
+      "branchId": 1
     },
     {
       "id": 7,
@@ -22,7 +23,8 @@
         5
       ],
       "isPaused": false,
-      "isOnVacation": false
+      "isOnVacation": false,
+      "branchId": 1
     },
     {
       "id": 11,
@@ -34,7 +36,8 @@
         10
       ],
       "isPaused": true,
-      "isOnVacation": false
+      "isOnVacation": false,
+      "branchId": 1
     },
     {
       "id": 12,
@@ -46,7 +49,8 @@
         5
       ],
       "isPaused": false,
-      "isOnVacation": false
+      "isOnVacation": false,
+      "branchId": 1
     }
   ],
   "services": [
@@ -87,7 +91,8 @@
       "createdAt": "2025-06-25T19:59:07.598Z",
       "userId": null,
       "number": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 106,
@@ -98,7 +103,8 @@
       "createdAt": "2025-06-25T20:00:45.954Z",
       "userId": null,
       "number": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 107,
@@ -109,7 +115,8 @@
       "createdAt": "2025-06-25T20:01:52.150Z",
       "userId": null,
       "number": 5,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 108,
@@ -120,7 +127,8 @@
       "createdAt": "2025-06-25T20:02:00.533Z",
       "userId": null,
       "number": 6,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 109,
@@ -131,7 +139,8 @@
       "createdAt": "2025-06-25T20:02:06.724Z",
       "userId": null,
       "number": 7,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 110,
@@ -142,7 +151,8 @@
       "createdAt": "2025-06-25T20:02:07.622Z",
       "userId": null,
       "number": 8,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 111,
@@ -153,7 +163,8 @@
       "createdAt": "2025-06-25T20:02:08.092Z",
       "userId": null,
       "number": 9,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 112,
@@ -164,7 +175,8 @@
       "createdAt": "2025-06-25T20:02:15.394Z",
       "userId": null,
       "number": 10,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 113,
@@ -175,7 +187,8 @@
       "createdAt": "2025-06-25T20:11:45.722Z",
       "userId": null,
       "number": 11,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 114,
@@ -186,7 +199,8 @@
       "createdAt": "2025-06-25T20:12:53.188Z",
       "userId": null,
       "number": 12,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 115,
@@ -197,7 +211,8 @@
       "createdAt": "2025-06-25T20:14:57.749Z",
       "userId": null,
       "number": 13,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 116,
@@ -208,7 +223,8 @@
       "createdAt": "2025-06-25T20:16:14.667Z",
       "userId": null,
       "number": 14,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 117,
@@ -219,7 +235,8 @@
       "createdAt": "2025-06-25T20:17:55.093Z",
       "userId": null,
       "number": 15,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 118,
@@ -230,7 +247,8 @@
       "createdAt": "2025-06-25T20:18:54.593Z",
       "userId": null,
       "number": 16,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 119,
@@ -241,7 +259,8 @@
       "createdAt": "2025-06-25T20:19:15.066Z",
       "userId": null,
       "number": 17,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 120,
@@ -252,7 +271,8 @@
       "createdAt": "2025-06-25T20:21:16.162Z",
       "userId": null,
       "number": 18,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 121,
@@ -263,7 +283,8 @@
       "createdAt": "2025-06-25T20:36:06.743Z",
       "userId": 1,
       "number": 19,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 122,
@@ -274,7 +295,8 @@
       "createdAt": "2025-06-25T20:38:18.102Z",
       "userId": 1,
       "number": 20,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 123,
@@ -285,7 +307,8 @@
       "createdAt": "2025-06-25T20:39:45.660Z",
       "userId": 1,
       "number": 21,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 124,
@@ -296,7 +319,8 @@
       "createdAt": "2025-06-25T20:39:56.858Z",
       "userId": 1,
       "number": 22,
-      "originallyUnspecified": true
+      "originallyUnspecified": true,
+      "branchId": 1
     },
     {
       "id": 126,
@@ -307,7 +331,8 @@
       "createdAt": "2025-06-25T20:53:55.781Z",
       "userId": null,
       "number": 24,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 127,
@@ -318,7 +343,8 @@
       "createdAt": "2025-06-26T05:59:22.363Z",
       "userId": null,
       "number": 25,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 128,
@@ -329,7 +355,8 @@
       "createdAt": "2025-06-26T05:59:37.790Z",
       "userId": 1,
       "number": 26,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 129,
@@ -340,7 +367,8 @@
       "createdAt": "2025-06-26T10:38:45.426Z",
       "userId": null,
       "number": 27,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 130,
@@ -351,7 +379,8 @@
       "createdAt": "2025-06-26T10:39:03.166Z",
       "userId": null,
       "number": 28,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 131,
@@ -362,7 +391,8 @@
       "createdAt": "2025-06-26T10:39:26.997Z",
       "userId": null,
       "number": 29,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 132,
@@ -373,7 +403,8 @@
       "createdAt": "2025-06-26T10:41:59.173Z",
       "userId": null,
       "number": 30,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 133,
@@ -384,7 +415,8 @@
       "createdAt": "2025-06-26T10:43:26.138Z",
       "userId": null,
       "number": 31,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 134,
@@ -395,7 +427,8 @@
       "createdAt": "2025-06-26T10:44:53.267Z",
       "userId": null,
       "number": 32,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 135,
@@ -406,7 +439,8 @@
       "createdAt": "2025-06-26T10:45:43.715Z",
       "userId": null,
       "number": 33,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 136,
@@ -417,7 +451,8 @@
       "createdAt": "2025-06-26T12:20:56.829Z",
       "userId": null,
       "number": 34,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 137,
@@ -428,7 +463,8 @@
       "createdAt": "2025-06-26T12:21:06.374Z",
       "userId": null,
       "number": 35,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 138,
@@ -439,7 +475,8 @@
       "createdAt": "2025-06-26T12:21:33.675Z",
       "userId": null,
       "number": 36,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 139,
@@ -450,7 +487,8 @@
       "createdAt": "2025-06-26T12:30:09.579Z",
       "userId": null,
       "number": 37,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 140,
@@ -461,7 +499,8 @@
       "createdAt": "2025-06-26T12:50:18.369Z",
       "userId": null,
       "number": 38,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 141,
@@ -472,7 +511,8 @@
       "createdAt": "2025-06-26T12:50:34.490Z",
       "userId": null,
       "number": 39,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 142,
@@ -483,7 +523,8 @@
       "createdAt": "2025-06-26T12:52:22.531Z",
       "userId": null,
       "number": 40,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 143,
@@ -494,7 +535,8 @@
       "createdAt": "2025-06-26T12:52:41.451Z",
       "userId": null,
       "number": 41,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 144,
@@ -505,7 +547,8 @@
       "createdAt": "2025-06-26T12:53:08.522Z",
       "userId": null,
       "number": 42,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 145,
@@ -516,7 +559,8 @@
       "createdAt": "2025-06-26T12:53:29.405Z",
       "userId": null,
       "number": 43,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 146,
@@ -527,7 +571,8 @@
       "createdAt": "2025-06-26T12:54:05.598Z",
       "userId": null,
       "number": 44,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 147,
@@ -538,7 +583,8 @@
       "createdAt": "2025-06-26T12:54:20.726Z",
       "userId": null,
       "number": 45,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 148,
@@ -549,7 +595,8 @@
       "createdAt": "2025-06-26T12:54:36.645Z",
       "userId": null,
       "number": 46,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 149,
@@ -560,7 +607,8 @@
       "createdAt": "2025-06-26T12:54:48.984Z",
       "userId": null,
       "number": 47,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 150,
@@ -571,7 +619,8 @@
       "createdAt": "2025-06-26T12:56:14.261Z",
       "userId": null,
       "number": 48,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 151,
@@ -582,7 +631,8 @@
       "createdAt": "2025-06-26T12:56:28.692Z",
       "userId": null,
       "number": 49,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 152,
@@ -593,7 +643,8 @@
       "createdAt": "2025-06-26T12:57:45.197Z",
       "userId": null,
       "number": 50,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 153,
@@ -604,7 +655,8 @@
       "createdAt": "2025-06-26T12:57:58.014Z",
       "userId": null,
       "number": 51,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 154,
@@ -615,7 +667,8 @@
       "createdAt": "2025-06-26T12:58:13.873Z",
       "userId": null,
       "number": 52,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 155,
@@ -626,7 +679,8 @@
       "createdAt": "2025-06-26T12:58:28.191Z",
       "userId": null,
       "number": 53,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 156,
@@ -637,7 +691,8 @@
       "createdAt": "2025-06-26T12:59:13.362Z",
       "userId": null,
       "number": 54,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 157,
@@ -648,7 +703,8 @@
       "createdAt": "2025-06-26T17:06:53.972Z",
       "userId": null,
       "number": 55,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 158,
@@ -659,7 +715,8 @@
       "createdAt": "2025-06-26T17:08:26.505Z",
       "userId": null,
       "number": 56,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 200,
@@ -670,7 +727,8 @@
       "createdAt": "2025-06-26T18:30:00Z",
       "userId": null,
       "number": 57,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 201,
@@ -681,7 +739,8 @@
       "createdAt": "2025-06-26T18:07:52.954Z",
       "userId": null,
       "number": 58,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 202,
@@ -692,7 +751,8 @@
       "createdAt": "2025-06-26T18:07:55.278Z",
       "userId": null,
       "number": 59,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 203,
@@ -703,7 +763,8 @@
       "createdAt": "2025-06-26T18:07:56.827Z",
       "userId": null,
       "number": 60,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 204,
@@ -714,7 +775,8 @@
       "createdAt": "2025-06-26T18:07:58.123Z",
       "userId": null,
       "number": 61,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 205,
@@ -725,7 +787,8 @@
       "createdAt": "2025-06-26T18:08:11.932Z",
       "userId": null,
       "number": 62,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 206,
@@ -736,7 +799,8 @@
       "createdAt": "2025-06-26T18:08:13.724Z",
       "userId": null,
       "number": 63,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 209,
@@ -747,7 +811,8 @@
       "number": 66,
       "createdAt": "2025-06-27T12:32:42.860Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 210,
@@ -758,7 +823,8 @@
       "number": 67,
       "createdAt": "2025-06-27T12:35:03.664Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 211,
@@ -769,7 +835,8 @@
       "number": 68,
       "createdAt": "2025-06-27T12:54:55.105Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 212,
@@ -780,7 +847,8 @@
       "number": 69,
       "createdAt": "2025-06-27T12:57:54.905Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 213,
@@ -791,7 +859,8 @@
       "number": 70,
       "createdAt": "2025-06-27T12:58:01.917Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 2761,
@@ -802,7 +871,8 @@
       "createdAt": "2025-06-27T12:58:01.917Z",
       "userId": null,
       "number": 1001,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 2762,
@@ -813,7 +883,8 @@
       "number": 1002,
       "createdAt": "2025-06-27T14:45:04.961Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 2763,
@@ -824,7 +895,8 @@
       "number": 1003,
       "createdAt": "2025-06-27T14:45:18.915Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 2764,
@@ -835,7 +907,8 @@
       "number": 1004,
       "createdAt": "2025-06-27T14:45:50.165Z",
       "userId": 1,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 2765,
@@ -846,7 +919,8 @@
       "number": 1005,
       "createdAt": "2025-06-27T14:45:58.713Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9001,
@@ -857,7 +931,8 @@
       "number": 9001,
       "createdAt": "2025-06-27T15:00:00.000Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9002,
@@ -868,7 +943,8 @@
       "number": 9002,
       "createdAt": "2025-06-27T15:00:00.000Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9003,
@@ -879,7 +955,8 @@
       "number": 9003,
       "createdAt": "2025-06-27T15:00:00.000Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9004,
@@ -891,7 +968,8 @@
       "createdAt": "2025-06-29T10:48:11.887Z",
       "userId": 4,
       "cancelledAt": "2025-06-29T12:47:43.769Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9005,
@@ -903,7 +981,8 @@
       "createdAt": "2025-06-29T11:57:33.457Z",
       "userId": 4,
       "cancelledAt": "2025-06-29T12:43:58.149Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9006,
@@ -915,7 +994,8 @@
       "createdAt": "2025-06-29T11:59:15.783Z",
       "userId": 4,
       "cancelledAt": "2025-06-29T12:13:21.286Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9007,
@@ -927,7 +1007,8 @@
       "createdAt": "2025-06-29T12:01:14.012Z",
       "userId": 4,
       "cancelledAt": "2025-06-29T12:13:05.228Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9008,
@@ -939,7 +1020,8 @@
       "createdAt": "2025-06-29T12:04:04.589Z",
       "userId": 4,
       "cancelledAt": "2025-06-29T12:10:41.575Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9009,
@@ -951,7 +1033,8 @@
       "createdAt": "2025-06-29T12:49:26.104Z",
       "userId": 4,
       "checkinAt": "2025-06-29T16:52:53.319Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9010,
@@ -963,7 +1046,8 @@
       "createdAt": "2025-06-29T12:53:02.137Z",
       "userId": 4,
       "checkinAt": "2025-06-29T16:53:10.226Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9011,
@@ -975,7 +1059,8 @@
       "createdAt": "2025-06-29T12:53:11.246Z",
       "userId": 4,
       "checkinAt": "2025-06-29T16:55:59.385Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9012,
@@ -987,7 +1072,8 @@
       "createdAt": "2025-06-29T14:30:33.292Z",
       "userId": 3,
       "checkinAt": "2025-06-29T16:56:06.320Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9013,
@@ -998,7 +1084,8 @@
       "number": 10,
       "createdAt": "2025-06-29T15:20:16.787Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9014,
@@ -1009,7 +1096,8 @@
       "number": 1,
       "createdAt": "2025-06-29T17:01:27.208Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9015,
@@ -1020,7 +1108,8 @@
       "number": 2,
       "createdAt": "2025-06-29T17:07:19.915Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9016,
@@ -1031,7 +1120,8 @@
       "number": 3,
       "createdAt": "2025-06-29T17:07:51.951Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9017,
@@ -1042,7 +1132,8 @@
       "number": 4,
       "createdAt": "2025-06-29T17:08:45.221Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9018,
@@ -1055,7 +1146,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T18:51:52.651Z",
       "completedAt": "2025-06-29T19:18:31.273Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9019,
@@ -1066,7 +1158,8 @@
       "number": 6,
       "createdAt": "2025-06-29T19:24:09.538Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9020,
@@ -1077,7 +1170,8 @@
       "number": 7,
       "createdAt": "2025-06-29T19:24:22.397Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9021,
@@ -1090,7 +1184,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T19:29:08.858Z",
       "completedAt": "2025-06-29T20:21:31.436Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9022,
@@ -1103,7 +1198,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T19:29:09.892Z",
       "completedAt": "2025-06-30T12:52:22.123Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9023,
@@ -1116,7 +1212,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T19:29:06.270Z",
       "completedAt": "2025-06-29T19:30:17.655Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9024,
@@ -1129,7 +1226,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T19:29:10.984Z",
       "completedAt": "2025-06-30T12:52:15.907Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9025,
@@ -1142,7 +1240,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T19:39:11.498Z",
       "completedAt": "2025-06-29T19:54:40.979Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9026,
@@ -1154,7 +1253,8 @@
       "createdAt": "2025-06-29T19:29:42.525Z",
       "userId": null,
       "absentAt": "2025-06-29T19:54:20.584Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9027,
@@ -1166,7 +1266,8 @@
       "createdAt": "2025-06-29T19:38:57.426Z",
       "userId": null,
       "absentAt": "2025-06-29T19:54:25.455Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9028,
@@ -1179,7 +1280,8 @@
       "userId": null,
       "checkinAt": "2025-06-29T19:54:45.729Z",
       "completedAt": "2025-06-29T20:00:47.713Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9029,
@@ -1192,7 +1294,8 @@
       "userId": null,
       "checkinAt": "2025-06-29T20:01:58.795Z",
       "completedAt": "2025-06-29T20:02:01.943Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9030,
@@ -1205,7 +1308,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T20:21:27.044Z",
       "completedAt": "2025-06-29T22:47:29.042Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9031,
@@ -1218,7 +1322,8 @@
       "userId": 3,
       "checkinAt": "2025-06-29T22:47:31.227Z",
       "completedAt": "2025-06-30T12:52:10.143Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9032,
@@ -1229,7 +1334,8 @@
       "number": 19,
       "createdAt": "2025-06-29T19:51:51.755Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9033,
@@ -1241,7 +1347,8 @@
       "createdAt": "2025-06-29T20:05:03.470Z",
       "userId": 3,
       "completedAt": "2025-06-29T20:05:07.635Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9034,
@@ -1252,7 +1359,8 @@
       "number": 21,
       "createdAt": "2025-06-30T06:46:44.917Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9035,
@@ -1263,7 +1371,8 @@
       "number": 22,
       "createdAt": "2025-06-30T07:48:30.082Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9036,
@@ -1276,7 +1385,8 @@
       "userId": 4,
       "checkinAt": "2025-06-30T12:52:22.805Z",
       "completedAt": "2025-06-30T13:23:06.440Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9037,
@@ -1289,7 +1399,8 @@
       "userId": null,
       "checkinAt": "2025-06-30T13:23:07.895Z",
       "completedAt": "2025-06-30T13:23:08.853Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9038,
@@ -1302,7 +1413,8 @@
       "userId": 4,
       "checkinAt": "2025-06-30T13:23:09.738Z",
       "completedAt": "2025-06-30T13:23:10.623Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9039,
@@ -1313,7 +1425,8 @@
       "number": 26,
       "createdAt": "2025-06-30T12:22:01.375Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9040,
@@ -1326,7 +1439,8 @@
       "userId": 4,
       "checkinAt": "2025-06-30T12:46:23.543Z",
       "completedAt": "2025-06-30T12:52:18.943Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9041,
@@ -1337,7 +1451,8 @@
       "number": 28,
       "createdAt": "2025-06-30T12:24:54.300Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9042,
@@ -1348,7 +1463,8 @@
       "number": 29,
       "createdAt": "2025-06-30T12:28:58.793Z",
       "userId": 4,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9043,
@@ -1361,7 +1477,8 @@
       "userId": 4,
       "checkinAt": "2025-06-30T13:23:12.475Z",
       "completedAt": "2025-06-30T13:23:13.387Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9044,
@@ -1372,7 +1489,8 @@
       "number": 31,
       "createdAt": "2025-06-30T12:37:30.879Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9045,
@@ -1384,7 +1502,8 @@
       "createdAt": "2025-06-30T12:45:27.687Z",
       "userId": 4,
       "checkinAt": "2025-06-30T12:52:19.638Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9046,
@@ -1396,7 +1515,8 @@
       "createdAt": "2025-06-30T12:47:08.815Z",
       "userId": 3,
       "checkinAt": "2025-06-30T12:52:16.938Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9047,
@@ -1408,7 +1528,8 @@
       "createdAt": "2025-06-30T12:47:22.029Z",
       "userId": 3,
       "checkinAt": "2025-06-30T16:05:57.759Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9048,
@@ -1420,7 +1541,8 @@
       "createdAt": "2025-06-30T12:48:08.063Z",
       "userId": 3,
       "checkinAt": "2025-06-30T16:11:01.697Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9049,
@@ -1433,7 +1555,8 @@
       "userId": 3,
       "checkinAt": "2025-06-30T13:23:15.066Z",
       "completedAt": "2025-06-30T13:23:56.368Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9050,
@@ -1446,7 +1569,8 @@
       "userId": 3,
       "checkinAt": "2025-06-30T12:52:12.344Z",
       "completedAt": "2025-06-30T13:24:32.636Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9051,
@@ -1458,7 +1582,8 @@
       "createdAt": "2025-06-30T12:54:56.308Z",
       "userId": 3,
       "checkinAt": "2025-06-30T16:05:52.551Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9052,
@@ -1470,7 +1595,8 @@
       "createdAt": "2025-06-30T12:55:19.914Z",
       "userId": 3,
       "checkinAt": "2025-06-30T16:12:51.764Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9053,
@@ -1481,7 +1607,8 @@
       "number": 40,
       "createdAt": "2025-06-30T12:56:41.010Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9054,
@@ -1492,7 +1619,8 @@
       "number": 41,
       "createdAt": "2025-06-30T12:58:34.951Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9055,
@@ -1505,7 +1633,8 @@
       "userId": 3,
       "checkinAt": "2025-06-30T13:24:01.160Z",
       "completedAt": "2025-06-30T13:24:05.416Z",
-      "originallyUnspecified": true
+      "originallyUnspecified": true,
+      "branchId": 1
     },
     {
       "id": 9056,
@@ -1518,7 +1647,8 @@
       "userId": 3,
       "checkinAt": "2025-06-30T13:24:15.487Z",
       "completedAt": "2025-06-30T13:24:16.411Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9057,
@@ -1529,7 +1659,8 @@
       "number": 44,
       "createdAt": "2025-06-30T13:00:50.804Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9058,
@@ -1542,7 +1673,8 @@
       "userId": 3,
       "checkinAt": "2025-06-30T13:24:37.757Z",
       "completedAt": "2025-06-30T13:24:46.944Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9059,
@@ -1553,7 +1685,8 @@
       "number": 46,
       "createdAt": "2025-06-30T13:01:55.428Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9060,
@@ -1566,7 +1699,8 @@
       "userId": 4,
       "checkinAt": "2025-06-30T13:24:56.658Z",
       "completedAt": "2025-06-30T13:25:02.095Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9061,
@@ -1577,7 +1711,8 @@
       "number": 48,
       "createdAt": "2025-06-30T13:35:58.936Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9062,
@@ -1589,7 +1724,8 @@
       "createdAt": "2025-06-30T13:37:14.954Z",
       "userId": 3,
       "checkinAt": "2025-06-30T16:06:00.723Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9063,
@@ -1600,7 +1736,8 @@
       "number": 1,
       "createdAt": "2025-06-30T16:08:38.800Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9064,
@@ -1612,7 +1749,8 @@
       "createdAt": "2025-06-30T16:13:17.989Z",
       "userId": null,
       "checkinAt": "2025-06-30T16:14:02.383Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9065,
@@ -1623,7 +1761,8 @@
       "number": 3,
       "createdAt": "2025-06-30T16:13:35.631Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9066,
@@ -1634,7 +1773,8 @@
       "number": 4,
       "createdAt": "2025-06-30T16:20:02.677Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9067,
@@ -1645,7 +1785,8 @@
       "number": 5,
       "createdAt": "2025-06-30T16:25:19.704Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9068,
@@ -1657,7 +1798,8 @@
       "createdAt": "2025-06-30T16:33:23.925Z",
       "userId": null,
       "checkinAt": "2025-06-30T17:17:59.962Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9069,
@@ -1669,7 +1811,8 @@
       "createdAt": "2025-06-30T17:13:18.061Z",
       "userId": 3,
       "absentAt": "2025-06-30T17:18:05.581Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9070,
@@ -1680,7 +1823,8 @@
       "number": 8,
       "createdAt": "2025-06-30T17:16:52.223Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9071,
@@ -1691,7 +1835,8 @@
       "number": 9,
       "createdAt": "2025-06-30T17:18:18.539Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9072,
@@ -1702,7 +1847,8 @@
       "number": 10,
       "createdAt": "2025-06-30T17:18:41.284Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9073,
@@ -1713,7 +1859,8 @@
       "number": 11,
       "createdAt": "2025-06-30T17:21:26.006Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9074,
@@ -1724,7 +1871,8 @@
       "number": 12,
       "createdAt": "2025-06-30T17:23:04.600Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9075,
@@ -1737,7 +1885,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T09:07:50.051Z",
       "completedAt": "2025-07-01T10:37:52.492Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9076,
@@ -1750,7 +1899,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T09:08:28.918Z",
       "completedAt": "2025-07-01T09:11:00.012Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9077,
@@ -1763,7 +1913,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T09:08:33.374Z",
       "completedAt": "2025-07-01T10:36:56.399Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9078,
@@ -1776,7 +1927,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T09:08:32.107Z",
       "completedAt": "2025-07-01T12:08:18.930Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9079,
@@ -1791,7 +1943,8 @@
       "transferReason": "設計師調整",
       "checkinAt": "2025-07-01T10:37:37.486Z",
       "completedAt": "2025-07-01T15:17:47.083Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9080,
@@ -1806,7 +1959,8 @@
       "transferReason": "設計師調整",
       "checkinAt": "2025-07-01T10:38:37.233Z",
       "completedAt": "2025-07-01T10:39:00.607Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9081,
@@ -1819,7 +1973,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T13:15:48.684Z",
       "completedAt": "2025-07-01T15:20:38.221Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9082,
@@ -1832,7 +1987,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:24:39.781Z",
       "completedAt": "2025-07-01T15:24:40.373Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9083,
@@ -1844,7 +2000,8 @@
       "createdAt": "2025-07-01T09:09:28.620Z",
       "userId": 3,
       "absentAt": "2025-07-01T10:39:30.957Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9084,
@@ -1857,7 +2014,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:20:39.153Z",
       "completedAt": "2025-07-01T15:20:40.126Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9085,
@@ -1870,7 +2028,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T10:37:53.601Z",
       "completedAt": "2025-07-01T10:37:54.828Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9086,
@@ -1883,7 +2042,8 @@
       "userId": null,
       "checkinAt": "2025-07-01T11:14:23.285Z",
       "completedAt": "2025-07-01T12:41:28.413Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9087,
@@ -1896,7 +2056,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:29:14.863Z",
       "completedAt": "2025-07-01T15:29:16.286Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9088,
@@ -1909,7 +2070,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T13:15:49.866Z",
       "completedAt": "2025-07-01T15:12:02.285Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9089,
@@ -1922,7 +2084,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:31:59.745Z",
       "completedAt": "2025-07-01T15:32:06.464Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9090,
@@ -1935,7 +2098,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T13:16:46.704Z",
       "completedAt": "2025-07-01T13:16:47.756Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9091,
@@ -1948,7 +2112,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:28:35.164Z",
       "completedAt": "2025-07-01T15:28:39.106Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9092,
@@ -1961,7 +2126,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:45:28.382Z",
       "completedAt": "2025-07-01T15:47:02.673Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9093,
@@ -1974,7 +2140,8 @@
       "userId": 3,
       "checkinAt": "2025-07-01T15:49:44.507Z",
       "completedAt": "2025-07-01T15:49:45.635Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9094,
@@ -1987,7 +2154,8 @@
       "userId": 3,
       "checkinAt": "2025-07-02T06:42:14.845Z",
       "completedAt": "2025-07-02T06:42:18.933Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9095,
@@ -2000,7 +2168,8 @@
       "userId": 3,
       "checkinAt": "2025-07-02T08:07:24.987Z",
       "completedAt": "2025-07-02T08:10:03.733Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9096,
@@ -2013,7 +2182,8 @@
       "userId": 3,
       "checkinAt": "2025-07-02T08:09:35.769Z",
       "completedAt": "2025-07-02T10:36:32.909Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9097,
@@ -2025,7 +2195,8 @@
       "createdAt": "2025-07-02T06:52:04.300Z",
       "userId": 3,
       "checkinAt": "2025-07-02T08:09:41.724Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9098,
@@ -2038,7 +2209,8 @@
       "userId": null,
       "absentAt": "2025-07-02T10:36:33.867Z",
       "checkinAt": "2025-07-02T16:28:56.853Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9099,
@@ -2050,7 +2222,8 @@
       "createdAt": "2025-07-02T06:53:11.029Z",
       "userId": null,
       "checkinAt": "2025-07-02T07:07:50.216Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9100,
@@ -2063,7 +2236,8 @@
       "userId": null,
       "absentAt": "2025-07-02T11:02:37.888Z",
       "checkinAt": "2025-07-02T16:29:02.414Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9101,
@@ -2076,7 +2250,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T08:15:15.431Z",
       "completedAt": "2025-07-02T10:41:18.418Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9102,
@@ -2088,7 +2263,8 @@
       "createdAt": "2025-07-02T08:10:50.204Z",
       "userId": null,
       "checkinAt": "2025-07-02T16:29:01.235Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9103,
@@ -2101,7 +2277,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T10:41:21.798Z",
       "checkinAt": "2025-07-02T16:29:00.407Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9104,
@@ -2113,7 +2290,8 @@
       "createdAt": "2025-07-02T08:13:34.362Z",
       "userId": null,
       "checkinAt": "2025-07-02T16:29:13.589Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9105,
@@ -2125,7 +2303,8 @@
       "createdAt": "2025-07-02T08:13:58.139Z",
       "userId": null,
       "checkinAt": "2025-07-02T16:29:14.711Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9106,
@@ -2137,7 +2316,8 @@
       "createdAt": "2025-07-02T08:14:18.017Z",
       "userId": null,
       "checkinAt": "2025-07-02T16:29:15.520Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9107,
@@ -2149,7 +2329,8 @@
       "createdAt": "2025-07-02T08:16:39.185Z",
       "userId": 3,
       "checkinAt": "2025-07-02T16:29:15.709Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9108,
@@ -2161,7 +2342,8 @@
       "createdAt": "2025-07-02T08:22:22.944Z",
       "userId": null,
       "checkinAt": "2025-07-02T16:29:15.889Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9109,
@@ -2174,7 +2356,8 @@
       "userId": null,
       "absentAt": "2025-07-02T10:55:31.391Z",
       "checkinAt": "2025-07-02T16:28:58.231Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9110,
@@ -2186,7 +2369,8 @@
       "createdAt": "2025-07-02T08:24:39.502Z",
       "userId": null,
       "checkinAt": "2025-07-02T16:29:16.057Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9111,
@@ -2198,7 +2382,8 @@
       "createdAt": "2025-07-02T08:25:49.229Z",
       "userId": null,
       "checkinAt": "2025-07-02T17:44:49.067Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9112,
@@ -2211,7 +2396,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T17:45:28.986Z",
       "completedAt": "2025-07-02T17:52:26.436Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9113,
@@ -2224,7 +2410,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T17:55:20.055Z",
       "completedAt": "2025-07-02T17:55:27.272Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9114,
@@ -2237,7 +2424,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T17:55:28.652Z",
       "completedAt": "2025-07-02T17:55:29.630Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9115,
@@ -2250,7 +2438,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T17:55:30.224Z",
       "completedAt": "2025-07-02T17:55:31.523Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9116,
@@ -2263,7 +2452,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T17:55:32.168Z",
       "completedAt": "2025-07-03T14:00:08.534Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9117,
@@ -2276,7 +2466,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T19:03:32.587Z",
       "completedAt": "2025-07-03T14:02:08.776Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9118,
@@ -2288,7 +2479,8 @@
       "createdAt": "2025-07-02T16:58:13.547Z",
       "userId": null,
       "checkinAt": "2025-07-02T19:03:30.544Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9119,
@@ -2301,7 +2493,8 @@
       "userId": null,
       "checkinAt": "2025-07-02T19:03:31.472Z",
       "completedAt": "2025-07-02T19:08:49.185Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9120,
@@ -2314,7 +2507,8 @@
       "userId": null,
       "absentAt": "2025-07-02T19:17:03.547Z",
       "completedAt": "2025-07-03T14:02:10.230Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9121,
@@ -2328,7 +2522,8 @@
       "absentAt": "2025-07-02T17:56:46.280Z",
       "checkinAt": "2025-07-02T20:12:21.196Z",
       "completedAt": "2025-07-03T14:01:11.311Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9122,
@@ -2342,7 +2537,8 @@
       "absentAt": "2025-07-02T17:59:07.643Z",
       "checkinAt": "2025-07-02T20:16:04.830Z",
       "completedAt": "2025-07-03T14:01:11.844Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9123,
@@ -2355,7 +2551,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:04:35.356Z",
       "completedAt": "2025-07-03T14:01:13.432Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9124,
@@ -2368,7 +2565,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:04:35.758Z",
       "completedAt": "2025-07-03T14:01:14.390Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9125,
@@ -2381,7 +2579,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:04:37.316Z",
       "completedAt": "2025-07-03T14:01:17.581Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9126,
@@ -2394,7 +2593,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:05:08.973Z",
       "completedAt": "2025-07-03T14:01:18.161Z",
-      "originallyUnspecified": true
+      "originallyUnspecified": true,
+      "branchId": 1
     },
     {
       "id": 9127,
@@ -2407,7 +2607,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:06:11.948Z",
       "completedAt": "2025-07-03T14:01:18.602Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9128,
@@ -2420,7 +2621,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:10:31.921Z",
       "completedAt": "2025-07-03T14:01:19.276Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9129,
@@ -2433,7 +2635,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:14:31.522Z",
       "completedAt": "2025-07-03T14:01:35.634Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9130,
@@ -2446,7 +2649,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:25:47.300Z",
       "completedAt": "2025-07-03T14:01:39.645Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9131,
@@ -2460,7 +2664,8 @@
       "absentAt": "2025-07-02T18:26:10.413Z",
       "checkinAt": "2025-07-02T20:32:44.068Z",
       "completedAt": "2025-07-03T14:01:41.501Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9132,
@@ -2474,7 +2679,8 @@
       "absentAt": "2025-07-02T18:27:53.391Z",
       "checkinAt": "2025-07-02T20:32:52.408Z",
       "completedAt": "2025-07-03T14:01:41.728Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9133,
@@ -2488,7 +2694,8 @@
       "absentAt": "2025-07-02T18:34:48.054Z",
       "checkinAt": "2025-07-02T20:32:58.769Z",
       "completedAt": "2025-07-03T14:01:41.902Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9134,
@@ -2501,7 +2708,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:51:09.882Z",
       "completedAt": "2025-07-03T14:01:42.307Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9135,
@@ -2514,7 +2722,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:51:58.596Z",
       "completedAt": "2025-07-03T14:01:44.071Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9136,
@@ -2527,7 +2736,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T19:25:04.000Z",
       "completedAt": "2025-07-03T14:01:44.461Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9137,
@@ -2540,7 +2750,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T19:20:35.932Z",
       "completedAt": "2025-07-03T14:09:10.131Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9138,
@@ -2553,7 +2764,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T19:23:46.000Z",
       "completedAt": "2025-07-03T14:09:14.556Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9139,
@@ -2566,7 +2778,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T19:28:02.000Z",
       "completedAt": "2025-07-03T14:01:44.640Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9140,
@@ -2579,7 +2792,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T19:32:48.000Z",
       "completedAt": "2025-07-03T14:01:44.825Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9141,
@@ -2591,7 +2805,8 @@
       "createdAt": "2025-07-02T19:35:17.618Z",
       "userId": 3,
       "completedAt": "2025-07-03T14:01:45.266Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9142,
@@ -2603,7 +2818,8 @@
       "createdAt": "2025-07-02T19:36:34.384Z",
       "userId": 3,
       "completedAt": "2025-07-03T14:09:54.316Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9143,
@@ -2615,7 +2831,8 @@
       "createdAt": "2025-07-02T19:54:16.000Z",
       "userId": 3,
       "absentAt": "2025-07-02T19:54:16.000Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9144,
@@ -2627,7 +2844,8 @@
       "createdAt": "2025-07-02T19:55:51.000Z",
       "userId": 3,
       "absentAt": "2025-07-02T19:55:51.000Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9145,
@@ -2640,7 +2858,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T19:59:02.000Z",
       "completedAt": "2025-07-03T11:17:00.126Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9146,
@@ -2652,7 +2871,8 @@
       "createdAt": "2025-07-02T20:00:16.000Z",
       "userId": 3,
       "absentAt": "2025-07-02T20:00:16.000Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9147,
@@ -2664,7 +2884,8 @@
       "createdAt": "2025-07-02T20:09:00.000Z",
       "userId": 3,
       "absentAt": "2025-07-02T20:09:00.000Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9148,
@@ -2677,7 +2898,8 @@
       "userId": 3,
       "absentAt": "2025-07-02T20:09:04.000Z",
       "completedAt": "2025-07-03T11:19:49.289Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9149,
@@ -2689,7 +2911,8 @@
       "createdAt": "2025-07-02T21:32:23.106Z",
       "userId": 3,
       "completedAt": "2025-07-03T14:11:41.677Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9150,
@@ -2701,7 +2924,8 @@
       "createdAt": "2025-07-02T21:44:40.915Z",
       "userId": 3,
       "completedAt": "2025-07-03T14:01:46.339Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9151,
@@ -2712,7 +2936,8 @@
       "number": 40,
       "createdAt": "2025-07-02T22:28:13.914Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9152,
@@ -2725,7 +2950,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T14:01:08.900Z",
       "completedAt": "2025-07-03T14:16:20.007Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9153,
@@ -2738,7 +2964,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T14:02:09.482Z",
       "completedAt": "2025-07-03T14:13:07.334Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9154,
@@ -2749,7 +2976,8 @@
       "number": 43,
       "createdAt": "2025-07-03T11:13:57.143Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9155,
@@ -2762,7 +2990,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T14:14:16.414Z",
       "completedAt": "2025-07-03T14:14:35.403Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9156,
@@ -2775,7 +3004,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T11:19:49.692Z",
       "completedAt": "2025-07-03T11:20:12.211Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9157,
@@ -2788,7 +3018,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T11:20:14.552Z",
       "completedAt": "2025-07-03T13:01:15.539Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9158,
@@ -2801,7 +3032,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T14:14:41.141Z",
       "completedAt": "2025-07-03T14:14:45.599Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9159,
@@ -2814,7 +3046,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T14:16:23.671Z",
       "completedAt": "2025-07-03T14:16:39.494Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9160,
@@ -2827,7 +3060,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T16:23:57.000Z",
       "completedAt": "2025-07-03T16:32:56.074Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9161,
@@ -2839,7 +3073,8 @@
       "createdAt": "2025-07-03T14:15:54.399Z",
       "userId": 3,
       "checkinAt": "2025-07-03T14:40:34.044Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9162,
@@ -2852,7 +3087,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T16:23:52.000Z",
       "checkinAt": "2025-07-03T16:45:51.385Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9163,
@@ -2865,7 +3101,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T14:16:41.209Z",
       "completedAt": "2025-07-03T14:16:43.114Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9164,
@@ -2878,7 +3115,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T16:32:57.000Z",
       "completedAt": "2025-07-03T16:33:06.548Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9165,
@@ -2891,7 +3129,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T16:33:08.000Z",
       "completedAt": "2025-07-03T16:35:19.366Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9166,
@@ -2904,7 +3143,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T16:34:37.000Z",
       "completedAt": "2025-07-03T16:35:23.260Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9167,
@@ -2918,7 +3158,8 @@
       "absentAt": "2025-07-03T16:44:43.000Z",
       "checkinAt": "2025-07-03T16:44:59.093Z",
       "completedAt": "2025-07-03T16:45:25.740Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9168,
@@ -2931,7 +3172,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T16:46:31.134Z",
       "completedAt": "2025-07-03T16:46:52.522Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9169,
@@ -2944,7 +3186,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T16:52:20.120Z",
       "completedAt": "2025-07-03T16:52:22.079Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9170,
@@ -2957,7 +3200,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T17:00:49.290Z",
       "completedAt": "2025-07-03T17:01:19.998Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9171,
@@ -2970,7 +3214,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T17:01:50.000Z",
       "completedAt": "2025-07-03T17:02:52.420Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9172,
@@ -2983,7 +3228,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T17:02:31.390Z",
       "completedAt": "2025-07-03T17:02:54.935Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9173,
@@ -2996,7 +3242,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T17:03:37.725Z",
       "completedAt": "2025-07-03T17:03:42.460Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9174,
@@ -3009,7 +3256,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T17:07:47.639Z",
       "completedAt": "2025-07-03T17:07:49.102Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9175,
@@ -3022,7 +3270,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T17:21:43.000Z",
       "completedAt": "2025-07-03T17:22:33.783Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9176,
@@ -3035,7 +3284,8 @@
       "userId": 3,
       "absentAt": "2025-07-03T17:22:02.000Z",
       "checkinAt": "2025-07-03T17:22:23.997Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9177,
@@ -3048,7 +3298,8 @@
       "userId": 3,
       "checkinAt": "2025-07-03T17:22:31.854Z",
       "completedAt": "2025-07-03T17:22:35.522Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9178,
@@ -3060,7 +3311,8 @@
       "createdAt": "2025-07-03T17:16:19.062Z",
       "userId": 3,
       "checkinAt": "2025-07-03T17:22:37.154Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9179,
@@ -3071,7 +3323,8 @@
       "number": 67,
       "createdAt": "2025-07-03T17:23:30.283Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9180,
@@ -3082,7 +3335,8 @@
       "number": 1,
       "createdAt": "2025-07-05T11:40:15.372Z",
       "userId": 3,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9181,
@@ -3095,7 +3349,8 @@
       "userId": 3,
       "checkinAt": "2025-07-05T11:46:46.961Z",
       "completedAt": "2025-07-05T11:46:50.177Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9182,
@@ -3108,7 +3363,8 @@
       "userId": null,
       "originallyUnspecified": false,
       "checkinAt": "2025-07-05T12:00:12.292Z",
-      "completedAt": "2025-07-05T12:00:13.424Z"
+      "completedAt": "2025-07-05T12:00:13.424Z",
+      "branchId": 1
     },
     {
       "id": 9183,
@@ -3121,7 +3377,8 @@
       "userId": null,
       "originallyUnspecified": false,
       "absentAt": "2025-07-05T12:01:34.000Z",
-      "completedAt": "2025-07-05T12:12:35.135Z"
+      "completedAt": "2025-07-05T12:12:35.135Z",
+      "branchId": 1
     },
     {
       "id": 9184,
@@ -3134,7 +3391,8 @@
       "userId": null,
       "originallyUnspecified": false,
       "absentAt": "2025-07-05T12:01:52.000Z",
-      "completedAt": "2025-07-05T12:12:37.008Z"
+      "completedAt": "2025-07-05T12:12:37.008Z",
+      "branchId": 1
     },
     {
       "id": 9185,
@@ -3147,7 +3405,8 @@
       "userId": null,
       "originallyUnspecified": false,
       "absentAt": "2025-07-05T12:01:53.000Z",
-      "completedAt": "2025-07-05T12:12:39.425Z"
+      "completedAt": "2025-07-05T12:12:39.425Z",
+      "branchId": 1
     },
     {
       "id": 9186,
@@ -3167,7 +3426,8 @@
           "timestamp": "2025-07-05T12:34:43.199Z",
           "note": "服務完成"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9187,
@@ -3198,7 +3458,8 @@
         }
       ],
       "checkinAt": "2025-07-05T12:37:45.500Z",
-      "completedAt": "2025-07-05T12:38:06.439Z"
+      "completedAt": "2025-07-05T12:38:06.439Z",
+      "branchId": 1
     },
     {
       "id": 9188,
@@ -3229,7 +3490,8 @@
         }
       ],
       "checkinAt": "2025-07-05T12:38:35.092Z",
-      "completedAt": "2025-07-05T12:38:35.773Z"
+      "completedAt": "2025-07-05T12:38:35.773Z",
+      "branchId": 1
     },
     {
       "id": 9190,
@@ -3241,7 +3503,8 @@
       "createdAt": "2025-07-05T12:05:48.279Z",
       "userId": null,
       "completedAt": "2025-07-05T12:05:48.291Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9191,
@@ -3253,7 +3516,8 @@
       "createdAt": "2025-07-05T12:05:50.548Z",
       "userId": null,
       "completedAt": "2025-07-05T12:05:50.560Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9192,
@@ -3265,7 +3529,8 @@
       "createdAt": "2025-07-05T12:06:19.099Z",
       "userId": null,
       "completedAt": "2025-07-05T12:06:19.110Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "branchId": 1
     },
     {
       "id": 9193,
@@ -3295,7 +3560,8 @@
         }
       ],
       "calledAt": "2025-07-05T12:29:04.316Z",
-      "checkinAt": "2025-07-05T12:29:04.326Z"
+      "checkinAt": "2025-07-05T12:29:04.326Z",
+      "branchId": 1
     },
     {
       "id": 9194,
@@ -3331,7 +3597,8 @@
       ],
       "calledAt": "2025-07-05T12:29:19.390Z",
       "checkinAt": "2025-07-05T12:29:19.399Z",
-      "completedAt": "2025-07-05T12:29:19.408Z"
+      "completedAt": "2025-07-05T12:29:19.408Z",
+      "branchId": 1
     },
     {
       "id": 9195,
@@ -3355,7 +3622,8 @@
           "note": "已叫號"
         }
       ],
-      "calledAt": "2025-07-05T12:29:19.434Z"
+      "calledAt": "2025-07-05T12:29:19.434Z",
+      "branchId": 1
     },
     {
       "id": 9196,
@@ -3391,7 +3659,8 @@
       ],
       "calledAt": "2025-07-05T12:29:32.005Z",
       "checkinAt": "2025-07-05T12:29:32.012Z",
-      "completedAt": "2025-07-05T12:29:32.020Z"
+      "completedAt": "2025-07-05T12:29:32.020Z",
+      "branchId": 1
     },
     {
       "id": 9197,
@@ -3427,7 +3696,8 @@
       ],
       "calledAt": "2025-07-05T12:29:32.049Z",
       "absentAt": "2025-07-05T12:29:32.055Z",
-      "absentCheckinAt": "2025-07-05T12:29:32.067Z"
+      "absentCheckinAt": "2025-07-05T12:29:32.067Z",
+      "branchId": 1
     },
     {
       "id": 9198,
@@ -3445,7 +3715,8 @@
           "timestamp": "2025-07-05T12:29:19.423Z",
           "note": "新增排隊"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9199,
@@ -3463,7 +3734,8 @@
           "timestamp": "2025-07-05T12:29:31.984Z",
           "note": "新增排隊"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9200,
@@ -3481,7 +3753,8 @@
           "timestamp": "2025-07-05T12:29:31.998Z",
           "note": "新增排隊"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9201,
@@ -3499,7 +3772,8 @@
           "timestamp": "2025-07-05T12:29:32.039Z",
           "note": "新增排隊"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9202,
@@ -3517,7 +3791,8 @@
           "timestamp": "2025-07-05T12:32:32.923Z",
           "note": "新增排隊"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9203,
@@ -3535,7 +3810,8 @@
           "timestamp": "2025-07-05T12:32:44.972Z",
           "note": "新增排隊"
         }
-      ]
+      ],
+      "branchId": 1
     },
     {
       "id": 9204,
@@ -3571,7 +3847,8 @@
       ],
       "calledAt": "2025-07-05T12:44:01.692Z",
       "checkinAt": "2025-07-05T12:44:01.700Z",
-      "completedAt": "2025-07-05T12:44:01.711Z"
+      "completedAt": "2025-07-05T12:44:01.711Z",
+      "branchId": 1
     },
     {
       "id": 9205,
@@ -3601,7 +3878,8 @@
         }
       ],
       "calledAt": "2025-07-05T12:44:01.724Z",
-      "absentAt": "2025-07-05T12:44:01.736Z"
+      "absentAt": "2025-07-05T12:44:01.736Z",
+      "branchId": 1
     },
     {
       "id": 9206,
@@ -3637,7 +3915,8 @@
       ],
       "calledAt": "2025-07-05T12:46:16.773Z",
       "checkinAt": "2025-07-05T12:46:16.790Z",
-      "completedAt": "2025-07-05T12:48:20.269Z"
+      "completedAt": "2025-07-05T12:48:20.269Z",
+      "branchId": 1
     },
     {
       "id": 9207,
@@ -3673,7 +3952,8 @@
       ],
       "calledAt": "2025-07-05T12:46:18.073Z",
       "checkinAt": "2025-07-05T12:46:18.079Z",
-      "completedAt": "2025-07-05T13:20:12.965Z"
+      "completedAt": "2025-07-05T13:20:12.965Z",
+      "branchId": 1
     },
     {
       "id": 9208,
@@ -3709,7 +3989,8 @@
       ],
       "calledAt": "2025-07-05T12:48:20.243Z",
       "checkinAt": "2025-07-05T12:48:20.254Z",
-      "completedAt": "2025-07-05T13:15:42.393Z"
+      "completedAt": "2025-07-05T13:15:42.393Z",
+      "branchId": 1
     },
     {
       "id": 9209,
@@ -3749,7 +4030,8 @@
         }
       ],
       "absentAt": "2025-07-05T13:04:25.120Z",
-      "absentCheckinAt": "2025-07-05T13:20:18.327Z"
+      "absentCheckinAt": "2025-07-05T13:20:18.327Z",
+      "branchId": 1
     },
     {
       "id": 9210,
@@ -3813,7 +4095,8 @@
       "transferredAt": "2025-07-05T13:08:14.891Z",
       "transferReason": "設計師調整",
       "calledAt": "2025-07-05T13:20:13.458Z",
-      "checkinAt": "2025-07-05T13:20:13.471Z"
+      "checkinAt": "2025-07-05T13:20:13.471Z",
+      "branchId": 1
     },
     {
       "id": 9211,
@@ -3843,7 +4126,8 @@
         }
       ],
       "absentAt": "2025-07-05T13:15:46.910Z",
-      "absentCheckinAt": "2025-07-05T13:16:03.898Z"
+      "absentCheckinAt": "2025-07-05T13:16:03.898Z",
+      "branchId": 1
     },
     {
       "id": 9212,
@@ -3873,7 +4157,8 @@
         }
       ],
       "calledAt": "2025-07-05T13:15:48.544Z",
-      "checkinAt": "2025-07-05T13:15:48.554Z"
+      "checkinAt": "2025-07-05T13:15:48.554Z",
+      "branchId": 1
     }
   ],
   "reservations": [
@@ -3883,7 +4168,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2024-06-27",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 202,
@@ -3891,7 +4177,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-27",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 203,
@@ -3899,7 +4186,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 204,
@@ -3907,7 +4195,8 @@
       "serviceId": 2,
       "userId": 1,
       "date": "2025-06-27",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 205,
@@ -3915,7 +4204,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 206,
@@ -3923,7 +4213,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 207,
@@ -3931,7 +4222,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 208,
@@ -3939,7 +4231,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 209,
@@ -3947,7 +4240,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 210,
@@ -3955,7 +4249,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 211,
@@ -3963,7 +4258,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 212,
@@ -3971,7 +4267,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-26",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 213,
@@ -3979,7 +4276,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-27",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 214,
@@ -3987,7 +4285,8 @@
       "serviceId": 1,
       "userId": 1,
       "date": "2025-06-27",
-      "status": "booked"
+      "status": "booked",
+      "branchId": 1
     },
     {
       "id": 215,
@@ -3998,7 +4297,8 @@
       "time": "09:00",
       "status": "cancelled",
       "createdAt": "2025-06-29T10:44:24.332Z",
-      "cancelledAt": "2025-06-29T11:57:15.309Z"
+      "cancelledAt": "2025-06-29T11:57:15.309Z",
+      "branchId": 1
     },
     {
       "id": 216,
@@ -4009,7 +4309,8 @@
       "time": "09:00",
       "status": "cancelled",
       "createdAt": "2025-06-29T12:13:27.776Z",
-      "cancelledAt": "2025-06-29T12:46:27.523Z"
+      "cancelledAt": "2025-06-29T12:46:27.523Z",
+      "branchId": 1
     },
     {
       "id": 217,
@@ -4020,7 +4321,8 @@
       "time": "09:00",
       "status": "cancelled",
       "createdAt": "2025-06-29T15:20:41.480Z",
-      "cancelledAt": "2025-06-29T15:21:38.577Z"
+      "cancelledAt": "2025-06-29T15:21:38.577Z",
+      "branchId": 1
     },
     {
       "id": 218,
@@ -4031,7 +4333,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-29T20:05:07.635Z",
-      "completedAt": "2025-06-29T20:05:07.635Z"
+      "completedAt": "2025-06-29T20:05:07.635Z",
+      "branchId": 1
     },
     {
       "id": 219,
@@ -4042,7 +4345,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-29T20:21:31.436Z",
-      "completedAt": "2025-06-29T20:21:31.436Z"
+      "completedAt": "2025-06-29T20:21:31.436Z",
+      "branchId": 1
     },
     {
       "id": 220,
@@ -4053,7 +4357,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-29T22:47:29.042Z",
-      "completedAt": "2025-06-29T22:47:29.042Z"
+      "completedAt": "2025-06-29T22:47:29.042Z",
+      "branchId": 1
     },
     {
       "id": 221,
@@ -4064,7 +4369,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T12:52:10.143Z",
-      "completedAt": "2025-06-30T12:52:10.143Z"
+      "completedAt": "2025-06-30T12:52:10.143Z",
+      "branchId": 1
     },
     {
       "id": 222,
@@ -4075,7 +4381,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T12:52:15.907Z",
-      "completedAt": "2025-06-30T12:52:15.907Z"
+      "completedAt": "2025-06-30T12:52:15.907Z",
+      "branchId": 1
     },
     {
       "id": 223,
@@ -4086,7 +4393,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T12:52:18.943Z",
-      "completedAt": "2025-06-30T12:52:18.943Z"
+      "completedAt": "2025-06-30T12:52:18.943Z",
+      "branchId": 1
     },
     {
       "id": 224,
@@ -4097,7 +4405,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T12:52:22.123Z",
-      "completedAt": "2025-06-30T12:52:22.123Z"
+      "completedAt": "2025-06-30T12:52:22.123Z",
+      "branchId": 1
     },
     {
       "id": 225,
@@ -4108,7 +4417,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:23:06.440Z",
-      "completedAt": "2025-06-30T13:23:06.440Z"
+      "completedAt": "2025-06-30T13:23:06.440Z",
+      "branchId": 1
     },
     {
       "id": 226,
@@ -4119,7 +4429,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:23:10.623Z",
-      "completedAt": "2025-06-30T13:23:10.623Z"
+      "completedAt": "2025-06-30T13:23:10.623Z",
+      "branchId": 1
     },
     {
       "id": 227,
@@ -4130,7 +4441,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:23:13.387Z",
-      "completedAt": "2025-06-30T13:23:13.387Z"
+      "completedAt": "2025-06-30T13:23:13.387Z",
+      "branchId": 1
     },
     {
       "id": 228,
@@ -4141,7 +4453,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:23:56.368Z",
-      "completedAt": "2025-06-30T13:23:56.368Z"
+      "completedAt": "2025-06-30T13:23:56.368Z",
+      "branchId": 1
     },
     {
       "id": 229,
@@ -4152,7 +4465,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:24:05.416Z",
-      "completedAt": "2025-06-30T13:24:05.416Z"
+      "completedAt": "2025-06-30T13:24:05.416Z",
+      "branchId": 1
     },
     {
       "id": 230,
@@ -4163,7 +4477,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:24:16.411Z",
-      "completedAt": "2025-06-30T13:24:16.411Z"
+      "completedAt": "2025-06-30T13:24:16.411Z",
+      "branchId": 1
     },
     {
       "id": 231,
@@ -4174,7 +4489,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:24:32.636Z",
-      "completedAt": "2025-06-30T13:24:32.636Z"
+      "completedAt": "2025-06-30T13:24:32.636Z",
+      "branchId": 1
     },
     {
       "id": 232,
@@ -4185,7 +4501,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:24:46.944Z",
-      "completedAt": "2025-06-30T13:24:46.944Z"
+      "completedAt": "2025-06-30T13:24:46.944Z",
+      "branchId": 1
     },
     {
       "id": 233,
@@ -4196,7 +4513,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-06-30T13:25:02.095Z",
-      "completedAt": "2025-06-30T13:25:02.095Z"
+      "completedAt": "2025-06-30T13:25:02.095Z",
+      "branchId": 1
     },
     {
       "id": 234,
@@ -4207,7 +4525,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T09:11:00.012Z",
-      "completedAt": "2025-07-01T09:11:00.012Z"
+      "completedAt": "2025-07-01T09:11:00.012Z",
+      "branchId": 1
     },
     {
       "id": 235,
@@ -4218,7 +4537,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T10:36:56.399Z",
-      "completedAt": "2025-07-01T10:36:56.399Z"
+      "completedAt": "2025-07-01T10:36:56.399Z",
+      "branchId": 1
     },
     {
       "id": 236,
@@ -4229,7 +4549,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T10:37:52.492Z",
-      "completedAt": "2025-07-01T10:37:52.492Z"
+      "completedAt": "2025-07-01T10:37:52.492Z",
+      "branchId": 1
     },
     {
       "id": 237,
@@ -4240,7 +4561,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T10:37:54.828Z",
-      "completedAt": "2025-07-01T10:37:54.828Z"
+      "completedAt": "2025-07-01T10:37:54.828Z",
+      "branchId": 1
     },
     {
       "id": 238,
@@ -4251,7 +4573,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T10:39:00.607Z",
-      "completedAt": "2025-07-01T10:39:00.607Z"
+      "completedAt": "2025-07-01T10:39:00.607Z",
+      "branchId": 1
     },
     {
       "id": 239,
@@ -4262,7 +4585,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T12:08:18.930Z",
-      "completedAt": "2025-07-01T12:08:18.930Z"
+      "completedAt": "2025-07-01T12:08:18.930Z",
+      "branchId": 1
     },
     {
       "id": 240,
@@ -4273,7 +4597,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T13:16:47.756Z",
-      "completedAt": "2025-07-01T13:16:47.756Z"
+      "completedAt": "2025-07-01T13:16:47.756Z",
+      "branchId": 1
     },
     {
       "id": 241,
@@ -4284,7 +4609,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:12:02.285Z",
-      "completedAt": "2025-07-01T15:12:02.285Z"
+      "completedAt": "2025-07-01T15:12:02.285Z",
+      "branchId": 1
     },
     {
       "id": 242,
@@ -4295,7 +4621,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:17:47.083Z",
-      "completedAt": "2025-07-01T15:17:47.083Z"
+      "completedAt": "2025-07-01T15:17:47.083Z",
+      "branchId": 1
     },
     {
       "id": 243,
@@ -4306,7 +4633,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:20:38.221Z",
-      "completedAt": "2025-07-01T15:20:38.221Z"
+      "completedAt": "2025-07-01T15:20:38.221Z",
+      "branchId": 1
     },
     {
       "id": 244,
@@ -4317,7 +4645,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:20:40.126Z",
-      "completedAt": "2025-07-01T15:20:40.126Z"
+      "completedAt": "2025-07-01T15:20:40.126Z",
+      "branchId": 1
     },
     {
       "id": 245,
@@ -4328,7 +4657,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:24:40.373Z",
-      "completedAt": "2025-07-01T15:24:40.373Z"
+      "completedAt": "2025-07-01T15:24:40.373Z",
+      "branchId": 1
     },
     {
       "id": 246,
@@ -4339,7 +4669,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:28:39.106Z",
-      "completedAt": "2025-07-01T15:28:39.106Z"
+      "completedAt": "2025-07-01T15:28:39.106Z",
+      "branchId": 1
     },
     {
       "id": 247,
@@ -4350,7 +4681,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:29:16.286Z",
-      "completedAt": "2025-07-01T15:29:16.286Z"
+      "completedAt": "2025-07-01T15:29:16.286Z",
+      "branchId": 1
     },
     {
       "id": 248,
@@ -4361,7 +4693,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:32:06.464Z",
-      "completedAt": "2025-07-01T15:32:06.464Z"
+      "completedAt": "2025-07-01T15:32:06.464Z",
+      "branchId": 1
     },
     {
       "id": 249,
@@ -4372,7 +4705,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:47:02.673Z",
-      "completedAt": "2025-07-01T15:47:02.673Z"
+      "completedAt": "2025-07-01T15:47:02.673Z",
+      "branchId": 1
     },
     {
       "id": 250,
@@ -4383,7 +4717,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-01T15:49:45.635Z",
-      "completedAt": "2025-07-01T15:49:45.635Z"
+      "completedAt": "2025-07-01T15:49:45.635Z",
+      "branchId": 1
     },
     {
       "id": 251,
@@ -4394,7 +4729,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-02T06:42:18.933Z",
-      "completedAt": "2025-07-02T06:42:18.933Z"
+      "completedAt": "2025-07-02T06:42:18.933Z",
+      "branchId": 1
     },
     {
       "id": 252,
@@ -4405,7 +4741,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-02T08:10:03.733Z",
-      "completedAt": "2025-07-02T08:10:03.733Z"
+      "completedAt": "2025-07-02T08:10:03.733Z",
+      "branchId": 1
     },
     {
       "id": 253,
@@ -4416,7 +4753,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-02T10:36:32.909Z",
-      "completedAt": "2025-07-02T10:36:32.909Z"
+      "completedAt": "2025-07-02T10:36:32.909Z",
+      "branchId": 1
     },
     {
       "id": 254,
@@ -4427,7 +4765,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-02T17:52:26.436Z",
-      "completedAt": "2025-07-02T17:52:26.436Z"
+      "completedAt": "2025-07-02T17:52:26.436Z",
+      "branchId": 1
     },
     {
       "id": 255,
@@ -4438,7 +4777,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T11:17:00.126Z",
-      "completedAt": "2025-07-03T11:17:00.126Z"
+      "completedAt": "2025-07-03T11:17:00.126Z",
+      "branchId": 1
     },
     {
       "id": 256,
@@ -4449,7 +4789,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T11:19:49.289Z",
-      "completedAt": "2025-07-03T11:19:49.289Z"
+      "completedAt": "2025-07-03T11:19:49.289Z",
+      "branchId": 1
     },
     {
       "id": 257,
@@ -4460,7 +4801,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T11:20:12.211Z",
-      "completedAt": "2025-07-03T11:20:12.211Z"
+      "completedAt": "2025-07-03T11:20:12.211Z",
+      "branchId": 1
     },
     {
       "id": 258,
@@ -4471,7 +4813,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T13:01:15.540Z",
-      "completedAt": "2025-07-03T13:01:15.540Z"
+      "completedAt": "2025-07-03T13:01:15.540Z",
+      "branchId": 1
     },
     {
       "id": 259,
@@ -4482,7 +4825,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:11.311Z",
-      "completedAt": "2025-07-03T14:01:11.311Z"
+      "completedAt": "2025-07-03T14:01:11.311Z",
+      "branchId": 1
     },
     {
       "id": 260,
@@ -4493,7 +4837,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:11.844Z",
-      "completedAt": "2025-07-03T14:01:11.844Z"
+      "completedAt": "2025-07-03T14:01:11.844Z",
+      "branchId": 1
     },
     {
       "id": 261,
@@ -4504,7 +4849,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:13.432Z",
-      "completedAt": "2025-07-03T14:01:13.432Z"
+      "completedAt": "2025-07-03T14:01:13.432Z",
+      "branchId": 1
     },
     {
       "id": 262,
@@ -4515,7 +4861,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:14.391Z",
-      "completedAt": "2025-07-03T14:01:14.391Z"
+      "completedAt": "2025-07-03T14:01:14.391Z",
+      "branchId": 1
     },
     {
       "id": 263,
@@ -4526,7 +4873,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:17.581Z",
-      "completedAt": "2025-07-03T14:01:17.581Z"
+      "completedAt": "2025-07-03T14:01:17.581Z",
+      "branchId": 1
     },
     {
       "id": 264,
@@ -4537,7 +4885,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:18.161Z",
-      "completedAt": "2025-07-03T14:01:18.161Z"
+      "completedAt": "2025-07-03T14:01:18.161Z",
+      "branchId": 1
     },
     {
       "id": 265,
@@ -4548,7 +4897,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:18.602Z",
-      "completedAt": "2025-07-03T14:01:18.602Z"
+      "completedAt": "2025-07-03T14:01:18.602Z",
+      "branchId": 1
     },
     {
       "id": 266,
@@ -4559,7 +4909,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:19.276Z",
-      "completedAt": "2025-07-03T14:01:19.276Z"
+      "completedAt": "2025-07-03T14:01:19.276Z",
+      "branchId": 1
     },
     {
       "id": 267,
@@ -4570,7 +4921,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:35.634Z",
-      "completedAt": "2025-07-03T14:01:35.634Z"
+      "completedAt": "2025-07-03T14:01:35.634Z",
+      "branchId": 1
     },
     {
       "id": 268,
@@ -4581,7 +4933,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:39.645Z",
-      "completedAt": "2025-07-03T14:01:39.645Z"
+      "completedAt": "2025-07-03T14:01:39.645Z",
+      "branchId": 1
     },
     {
       "id": 269,
@@ -4592,7 +4945,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:41.501Z",
-      "completedAt": "2025-07-03T14:01:41.501Z"
+      "completedAt": "2025-07-03T14:01:41.501Z",
+      "branchId": 1
     },
     {
       "id": 270,
@@ -4603,7 +4957,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:41.728Z",
-      "completedAt": "2025-07-03T14:01:41.728Z"
+      "completedAt": "2025-07-03T14:01:41.728Z",
+      "branchId": 1
     },
     {
       "id": 271,
@@ -4614,7 +4969,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:41.902Z",
-      "completedAt": "2025-07-03T14:01:41.902Z"
+      "completedAt": "2025-07-03T14:01:41.902Z",
+      "branchId": 1
     },
     {
       "id": 272,
@@ -4625,7 +4981,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:42.307Z",
-      "completedAt": "2025-07-03T14:01:42.307Z"
+      "completedAt": "2025-07-03T14:01:42.307Z",
+      "branchId": 1
     },
     {
       "id": 273,
@@ -4636,7 +4993,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:44.071Z",
-      "completedAt": "2025-07-03T14:01:44.071Z"
+      "completedAt": "2025-07-03T14:01:44.071Z",
+      "branchId": 1
     },
     {
       "id": 274,
@@ -4647,7 +5005,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:44.461Z",
-      "completedAt": "2025-07-03T14:01:44.461Z"
+      "completedAt": "2025-07-03T14:01:44.461Z",
+      "branchId": 1
     },
     {
       "id": 275,
@@ -4658,7 +5017,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:44.640Z",
-      "completedAt": "2025-07-03T14:01:44.640Z"
+      "completedAt": "2025-07-03T14:01:44.640Z",
+      "branchId": 1
     },
     {
       "id": 276,
@@ -4669,7 +5029,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:44.825Z",
-      "completedAt": "2025-07-03T14:01:44.825Z"
+      "completedAt": "2025-07-03T14:01:44.825Z",
+      "branchId": 1
     },
     {
       "id": 277,
@@ -4680,7 +5041,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:45.266Z",
-      "completedAt": "2025-07-03T14:01:45.266Z"
+      "completedAt": "2025-07-03T14:01:45.266Z",
+      "branchId": 1
     },
     {
       "id": 278,
@@ -4691,7 +5053,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:01:46.339Z",
-      "completedAt": "2025-07-03T14:01:46.339Z"
+      "completedAt": "2025-07-03T14:01:46.339Z",
+      "branchId": 1
     },
     {
       "id": 279,
@@ -4702,7 +5065,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:09:10.131Z",
-      "completedAt": "2025-07-03T14:09:10.131Z"
+      "completedAt": "2025-07-03T14:09:10.131Z",
+      "branchId": 1
     },
     {
       "id": 280,
@@ -4713,7 +5077,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:09:14.556Z",
-      "completedAt": "2025-07-03T14:09:14.556Z"
+      "completedAt": "2025-07-03T14:09:14.556Z",
+      "branchId": 1
     },
     {
       "id": 281,
@@ -4724,7 +5089,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:09:54.316Z",
-      "completedAt": "2025-07-03T14:09:54.316Z"
+      "completedAt": "2025-07-03T14:09:54.316Z",
+      "branchId": 1
     },
     {
       "id": 282,
@@ -4735,7 +5101,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:11:41.677Z",
-      "completedAt": "2025-07-03T14:11:41.677Z"
+      "completedAt": "2025-07-03T14:11:41.677Z",
+      "branchId": 1
     },
     {
       "id": 283,
@@ -4746,7 +5113,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:13:07.334Z",
-      "completedAt": "2025-07-03T14:13:07.334Z"
+      "completedAt": "2025-07-03T14:13:07.334Z",
+      "branchId": 1
     },
     {
       "id": 284,
@@ -4757,7 +5125,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:14:35.403Z",
-      "completedAt": "2025-07-03T14:14:35.403Z"
+      "completedAt": "2025-07-03T14:14:35.403Z",
+      "branchId": 1
     },
     {
       "id": 285,
@@ -4768,7 +5137,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:14:45.599Z",
-      "completedAt": "2025-07-03T14:14:45.599Z"
+      "completedAt": "2025-07-03T14:14:45.599Z",
+      "branchId": 1
     },
     {
       "id": 286,
@@ -4779,7 +5149,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:16:20.007Z",
-      "completedAt": "2025-07-03T14:16:20.007Z"
+      "completedAt": "2025-07-03T14:16:20.007Z",
+      "branchId": 1
     },
     {
       "id": 287,
@@ -4790,7 +5161,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:16:39.494Z",
-      "completedAt": "2025-07-03T14:16:39.494Z"
+      "completedAt": "2025-07-03T14:16:39.494Z",
+      "branchId": 1
     },
     {
       "id": 288,
@@ -4801,7 +5173,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T14:16:43.114Z",
-      "completedAt": "2025-07-03T14:16:43.114Z"
+      "completedAt": "2025-07-03T14:16:43.114Z",
+      "branchId": 1
     },
     {
       "id": 289,
@@ -4812,7 +5185,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:32:56.074Z",
-      "completedAt": "2025-07-03T16:32:56.074Z"
+      "completedAt": "2025-07-03T16:32:56.074Z",
+      "branchId": 1
     },
     {
       "id": 290,
@@ -4823,7 +5197,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:33:06.548Z",
-      "completedAt": "2025-07-03T16:33:06.548Z"
+      "completedAt": "2025-07-03T16:33:06.548Z",
+      "branchId": 1
     },
     {
       "id": 291,
@@ -4834,7 +5209,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:35:19.366Z",
-      "completedAt": "2025-07-03T16:35:19.366Z"
+      "completedAt": "2025-07-03T16:35:19.366Z",
+      "branchId": 1
     },
     {
       "id": 292,
@@ -4845,7 +5221,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:35:23.260Z",
-      "completedAt": "2025-07-03T16:35:23.260Z"
+      "completedAt": "2025-07-03T16:35:23.260Z",
+      "branchId": 1
     },
     {
       "id": 293,
@@ -4856,7 +5233,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:45:25.740Z",
-      "completedAt": "2025-07-03T16:45:25.740Z"
+      "completedAt": "2025-07-03T16:45:25.740Z",
+      "branchId": 1
     },
     {
       "id": 294,
@@ -4867,7 +5245,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:46:52.522Z",
-      "completedAt": "2025-07-03T16:46:52.522Z"
+      "completedAt": "2025-07-03T16:46:52.522Z",
+      "branchId": 1
     },
     {
       "id": 295,
@@ -4878,7 +5257,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T16:52:22.079Z",
-      "completedAt": "2025-07-03T16:52:22.079Z"
+      "completedAt": "2025-07-03T16:52:22.079Z",
+      "branchId": 1
     },
     {
       "id": 296,
@@ -4889,7 +5269,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:01:19.998Z",
-      "completedAt": "2025-07-03T17:01:19.998Z"
+      "completedAt": "2025-07-03T17:01:19.998Z",
+      "branchId": 1
     },
     {
       "id": 297,
@@ -4900,7 +5281,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:02:52.420Z",
-      "completedAt": "2025-07-03T17:02:52.420Z"
+      "completedAt": "2025-07-03T17:02:52.420Z",
+      "branchId": 1
     },
     {
       "id": 298,
@@ -4911,7 +5293,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:02:54.935Z",
-      "completedAt": "2025-07-03T17:02:54.935Z"
+      "completedAt": "2025-07-03T17:02:54.935Z",
+      "branchId": 1
     },
     {
       "id": 299,
@@ -4922,7 +5305,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:03:42.460Z",
-      "completedAt": "2025-07-03T17:03:42.460Z"
+      "completedAt": "2025-07-03T17:03:42.460Z",
+      "branchId": 1
     },
     {
       "id": 300,
@@ -4933,7 +5317,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:07:49.102Z",
-      "completedAt": "2025-07-03T17:07:49.102Z"
+      "completedAt": "2025-07-03T17:07:49.102Z",
+      "branchId": 1
     },
     {
       "id": 301,
@@ -4944,7 +5329,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:22:33.783Z",
-      "completedAt": "2025-07-03T17:22:33.783Z"
+      "completedAt": "2025-07-03T17:22:33.783Z",
+      "branchId": 1
     },
     {
       "id": 302,
@@ -4955,7 +5341,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-03T17:22:35.522Z",
-      "completedAt": "2025-07-03T17:22:35.522Z"
+      "completedAt": "2025-07-03T17:22:35.522Z",
+      "branchId": 1
     },
     {
       "id": 303,
@@ -4966,7 +5353,8 @@
       "time": "09:00",
       "status": "completed",
       "createdAt": "2025-07-05T11:46:50.177Z",
-      "completedAt": "2025-07-05T11:46:50.177Z"
+      "completedAt": "2025-07-05T11:46:50.177Z",
+      "branchId": 1
     },
     {
       "id": 304,
@@ -4979,7 +5367,8 @@
       "createdAt": "2025-07-05T12:29:19.408Z",
       "completedAt": "2025-07-05T12:29:19.408Z",
       "originallyUnspecified": true,
-      "queueId": 9194
+      "queueId": 9194,
+      "branchId": 1
     },
     {
       "id": 305,
@@ -4992,7 +5381,8 @@
       "createdAt": "2025-07-05T12:29:32.020Z",
       "completedAt": "2025-07-05T12:29:32.020Z",
       "originallyUnspecified": true,
-      "queueId": 9196
+      "queueId": 9196,
+      "branchId": 1
     },
     {
       "id": 306,
@@ -5005,7 +5395,8 @@
       "createdAt": "2025-07-05T12:44:01.711Z",
       "completedAt": "2025-07-05T12:44:01.711Z",
       "originallyUnspecified": false,
-      "queueId": 9204
+      "queueId": 9204,
+      "branchId": 1
     },
     {
       "id": 307,
@@ -5018,7 +5409,8 @@
       "createdAt": "2025-07-05T12:48:20.269Z",
       "completedAt": "2025-07-05T12:48:20.269Z",
       "originallyUnspecified": true,
-      "queueId": 9206
+      "queueId": 9206,
+      "branchId": 1
     },
     {
       "id": 308,
@@ -5031,7 +5423,8 @@
       "createdAt": "2025-07-05T13:15:42.393Z",
       "completedAt": "2025-07-05T13:15:42.393Z",
       "originallyUnspecified": true,
-      "queueId": 9208
+      "queueId": 9208,
+      "branchId": 1
     },
     {
       "id": 309,
@@ -5044,7 +5437,8 @@
       "createdAt": "2025-07-05T13:20:12.965Z",
       "completedAt": "2025-07-05T13:20:12.965Z",
       "originallyUnspecified": true,
-      "queueId": 9207
+      "queueId": 9207,
+      "branchId": 1
     }
   ],
   "users": [
@@ -5056,7 +5450,8 @@
       "role": "customer",
       "phone": "0912333444",
       "status": "inactive",
-      "totalSpent": 200
+      "totalSpent": 200,
+      "preferredBranchId": 1
     },
     {
       "id": 3,
@@ -5064,7 +5459,8 @@
       "phone": "rowyha",
       "password": "$2b$10$7FhMzjMJrlfdxPvzxz8Hre4sDUNIlr0CUeQUq1uDqdQzQC73hvBSi",
       "name": "系統管理員",
-      "role": "admin"
+      "role": "admin",
+      "preferredBranchId": 1
     },
     {
       "id": 4,
@@ -5072,61 +5468,70 @@
       "password": "$2b$10$xjcAI3yHLiKHGqcCjPG7tedffl95N.FSyuTAPIiboOc825gDpB6X6",
       "name": "測試會員",
       "role": "customer",
-      "totalSpent": 200
+      "totalSpent": 200,
+      "preferredBranchId": 1
     },
     {
       "id": 6,
       "phone": "0912666555",
       "password": "$2b$10$3gK0elnhS.bPGHGIjDegpeL19B3okXXlytjJxw2eaXfSKLE0Bshz2",
       "name": "我是測試",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 7,
       "phone": "0911111111",
       "password": "$2b$10$iU/uPoYFcYovtMEhPXzKuels6XIoFZfVcVEYTtIOnBvJv3.etOfla",
       "name": "我是測試",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 11,
       "phone": "0944555666",
       "password": "$2b$10$8xvWEj5/szFFS5J0T.k.pObl9UKreYsB5OcU5YLSoKN3XiIHUsb1e",
       "name": "是測試",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 12,
       "phone": "0911888999",
       "password": "$2b$10$FQhdfL4kWXqzAxqWOTQSVuicdBoIfWD/vh5SB6rl9EE9RKcLtaG.q",
       "name": "hair-queue",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 13,
       "phone": "0933444555",
       "password": "$2b$10$dpaQgJMkqMshHQVt/GpBVeXCH5EmHWo1vBTooZ1KamvLDM769Gf9u",
       "name": "是測試",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 14,
       "password": "$2b$10$J7MgKD0AZ0Qz1cQ/JiZel.wjI1riulKi7RJmHMzjvbRuHfrrcrrxW",
       "name": "0933123123",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 15,
       "password": "123456",
       "name": "?????",
-      "role": "customer"
+      "role": "customer",
+      "preferredBranchId": 1
     },
     {
       "id": 16,
       "phone": "0922333444",
       "password": "$2b$10$r0iM3XM5cDLZW3Lg2Y0mUunfLy50xppAt64PGY3mn5UwzsySOB7OC",
       "name": "123",
-      "role": "designer"
+      "role": "designer",
+      "preferredBranchId": 1
     }
   ],
   "worktime": {
@@ -5176,7 +5581,8 @@
       [],
       [],
       []
-    ]
+    ],
+    "branchId": 1
   },
   "transactions": [
     {
@@ -5760,6 +6166,34 @@
       "name": "測使水",
       "price": "200",
       "stock": "100"
+    }
+  ],
+  "branches": [
+    {
+      "id": 1,
+      "name": "總店",
+      "address": "台北市信義區信義路五段7號",
+      "phone": "02-1234-5678",
+      "status": "active",
+      "createdAt": "2025-07-05T15:12:11.099Z",
+      "settings": {
+        "timezone": "Asia/Taipei",
+        "currency": "TWD",
+        "taxRate": 0.05
+      }
+    },
+    {
+      "id": 2,
+      "name": "????",
+      "address": "????????????1?",
+      "phone": "02-2345-6789",
+      "status": "active",
+      "createdAt": "2025-07-05T15:17:24.956Z",
+      "settings": {
+        "timezone": "Asia/Taipei",
+        "currency": "TWD",
+        "taxRate": 0.05
+      }
     }
   ]
 }
