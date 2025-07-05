@@ -6183,19 +6183,6 @@
       }
     },
     {
-      "id": 2,
-      "name": "????",
-      "address": "????????????1?",
-      "phone": "02-2345-6789",
-      "status": "active",
-      "createdAt": "2025-07-05T15:17:24.956Z",
-      "settings": {
-        "timezone": "Asia/Taipei",
-        "currency": "TWD",
-        "taxRate": 0.05
-      }
-    },
-    {
       "id": 3,
       "name": "????",
       "address": "????????????1?",
