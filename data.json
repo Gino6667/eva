@@ -3674,7 +3674,7 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "done",
       "number": 29,
       "createdAt": "2025-07-05T12:46:10.691Z",
       "userId": 3,
@@ -3694,10 +3694,16 @@
           "status": "serving",
           "timestamp": "2025-07-05T12:48:20.254Z",
           "note": "客人報到，開始服務"
+        },
+        {
+          "status": "done",
+          "timestamp": "2025-07-05T13:15:42.393Z",
+          "note": "服務完成"
         }
       ],
       "calledAt": "2025-07-05T12:48:20.243Z",
-      "checkinAt": "2025-07-05T12:48:20.254Z"
+      "checkinAt": "2025-07-05T12:48:20.254Z",
+      "completedAt": "2025-07-05T13:15:42.393Z"
     },
     {
       "id": 9209,
@@ -4956,6 +4962,19 @@
       "completedAt": "2025-07-05T12:48:20.269Z",
       "originallyUnspecified": true,
       "queueId": 9206
+    },
+    {
+      "id": 308,
+      "designerId": 7,
+      "serviceId": 3,
+      "userId": 3,
+      "date": "2025-07-05",
+      "time": "09:00",
+      "status": "completed",
+      "createdAt": "2025-07-05T13:15:42.393Z",
+      "completedAt": "2025-07-05T13:15:42.393Z",
+      "originallyUnspecified": true,
+      "queueId": 9208
     }
   ],
   "users": [
