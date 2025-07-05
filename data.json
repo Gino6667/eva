@@ -65,7 +65,8 @@
       "id": 3,
       "name": "燙髮",
       "price": 300,
-      "duration": 180
+      "duration": 180,
+      "branchId": 2
     },
     {
       "id": 5,
