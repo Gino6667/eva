@@ -3133,11 +3133,12 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 4,
-      "createdAt": "2025-07-05T11:57:34.057Z",
+      "createdAt": "2025-07-05T12:01:34.000Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "absentAt": "2025-07-05T12:01:34.000Z"
     },
     {
       "id": 9184,
