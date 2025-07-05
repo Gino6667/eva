@@ -303,18 +303,7 @@
       "createdAt": "2025-06-25T20:39:56.858Z",
       "userId": 1,
       "number": 22,
-      "originallyUnspecified": false
-    },
-    {
-      "id": 125,
-      "designerId": 5,
-      "serviceId": 2,
-      "type": "online",
-      "status": "done",
-      "createdAt": "2025-06-25T20:41:21.872Z",
-      "userId": 1,
-      "number": 23,
-      "originallyUnspecified": false
+      "originallyUnspecified": true
     },
     {
       "id": 126,
@@ -1523,7 +1512,7 @@
       "userId": 3,
       "checkinAt": "2025-06-30T13:24:01.160Z",
       "completedAt": "2025-06-30T13:24:05.416Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": true
     },
     {
       "id": 9056,
@@ -2412,7 +2401,7 @@
       "userId": 3,
       "absentAt": "2025-07-02T18:05:08.973Z",
       "completedAt": "2025-07-03T14:01:18.161Z",
-      "originallyUnspecified": false
+      "originallyUnspecified": true
     },
     {
       "id": 9127,
@@ -3169,11 +3158,12 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 7,
       "createdAt": "2025-07-05T11:57:36.434Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "checkinAt": "2025-07-05T12:12:34.089Z"
     },
     {
       "id": 9187,
@@ -3183,7 +3173,8 @@
       "status": "waiting",
       "number": 8,
       "createdAt": "2025-07-05T11:58:46.663Z",
-      "userId": null
+      "userId": null,
+      "originallyUnspecified": false
     },
     {
       "id": 9188,
@@ -3193,7 +3184,8 @@
       "status": "waiting",
       "number": 9,
       "createdAt": "2025-07-05T11:58:46.674Z",
-      "userId": null
+      "userId": null,
+      "originallyUnspecified": false
     },
     {
       "id": 9189,
@@ -3203,7 +3195,8 @@
       "status": "waiting",
       "number": 10,
       "createdAt": "2025-07-05T11:59:54.924Z",
-      "userId": null
+      "userId": null,
+      "originallyUnspecified": false
     },
     {
       "id": 9190,
@@ -3214,7 +3207,8 @@
       "number": 11,
       "createdAt": "2025-07-05T12:05:48.279Z",
       "userId": null,
-      "completedAt": "2025-07-05T12:05:48.291Z"
+      "completedAt": "2025-07-05T12:05:48.291Z",
+      "originallyUnspecified": false
     },
     {
       "id": 9191,
@@ -3225,7 +3219,8 @@
       "number": 12,
       "createdAt": "2025-07-05T12:05:50.548Z",
       "userId": null,
-      "completedAt": "2025-07-05T12:05:50.560Z"
+      "completedAt": "2025-07-05T12:05:50.560Z",
+      "originallyUnspecified": false
     },
     {
       "id": 9192,
@@ -3236,7 +3231,8 @@
       "number": 13,
       "createdAt": "2025-07-05T12:06:19.099Z",
       "userId": null,
-      "completedAt": "2025-07-05T12:06:19.110Z"
+      "completedAt": "2025-07-05T12:06:19.110Z",
+      "originallyUnspecified": false
     }
   ],
   "reservations": [
