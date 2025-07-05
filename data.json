@@ -3148,12 +3148,13 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "absent",
+      "status": "done",
       "number": 6,
       "createdAt": "2025-07-05T12:01:53.000Z",
       "userId": null,
       "originallyUnspecified": false,
-      "absentAt": "2025-07-05T12:01:53.000Z"
+      "absentAt": "2025-07-05T12:01:53.000Z",
+      "completedAt": "2025-07-05T12:12:39.425Z"
     },
     {
       "id": 9186,
