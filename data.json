@@ -2856,10 +2856,11 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "serving",
       "number": 2,
       "createdAt": "2025-07-05T11:46:38.697Z",
-      "userId": 3
+      "userId": 3,
+      "checkinAt": "2025-07-05T11:46:46.961Z"
     }
   ],
   "reservations": [
