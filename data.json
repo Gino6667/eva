@@ -6252,8 +6252,8 @@
       },
       "worktime": {
         "openDays": [
-          false,
-          false,
+          true,
+          true,
           true,
           true,
           true,
@@ -6297,7 +6297,8 @@
           [],
           [],
           []
-        ]
+        ],
+        "branchId": 2
       }
     }
   ]
