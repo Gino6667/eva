@@ -5542,7 +5542,7 @@
   ],
   "worktime": {
     "openDays": [
-      false,
+      true,
       false,
       true,
       true,
@@ -5588,7 +5588,7 @@
       [],
       []
     ],
-    "branchId": 1
+    "branchId": 2
   },
   "transactions": [
     {
