@@ -3157,11 +3157,12 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 6,
-      "createdAt": "2025-07-05T11:57:36.420Z",
+      "createdAt": "2025-07-05T12:01:53.000Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "absentAt": "2025-07-05T12:01:53.000Z"
     },
     {
       "id": 9186,
