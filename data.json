@@ -5122,17 +5122,19 @@
       "role": "customer"
     },
     {
-      "id": 16,
-      "phone": "0912345678",
-      "password": "$2b$10$tVByNJl/N8iWMJqv3NW10.J7qBzQusaaCZK.3wQFN/P.bha6NPRMK",
-      "name": "測試設計師",
-      "role": "designer"
-    },
-    {
       "id": 17,
       "password": "$2b$10$Nwk8a51c66Uepu1PKx9lF.DIDrWt4FVxxBGpWmjrSJXa6yCJID8be",
       "name": "測試設計師2",
-      "role": "designer"
+      "role": "designer",
+      "invalid": true
+    },
+    {
+      "id": 18,
+      "phone": "12345678",
+      "password": "$2b$10$slZdPO9deNCZ9AlfMnIf3.OyKdvWJp77MqIAOP6.L1dq6QMVrRtqW",
+      "name": "測試設計師3",
+      "role": "designer",
+      "invalid": true
     }
   ],
   "worktime": {
