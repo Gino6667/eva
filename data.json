@@ -5075,13 +5075,6 @@
       "totalSpent": 200
     },
     {
-      "id": 5,
-      "email": "qwe@gmail.com",
-      "password": "$2b$10$1rEFA96e.yiDtmlZcRdrFOXbwBJ4nYG7qAeymgsqyAFQHCSsXZlFi",
-      "name": "qwe@gmail.com",
-      "role": "designer"
-    },
-    {
       "id": 6,
       "phone": "0912666555",
       "password": "$2b$10$3gK0elnhS.bPGHGIjDegpeL19B3okXXlytjJxw2eaXfSKLE0Bshz2",
