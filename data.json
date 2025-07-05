@@ -6181,6 +6181,19 @@
         "currency": "TWD",
         "taxRate": 0.05
       }
+    },
+    {
+      "id": 2,
+      "name": "是測試",
+      "address": "試試看",
+      "phone": "123",
+      "status": "active",
+      "createdAt": "2025-07-05T16:50:19.193Z",
+      "settings": {
+        "timezone": "Asia/Taipei",
+        "currency": "TWD",
+        "taxRate": 0.05
+      }
     }
   ]
 }
