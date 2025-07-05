@@ -3174,7 +3174,7 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "serving",
+      "status": "done",
       "number": 8,
       "createdAt": "2025-07-05T11:58:46.663Z",
       "userId": null,
@@ -3190,9 +3190,15 @@
           "status": "serving",
           "timestamp": "2025-07-05T12:37:45.500Z",
           "note": "客人報到，開始服務"
+        },
+        {
+          "status": "done",
+          "timestamp": "2025-07-05T12:38:06.439Z",
+          "note": "服務完成"
         }
       ],
-      "checkinAt": "2025-07-05T12:37:45.500Z"
+      "checkinAt": "2025-07-05T12:37:45.500Z",
+      "completedAt": "2025-07-05T12:38:06.439Z"
     },
     {
       "id": 9188,
