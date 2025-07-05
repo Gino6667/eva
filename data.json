@@ -5138,7 +5138,14 @@
     {
       "id": 19,
       "password": "$2b$10$qPDZfh5kmpnTICxHSQFKtuXb7/hHJFC/09Y.L8U0wgsa/UvoDjkTC",
-      "name": "0913444555",
+      "name": "設計師19",
+      "role": "designer",
+      "phone": "0913444555"
+    },
+    {
+      "id": 20,
+      "password": "$2b$10$EEBe15V9AZZRIc/xMt9oYu6918ImYrcfM9YOq4lM6mPKSNOiUrUbG",
+      "name": "0914444555",
       "role": "designer"
     }
   ],
