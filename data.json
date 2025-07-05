@@ -3144,6 +3144,26 @@
       "number": 5,
       "createdAt": "2025-07-05T11:57:34.070Z",
       "userId": null
+    },
+    {
+      "id": 9185,
+      "designerId": 7,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 6,
+      "createdAt": "2025-07-05T11:57:36.420Z",
+      "userId": null
+    },
+    {
+      "id": 9186,
+      "designerId": 7,
+      "serviceId": 2,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 7,
+      "createdAt": "2025-07-05T11:57:36.434Z",
+      "userId": null
     }
   ],
   "reservations": [
