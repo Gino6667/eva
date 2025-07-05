@@ -3205,11 +3205,25 @@
       "designerId": 7,
       "serviceId": 2,
       "type": "onsite",
-      "status": "waiting",
+      "status": "serving",
       "number": 9,
       "createdAt": "2025-07-05T11:58:46.674Z",
       "userId": null,
-      "originallyUnspecified": false
+      "originallyUnspecified": false,
+      "calledAt": "2025-07-05T12:38:35.083Z",
+      "statusHistory": [
+        {
+          "status": "called",
+          "timestamp": "2025-07-05T12:38:35.083Z",
+          "note": "已叫號"
+        },
+        {
+          "status": "serving",
+          "timestamp": "2025-07-05T12:38:35.092Z",
+          "note": "客人報到，開始服務"
+        }
+      ],
+      "checkinAt": "2025-07-05T12:38:35.092Z"
     },
     {
       "id": 9189,
