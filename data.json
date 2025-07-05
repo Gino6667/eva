@@ -3739,7 +3739,7 @@
       "designerId": 7,
       "serviceId": 5,
       "type": "onsite",
-      "status": "absent",
+      "status": "waiting",
       "number": 31,
       "createdAt": "2025-07-05T12:48:20.231Z",
       "userId": 10001,
@@ -3764,10 +3764,15 @@
           "status": "absent",
           "timestamp": "2025-07-05T13:04:26.199Z",
           "note": "客人未到，標記過號"
+        },
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T13:04:37.198Z",
+          "note": "過號客人重新報到"
         }
       ],
       "absentAt": "2025-07-05T13:04:26.199Z",
-      "absentCheckinAt": "2025-07-05T13:03:34.723Z"
+      "absentCheckinAt": "2025-07-05T13:04:37.198Z"
     }
   ],
   "reservations": [
