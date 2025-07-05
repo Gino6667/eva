@@ -47,6 +47,19 @@
       ],
       "isPaused": false,
       "isOnVacation": false
+    },
+    {
+      "id": 1001,
+      "name": "測試設計師",
+      "services": [
+        1,
+        2,
+        3,
+        5,
+        10
+      ],
+      "isPaused": false,
+      "isOnVacation": false
     }
   ],
   "services": [
@@ -3236,6 +3249,24 @@
       "userId": null,
       "completedAt": "2025-07-05T12:06:19.110Z",
       "originallyUnspecified": false
+    },
+    {
+      "id": 9193,
+      "designerId": 1001,
+      "serviceId": 1,
+      "type": "onsite",
+      "status": "waiting",
+      "number": 14,
+      "createdAt": "2025-07-05T12:28:49.492Z",
+      "userId": 1,
+      "originallyUnspecified": true,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:28:49.492Z",
+          "note": "新增排隊"
+        }
+      ]
     }
   ],
   "reservations": [
