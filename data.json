@@ -5120,14 +5120,6 @@
       "password": "123456",
       "name": "?????",
       "role": "customer"
-    },
-    {
-      "id": 18,
-      "phone": "12345678",
-      "password": "$2b$10$slZdPO9deNCZ9AlfMnIf3.OyKdvWJp77MqIAOP6.L1dq6QMVrRtqW",
-      "name": "測試設計師3",
-      "role": "designer",
-      "invalid": true
     }
   ],
   "worktime": {
