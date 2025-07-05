@@ -3638,6 +3638,24 @@
           "note": "新增排隊"
         }
       ]
+    },
+    {
+      "id": 9208,
+      "designerId": 7,
+      "serviceId": 3,
+      "type": "online",
+      "status": "waiting",
+      "number": 29,
+      "createdAt": "2025-07-05T12:46:10.691Z",
+      "userId": 3,
+      "originallyUnspecified": true,
+      "statusHistory": [
+        {
+          "status": "waiting",
+          "timestamp": "2025-07-05T12:46:10.691Z",
+          "note": "新增排隊"
+        }
+      ]
     }
   ],
   "reservations": [
