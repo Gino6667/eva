@@ -3339,7 +3339,7 @@
       "designerId": 1,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 1,
       "createdAt": "2025-07-05T11:40:15.372Z",
       "userId": 3,
@@ -3545,7 +3545,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "onsite",
-      "status": "serving",
+      "status": "absent",
       "number": 14,
       "createdAt": "2025-07-05T12:28:49.492Z",
       "userId": 1,
@@ -3613,7 +3613,7 @@
       "designerId": 1001,
       "serviceId": 2,
       "type": "online",
-      "status": "called",
+      "status": "absent",
       "number": 16,
       "createdAt": "2025-07-05T12:29:04.308Z",
       "userId": 2,
@@ -3675,7 +3675,7 @@
       "designerId": 1001,
       "serviceId": 2,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 18,
       "createdAt": "2025-07-05T12:29:19.383Z",
       "userId": 2,
@@ -3712,7 +3712,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 19,
       "createdAt": "2025-07-05T12:29:19.423Z",
       "userId": 3,
@@ -3731,7 +3731,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 20,
       "createdAt": "2025-07-05T12:29:31.984Z",
       "userId": 1,
@@ -3750,7 +3750,7 @@
       "designerId": 1001,
       "serviceId": 2,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 21,
       "createdAt": "2025-07-05T12:29:31.998Z",
       "userId": 2,
@@ -3769,7 +3769,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 22,
       "createdAt": "2025-07-05T12:29:32.039Z",
       "userId": 3,
@@ -3788,7 +3788,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "onsite",
-      "status": "waiting",
+      "status": "absent",
       "number": 23,
       "createdAt": "2025-07-05T12:32:32.923Z",
       "userId": null,
@@ -3807,7 +3807,7 @@
       "designerId": 1001,
       "serviceId": 1,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 24,
       "createdAt": "2025-07-05T12:32:44.972Z",
       "userId": 3,
@@ -4005,7 +4005,7 @@
       "designerId": 12,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 30,
       "createdAt": "2025-07-05T12:46:25.186Z",
       "userId": 3,
@@ -4046,7 +4046,7 @@
       "designerId": 12,
       "serviceId": 5,
       "type": "onsite",
-      "status": "serving",
+      "status": "absent",
       "number": 31,
       "createdAt": "2025-07-05T12:48:20.231Z",
       "userId": 10001,
@@ -4111,7 +4111,7 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "waiting",
+      "status": "absent",
       "number": 32,
       "createdAt": "2025-07-05T13:05:38.091Z",
       "userId": 3,
@@ -4142,7 +4142,7 @@
       "designerId": 7,
       "serviceId": 3,
       "type": "online",
-      "status": "serving",
+      "status": "absent",
       "number": 33,
       "createdAt": "2025-07-05T13:05:51.189Z",
       "userId": 3,
@@ -5545,7 +5545,7 @@
   "worktime": {
     "openDays": [
       false,
-      false,
+      true,
       true,
       true,
       true,
@@ -5554,35 +5554,36 @@
     ],
     "openTimes": [
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       },
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       },
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       },
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       },
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       },
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       },
       {
-        "start": "00:00",
-        "end": "23:59"
+        "start": "09:00",
+        "end": "18:00"
       }
     ],
     "slotConfig": [
+      [],
       [],
       [],
       [],
@@ -6234,6 +6235,7 @@
           [],
           [],
           [],
+          [],
           []
         ],
         "branchId": 1
@@ -6292,6 +6294,7 @@
           }
         ],
         "slotConfig": [
+          [],
           [],
           [],
           [],
